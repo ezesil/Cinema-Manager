@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinema.UI", "Cinema.UI\Cinema.UI.csproj", "{CCB3FA2D-FF77-48AB-8D17-4D1D6E8B61FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cinema.Business", "Cinema.Business\Cinema.Business.csproj", "{CD326700-6D61-4E35-8634-60732A716215}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinema.Business", "Cinema.Business\Cinema.Business.csproj", "{CD326700-6D61-4E35-8634-60732A716215}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cinema.DAL", "Cinema.DAL\Cinema.DAL.csproj", "{7D2D4F0C-01E7-4278-A9E5-D0FBF8FC255F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinema.DAL", "Cinema.DAL\Cinema.DAL.csproj", "{7D2D4F0C-01E7-4278-A9E5-D0FBF8FC255F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cinema.Domain", "Cinema.Domain\Cinema.Domain.csproj", "{6FFED8DC-8C19-4D4F-AFBB-FBB9D01F3108}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinema.Domain", "Cinema.Domain\Cinema.Domain.csproj", "{6FFED8DC-8C19-4D4F-AFBB-FBB9D01F3108}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseServices", "BaseServices\BaseServices.csproj", "{8C8B915C-C31E-4BF2-B5B7-1F1E67FBE4CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseServices", "BaseServices\BaseServices.csproj", "{8C8B915C-C31E-4BF2-B5B7-1F1E67FBE4CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinema.UI", "Cinema.UI\Cinema.UI.csproj", "{EE06F930-896E-4D10-91AB-A6DBBABE8043}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CCB3FA2D-FF77-48AB-8D17-4D1D6E8B61FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CCB3FA2D-FF77-48AB-8D17-4D1D6E8B61FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CCB3FA2D-FF77-48AB-8D17-4D1D6E8B61FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CCB3FA2D-FF77-48AB-8D17-4D1D6E8B61FE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CD326700-6D61-4E35-8634-60732A716215}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CD326700-6D61-4E35-8634-60732A716215}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD326700-6D61-4E35-8634-60732A716215}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +35,10 @@ Global
 		{8C8B915C-C31E-4BF2-B5B7-1F1E67FBE4CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C8B915C-C31E-4BF2-B5B7-1F1E67FBE4CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C8B915C-C31E-4BF2-B5B7-1F1E67FBE4CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE06F930-896E-4D10-91AB-A6DBBABE8043}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE06F930-896E-4D10-91AB-A6DBBABE8043}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE06F930-896E-4D10-91AB-A6DBBABE8043}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE06F930-896E-4D10-91AB-A6DBBABE8043}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
