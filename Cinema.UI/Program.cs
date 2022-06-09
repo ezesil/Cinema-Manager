@@ -1,3 +1,6 @@
+using Cinema.UI.Services;
+using Cinema.UI.Views;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +20,22 @@ namespace Cinema.UI
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            var services = new ServiceCollection();
+
+            services.AddSingleton<ContentService>();
+            services.AddSingleton<PaginaInicio>();
+            services.AddSingleton<Home>();
+            services.AddSingleton<Form1>();
+
+
+            ServiceProvider serviceProvider = services.BuildServiceProvider();
+
+            DependencyService.SetInstance(serviceProvider);
+            
+            var form1 = serviceProvider.GetRequiredService<Home>();
+            Application.Run(form1);
+            
         }
     }
 }
