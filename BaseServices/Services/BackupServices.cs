@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BaseServices.BLL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,12 +17,19 @@ namespace BaseServices.Services
         /// <summary>
         /// Efectúa un backup solamente en la base de datos.
         /// </summary>
-        public void PerformDatabaseBackup()
+        public void BackupDatabase(string dbname, string path)
         {
-
+            BackupManager.Current.PerformBackup(dbname, path);
         }
 
 
+        /// <summary>
+        /// Efectúa un backup solamente en la base de datos.
+        /// </summary>
+        public void RestoreDatabase(string dbname, string path)
+        {
+            BackupManager.Current.PerformRestore(dbname, path);
+        }
 
 
 

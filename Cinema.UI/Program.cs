@@ -1,3 +1,4 @@
+using BaseServices.Services;
 using Cinema.UI.Services;
 using Cinema.UI.Views;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,8 +24,22 @@ namespace Cinema.UI
 
             var services = new ServiceCollection();
 
+            // Servicios de BaseServices
+            services.AddSingleton<BackupServices>();
+            services.AddSingleton<CheckerDigitService>();
+            services.AddSingleton<ExceptionHandlerService>();
+            services.AddSingleton<HashingService>();
+            services.AddSingleton<LanguageService>();
+            services.AddSingleton<LogService>();
+            services.AddSingleton<PermissionCheckProvider>();
+
+            // Servicios de la UI
+            services.AddSingleton<ControlTranslationService>();
             services.AddSingleton<ContentService>();
+
+            // Paginas
             services.AddSingleton<PaginaInicio>();
+            services.AddSingleton<AdminPanel>();
             services.AddSingleton<Home>();
             services.AddSingleton<Form1>();
 

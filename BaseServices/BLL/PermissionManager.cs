@@ -1,5 +1,4 @@
-﻿using BaseServices.BLL.Session;
-using BaseServices.Domain.Control_de_acceso;
+﻿using BaseServices.Domain.Control_de_acceso;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BaseServices.DAL.Interfaces;
 using BaseServices.DAL.Factory;
+using BaseServices.Services;
 
 namespace BaseServices.BLL
 {
@@ -17,6 +17,8 @@ namespace BaseServices.BLL
     /// </summary>
     internal class PermissionManager
     {
+        ExceptionHandlerService _exhandler = InstanceManager.Get<ExceptionHandlerService>();
+        LogService _logger = InstanceManager.Get<LogService>();
 
         private readonly IPermissionRepository<Rol> repoperm;
 

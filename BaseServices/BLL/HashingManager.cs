@@ -1,17 +1,20 @@
-﻿using System;
+﻿using BaseServices.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BaseServices.BLL.Hashing
+namespace BaseServices.BLL
 {
     /// <summary>
     /// Clase gestora de servicios de Hashing.
     /// </summary>
     internal class HashingManager
     {
+        ExceptionHandlerService _exhandler = InstanceManager.Get<ExceptionHandlerService>();
+        LogService _logger = InstanceManager.Get<LogService>();
 
         private readonly static HashingManager _instance = new HashingManager();
 

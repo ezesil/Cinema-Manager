@@ -17,7 +17,7 @@ namespace BaseServices.BLL.Logger
     internal class SqlLogger : ILogger
     {
 
-        private readonly IGenericLogRepository<Log> SqlLog = FactoryDAL.SqlLogRepository;
+        private IGenericLogRepository<Log> SqlLog = FactoryDAL.SqlLogRepository;
 
         #region single
         private readonly static SqlLogger _instance = new SqlLogger();
@@ -45,6 +45,8 @@ namespace BaseServices.BLL.Logger
         /// <returns>Retorna una lita de bitacoras.</returns>
         public List<Log> GetAll()
         {
+            if (SqlLog == null)
+                SqlLog = FactoryDAL.SqlLogRepository;
             return SqlLog.SelectAll().ToList();
         }
 
@@ -54,6 +56,8 @@ namespace BaseServices.BLL.Logger
         /// <param name="L"></param>
         public void Store(Log L)
         {
+            if(SqlLog == null)
+                SqlLog = FactoryDAL.SqlLogRepository;
             SqlLog.Insert(L);
         }
     }

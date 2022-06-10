@@ -1,5 +1,6 @@
 ﻿using BaseServices.DAL.Factory;
 using BaseServices.DAL.Interfaces;
+using BaseServices.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,6 +15,8 @@ namespace BaseServices.BLL
     /// </summary>
     internal class BackupManager
     {
+        ExceptionHandlerService _exhandler = InstanceManager.Get<ExceptionHandlerService>();
+        LogService _logger = InstanceManager.Get<LogService>();
 
         #region Singleton
         private readonly static BackupManager _instance = new BackupManager();

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using BaseServices.Domain.Control_de_acceso;
-using Domain;
 
 namespace BaseServices.Domain.Login
 {

@@ -23,7 +23,7 @@ namespace Cinema.UI.Views
             {
 
             };
-            _contentService.Setup(splitContainer1, buttons);
+            _contentService.Setup(splitContainer2, buttons);
         }
 
         private void Home_Load(object sender, EventArgs e)
@@ -46,5 +46,9 @@ namespace Cinema.UI.Views
             _contentService.NavigateTo<PaginaInicio>();
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            _contentService.NavigateTo<AdminPanel>();
+        }
     }
 }

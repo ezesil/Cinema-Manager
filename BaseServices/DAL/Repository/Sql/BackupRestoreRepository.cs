@@ -13,6 +13,8 @@ namespace BaseServices.DAL.Repository.Sql
 {
     internal class BackupRestoreRepository : IBackupRestoreRepository
     {
+        ExceptionHandlerService _exhandler = InstanceManager.Get<ExceptionHandlerService>();
+        LogService _logger = InstanceManager.Get<LogService>();
 
         #region Statements
         private string BackupStatement
@@ -26,7 +28,6 @@ namespace BaseServices.DAL.Repository.Sql
         }
 
         #endregion
-
 
 
         public int Backup(string name, string path)
@@ -47,7 +48,7 @@ namespace BaseServices.DAL.Repository.Sql
 
             catch (Exception ex)
             {
-                ExceptionManagerService.Handle(ex);
+                _exhandler.Handle(ex);
                 return 0;
             }
             
@@ -71,7 +72,7 @@ namespace BaseServices.DAL.Repository.Sql
 
             catch(Exception ex)
             {
-                ExceptionManagerService.Handle(ex);
+                _exhandler.Handle(ex);
                 return 0;
             }
         }

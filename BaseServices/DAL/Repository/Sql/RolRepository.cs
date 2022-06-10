@@ -45,6 +45,8 @@ namespace BaseServices.DAL.Repository.Sql
         }
         #endregion
 
+        ExceptionHandlerService _exhandler = InstanceManager.Get<ExceptionHandlerService>();
+        LogService _logger = InstanceManager.Get<LogService>();
 
         public void Insert(Rol c)
         {
@@ -63,7 +65,7 @@ namespace BaseServices.DAL.Repository.Sql
             }
             catch (Exception ex)
             {
-                ExceptionManagerService.Handle(ex);
+                _exhandler.Handle(ex);
             }
             
         }
@@ -111,7 +113,7 @@ namespace BaseServices.DAL.Repository.Sql
 
             catch (Exception sqlError)
             {
-                ExceptionManagerService.Handle(sqlError);
+                _exhandler.Handle(sqlError);
                 return null;
             }
         }
@@ -135,7 +137,7 @@ namespace BaseServices.DAL.Repository.Sql
 
             catch (Exception ex)
             {
-                ExceptionManagerService.Handle(ex);
+                _exhandler.Handle(ex);
             }
 
         }
@@ -152,7 +154,7 @@ namespace BaseServices.DAL.Repository.Sql
             }
             catch (Exception ex)
             {
-                ExceptionManagerService.Handle(ex);
+                _exhandler.Handle(ex);
             }
         }
 

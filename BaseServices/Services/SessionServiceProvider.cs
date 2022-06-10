@@ -1,4 +1,4 @@
-﻿using BaseServices.BLL.Session;
+﻿using BaseServices.BLL;
 using BaseServices.Domain.Control_de_acceso;
 using BaseServices.Domain.Login;
 using System;
@@ -13,8 +13,6 @@ namespace BaseServices.Services
     /// </summary>
     public class SessionServiceProvider
     {
-
-
         private readonly static SessionServiceProvider _instance = new SessionServiceProvider();
 
         /// <summary>
@@ -27,7 +25,6 @@ namespace BaseServices.Services
                 return _instance;
             }
         }
-
 
         private SessionServiceProvider()
         {
@@ -45,8 +42,6 @@ namespace BaseServices.Services
 
             }
         }
-
-
 
         /// <summary>
         /// Devuelve el nombre de usuario actual.
@@ -69,8 +64,7 @@ namespace BaseServices.Services
             get
             {
                 if (UserIsNull)
-                    return Guid.Parse("0000000000000000000000000");
-
+                    return Guid.Parse("00000000-0000-0000-0000-000000000000");
                 return SessionManager.Current.CurrentUserGuid;
             }
         }
@@ -89,8 +83,6 @@ namespace BaseServices.Services
             }
         }
 
-
-
         /// <summary>
         /// Efectúa un intento de inicio de sesión.
         /// </summary>
@@ -104,19 +96,5 @@ namespace BaseServices.Services
             else
                 return SessionManager.Current.LoginAttempUser(identificador, contraseña);
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

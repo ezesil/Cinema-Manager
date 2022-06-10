@@ -1,6 +1,7 @@
 ﻿using BaseServices.DAL.Factory;
 using BaseServices.Domain.Login;
 using BaseServices.Domain.Logs;
+using BaseServices.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,10 @@ namespace BaseServices.BLL
     /// </summary>
     internal class CheckDigitManager
     {
+
+        ExceptionHandlerService _exhandler = InstanceManager.Get<ExceptionHandlerService>();
+        LogService _logger = InstanceManager.Get<LogService>();
+
         private static List<Persona> PersonasConFallos = new List<Persona>();
 
         #region Singleton
@@ -98,7 +103,7 @@ namespace BaseServices.BLL
             {
                 foreach(Persona p in PersonasConFallos)
                 {                                                      
-                    Services.Security.LogServices.LogService.LogEvent(new Domain.Log("Error de chequeo de integridad en el usuario: " + p.Usuario, Log.Severity.Critical));
+                    _logger.Log("Error de chequeo de integridad en el usuario: " + p.Usuario, Log.Severity.Critical);
                 }
 
                 return false;
@@ -128,7 +133,7 @@ namespace BaseServices.BLL
 
             else
             {
-                Services.Security.LogServices.LogService.LogEvent(new Domain.Log("Error de chequeo de integridad en la cuentas: Faltan datos.", Log.Severity.Critical));
+                _logger.Log("Error de chequeo de integridad en la cuentas: Faltan datos.", Log.Severity.Critical);
                 return false;
             }
 

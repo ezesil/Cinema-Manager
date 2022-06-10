@@ -25,7 +25,7 @@ namespace BaseServices.BLL.Logger
 
         #region single
         
-        private readonly static FileLogger _instance = new FileLogger();
+        private static FileLogger _instance = new FileLogger();
 
         /// <summary>
         /// Propiedad estatica que permite accesar los atributos, propiedades y metodos publicos de una clase con patrón Singleton.
@@ -34,6 +34,8 @@ namespace BaseServices.BLL.Logger
         {
             get
             {
+                if(_instance == null)
+                    _instance = new FileLogger();
                 return _instance;
             }
         }
@@ -52,11 +54,13 @@ namespace BaseServices.BLL.Logger
         {           
             try
             {
+                if (FileLog == null)
+                    FileLog = FactoryDAL.SqlLogRepository;
                 return FileLog.SelectAll().ToList();
             }
             catch (Exception ex)
             {
-                ExceptionManagerService.Handle(ex);
+                InstanceManager.Get<ExceptionHandlerService>().Handle(ex);
                 return null;
             }
 
@@ -68,6 +72,8 @@ namespace BaseServices.BLL.Logger
         /// <param name="L"></param>
         public void Store(Log L)
         {
+            if(FileLog == null)
+                FileLog = FactoryDAL.FileLogRepository;
             FileLog.Insert(L);
         }
     }

@@ -11,13 +11,13 @@ namespace BaseServices.Services
     /// <summary>
     /// Gestiona la recepcion de excepciones para su posterior manejo.
     /// </summary>
-    public class ExceptionManagerService
+    public class ExceptionHandlerService
     {
         /// <summary>
         /// Maneja y registra una excepcion.
         /// </summary>
         /// <param name="ex">Excepcion.</param>
-        public static void Handle(Exception ex)
+        public void Handle(Exception ex)
         {
             ExceptionManager.Current.Handle(ex);
         }
@@ -26,7 +26,7 @@ namespace BaseServices.Services
         /// Maneja y registra una excepcion.
         /// </summary>
         /// <param name="ex">Excepcion.</param>
-        public static void Handle(Exception ex, Log log)
+        public void Handle(Exception ex, Log log)
         {
             ExceptionManager.Current.Handle(ex, log);
         }

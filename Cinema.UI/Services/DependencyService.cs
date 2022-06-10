@@ -11,6 +11,10 @@ namespace Cinema.UI.Services
     {
         private static IServiceProvider _instance;
 
+        /// <summary>
+        /// Setea una instancia del proveedor de servicios. Solo funciona en el primer uso.
+        /// </summary>
+        /// <param name="serviceProvider"></param>
         public static void SetInstance(IServiceProvider serviceProvider)
         {
             if(_instance == null)
@@ -19,7 +23,11 @@ namespace Cinema.UI.Services
 
         public static T Get<T>()
         {
-            return _instance.GetService<T>();
+            var instance = _instance.GetService<T>();
+            if (instance == null)
+                throw new Exception($"No se encontró un servicio de tipo {typeof(T)}.");
+            else
+                return instance;
         }
     }
 }

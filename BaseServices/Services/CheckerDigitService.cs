@@ -15,26 +15,10 @@ namespace BaseServices.Services
     /// </summary>
     public class CheckerDigitService
     {
-
-        #region Singleton
-        private readonly static CheckerDigitService _instance = new CheckerDigitService();
-
-        /// <summary>
-        /// Propiedad estatica que permite accesar los atributos, propiedades y metodos publicos de una clase con patrón Singleton.
-        /// </summary>
-        public static CheckerDigitService Current
-        {
-            get
-            {
-                return _instance;
-            }
-        }
-
-        private CheckerDigitService()
+        public CheckerDigitService()
         {
 
         }
-        #endregion
 
         /// <summary>
         /// Calcula el digito verficiador horizontal para la cadena de bytes especificada.

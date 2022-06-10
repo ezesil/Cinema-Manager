@@ -11,6 +11,9 @@ namespace BaseServices.DAL.Tools
 {
     internal static class SqlHelper
     {
+        static ExceptionHandlerService _exhandler = InstanceManager.Get<ExceptionHandlerService>();
+        static LogService _logger = InstanceManager.Get<LogService>();
+
         static string conString;
         readonly static string _logConString;
         readonly static string _sqlConString;
@@ -61,7 +64,7 @@ namespace BaseServices.DAL.Tools
 
             catch (Exception ex)
             {
-                ExceptionManagerService.Handle(ex);
+                _exhandler.Handle(ex);
                 return 0;
             }
         }
@@ -116,7 +119,7 @@ namespace BaseServices.DAL.Tools
 
             catch (Exception ex)
             {
-                ExceptionManagerService.Handle(ex);
+                _exhandler.Handle(ex);
             }
         }
 
@@ -155,7 +158,7 @@ namespace BaseServices.DAL.Tools
 
             catch (Exception ex)
             {
-                ExceptionManagerService.Handle(ex);
+                _exhandler.Handle(ex);
                 throw;
             }
         }
@@ -218,7 +221,7 @@ namespace BaseServices.DAL.Tools
 
             catch(Exception ex)
             {
-                ExceptionManagerService.Handle(ex);
+                _exhandler.Handle(ex);
                 return 0;
             }
         }
@@ -248,7 +251,7 @@ namespace BaseServices.DAL.Tools
 
             catch (Exception ex)
             {
-                ExceptionManagerService.Handle(ex);
+                _exhandler.Handle(ex);
                 return null;
             }
 
@@ -280,7 +283,7 @@ namespace BaseServices.DAL.Tools
 
             catch (SqlException ex)
             {
-                ExceptionManagerService.Handle(ex);
+                _exhandler.Handle(ex);
                 return null;
             }
         }

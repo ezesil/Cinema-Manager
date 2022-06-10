@@ -7,14 +7,18 @@ using System.Text;
 using System.Threading.Tasks;
 using BaseServices.DAL.Interfaces;
 using BaseServices.Domain.RepoSettings;
+using BaseServices.Services;
 
 namespace BaseServices.BLL
 {
     /// <summary>
     /// Gestor del sistema de multiples lenguajes.
     /// </summary>
-    internal static class LanguageManager
+    public static class LanguageManager
     {
+        static ExceptionHandlerService _exhandler = InstanceManager.Get<ExceptionHandlerService>();
+        static LogService _logger = InstanceManager.Get<LogService>();
+
         /// <summary>
         /// Repositorio de lenguajes.
         /// </summary>

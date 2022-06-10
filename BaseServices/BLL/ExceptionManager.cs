@@ -1,5 +1,6 @@
 ﻿using BaseServices.Domain.Exceptions;
 using BaseServices.Domain.Logs;
+using BaseServices.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,8 @@ namespace BaseServices.BLL
 {
     internal class ExceptionManager
     {
-
+        ExceptionHandlerService _exhandler = InstanceManager.Get<ExceptionHandlerService>();
+        LogService _logger;
         #region
         private readonly static ExceptionManager _instance = new ExceptionManager();
 
@@ -24,7 +26,7 @@ namespace BaseServices.BLL
 
         private ExceptionManager()
         {
-
+            _logger = InstanceManager.Get<LogService>();
         }
         #endregion
 
@@ -51,7 +53,7 @@ namespace BaseServices.BLL
 
                 else
                 {
-                    Services.Security.LogServices.LogService.LogEvent(new Log(ex.Message, Log.Severity.Unknown,ex.StackTrace.ToString()));
+                    _logger.Log(ex.Message, Log.Severity.Unknown, ex.StackTrace?.ToString());
                 }
                 
             }
@@ -59,27 +61,25 @@ namespace BaseServices.BLL
 
         }
 
-
-
         private void Handle(BLLException ex)
         {
 
             if (ex.InnerException is DALException)
             {
-                Services.Security.LogServices.LogService.LogEvent(new Log(ex.Message, Log.Severity.DebugInformation));
+                _logger.Log(ex.Message, Log.Severity.DebugInformation);
                 return;
             }
             
             else
             {
-                Services.Security.LogServices.LogService.LogEvent(new Log(ex.Message, Log.Severity.LogicError));
+                _logger.Log(ex.Message, Log.Severity.LogicError);
                 return;
             }
         }
 
         private void Handle(DALException ex)
         {
-            Services.Security.LogServices.LogService.LogEvent(new Log(ex.Message, Log.Severity.DataAccessError));
+            _logger.Log(ex.Message, Log.Severity.DataAccessError);
             throw new BLLException(ex.Message, ex);
         }
 

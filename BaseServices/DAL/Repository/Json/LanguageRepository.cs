@@ -18,6 +18,9 @@ namespace BaseServices.DAL.Repository.Json
     /// </summary>
     internal class LanguageRepository : ILanguageRepository
     {
+        ExceptionHandlerService _exhandler = InstanceManager.Get<ExceptionHandlerService>();
+        LogService _logger = InstanceManager.Get<LogService>();
+
         /// <summary>
         /// Busca y carga un archivo de lenguaje de formato JSON. La carpeta de busca por defecto es \locale\.
         /// </summary>
@@ -37,7 +40,7 @@ namespace BaseServices.DAL.Repository.Json
             }
             catch(Exception ex)
             {
-                ExceptionManagerService.Handle(ex as DALException);
+                _exhandler.Handle(ex as DALException);
                 return new Dictionary<string, string>();
             }
         }
@@ -64,7 +67,7 @@ namespace BaseServices.DAL.Repository.Json
             catch (Exception ex)
             {
 
-                ExceptionManagerService.Handle(ex as DALException);
+                _exhandler.Handle(ex as DALException);
                 return null;
             }
         }
@@ -89,7 +92,7 @@ namespace BaseServices.DAL.Repository.Json
             
             catch(Exception ex)
             {
-                ExceptionManagerService.Handle(ex as DALException);
+                _exhandler.Handle(ex as DALException);
             }
         }
 
@@ -109,7 +112,7 @@ namespace BaseServices.DAL.Repository.Json
 
             catch (Exception ex)
             {
-                ExceptionManagerService.Handle(ex as DALException);
+                _exhandler.Handle(ex as DALException);
             }
         }
 
