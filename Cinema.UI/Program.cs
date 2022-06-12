@@ -38,8 +38,8 @@ namespace Cinema.UI
             services.AddSingleton<ContentService>();
 
             // Paginas
+            services.AddTransient<AdminPanel>();
             services.AddSingleton<PaginaInicio>();
-            services.AddSingleton<AdminPanel>();
             services.AddSingleton<Home>();
             services.AddSingleton<Form1>();
 

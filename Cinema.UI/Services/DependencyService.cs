@@ -9,7 +9,7 @@ namespace Cinema.UI.Services
 {
     public class DependencyService
     {
-        private static IServiceProvider _instance;
+        private static IServiceProvider _provider;
 
         /// <summary>
         /// Setea una instancia del proveedor de servicios. Solo funciona en el primer uso.
@@ -17,15 +17,15 @@ namespace Cinema.UI.Services
         /// <param name="serviceProvider"></param>
         public static void SetInstance(IServiceProvider serviceProvider)
         {
-            if(_instance == null)
-                _instance = serviceProvider;
+            if(_provider == null)
+                _provider = serviceProvider;
         }
 
         public static T Get<T>()
         {
-            var instance = _instance.GetService<T>();
+            var instance = _provider.GetService<T>();
             if (instance == null)
-                throw new Exception($"No se encontró un servicio de tipo {typeof(T)}.");
+                throw new Exception($"No se encontró un servicio de tipo {typeof(T)} en el contenedor de servicios.");
             else
                 return instance;
         }

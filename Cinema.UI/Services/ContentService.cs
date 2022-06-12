@@ -1,4 +1,5 @@
-﻿using Cinema.UI.Views;
+﻿using Cinema.UI.Headers;
+using Cinema.UI.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +11,16 @@ namespace Cinema.UI.Services
 {
     public class ContentService
     {
-        private SplitContainer? _currentContainer;
         private UserControl? _currentUserControl;
+        private SplitterPanel? _currentContainer;
+
+        private SplitterPanel? _currentHeaderContainer;
+        private GenericHeader? _currentHeader;
+        
         private List<Button>? _currentButtons;
         public event EventHandler<UserControl>? CurrentFormChanged;
 
-        public ContentService Setup(SplitContainer container, List<Button> buttons, UserControl? currentPanel = null)
+        public ContentService Setup(SplitterPanel container, List<Button> buttons, UserControl? currentPanel = null)
         {
             _currentContainer = container;
             _currentUserControl = currentPanel;
@@ -23,22 +28,46 @@ namespace Cinema.UI.Services
             return this;
         }
 
-        public void NavigateTo<T>() where T : UserControl
+        public void SetHeaderContainer(SplitterPanel headerContainer)
+        {          
+            _currentHeaderContainer = headerContainer;
+            _currentHeader = new GenericHeader();
+            headerContainer.Controls.Clear();
+            headerContainer.Controls.Add(_currentHeader);         
+        }
+
+        public void SetHeaderTitle(string name)
+        {
+            if (_currentHeaderContainer == null || _currentHeader == null)
+                return;
+
+            _currentHeader.SetHeaderTitle(name);
+        }
+
+        public T? NavigateTo<T>(object? args = null) where T : UserControl
         {
             var userControl = DependencyService.Get<T>();
 
-            if(_currentUserControl == userControl || _currentContainer == null)
-                return;
+            if(_currentUserControl == userControl 
+                || _currentContainer == null 
+                || _currentHeaderContainer == null 
+                || _currentHeader == null)
+                return null;
 
-            _currentContainer.Panel2.Controls.Clear();
+            _currentContainer.Controls.Clear();
 
             _currentUserControl = userControl;
-            _currentUserControl.Visible = true;           
+            SetHeaderTitle(_currentUserControl.Name);
+            _currentUserControl.Visible = true;    
+            userControl.Dock = DockStyle.Fill;
             userControl.Show();
-            _currentContainer.Panel2.Controls.Add(userControl);
+            _currentContainer.Controls.Add(userControl);
             _currentUserControl.Focus();
 
+
             CurrentFormChanged?.Invoke(this, userControl);
+
+            return userControl;
         }
 
         public void DisableButton(Button currentButton)

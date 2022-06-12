@@ -19,11 +19,13 @@ namespace Cinema.UI.Views
         {
             InitializeComponent();
             _contentService = contentService;
+            _contentService.SetHeaderContainer(splitContainer2.Panel1);
+            _contentService.SetHeaderTitle("Inicio");
             var buttons = new List<Button>()
             {
 
             };
-            _contentService.Setup(splitContainer2, buttons);
+            _contentService.Setup(splitContainer2.Panel2, buttons);
         }
 
         private void Home_Load(object sender, EventArgs e)
@@ -49,6 +51,16 @@ namespace Cinema.UI.Views
         private void button2_Click(object sender, EventArgs e)
         {
             _contentService.NavigateTo<AdminPanel>();
+        }
+
+        private void splitContainer2_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

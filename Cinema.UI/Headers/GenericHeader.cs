@@ -1,0 +1,30 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Cinema.UI.Headers
+{
+    public partial class GenericHeader : UserControl
+    {
+        public void SetHeaderTitle(string name)
+        {
+            label1.Text = name;
+        }
+
+        public GenericHeader()
+        {
+            InitializeComponent();
+        }
+
+        private void GenericHeader_Load(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
