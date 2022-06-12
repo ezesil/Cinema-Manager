@@ -2,6 +2,7 @@
 using Cinema.UI.Views;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,10 +19,22 @@ namespace Cinema.UI.Services
         private GenericHeader? _currentHeader;
         
         private List<Button>? _currentButtons;
-        public event EventHandler<UserControl>? CurrentFormChanged;
+
+        public delegate void ButtonDisable(Button button);
+        public ButtonDisable? ButtonDisabler;
+        
+        public EventHandler? ButtonPainter;
 
         public ContentService Setup(SplitterPanel container, List<Button> buttons, UserControl? currentPanel = null)
         {
+            ButtonDisabler += DisableButton;
+            ButtonPainter += Button_EnabledChanged;
+
+            foreach (var button in buttons)
+            {
+                button.EnabledChanged += ButtonPainter;
+            }
+
             _currentContainer = container;
             _currentUserControl = currentPanel;
             _currentButtons = buttons;
@@ -54,23 +67,27 @@ namespace Cinema.UI.Services
                 || _currentHeader == null)
                 return null;
 
-            _currentContainer.Controls.Clear();
+            _currentContainer.Invoke((MethodInvoker)delegate {
 
-            _currentUserControl = userControl;
-            SetHeaderTitle(_currentUserControl.Name);
-            _currentUserControl.Visible = true;    
-            userControl.Dock = DockStyle.Fill;
-            userControl.Show();
-            _currentContainer.Controls.Add(userControl);
-            _currentUserControl.Focus();
+                _currentContainer.Controls.Clear();
 
+                _currentUserControl = userControl;
+                SetHeaderTitle(_currentUserControl.Name);
+                _currentUserControl.Visible = true;
 
-            CurrentFormChanged?.Invoke(this, userControl);
+                _currentContainer.Controls.Add(userControl);
+            });
 
+            userControl.Invoke((MethodInvoker)delegate
+            {
+                userControl.Dock = DockStyle.Fill;
+                userControl.Show();
+            });
+         
             return userControl;
         }
 
-        public void DisableButton(Button currentButton)
+        private void DisableButton(Button currentButton)
         {
             if (_currentButtons == null)
                 return;
@@ -79,8 +96,24 @@ namespace Cinema.UI.Services
             {
                 if(button != currentButton)
                     button.Enabled = true;
+
                 else
                     button.Enabled = false;
+            }
+        }
+
+        private void Button_EnabledChanged(object sender, EventArgs e)
+        {           
+            var button = (Button)sender;
+            if (button.Enabled)
+            {
+                button.ForeColor = Color.FromArgb(114, 137, 218);
+                button.BackColor = Color.FromArgb(30, 33, 36); ;
+            }
+            else
+            {
+                button.ForeColor = Color.Black;
+                button.BackColor = Color.DarkGray;
             }
         }
 

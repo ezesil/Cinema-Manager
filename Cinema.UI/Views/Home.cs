@@ -23,7 +23,13 @@ namespace Cinema.UI.Views
             _contentService.SetHeaderTitle("Inicio");
             var buttons = new List<Button>()
             {
-
+                BotonInicio,
+                button2,
+                button3,
+                button4,
+                button5,
+                button6,               
+                button1,
             };
             _contentService.Setup(splitContainer2.Panel2, buttons);
         }
@@ -31,6 +37,11 @@ namespace Cinema.UI.Views
         private void Home_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void SetSelectedNavButton(object sender)
+        {
+            _contentService?.ButtonDisabler?.Invoke((Button)sender);
         }
 
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
@@ -45,11 +56,13 @@ namespace Cinema.UI.Views
 
         private async void button1_Click(object sender, EventArgs e)
         {
+            SetSelectedNavButton(sender);
             _contentService.NavigateTo<PaginaInicio>();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private async void button2_Click(object sender, EventArgs e)
         {
+            SetSelectedNavButton(sender);
             _contentService.NavigateTo<AdminPanel>();
         }
 
