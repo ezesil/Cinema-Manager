@@ -30,7 +30,7 @@ namespace Cinema.UI.Services
             ButtonDisabler += DisableButton;
             ButtonPainter += Button_EnabledChanged;
 
-            foreach (var button in buttons)
+            foreach(var button in buttons)
             {
                 button.EnabledChanged += ButtonPainter;
             }
