@@ -82,6 +82,7 @@ namespace Cinema.UI.Services
             {
                 userControl.Dock = DockStyle.Fill;
                 userControl.Show();
+                userControl.Focus();
             });
          
             return userControl;
