@@ -15,6 +15,7 @@ namespace Cinema.UI.AdminViews
         public BackupPanel()
         {
             InitializeComponent();
+            this.Name = "Backup";
         }
     }
 }

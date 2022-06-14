@@ -15,6 +15,7 @@ namespace Cinema.UI.AdminViews
         public PermissionsPanel()
         {
             InitializeComponent();
+            this.Name = "Permissions";
         }
     }
 }

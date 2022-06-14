@@ -28,7 +28,6 @@ namespace Cinema.UI.Views
                 BtnTickets,
                 BtnSesiones,
                 BtnPeliculas,
-                BtnUsuarios,               
                 BtnAdministracion,
             };
             _navigationManager.Setup(splitContainer2.Panel2, buttons);         
@@ -46,27 +45,22 @@ namespace Cinema.UI.Views
 
         private void BtnTickets_Click(object sender, EventArgs e)
         {
-
+            _navigationManager.NavigateTo<TicketsPage>();
         }
 
         private void BtnSesiones_Click(object sender, EventArgs e)
         {
-
+            _navigationManager.NavigateTo<SessionsPage>();
         }
 
         private void BtnPeliculas_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void BtnUsuarios_Click(object sender, EventArgs e)
-        {
-
+            _navigationManager.NavigateTo<MoviesPage>();
         }
 
         private void BtnAdministracion_Click(object sender, EventArgs e)
         {
-
+            _navigationManager.NavigateTo<AdminPanel>();
         }
     }
 }

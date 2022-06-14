@@ -31,7 +31,6 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.BtnAdministracion = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.BtnUsuarios = new System.Windows.Forms.Button();
             this.BtnPeliculas = new System.Windows.Forms.Button();
             this.BtnSesiones = new System.Windows.Forms.Button();
             this.BtnTickets = new System.Windows.Forms.Button();
@@ -59,7 +58,6 @@
             this.splitContainer1.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(33)))), ((int)(((byte)(36)))));
             this.splitContainer1.Panel1.Controls.Add(this.BtnAdministracion);
             this.splitContainer1.Panel1.Controls.Add(this.panel1);
-            this.splitContainer1.Panel1.Controls.Add(this.BtnUsuarios);
             this.splitContainer1.Panel1.Controls.Add(this.BtnPeliculas);
             this.splitContainer1.Panel1.Controls.Add(this.BtnSesiones);
             this.splitContainer1.Panel1.Controls.Add(this.BtnTickets);
@@ -84,7 +82,7 @@
             this.BtnAdministracion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnAdministracion.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.BtnAdministracion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(137)))), ((int)(((byte)(218)))));
-            this.BtnAdministracion.Location = new System.Drawing.Point(5, 354);
+            this.BtnAdministracion.Location = new System.Drawing.Point(5, 317);
             this.BtnAdministracion.Name = "BtnAdministracion";
             this.BtnAdministracion.Size = new System.Drawing.Size(126, 31);
             this.BtnAdministracion.TabIndex = 7;
@@ -99,22 +97,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(133, 119);
             this.panel1.TabIndex = 6;
-            // 
-            // BtnUsuarios
-            // 
-            this.BtnUsuarios.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(33)))), ((int)(((byte)(36)))));
-            this.BtnUsuarios.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
-            this.BtnUsuarios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnUsuarios.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.BtnUsuarios.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(137)))), ((int)(((byte)(218)))));
-            this.BtnUsuarios.Location = new System.Drawing.Point(5, 317);
-            this.BtnUsuarios.Name = "BtnUsuarios";
-            this.BtnUsuarios.Size = new System.Drawing.Size(126, 31);
-            this.BtnUsuarios.TabIndex = 4;
-            this.BtnUsuarios.Text = "Usuarios";
-            this.BtnUsuarios.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnUsuarios.UseVisualStyleBackColor = false;
-            this.BtnUsuarios.Click += new System.EventHandler(this.BtnUsuarios_Click);
             // 
             // BtnPeliculas
             // 
@@ -244,7 +226,6 @@
         private System.Windows.Forms.Button BotonInicio;
         private System.Windows.Forms.Button BtnTickets;
         private System.Windows.Forms.Button BtnGenerarTicket;
-        private System.Windows.Forms.Button BtnUsuarios;
         private System.Windows.Forms.Button BtnPeliculas;
         private System.Windows.Forms.Button BtnSesiones;
         private System.Windows.Forms.Panel panel1;

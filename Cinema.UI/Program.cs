@@ -60,8 +60,8 @@ namespace Cinema.UI
 
             DependencyService.SetInstance(serviceProvider);
             
-            var form1 = serviceProvider.GetRequiredService<Home>();
-            Application.Run(form1);
+            var homeform = serviceProvider.GetRequiredService<Home>();
+            Application.Run(homeform);
             
         }
     }

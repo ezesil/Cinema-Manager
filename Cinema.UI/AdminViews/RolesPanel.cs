@@ -15,6 +15,7 @@ namespace Cinema.UI.AdminViews
         public RolesPanel()
         {
             InitializeComponent();
+            this.Name = "Roles";
         }
     }
 }

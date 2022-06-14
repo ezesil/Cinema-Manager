@@ -20,6 +20,8 @@ namespace Cinema.UI.Services
 
         private List<Button>? _currentButtons;
 
+        private event EventHandler<EventArgs> OnNavigate;
+
         public NavigationManager Setup(SplitterPanel container, List<Button> buttons, UserControl? currentPanel = null)
         {
             foreach (var button in buttons)
@@ -94,16 +96,16 @@ namespace Cinema.UI.Services
                 {
                     if (button != currentbutton)
                     {
-                        button.Enabled = true;
                         button.ForeColor = Color.FromArgb(114, 137, 218);
                         button.BackColor = Color.FromArgb(30, 33, 36); ;
+                        button.Enabled = true;
                     }
 
                     else
                     {
-                        button.Enabled = false;
                         button.ForeColor = Color.Black;
                         button.BackColor = Color.DarkGray;
+                        button.Enabled = false;
                     }
                 });
             }

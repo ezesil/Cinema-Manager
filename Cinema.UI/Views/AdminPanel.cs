@@ -2,6 +2,7 @@
 using BaseServices.Domain.Logs;
 using BaseServices.Services;
 using Cinema.UI.AdminViews;
+using Cinema.UI.Extensions;
 using Cinema.UI.Services;
 using System;
 using System.Windows.Forms;
@@ -12,6 +13,7 @@ namespace Cinema.UI.Views
     public partial class AdminPanel : UserControl
     {
         private LogService _logger;
+        private NavigationManager _navigationManager;
         private PermissionCheckProvider _permissions;
         private SessionServiceProvider _session;
         private ExceptionHandlerService _exmanager;
@@ -24,6 +26,7 @@ namespace Cinema.UI.Views
         private LogsPanel _logsPanel;
 
         public AdminPanel(
+            NavigationManager navigationManager,
             LogService logger, 
             PermissionCheckProvider permissions, 
             ExceptionHandlerService exmanager,
@@ -40,12 +43,32 @@ namespace Cinema.UI.Views
 
             // Title
             this.Name = "Panel de administrador";
-
+            
             // Services
             _logger = logger;
             _permissions = permissions;
             _session = SessionServiceProvider.Current;
             _exmanager = exmanager;
+            _navigationManager = navigationManager;
+
+            try
+            {
+                //if (_session.UserIsNull || !_permissions.HasPermission(PermissionType.Administrator))
+                //    throw new Exception("Intento de acceso ilegal a herramientas de permisos elevados.");
+
+                AddPanel(backupPanel);
+                AddPanel(permissionsPanel);
+                AddPanel(rolesPanel);
+                AddPanel(usersPanel);
+                AddPanel(checkerDigitPanel);
+                AddPanel(languagesPanel);
+                AddPanel(logsPanel);
+            }
+            catch (Exception ex)
+            {
+                _exmanager.Handle(ex, new Log(ex.Message + " Datos del usuario: Guid= " + SessionServiceProvider.Current.CurrentUserGuid + ", Nombre= " + SessionServiceProvider.Current.CurrentUser + ", Correo= " + SessionServiceProvider.Current.CurrentUserCorreo, Log.Severity.Critical));
+                _navigationManager.NavigateTo<MainPage>();
+            }
 
             // Panels
             _backupPanel = backupPanel;
@@ -55,19 +78,27 @@ namespace Cinema.UI.Views
             _checkerDigitPanel = checkerDigitPanel;
             _languagesPanel = languagesPanel;
             _logsPanel = logsPanel;
+
+            
+
+
+        }
+
+        private void AddPanel(UserControl panel)
+        {
+            TabPage tp = new TabPage(panel.Name);
+            tabControl1.TabPages.Add(tp);
+            tp.Controls.Add(panel);
         }
 
         private void AdminPanel_Load(object sender, EventArgs e)
         {
-            try
-            {
-                if (_session.UserIsNull || !_permissions.HasPermission(PermissionType.Administrator))
-                    throw new Exception("Intento de acceso ilegal a herramientas de permisos elevados.");
-            }
-            catch (Exception ex)
-            {
-                _exmanager.Handle(ex, new Log(ex.Message + " Datos del usuario: Guid= " + SessionServiceProvider.Current.CurrentUserGuid + ", Nombre= " + SessionServiceProvider.Current.CurrentUser + ", Correo= " + SessionServiceProvider.Current.CurrentUserCorreo, Log.Severity.Critical));
-            }
+            
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

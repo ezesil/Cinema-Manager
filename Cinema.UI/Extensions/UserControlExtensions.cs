@@ -13,5 +13,10 @@ namespace Cinema.UI.Extensions
         {
             return userControl.Name;
         }
+
+        public static void SetTitle(this UserControl userControl, string title)
+        {
+            userControl.Name = title;
+        }
     }
 }

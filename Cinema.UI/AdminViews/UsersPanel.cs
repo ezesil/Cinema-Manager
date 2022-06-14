@@ -15,6 +15,7 @@ namespace Cinema.UI.AdminViews
         public UsersPanel()
         {
             InitializeComponent();
+            this.Name = "Users";
         }
     }
 }

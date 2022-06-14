@@ -15,6 +15,7 @@ namespace Cinema.UI.AdminViews
         public CheckerDigitPanel()
         {
             InitializeComponent();
+            this.Name = "Checker digit";
         }
     }
 }

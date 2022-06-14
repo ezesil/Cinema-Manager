@@ -15,6 +15,7 @@ namespace Cinema.UI.AdminViews
         public LogsPanel()
         {
             InitializeComponent();
+            this.Name = "Logs";
         }
     }
 }
