@@ -13,65 +13,58 @@ namespace Cinema.UI.Views
 {
     public partial class Home : Form
     {
-        private ContentService _contentService;
+        private NavigationManager _navigationManager;
 
-        public Home(ContentService contentService)
+        public Home(NavigationManager contentService)
         {
             InitializeComponent();
-            _contentService = contentService;
-            _contentService.SetHeaderContainer(splitContainer2.Panel1);
-            _contentService.SetHeaderTitle("Inicio");
+            _navigationManager = contentService;
+            _navigationManager.SetHeaderContainer(splitContainer2.Panel1);
+            _navigationManager.SetHeaderTitle("Inicio");
             var buttons = new List<Button>()
             {
                 BotonInicio,
-                button2,
-                button3,
-                button4,
-                button5,
-                button6,               
-                button1,
+                BtnGenerarTicket,
+                BtnTickets,
+                BtnSesiones,
+                BtnPeliculas,
+                BtnUsuarios,               
+                BtnAdministracion,
             };
-            _contentService.Setup(splitContainer2.Panel2, buttons);
+            _navigationManager.Setup(splitContainer2.Panel2, buttons);         
         }
 
-        private void Home_Load(object sender, EventArgs e)
+        private void BotonInicio_Click(object sender, EventArgs e)
+        {
+            _navigationManager.NavigateTo<MainPage>();
+        }
+
+        private void BtnGenerarTicket_Click(object sender, EventArgs e)
+        {
+            _navigationManager.NavigateTo<CreateTicketPage>();
+        }
+
+        private void BtnTickets_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void SetSelectedNavButton(object sender)
-        {
-            _contentService?.ButtonDisabler?.Invoke((Button)sender);
-        }
-
-        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
+        private void BtnSesiones_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
+        private void BtnPeliculas_Click(object sender, EventArgs e)
         {
 
         }
 
-        private async void button1_Click(object sender, EventArgs e)
-        {
-            SetSelectedNavButton(sender);
-            _contentService.NavigateTo<PaginaInicio>();
-        }
-
-        private async void button2_Click(object sender, EventArgs e)
-        {
-            SetSelectedNavButton(sender);
-            _contentService.NavigateTo<AdminPanel>();
-        }
-
-        private void splitContainer2_Panel1_Paint(object sender, PaintEventArgs e)
+        private void BtnUsuarios_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void BtnAdministracion_Click(object sender, EventArgs e)
         {
 
         }

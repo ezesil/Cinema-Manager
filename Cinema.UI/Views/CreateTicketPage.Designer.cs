@@ -1,6 +1,6 @@
 ﻿namespace Cinema.UI.Views
 {
-    partial class PaginaInicio
+    partial class CreateTicketPage
     {
         /// <summary> 
         /// Variable del diseñador necesaria.

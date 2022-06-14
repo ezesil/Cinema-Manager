@@ -1,4 +1,5 @@
 using BaseServices.Services;
+using Cinema.UI.AdminViews;
 using Cinema.UI.Services;
 using Cinema.UI.Views;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,14 +36,25 @@ namespace Cinema.UI
 
             // Servicios de la UI
             services.AddSingleton<ControlTranslationService>();
-            services.AddSingleton<ContentService>();
+            services.AddSingleton<NavigationManager>();
+
+            // Paneles de administracion
+            services.AddTransient<BackupPanel>();
+            services.AddTransient<PermissionsPanel>();
+            services.AddTransient<RolesPanel>();
+            services.AddTransient<UsersPanel>();
+            services.AddTransient<CheckerDigitPanel>();
+            services.AddTransient<LanguagesPanel>();
+            services.AddTransient<LogsPanel>();
 
             // Paginas
             services.AddTransient<AdminPanel>();
-            services.AddSingleton<PaginaInicio>();
+            services.AddSingleton<CreateTicketPage>();
             services.AddSingleton<Home>();
-            services.AddSingleton<Form1>();
-
+            services.AddSingleton<MainPage>();
+            services.AddSingleton<MoviesPage>();
+            services.AddSingleton<SessionsPage>();
+            services.AddSingleton<TicketsPage>();
 
             ServiceProvider serviceProvider = services.BuildServiceProvider();
 

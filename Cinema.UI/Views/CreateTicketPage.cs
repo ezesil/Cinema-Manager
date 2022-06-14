@@ -11,17 +11,17 @@ using System.Windows.Forms;
 
 namespace Cinema.UI.Views
 {
-    public partial class PaginaInicio : UserControl
+    public partial class CreateTicketPage : UserControl
     {
         private LogService _logger;
         private PermissionCheckProvider _permissions;
         private SessionServiceProvider _session;
         private ExceptionHandlerService _exmanager;
 
-        public PaginaInicio(LogService logger, PermissionCheckProvider permissions, ExceptionHandlerService exmanager)
+        public CreateTicketPage(LogService logger, PermissionCheckProvider permissions, ExceptionHandlerService exmanager)
         {
             InitializeComponent();
-            this.Name = "Pagina de inicio";
+            this.Name = "Creacion de ticket";
             _logger = logger;
             _permissions = permissions;
             _session = SessionServiceProvider.Current;
@@ -30,7 +30,7 @@ namespace Cinema.UI.Views
 
         private void PaginaInicio_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void button1_Click(object sender, EventArgs e)

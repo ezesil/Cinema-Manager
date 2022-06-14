@@ -10,29 +10,21 @@ using System.Windows.Forms;
 
 namespace Cinema.UI.Services
 {
-    public class ContentService
+    public class NavigationManager
     {
         private UserControl? _currentUserControl;
         private SplitterPanel? _currentContainer;
 
         private SplitterPanel? _currentHeaderContainer;
         private GenericHeader? _currentHeader;
-        
+
         private List<Button>? _currentButtons;
 
-        public delegate void ButtonDisable(Button button);
-        public ButtonDisable? ButtonDisabler;
-        
-        public EventHandler? ButtonPainter;
-
-        public ContentService Setup(SplitterPanel container, List<Button> buttons, UserControl? currentPanel = null)
+        public NavigationManager Setup(SplitterPanel container, List<Button> buttons, UserControl? currentPanel = null)
         {
-            ButtonDisabler += DisableButton;
-            ButtonPainter += Button_EnabledChanged;
-
-            foreach(var button in buttons)
+            foreach (var button in buttons)
             {
-                button.EnabledChanged += ButtonPainter;
+                button.Click += DisableButton;
             }
 
             _currentContainer = container;
@@ -42,11 +34,11 @@ namespace Cinema.UI.Services
         }
 
         public void SetHeaderContainer(SplitterPanel headerContainer)
-        {          
+        {
             _currentHeaderContainer = headerContainer;
             _currentHeader = new GenericHeader();
             headerContainer.Controls.Clear();
-            headerContainer.Controls.Add(_currentHeader);         
+            headerContainer.Controls.Add(_currentHeader);
         }
 
         public void SetHeaderTitle(string name)
@@ -61,13 +53,14 @@ namespace Cinema.UI.Services
         {
             var userControl = DependencyService.Get<T>();
 
-            if(_currentUserControl == userControl 
-                || _currentContainer == null 
-                || _currentHeaderContainer == null 
+            if (_currentUserControl == userControl
+                || _currentContainer == null
+                || _currentHeaderContainer == null
                 || _currentHeader == null)
                 return null;
 
-            _currentContainer.Invoke((MethodInvoker)delegate {
+            _currentContainer.Invoke((MethodInvoker)delegate
+            {
 
                 _currentContainer.Controls.Clear();
 
@@ -84,37 +77,35 @@ namespace Cinema.UI.Services
                 userControl.Show();
                 userControl.Focus();
             });
-         
+
             return userControl;
         }
 
-        private void DisableButton(Button currentButton)
+        private void DisableButton(object sender, EventArgs e)
         {
-            if (_currentButtons == null)
+            if (_currentButtons == null || sender == null)
                 return;
 
-            foreach(var button in _currentButtons)
-            {
-                if(button != currentButton)
-                    button.Enabled = true;
+            var currentbutton = (Button)sender;
 
-                else
-                    button.Enabled = false;
-            }
-        }
+            foreach (var button in _currentButtons)
+            {
+                button.Invoke((MethodInvoker)delegate
+                {
+                    if (button != currentbutton)
+                    {
+                        button.Enabled = true;
+                        button.ForeColor = Color.FromArgb(114, 137, 218);
+                        button.BackColor = Color.FromArgb(30, 33, 36); ;
+                    }
 
-        private void Button_EnabledChanged(object sender, EventArgs e)
-        {           
-            var button = (Button)sender;
-            if (button.Enabled)
-            {
-                button.ForeColor = Color.FromArgb(114, 137, 218);
-                button.BackColor = Color.FromArgb(30, 33, 36); ;
-            }
-            else
-            {
-                button.ForeColor = Color.Black;
-                button.BackColor = Color.DarkGray;
+                    else
+                    {
+                        button.Enabled = false;
+                        button.ForeColor = Color.Black;
+                        button.BackColor = Color.DarkGray;
+                    }
+                });
             }
         }
 
