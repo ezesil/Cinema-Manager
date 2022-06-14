@@ -8,19 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Cinema.UI.AdminViews
+namespace Cinema.UI.Views
 {
-    public partial class LanguagesPanel : UserControl
+    public partial class Register : Form
     {
-        public LanguagesPanel()
+        public Register()
         {
             InitializeComponent();
-            this.Name = "Languages";
-        }
-
-        private void LanguagesPanel_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

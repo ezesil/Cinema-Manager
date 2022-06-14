@@ -1,5 +1,5 @@
 ﻿using BaseServices.BLL;
-using BaseServices.Domain.RepoSettings;
+using BaseServices.Domain.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;

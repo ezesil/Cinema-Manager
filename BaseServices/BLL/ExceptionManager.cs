@@ -33,7 +33,9 @@ namespace BaseServices.BLL
 
         public void Handle(Exception ex, Log? log = null)
         {
-
+            if (ex == null)
+                return;
+            
             if (ex is BLLException)
             {
                 Handle(ex as BLLException);
@@ -46,10 +48,8 @@ namespace BaseServices.BLL
 
             else
             {
-                if(ex == null)
-                {
+                if (ex == null)
                     return;
-                }
 
                 else
                 {

@@ -24,9 +24,15 @@ namespace Cinema.UI.Services
 
         public NavigationManager Setup(SplitterPanel container, List<Button> buttons, UserControl? currentPanel = null)
         {
+            var firstbutton = true;
             foreach (var button in buttons)
             {
-                button.Click += DisableButton;
+                if (firstbutton)
+                {
+                    firstbutton = false;
+                    DisableButton(button);
+                }
+                button.Click += SetSelectedButton;
             }
 
             _currentContainer = container;
@@ -83,7 +89,7 @@ namespace Cinema.UI.Services
             return userControl;
         }
 
-        private void DisableButton(object sender, EventArgs e)
+        private void SetSelectedButton(object sender, EventArgs? e)
         {
             if (_currentButtons == null || sender == null)
                 return;
@@ -95,20 +101,28 @@ namespace Cinema.UI.Services
                 button.Invoke((MethodInvoker)delegate
                 {
                     if (button != currentbutton)
-                    {
-                        button.ForeColor = Color.FromArgb(114, 137, 218);
-                        button.BackColor = Color.FromArgb(30, 33, 36); ;
-                        button.Enabled = true;
-                    }
+                        EnableButton(button);
 
                     else
-                    {
-                        button.ForeColor = Color.Black;
-                        button.BackColor = Color.DarkGray;
-                        button.Enabled = false;
-                    }
+                        DisableButton(button);
                 });
             }
+        }
+
+        public void EnableButton(Button button)
+        {
+            // Color de texto ~violeta/gris
+            button.ForeColor = Color.FromArgb(114, 137, 218);
+            // Color de fondo gris oscuro
+            button.BackColor = Color.FromArgb(30, 33, 36); ;
+            button.Enabled = true;
+        }
+
+        public void DisableButton(Button button)
+        {
+            button.ForeColor = Color.Black;
+            button.BackColor = Color.DarkGray;
+            button.Enabled = false;
         }
 
         public async Task NavigateToAsync<T>() where T : UserControl

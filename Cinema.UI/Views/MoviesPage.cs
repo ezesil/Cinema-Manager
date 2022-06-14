@@ -15,6 +15,7 @@ namespace Cinema.UI.Views
         public MoviesPage()
         {
             InitializeComponent();
+            this.Name = "Peliculas";
         }
     }
 }

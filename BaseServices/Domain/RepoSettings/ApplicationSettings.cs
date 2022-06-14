@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Text;
 
-namespace BaseServices.Domain.RepoSettings
+namespace BaseServices.Domain.Settings
 {
     /// <summary>
     /// Clase que encapsula la configuracion de la aplicacion. Las configuraciones son extraídas de AppSettings.

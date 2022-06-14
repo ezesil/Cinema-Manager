@@ -31,7 +31,15 @@ namespace BaseServices.Services
             ExceptionManager.Current.Handle(ex, log);
         }
 
-
+        /// <summary>
+        /// Maneja y registra una excepcion.
+        /// </summary>
+        /// <param name="ex">Excepcion.</param>
+        public void Handle(Exception ex, string message, Log.Severity severity)
+        {
+            var log = new Log(message, severity, ex.StackTrace);
+            ExceptionManager.Current.Handle(ex, log);
+        }
 
 
     }

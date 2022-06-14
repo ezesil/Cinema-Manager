@@ -15,6 +15,7 @@ namespace Cinema.UI.Views
         public MainPage()
         {
             InitializeComponent();
+            this.Name = "Inicio";
         }
     }
 }

@@ -5,6 +5,7 @@ using Cinema.UI.AdminViews;
 using Cinema.UI.Extensions;
 using Cinema.UI.Services;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 using static BaseServices.Domain.Control_de_acceso.Permiso;
 
@@ -66,7 +67,7 @@ namespace Cinema.UI.Views
             }
             catch (Exception ex)
             {
-                _exmanager.Handle(ex, new Log(ex.Message + " Datos del usuario: Guid= " + SessionServiceProvider.Current.CurrentUserGuid + ", Nombre= " + SessionServiceProvider.Current.CurrentUser + ", Correo= " + SessionServiceProvider.Current.CurrentUserCorreo, Log.Severity.Critical));
+                _exmanager.Handle(ex, ex.Message + " Datos del usuario: Guid: " + SessionServiceProvider.Current.CurrentUserGuid + ", Nombre: " + SessionServiceProvider.Current.CurrentUser + ", Correo: " + SessionServiceProvider.Current.CurrentUserCorreo, Log.Severity.Critical);
                 _navigationManager.NavigateTo<MainPage>();
             }
 
@@ -78,15 +79,13 @@ namespace Cinema.UI.Views
             _checkerDigitPanel = checkerDigitPanel;
             _languagesPanel = languagesPanel;
             _logsPanel = logsPanel;
-
-            
-
-
         }
 
         private void AddPanel(UserControl panel)
         {
             TabPage tp = new TabPage(panel.Name);
+            panel.Dock = DockStyle.Fill;
+            panel.BackColor = Color.FromArgb(30, 33, 36); ;
             tabControl1.TabPages.Add(tp);
             tp.Controls.Add(panel);
         }
@@ -97,6 +96,16 @@ namespace Cinema.UI.Views
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

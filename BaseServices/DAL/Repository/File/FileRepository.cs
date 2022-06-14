@@ -11,7 +11,7 @@ using BaseServices.DAL.Factory;
 using BaseServices.DAL.Repository.File.Adapter;
 using BaseServices.DAL.Repository.Sql.Adapter;
 using BaseServices.Domain.Logs;
-using BaseServices.Domain.RepoSettings;
+using BaseServices.Domain.Settings;
 
 namespace BaseServices.DAL.Repository.File
 {

@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 using BaseServices.Domain;
 using System.Runtime.CompilerServices;
 using BaseServices.Services;
-using BaseServices.Domain.RepoSettings;
+using BaseServices.Domain.Settings;
 
 namespace BaseServices.DAL.Tools
 {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using BaseServices.DAL.Interfaces;
 using BaseServices.Domain.Login;
 using BaseServices.Domain.Control_de_acceso;
-using ApplicationSettings = BaseServices.Domain.RepoSettings.ApplicationSettings;
+using ApplicationSettings = BaseServices.Domain.Settings.ApplicationSettings;
 using Persona = BaseServices.Domain.Login.Persona;
 using BaseServices.Domain.Logs;
 

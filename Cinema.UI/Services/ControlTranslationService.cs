@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BaseServices.Domain.Logs;
-using BaseServices.Domain.RepoSettings;
+using BaseServices.Domain.Settings;
 using System.Windows.Forms;
 using static System.Windows.Forms.Control;
 using BaseServices.Services;

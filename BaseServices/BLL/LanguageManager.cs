@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BaseServices.DAL.Interfaces;
-using BaseServices.Domain.RepoSettings;
+using BaseServices.Domain.Settings;
 using BaseServices.Services;
 
 namespace BaseServices.BLL
