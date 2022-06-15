@@ -106,9 +106,10 @@
             // 
             // button1
             // 
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Location = new System.Drawing.Point(149, 318);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(185, 51);
+            this.button1.Size = new System.Drawing.Size(142, 51);
             this.button1.TabIndex = 10;
             this.button1.Text = "Limpiar campos";
             this.button1.UseVisualStyleBackColor = true;
@@ -117,9 +118,10 @@
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(601, 318);
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(644, 318);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(185, 51);
+            this.button2.Size = new System.Drawing.Size(142, 51);
             this.button2.TabIndex = 11;
             this.button2.Text = "Ver asientos";
             this.button2.UseVisualStyleBackColor = true;
@@ -144,7 +146,7 @@
             this.comboBox7.Size = new System.Drawing.Size(637, 23);
             this.comboBox7.TabIndex = 12;
             // 
-            // PaginaInicio
+            // CreateTicketPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -158,7 +160,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBox1);
-            this.Name = "PaginaInicio";
+            this.Name = "CreateTicketPage";
             this.Size = new System.Drawing.Size(919, 443);
             this.Load += new System.EventHandler(this.PaginaInicio_Load);
             this.ResumeLayout(false);

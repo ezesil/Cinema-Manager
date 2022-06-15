@@ -197,7 +197,7 @@
             this.BotonInicio.Size = new System.Drawing.Size(182, 50);
             this.BotonInicio.TabIndex = 0;
             this.BotonInicio.Tag = "main_button";
-            this.BotonInicio.Text = "Orders";
+            this.BotonInicio.Text = "Inicio";
             this.BotonInicio.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BotonInicio.UseVisualStyleBackColor = false;
             this.BotonInicio.Click += new System.EventHandler(this.BotonInicio_Click);
