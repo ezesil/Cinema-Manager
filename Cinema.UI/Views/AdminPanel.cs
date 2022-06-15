@@ -84,8 +84,9 @@ namespace Cinema.UI.Views
         private void AddPanel(UserControl panel)
         {
             TabPage tp = new TabPage(panel.Name);
+            tp.ForeColor = Color.Black;
+            tp.Font = new Font("Arial", 9 , FontStyle.Bold);
             panel.Dock = DockStyle.Fill;
-            panel.BackColor = Color.FromArgb(30, 33, 36); ;
             tabControl1.TabPages.Add(tp);
             tp.Controls.Add(panel);
         }

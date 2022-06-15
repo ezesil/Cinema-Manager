@@ -46,6 +46,7 @@ namespace Cinema.UI.Services
             _currentHeaderContainer = headerContainer;
             _currentHeader = new GenericHeader();
             headerContainer.Controls.Clear();
+            _currentHeader.Dock = DockStyle.Fill;
             headerContainer.Controls.Add(_currentHeader);
         }
 
@@ -112,16 +113,17 @@ namespace Cinema.UI.Services
         public void EnableButton(Button button)
         {
             // Color de texto ~violeta/gris
-            button.ForeColor = Color.FromArgb(114, 137, 218);
+            //button.ForeColor = Color.FromArgb(114, 137, 218);
             // Color de fondo gris oscuro
-            button.BackColor = Color.FromArgb(30, 33, 36); ;
+            button.BackColor = Color.FromArgb(30, 33, 36);
+            button.ForeColor = Color.Silver;
             button.Enabled = true;
         }
 
         public void DisableButton(Button button)
         {
-            button.ForeColor = Color.Black;
-            button.BackColor = Color.DarkGray;
+            button.BackColor = Color.FromArgb(33, 150, 243);
+            button.ForeColor = Color.Silver;
             button.Enabled = false;
         }
 

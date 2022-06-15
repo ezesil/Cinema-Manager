@@ -26,5 +26,10 @@ namespace Cinema.UI.Headers
         {
 
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

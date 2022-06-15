@@ -19,7 +19,7 @@ namespace Cinema.UI.Views
         {
             InitializeComponent();
             _navigationManager = contentService;
-            _navigationManager.SetHeaderContainer(splitContainer2.Panel1);
+            _navigationManager.SetHeaderContainer(splitContainer2.Panel2);
             _navigationManager.SetHeaderTitle("Inicio");
             var buttons = new List<Button>()
             {
@@ -30,7 +30,7 @@ namespace Cinema.UI.Views
                 BtnPeliculas,
                 BtnAdministracion,
             };
-            _navigationManager.Setup(splitContainer2.Panel2, buttons);         
+            _navigationManager.Setup(splitContainer1.Panel2, buttons);         
         }
 
         private void BotonInicio_Click(object sender, EventArgs e)
@@ -64,6 +64,11 @@ namespace Cinema.UI.Views
         }
 
         private void Home_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }
