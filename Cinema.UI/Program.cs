@@ -52,6 +52,8 @@ namespace Cinema.UI
             services.AddSingleton<CreateTicketPage>();
             services.AddSingleton<Home>();
             services.AddSingleton<MainPage>();
+            services.AddSingleton<LoginPage>();
+            services.AddSingleton<RegisterPage>();
             services.AddSingleton<MoviesPage>();
             services.AddSingleton<SessionsPage>();
             services.AddSingleton<TicketsPage>();

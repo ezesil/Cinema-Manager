@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Cinema.UI.Views
 {
-    public partial class Login : Form
+    public partial class LoginPage : UserControl
     {
-        public Login()
+        public LoginPage()
         {
             InitializeComponent();
         }

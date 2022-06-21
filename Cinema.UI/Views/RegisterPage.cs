@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Cinema.UI.Views
 {
-    public partial class Register : Form
+    public partial class RegisterPage : UserControl
     {
-        public Register()
+        public RegisterPage()
         {
             InitializeComponent();
         }

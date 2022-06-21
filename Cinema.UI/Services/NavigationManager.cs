@@ -68,6 +68,11 @@ namespace Cinema.UI.Services
                 || _currentHeader == null)
                 return null;
 
+            userControl.Dock = DockStyle.Fill;
+            userControl.Show();
+            userControl.Focus();
+
+
             _currentContainer.Invoke((MethodInvoker)delegate
             {
 
@@ -80,12 +85,7 @@ namespace Cinema.UI.Services
                 _currentContainer.Controls.Add(userControl);
             });
 
-            userControl.Invoke((MethodInvoker)delegate
-            {
-                userControl.Dock = DockStyle.Fill;
-                userControl.Show();
-                userControl.Focus();
-            });
+
 
             return userControl;
         }

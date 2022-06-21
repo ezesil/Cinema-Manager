@@ -134,7 +134,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(19, 94);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(599, 381);
+            this.dataGridView1.Size = new System.Drawing.Size(599, 396);
             this.dataGridView1.TabIndex = 29;
             // 
             // label5
@@ -150,7 +150,7 @@
             // 
             this.textBox2.Location = new System.Drawing.Point(183, 36);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(267, 23);
+            this.textBox2.Size = new System.Drawing.Size(275, 23);
             this.textBox2.TabIndex = 32;
             // 
             // UsersPanel

@@ -34,12 +34,12 @@ namespace Cinema.UI.Views
                 BtnPeliculas,
                 BtnAdministracion,
             };
-            _navigationManager.Setup(splitContainer1.Panel2, buttons);         
+            _navigationManager.Setup(splitContainer1.Panel2, buttons);                    
         }
 
         private void BotonInicio_Click(object sender, EventArgs e)
         {
-            _navigationManager.NavigateTo<MainPage>();
+            _navigationManager.NavigateTo<LoginPage>();
         }
 
         private void BtnGenerarTicket_Click(object sender, EventArgs e)
@@ -69,7 +69,7 @@ namespace Cinema.UI.Views
 
         private void Home_Load(object sender, EventArgs e)
         {
-
+            _navigationManager.NavigateTo<LoginPage>();
         }
 
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
