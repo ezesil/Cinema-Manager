@@ -15,9 +15,9 @@ namespace Cinema.DAL.Repository.SqlServer
         private static string DeleteQuery 
         { get => "DELETE * FROM USERS WHERE guid_usuario = @Usuario"; }
         private static string SelectAllQuery 
-        { get => ""; }
+        { get => "SELECT * FROM USERS"; }
         private static string SelectQuery 
-        { get => ""; }
+        { get => "SELECT TOP(1) * FROM USERS where guid_usuario = @guid"; }
         private static string InsertQuery 
         { get => ""; }
         private static string UpdateQuery 

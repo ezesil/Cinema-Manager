@@ -71,7 +71,7 @@ namespace Cinema.DAL.Repository.SqlServer
             }
         }
 
-        public virtual IEnumerable<TEntity?> GetAll(string queryOverride = "")
+        public virtual IEnumerable<TEntity> GetAll(string queryOverride = "")
         {
             var query = SelectAllQuery;
             if (queryOverride == null || queryOverride == "")
@@ -96,7 +96,7 @@ namespace Cinema.DAL.Repository.SqlServer
             }       
         }
 
-        public virtual TEntity? GetOne(SqlParameter[] parameters, string queryOverride = "")
+        public virtual TEntity GetOne(SqlParameter[] parameters, string queryOverride = "")
         {
             try
             {
