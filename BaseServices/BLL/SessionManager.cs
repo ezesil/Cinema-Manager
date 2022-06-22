@@ -12,8 +12,8 @@ namespace BaseServices.BLL
 {
     internal class SessionManager
     {
-        ExceptionHandlerService _exhandler = InstanceManager.Get<ExceptionHandlerService>();
-        LogService _logger = InstanceManager.Get<LogService>();
+        ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
+        LogService _logger = ServiceContainer.Get<LogService>();
 
         DAL.Interfaces.ILoginRepository<Persona> repo = DAL.Factory.FactoryDAL.PersonaRepository;
 

@@ -29,7 +29,7 @@ namespace Cinema.UI.Services
         public static LanguageRefresh refresher;
 
         private static string currentlanguage = ApplicationSettings.Instance.LastLanguage;
-        private static List<string> failedcodes = new List<string>();
+        private List<string> failedcodes = new List<string>();
         private LogService _logger;
         
 
@@ -44,7 +44,7 @@ namespace Cinema.UI.Services
         /// </summary>
         /// <param name="controls"></param>
         /// <returns>Retorna dos listados. El primer listado corresponde al listado de codigos utilizados. El segundo listado correponde al listado de controles sin traduccion.</returns>
-        public static List<string>[] CheckControlsTranslationStatus(IList<Control> controls)
+        public List<string>[] CheckControlsTranslationStatus(IList<Control> controls)
         {
             List<string>[] translatecodes = new List<string>[2] 
             {

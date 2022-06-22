@@ -5,4 +5,18 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Factory\" />
+    <Folder Include="Repository\Txt\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BaseServices\BaseServices.csproj" />
+    <ProjectReference Include="..\Cinema.Domain\Cinema.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

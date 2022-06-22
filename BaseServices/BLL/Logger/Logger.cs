@@ -110,7 +110,7 @@ namespace BaseServices.BLL.Logger
             }
             catch (Exception ex)
             {
-                InstanceManager.Get<ExceptionHandlerService>().Handle(ex);
+                ServiceContainer.Get<ExceptionHandler>().Handle(ex);
                 return null;
             }
 

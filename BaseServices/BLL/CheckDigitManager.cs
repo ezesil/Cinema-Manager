@@ -17,8 +17,8 @@ namespace BaseServices.BLL
     internal class CheckDigitManager
     {
 
-        ExceptionHandlerService _exhandler = InstanceManager.Get<ExceptionHandlerService>();
-        LogService _logger = InstanceManager.Get<LogService>();
+        ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
+        LogService _logger = ServiceContainer.Get<LogService>();
 
         private static List<Persona> PersonasConFallos = new List<Persona>();
 

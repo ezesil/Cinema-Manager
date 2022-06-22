@@ -18,8 +18,8 @@ namespace BaseServices.DAL.Repository.Json
     /// </summary>
     internal class LanguageRepository : ILanguageRepository
     {
-        ExceptionHandlerService _exhandler = InstanceManager.Get<ExceptionHandlerService>();
-        LogService _logger = InstanceManager.Get<LogService>();
+        ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
+        LogService _logger = ServiceContainer.Get<LogService>();
 
         /// <summary>
         /// Busca y carga un archivo de lenguaje de formato JSON. La carpeta de busca por defecto es \locale\.

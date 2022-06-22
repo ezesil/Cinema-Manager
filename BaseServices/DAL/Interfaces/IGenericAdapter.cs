@@ -9,6 +9,5 @@ namespace BaseServices.DAL.Interfaces
     internal interface IGenericAdapter<T> where T: class, new()
     {
         T Adapt(object[] values);
-
     }
 }

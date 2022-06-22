@@ -11,7 +11,7 @@ namespace BaseServices.Services
     /// <summary>
     /// Gestiona la recepcion de excepciones para su posterior manejo.
     /// </summary>
-    public class ExceptionHandlerService
+    public class ExceptionHandler
     {
         /// <summary>
         /// Maneja y registra una excepcion.
@@ -40,7 +40,5 @@ namespace BaseServices.Services
             var log = new Log(message, severity, ex.StackTrace);
             ExceptionManager.Current.Handle(ex, log);
         }
-
-
     }
 }

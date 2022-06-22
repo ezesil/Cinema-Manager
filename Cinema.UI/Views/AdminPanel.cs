@@ -17,7 +17,7 @@ namespace Cinema.UI.Views
         private NavigationManager _navigationManager;
         private PermissionCheckProvider _permissions;
         private SessionServiceProvider _session;
-        private ExceptionHandlerService _exmanager;
+        private ExceptionHandler _exmanager;
         private BackupPanel _backupPanel;
         private PermissionsPanel _permissionsPanel;
         private RolesPanel _rolesPanel;
@@ -30,7 +30,7 @@ namespace Cinema.UI.Views
             NavigationManager navigationManager,
             LogService logger, 
             PermissionCheckProvider permissions, 
-            ExceptionHandlerService exmanager,
+            ExceptionHandler exmanager,
             BackupPanel backupPanel,
             PermissionsPanel permissionsPanel,
             RolesPanel rolesPanel,

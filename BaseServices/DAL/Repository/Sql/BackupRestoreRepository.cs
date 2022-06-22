@@ -13,8 +13,8 @@ namespace BaseServices.DAL.Repository.Sql
 {
     internal class BackupRestoreRepository : IBackupRestoreRepository
     {
-        ExceptionHandlerService _exhandler = InstanceManager.Get<ExceptionHandlerService>();
-        LogService _logger = InstanceManager.Get<LogService>();
+        ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
+        LogService _logger = ServiceContainer.Get<LogService>();
 
         #region Statements
         private string BackupStatement

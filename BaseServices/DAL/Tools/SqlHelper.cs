@@ -11,8 +11,8 @@ namespace BaseServices.DAL.Tools
 {
     internal static class SqlHelper
     {
-        static ExceptionHandlerService _exhandler = InstanceManager.Get<ExceptionHandlerService>();
-        static LogService _logger = InstanceManager.Get<LogService>();
+        static ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
+        static LogService _logger = ServiceContainer.Get<LogService>();
 
         static string conString;
         readonly static string _logConString;

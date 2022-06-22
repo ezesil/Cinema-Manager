@@ -16,9 +16,9 @@ namespace Cinema.UI.Views
         private LogService _logger;
         private PermissionCheckProvider _permissions;
         private SessionServiceProvider _session;
-        private ExceptionHandlerService _exmanager;
+        private ExceptionHandler _exmanager;
 
-        public CreateTicketPage(LogService logger, PermissionCheckProvider permissions, ExceptionHandlerService exmanager)
+        public CreateTicketPage(LogService logger, PermissionCheckProvider permissions, ExceptionHandler exmanager)
         {
             InitializeComponent();
             this.Name = "Creacion de ticket";

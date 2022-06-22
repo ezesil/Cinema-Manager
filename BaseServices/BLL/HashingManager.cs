@@ -13,8 +13,8 @@ namespace BaseServices.BLL
     /// </summary>
     internal class HashingManager
     {
-        ExceptionHandlerService _exhandler = InstanceManager.Get<ExceptionHandlerService>();
-        LogService _logger = InstanceManager.Get<LogService>();
+        ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
+        LogService _logger = ServiceContainer.Get<LogService>();
 
         private readonly static HashingManager _instance = new HashingManager();
 

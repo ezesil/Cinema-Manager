@@ -11,7 +11,7 @@ namespace BaseServices.BLL
 {
     internal class ExceptionManager
     {
-        ExceptionHandlerService _exhandler = InstanceManager.Get<ExceptionHandlerService>();
+        ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
         LogService _logger;
         #region
         private readonly static ExceptionManager _instance = new ExceptionManager();
@@ -26,7 +26,7 @@ namespace BaseServices.BLL
 
         private ExceptionManager()
         {
-            _logger = InstanceManager.Get<LogService>();
+            _logger = ServiceContainer.Get<LogService>();
         }
         #endregion
 
