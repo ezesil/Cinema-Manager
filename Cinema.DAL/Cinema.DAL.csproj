@@ -3,11 +3,11 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
     <Folder Include="Factory\" />
-    <Folder Include="Repository\Txt\" />
   </ItemGroup>
 
   <ItemGroup>

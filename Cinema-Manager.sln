@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseServices", "BaseService
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cinema.UI", "Cinema.UI\Cinema.UI.csproj", "{EE06F930-896E-4D10-91AB-A6DBBABE8043}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{1B150B17-BFA7-4021-8BBD-542A72FDD178}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Test\Test.csproj", "{1B150B17-BFA7-4021-8BBD-542A72FDD178}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing", "Testing\Testing.csproj", "{454044FD-4A49-4444-8D2F-A01A6DC9B9A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{1B150B17-BFA7-4021-8BBD-542A72FDD178}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B150B17-BFA7-4021-8BBD-542A72FDD178}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B150B17-BFA7-4021-8BBD-542A72FDD178}.Release|Any CPU.Build.0 = Release|Any CPU
+		{454044FD-4A49-4444-8D2F-A01A6DC9B9A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{454044FD-4A49-4444-8D2F-A01A6DC9B9A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{454044FD-4A49-4444-8D2F-A01A6DC9B9A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{454044FD-4A49-4444-8D2F-A01A6DC9B9A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
