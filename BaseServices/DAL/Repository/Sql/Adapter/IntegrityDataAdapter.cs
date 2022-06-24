@@ -12,31 +12,24 @@ namespace BaseServices.DAL.Repository.Sql.Adapter
     /// <summary>
     /// Clase de tipo Adaptador.
     /// </summary>
-    internal class PersonaAdapter : IGenericAdapter<Persona>
+    internal class IntegrityDataAdapter : IGenericAdapter<Persona>
     {
         /// <summary>
-        /// Adapta los datos del usuario.
+        /// Adapta los datos necesarios para verificar su integridad.
         /// </summary>
         /// <param name="values"></param>
-        /// <returns></returns>
+        /// <returns>Retorna un objeto Persona hidratado con datos necesarios para chequeo de integridad.</returns>
         public Persona Adapt(object[] values)
         {
-            var p = new Persona
+            return new Persona
             {
                 Guid = Guid.Parse(values[0].ToString()),
                 Usuario = values[1].ToString(),
-                Correo = values[2].ToString(),
-                Habilitado = values[3].ToString(),
+                Contraseña = values[2].ToString(),
+                Correo = values[3].ToString(),
                 TipoUsuario = (Persona.TipoPersona)values[4],
-                Rol = values[5].ToString(),                          
+                DVH = (int)values[5]
             };
-
-            foreach(var item in values[6].ToString().Split(';'))
-            {
-                p.Permisos.Add(new Permiso(item));
-            }
-
-            return p;
         }
     }
 }
