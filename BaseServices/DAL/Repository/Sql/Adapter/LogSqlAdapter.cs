@@ -12,7 +12,27 @@ namespace BaseServices.DAL.Repository.Sql.Adapter
     /// Clase de tipo Adaptador.
     /// </summary>
     internal class LogSqlAdapter
-	{      
+	{
+        #region single
+        private readonly static LogSqlAdapter _instance = new LogSqlAdapter();
+
+		/// <summary>
+		/// Propiedad estatica que permite accesar los atributos, propiedades y metodos publicos de una clase con patrón Singleton.
+		/// </summary>
+		public static LogSqlAdapter Instance
+		{
+			get
+			{
+				return _instance;
+			}
+		}
+
+		private LogSqlAdapter()
+		{
+
+		}
+		#endregion
+
 		/// <summary>
 		/// Adapta el vector de objetos correspondiente a un objeto de bitacora.
 		/// </summary>
@@ -27,6 +47,7 @@ namespace BaseServices.DAL.Repository.Sql.Adapter
 			L.StackTrace = item[3].ToString();
 
 			return L;
+
 		}
 	}
 

@@ -13,6 +13,26 @@ namespace BaseServices.DAL.Repository.Sql.Adapter
 	/// </summary>
 	internal class LegacySqlLoggerAdapter
 	{
+        #region single
+        private readonly static LegacySqlLoggerAdapter _instance = new LegacySqlLoggerAdapter();
+
+		/// <summary>
+		/// Propiedad estatica que permite accesar los atributos, propiedades y metodos publicos de una clase con patrón Singleton.
+		/// </summary>
+		public static LegacySqlLoggerAdapter Instance
+		{
+			get
+			{
+				return _instance;
+			}
+		}
+
+		private LegacySqlLoggerAdapter()
+		{
+
+		}
+		#endregion
+
 		/// <summary>
 		/// Metodo utilizado para adaptar un vector de objetos correspondiente a un objeto de bitacora.
 		/// </summary>

@@ -4,7 +4,6 @@ using BaseServices.DAL.Tools;
 using BaseServices.Domain.Control_de_acceso;
 using BaseServices.Domain.Exceptions;
 using BaseServices.Services;
-using Cinema.DAL.Repository.SqlServer;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,8 +14,10 @@ using System.Threading.Tasks;
 
 namespace BaseServices.DAL.Repository.Sql
 {
-    internal class RolRepository : SqlRepository<Rol, RolAdapter>, IGenericRepository<Rol>
+    internal class RolRepository : IPermissionRepository<Rol>
     {
+
+
         #region Statements
         private string InsertStatement
         {
@@ -46,7 +47,7 @@ namespace BaseServices.DAL.Repository.Sql
 
         ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
         LogService _logger = ServiceContainer.Get<LogService>();
-        // TODO: Reformar todos los servicios de base y la conexion a base de datos
+
         public void Insert(Rol c)
         {
 
@@ -70,7 +71,7 @@ namespace BaseServices.DAL.Repository.Sql
         }
 
 
-        public IEnumerable<Rol> GetAll()
+        public IEnumerable<Rol> SelectAll()
         {
             SqlHelper.SetSqlMode();
             using (var dr = SqlHelper.ExecuteReader(SelectAllStatement, System.Data.CommandType.Text))
@@ -87,7 +88,7 @@ namespace BaseServices.DAL.Repository.Sql
         }
 
 
-        public Rol GetOne(int id)
+        public Rol SelectOne(int id)
         {
             try
             {
