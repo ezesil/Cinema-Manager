@@ -27,12 +27,12 @@ namespace Cinema.UI
 
             // Servicios de BaseServices
             services.AddSingleton<BackupServices>();
+            services.AddSingleton<SessionService>();
             services.AddSingleton<CheckerDigitService>();
             services.AddSingleton<ExceptionHandler>();
             services.AddSingleton<HashingService>();
             services.AddSingleton<LanguageService>();
             services.AddSingleton<LogService>();
-            services.AddSingleton<PermissionCheckProvider>();
 
             // Servicios de la UI
             services.AddSingleton<ControlTranslationService>();

@@ -15,8 +15,7 @@ namespace Cinema.UI.Views
     {
         private LogService _logger;
         private NavigationManager _navigationManager;
-        private PermissionCheckProvider _permissions;
-        private SessionServiceProvider _session;
+        private SessionService _session;
         private ExceptionHandler _exmanager;
         private BackupPanel _backupPanel;
         private PermissionsPanel _permissionsPanel;
@@ -29,7 +28,6 @@ namespace Cinema.UI.Views
         public AdminPanel(
             NavigationManager navigationManager,
             LogService logger, 
-            PermissionCheckProvider permissions, 
             ExceptionHandler exmanager,
             BackupPanel backupPanel,
             PermissionsPanel permissionsPanel,
@@ -47,8 +45,7 @@ namespace Cinema.UI.Views
             
             // Services
             _logger = logger;
-            _permissions = permissions;
-            _session = SessionServiceProvider.Current;
+            _session = SessionService.Current;
             _exmanager = exmanager;
             _navigationManager = navigationManager;
 
@@ -67,7 +64,7 @@ namespace Cinema.UI.Views
             }
             catch (Exception ex)
             {
-                _exmanager.Handle(ex, ex.Message + " Datos del usuario: Guid: " + SessionServiceProvider.Current.CurrentUserGuid + ", Nombre: " + SessionServiceProvider.Current.CurrentUser + ", Correo: " + SessionServiceProvider.Current.CurrentUserCorreo, Log.Severity.Critical);
+                _exmanager.Handle(ex, ex.Message + " Datos del usuario: Guid: " + SessionService.Current.CurrentUserGuid + ", Nombre: " + SessionService.Current.CurrentUser + ", Correo: " + SessionService.Current.CurrentUserCorreo, Log.Severity.Critical);
                 _navigationManager.NavigateTo<MainPage>();
             }
 

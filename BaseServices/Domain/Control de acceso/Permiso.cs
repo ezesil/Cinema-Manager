@@ -10,38 +10,32 @@ namespace BaseServices.Domain.Control_de_acceso
     /// <summary>
     /// Representa un permiso utilizado para control de acceso a formularios.
     /// </summary>
+    /// <summary>
+    /// Tipos de permisos.
+    /// </summary>
+    public enum Permission
+    {     
+        /// <summary>
+        /// Permisos de administrador del sistema.
+        /// </summary>
+        [Description("Cinema.Administrator")]
+        Administrator,
+
+        /// <summary>
+        /// Permisos de administrador del sistema.
+        /// </summary>
+        [Description("Cinema.Manager")]
+        Manager,
+
+        /// <summary>
+        /// Permisos de administrador del sistema.
+        /// </summary>
+        [Description("Cinema.Receptionist")]
+        Receptionist,
+    }
     public class Permiso
     {
 
-        /// <summary>
-        /// Tipos de permisos.
-        /// </summary>
-        public enum PermissionType
-        {
-            /// <summary>
-            /// Permisos de tipo Cliente.
-            /// </summary>
-            [Description("grupo_cliente")]
-            Cliente,
-
-            /// <summary>
-            /// Permisos de tipo Anunciante.
-            /// </summary>
-            [Description("grupo_anunciante")]
-            Anunciante,
-
-            /// <summary>
-            /// Permisos de tipo administrador de publicidad-
-            /// </summary>
-            [Description("grupo_adminpub")]
-            AdminPub,
-
-            /// <summary>
-            /// Permisos de administrador del sistema.
-            /// </summary>
-            [Description("grupo_admin")]
-            Administrator
-        }
 
         /// <summary>
         /// Constructor por defecto.

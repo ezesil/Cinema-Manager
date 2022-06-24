@@ -189,6 +189,11 @@ namespace BaseServices.BLL
             }
         }
 
+        public void Logout()
+        {
+            CurrentUserData = null;
+        }
+
         
 
 

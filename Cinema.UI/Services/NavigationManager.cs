@@ -1,4 +1,6 @@
-﻿using Cinema.UI.Headers;
+﻿using BaseServices.Domain.Control_de_acceso;
+using BaseServices.Services;
+using Cinema.UI.Headers;
 using Cinema.UI.Views;
 using System;
 using System.Collections.Generic;
@@ -18,26 +20,18 @@ namespace Cinema.UI.Services
         private SplitterPanel? _currentHeaderContainer;
         private GenericHeader? _currentHeader;
 
+        private Home _currentForm;
+
         private List<Button>? _currentButtons;
 
-        private event EventHandler<EventArgs> OnNavigate;
+        private event EventHandler<EventArgs> OnNavigate; 
 
-        public NavigationManager Setup(SplitterPanel container, List<Button> buttons, UserControl? currentPanel = null)
-        {
-            var firstbutton = true;
-            foreach (var button in buttons)
-            {
-                if (firstbutton)
-                {
-                    firstbutton = false;
-                    DisableButton(button);
-                }
-                button.Click += SetSelectedButton;
-            }
-
+        public NavigationManager Setup(Home currentform, SplitterPanel container, UserControl? currentPanel = null)
+        {          
             _currentContainer = container;
             _currentUserControl = currentPanel;
-            _currentButtons = buttons;
+            _currentForm = currentform;
+            _currentButtons = new List<Button>();
             return this;
         }
 
@@ -130,6 +124,82 @@ namespace Cinema.UI.Services
         public async Task NavigateToAsync<T>() where T : UserControl
         {
             await Task.Run(() => NavigateTo<T>());
+        }
+
+        public Button CreateButton(EventHandler handler, string name, string buttontag = "Boton")
+        {        
+            //List<Button>? buttons = _currentContainer?.Controls?.OfType<Button>().ToList();
+            if(_currentButtons == null || _currentButtons.Count == 0)
+            {
+                var button = GetNavigationButton();
+                button.Tag = buttontag;
+                button.Text = buttontag;
+                button.Name = name;
+                button.Click += handler;
+                button.Click += SetSelectedButton;
+                DisableButton(button);             
+                _currentButtons.Add(button);
+                button.Visible = true;
+                button.Enabled = true;
+                _currentForm.Controls.Add(button);
+                //_currentContainer.Controls.Add(button);
+                button.Show();
+                button.BringToFront();
+                return button;
+            }
+            else
+            {
+                var button = GetNavigationButton(_currentButtons.Count);
+                button.Tag = buttontag;
+                button.Text = buttontag;
+                button.Name = name;
+                button.Click += handler;
+                button.Click += SetSelectedButton;
+                _currentButtons.Add(button);
+                button.Visible = true;
+                button.Enabled = true;
+                _currentForm.Controls.Add(button);
+                //_currentContainer.Controls.Add(button);
+                button.Show();
+                button.BringToFront();
+                return button;
+            }
+        }
+
+        private Button GetNavigationButton(int position = 0)
+        {
+            Button button = new Button();
+            button.Location = new Point(-2, 0 + (position * 50) + 90);
+            button.ForeColor = Color.Silver;
+            button.Enabled = true;
+            button.Size = new Size(162, 50);
+            button.TextAlign = ContentAlignment.MiddleLeft;
+
+            button.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+            button.BackColor = Color.FromArgb(30, 33, 36);
+            button.FlatAppearance.BorderColor = Color.FromArgb(30, 33, 36);
+            button.FlatAppearance.BorderSize = 0;
+            button.FlatAppearance.MouseDownBackColor = Color.FromArgb(33, 190, 255);
+            button.FlatAppearance.MouseOverBackColor = Color.FromArgb(33, 150, 243);
+            button.FlatStyle = FlatStyle.Flat;
+            button.Font = new Font("Arial", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            button.UseVisualStyleBackColor = false;
+
+            return button;
+        }
+
+        public void ClearNavigationButtons()
+        {
+            foreach(var button in _currentButtons)
+            {
+                _currentForm.Controls.Remove(button);
+            }
+            _currentButtons.Clear();
+        }
+
+        public void MenuOnLogin()
+        {
+            _currentForm.MenuOnLogin();
         }
     }
 }

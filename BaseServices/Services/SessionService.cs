@@ -11,14 +11,14 @@ namespace BaseServices.Services
     /// <summary>
     /// Provee servicios de inicio de sesión.
     /// </summary>
-    public class SessionServiceProvider
+    public class SessionService
     {
-        private readonly static SessionServiceProvider _instance = new SessionServiceProvider();
+        private readonly static SessionService _instance = new SessionService();
 
         /// <summary>
         /// Propiedad estatica que permite accesar los atributos, propiedades y metodos publicos de una clase con patrón Singleton.
         /// </summary>
-        public static SessionServiceProvider Current
+        public static SessionService Current
         {
             get
             {
@@ -26,7 +26,7 @@ namespace BaseServices.Services
             }
         }
 
-        private SessionServiceProvider()
+        public SessionService()
         {
 
         }
@@ -96,5 +96,46 @@ namespace BaseServices.Services
             else
                 return SessionManager.Current.LoginAttempUser(identificador, contraseña);
         }
+
+        public void Logout()
+        {
+            SessionManager.Current.Logout();
+        }
+
+        /// <summary>
+        /// Comprueba si el usuario posee el permiso especificado.
+        /// </summary>
+        /// <param name="CodigoPermiso"></param>
+        /// <returns>Retorna un booleano indicando si el usuario posee o no los permisos. Retorna siempre false si no hay usuario logeado en el sistema.</returns>
+        public bool UserHasPermission(Permission CodigoPermiso)
+        {
+            Permiso permiso = new Permiso(PermissionExtractor.GetDescription(CodigoPermiso));
+
+            if (SessionService.Current.UserIsNull)
+                return false;
+
+            return PermissionManager.Current.HasRight(permiso);
+        }
+
+        /// <summary>
+        /// Comprueba si el usuario posee todos los permisos especificados.
+        /// </summary>
+        /// <param name="CodigoPermiso"></param>
+        /// <returns>Retorna un valor booleando indicando si posee los permisos necesarios.</returns>
+        public bool HasPermission(Permission[] CodigoPermiso)
+        {
+            List<Permiso> permisos = new List<Permiso>();
+            foreach (var item in CodigoPermiso)
+            {
+                permisos.Add(new Permiso(PermissionExtractor.GetDescription(item)));
+            }
+
+
+            if (SessionService.Current.UserIsNull)
+                return false;
+
+            return PermissionManager.Current.HasRight(permisos);
+        }
+
     }
 }

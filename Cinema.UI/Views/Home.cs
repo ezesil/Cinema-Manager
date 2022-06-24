@@ -1,4 +1,6 @@
-﻿using Cinema.UI.Services;
+﻿using BaseServices.Domain.Control_de_acceso;
+using BaseServices.Services;
+using Cinema.UI.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,28 +20,24 @@ namespace Cinema.UI.Views
     public partial class Home : Form
     {
         private NavigationManager _navigationManager;
+        private SessionService _sessionService;
 
-        public Home(NavigationManager contentService)
+        public Home(NavigationManager navigationManager, 
+            SessionService sessionService)
         {
             InitializeComponent();
-            _navigationManager = contentService;
+
+            _navigationManager = navigationManager;
+            _sessionService = sessionService;
             _navigationManager.SetHeaderContainer(splitContainer2.Panel2);
             _navigationManager.SetHeaderTitle("Inicio");
-            var buttons = new List<Button>()
-            {
-                BotonInicio,
-                BtnGenerarTicket,
-                BtnTickets,
-                BtnSesiones,
-                BtnPeliculas,
-                BtnAdministracion,
-            };
-            _navigationManager.Setup(splitContainer1.Panel2, buttons);                    
+
+            _navigationManager.Setup(this, splitContainer1.Panel2);
         }
 
         private void BotonInicio_Click(object sender, EventArgs e)
         {
-            _navigationManager.NavigateTo<LoginPage>();
+            _navigationManager.NavigateTo<MainPage>();
         }
 
         private void BtnGenerarTicket_Click(object sender, EventArgs e)
@@ -67,14 +65,69 @@ namespace Cinema.UI.Views
             _navigationManager.NavigateTo<AdminPanel>();
         }
 
-        private void Home_Load(object sender, EventArgs e)
+        private void BtnLogin_Click(object sender, EventArgs e)
         {
             _navigationManager.NavigateTo<LoginPage>();
         }
 
-        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
+        private void BtnLogout_Click(object sender, EventArgs e)
         {
-
+            _sessionService.Logout();
+            _navigationManager.ClearNavigationButtons();
+            _navigationManager.CreateButton(BtnLogin_Click, "BotonLogin", "text_login").Show();
+            _navigationManager.CreateButton(BtnLogout_Click, "BtnLogout", "text_logout").Show();
+            _navigationManager.CreateButton(BtnExit_Click, "BtnExit", "text_exit").Show();
+            _navigationManager.NavigateTo<LoginPage>();
         }
+
+        private void BtnExit_Click(object sender, EventArgs e)
+        {
+            _sessionService.Logout();
+            Application.Exit();
+        }
+
+        private void Home_Load(object sender, EventArgs e)
+        {
+            _navigationManager.CreateButton(BtnLogin_Click, "BotonLogin", "text_login").Show();
+
+            _navigationManager.NavigateTo<LoginPage>();
+        }
+
+        public void MenuOnLogin()
+        {
+            if (_sessionService.UserHasPermission(Permission.Administrator))
+            {
+                _navigationManager.ClearNavigationButtons();
+                _navigationManager.CreateButton(BotonInicio_Click, "BotonInicio", "text_home").Show();
+                _navigationManager.CreateButton(BtnGenerarTicket_Click, "BtnGenerarTicket", "text_generateticket").Show();
+                _navigationManager.CreateButton(BtnTickets_Click, "BtnTickets", "text_tickets").Show();
+                _navigationManager.CreateButton(BtnSesiones_Click, "BtnSesiones", "text_sessions").Show();
+                _navigationManager.CreateButton(BtnPeliculas_Click, "BtnPeliculas", "text_movies").Show();
+                _navigationManager.CreateButton(BtnAdministracion_Click, "BtnAdministracion", "text_administration").Show();
+                _navigationManager.CreateButton(BtnLogout_Click, "BtnLogout", "text_logout").Show();
+                _navigationManager.CreateButton(BtnExit_Click, "BtnExit", "text_exit").Show();
+            }
+            else if (_sessionService.UserHasPermission(Permission.Manager))
+            {
+                _navigationManager.ClearNavigationButtons();
+                _navigationManager.CreateButton(BotonInicio_Click, "BotonInicio", "text_home").Show();
+                _navigationManager.CreateButton(BtnGenerarTicket_Click, "BtnGenerarTicket", "text_generateticket").Show();
+                _navigationManager.CreateButton(BtnTickets_Click, "BtnTickets", "text_tickets").Show();
+                _navigationManager.CreateButton(BtnSesiones_Click, "BtnSesiones", "text_sessions").Show();
+                _navigationManager.CreateButton(BtnPeliculas_Click, "BtnPeliculas", "text_movies").Show();
+                _navigationManager.CreateButton(BtnLogout_Click, "BtnLogout", "text_logout").Show();
+                _navigationManager.CreateButton(BtnExit_Click, "BtnExit", "text_exit").Show();
+            }
+            else if (_sessionService.UserHasPermission(Permission.Receptionist))
+            {
+                _navigationManager.ClearNavigationButtons();
+                _navigationManager.CreateButton(BotonInicio_Click, "BotonInicio", "text_home").Show();
+                _navigationManager.CreateButton(BtnGenerarTicket_Click, "BtnGenerarTicket", "text_generateticket").Show();
+                _navigationManager.CreateButton(BtnTickets_Click, "BtnTickets", "text_tickets").Show();
+                _navigationManager.CreateButton(BtnLogout_Click, "BtnLogout", "text_logout").Show();
+                _navigationManager.CreateButton(BtnExit_Click, "BtnExit", "text_exit").Show();
+            }
+        }
+
     }
 }
