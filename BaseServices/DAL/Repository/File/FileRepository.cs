@@ -18,7 +18,7 @@ namespace BaseServices.DAL.Repository.File
     /// <summary>
     /// Clase de tipo repositorio
     /// </summary>
-    internal class FileRepository : IGenericLogRepository<Log>
+    public class FileRepository : IGenericLogRepository<Log>
     {
 
         string FilePath;

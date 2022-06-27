@@ -1,5 +1,4 @@
-﻿using BaseServices.Domain.Login;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +10,7 @@ namespace BaseServices.DAL.Interfaces
     /// Interfaz para los repositorios de cuentas de usuario.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface ILoginRepository<T> where T: class, new()
+    public interface IUserRepository<T> where T: class, new()
     {
         /// <summary>
         /// Obtiene la contraseña almacenada utilizando el nombre de usuario.

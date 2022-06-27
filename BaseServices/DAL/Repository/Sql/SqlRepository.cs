@@ -2,8 +2,6 @@
 using BaseServices.Domain.Exceptions;
 using BaseServices.Domain.Settings;
 using BaseServices.Services;
-using Cinema.DAL.Interfaces;
-using Cinema.Domain;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,9 +10,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cinema.DAL.Repository.SqlServer
+namespace BaseServices.DAL.Repository.Sql
 {
-    internal abstract class SqlRepository<TEntity, TAdapter>
+    public abstract class SqlRepository<TEntity, TAdapter>
         where TEntity : class, new()
         where TAdapter : IGenericAdapter<TEntity>, new()
     { 
@@ -24,7 +22,7 @@ namespace Cinema.DAL.Repository.SqlServer
         private string InsertQuery { get; set; }
         private string UpdateQuery { get; set; }
 
-        private string connString { get => ApplicationSettings.Instance.SqlConnString; }
+        private static string connString { get => ApplicationSettings.Instance.SqlConnString; }
 
         private TAdapter? genericAdapter { get; }
 
@@ -33,7 +31,7 @@ namespace Cinema.DAL.Repository.SqlServer
 
 
 
-        public SqlRepository(string deleteQuery, string selectAllQuery, string selectQuery, string insertQuery, string updateQuery)
+        public SqlRepository(string deleteQuery = "", string selectAllQuery = "", string selectQuery = "", string insertQuery = "", string updateQuery = "")
         {
             DeleteQuery = deleteQuery;
             SelectAllQuery = selectAllQuery;
@@ -188,6 +186,65 @@ namespace Cinema.DAL.Repository.SqlServer
             }
         }
 
+        public static bool ExecuteStoreProcedure(SqlParameter[] parameters, string storedName)
+        {
+            Object[] values;
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                using (SqlCommand cmd = new SqlCommand(storedName, conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    conn.Open();
+                    
+                    cmd.ExecuteNonQuery();
 
+                    return true;
+                }
+            }
+        }
+
+
+    }
+
+    public static class SqlRepository
+    {
+        private static string connString { get => ApplicationSettings.Instance.SqlConnString; }
+
+        //public static bool ExecuteStoreProcedure<TAdapter>(SqlParameter[] parameters, string storedName)
+        //{
+        //    TAdapter? genericAdapter = default(TAdapter);
+
+
+        //    Object[] values;
+        //    using (SqlConnection conn = new SqlConnection(connString))
+        //    {
+        //        using (SqlCommand cmd = new SqlCommand(storedName, conn))
+        //        {
+        //            cmd.CommandType = CommandType.StoredProcedure;
+        //            conn.Open();
+
+        //            cmd.ExecuteNonQuery();
+
+        //            return true;
+        //        }
+        //    }
+        //}
+
+        public static bool ExecuteStoreProcedure(SqlParameter[] parameters, string storedName)
+        {
+            Object[] values;
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                using (SqlCommand cmd = new SqlCommand(storedName, conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    conn.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                    return true;
+                }
+            }
+        }
     }
 }

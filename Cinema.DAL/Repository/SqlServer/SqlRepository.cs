@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace Cinema.DAL.Repository.SqlServer
 {
     public abstract class SqlRepository<TEntity, TAdapter>
-        where TEntity : Entity, new()
+        where TEntity : class, new()
         where TAdapter : IGenericAdapter<TEntity>, new()
     { 
         private string DeleteQuery { get; set; }

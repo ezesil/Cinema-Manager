@@ -1,5 +1,5 @@
 ﻿using BaseServices.BLL;
-using BaseServices.Domain.Login;
+using BaseServices.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,7 +62,7 @@ namespace BaseServices.Services
         /// Actualizar el valor DVH de un objeto Persona en la base de datos.
         /// </summary>
         /// <param name="p"></param>
-        public void UpdateDVH(Persona p)
+        public void UpdateDVH(User p)
         {
             CheckDigitManager.Current.UpdateDVH(p);
         }

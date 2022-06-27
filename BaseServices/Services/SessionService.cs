@@ -1,6 +1,5 @@
 ﻿using BaseServices.BLL;
 using BaseServices.Domain.Control_de_acceso;
-using BaseServices.Domain.Login;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -94,7 +93,7 @@ namespace BaseServices.Services
             if (identificador.Contains("@") && identificador.Contains(".com"))
                 return SessionManager.Current.LoginAttempCorreo(identificador, contraseña);
             else
-                return SessionManager.Current.LoginAttempUser(identificador, contraseña);
+                return SessionManager.Current.AttempLogin(identificador, contraseña);
         }
 
         public void Logout()
@@ -122,20 +121,20 @@ namespace BaseServices.Services
         /// </summary>
         /// <param name="CodigoPermiso"></param>
         /// <returns>Retorna un valor booleando indicando si posee los permisos necesarios.</returns>
-        public bool HasPermission(Permission[] CodigoPermiso)
-        {
-            List<Permiso> permisos = new List<Permiso>();
-            foreach (var item in CodigoPermiso)
-            {
-                permisos.Add(new Permiso(PermissionExtractor.GetDescription(item)));
-            }
+        //public bool HasPermission(Permission[] CodigoPermiso)
+        //{
+        //    List<Permiso> permisos = new List<Permiso>();
+        //    foreach (var item in CodigoPermiso)
+        //    {
+        //        permisos.Add(new Permiso(PermissionExtractor.GetDescription(item)));
+        //    }
 
 
-            if (SessionService.Current.UserIsNull)
-                return false;
+        //    if (SessionService.Current.UserIsNull)
+        //        return false;
 
-            return PermissionManager.Current.HasRight(permisos);
-        }
+        //    return PermissionManager.Current.HasRight(permisos);
+        //}
 
     }
 }

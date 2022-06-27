@@ -47,11 +47,11 @@ namespace BaseServices.BLL
         /// <param name="nombredb"></param>
         /// <param name="path"></param>
         /// <returns>Retorna un valor entero -1 si la operacion fué un exito.</returns>
-        public int PerformBackup(string nombredb, string path)
+        public bool PerformBackup(string nombredb, string path)
         {
             if(nombredb.Length > 3 && path.Length > 3)
                 return repo.Backup(nombredb, path);
-            return 0;
+            return false;
         }
 
         /// <summary>
@@ -60,12 +60,12 @@ namespace BaseServices.BLL
         /// <param name="nombredb"></param>
         /// <param name="fullpath"></param>
         /// <returns>Retorna un valor entero -1 si la operacion fue un exito.</returns>
-        public int PerformRestore(string nombredb, string fullpath)
+        public bool PerformRestore(string nombredb, string fullpath)
         {
             if (nombredb.Length > 3 && fullpath.Length > 3)
                 return repo.Restore(nombredb, fullpath);
 
-            return 0;
+            return false;
         }
 
 

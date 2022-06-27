@@ -1,5 +1,5 @@
 ﻿using BaseServices.DAL.Factory;
-using BaseServices.Domain.Login;
+using BaseServices.Domain;
 using BaseServices.Domain.Logs;
 using BaseServices.Services;
 using System;
@@ -20,7 +20,7 @@ namespace BaseServices.BLL
         ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
         LogService _logger = ServiceContainer.Get<LogService>();
 
-        private static List<Persona> PersonasConFallos = new List<Persona>();
+        private static List<User> PersonasConFallos = new List<User>();
 
         #region Singleton
         private readonly static CheckDigitManager _instance = new CheckDigitManager();
@@ -81,14 +81,14 @@ namespace BaseServices.BLL
         /// Chequea la integridad de los datos de las cuentas almacenadas.
         /// </summary>
         /// <returns>Retorna un valor booleano. Si es True, pasó el chequeo de integridad. Si es False, hay registros modificados y deben revisarse.</returns>
-        public bool CheckAccountsIntegrity(List<Persona> personas)
+        public bool CheckAccountsIntegrity(List<User> personas)
         {
             List<decimal> numeros = new List<decimal>();
 
             foreach (var c in personas)
             {
                 numeros.Add(Convert.ToDecimal(c.DVH));
-                if (Convert.ToInt32(c.DVH) != Convert.ToInt32(CalculateDVH(c.Guid.ToString() + c.Usuario + c.Contraseña + c.Correo + c.TipoUsuario.ToString())))
+                if (Convert.ToInt32(c.DVH) != Convert.ToInt32(CalculateDVH(c.Id.ToString() + c.Username + c.HashedPassword + c.Email)))
                 {
                     PersonasConFallos.Add(c);
                 }
@@ -101,9 +101,9 @@ namespace BaseServices.BLL
 
             else
             {
-                foreach(Persona p in PersonasConFallos)
+                foreach(User p in PersonasConFallos)
                 {                                                      
-                    _logger.Log("Error de chequeo de integridad en el usuario: " + p.Usuario, Log.Severity.Critical);
+                    _logger.Log("Error de chequeo de integridad en el usuario: " + p.Username, Log.Severity.Critical);
                 }
 
                 return false;
@@ -116,7 +116,7 @@ namespace BaseServices.BLL
         /// </summary>
         /// <param name="personas"></param>
         /// <returns></returns>
-        private bool CheckPersonaIntegrity(List<Persona> personas)
+        private bool CheckPersonaIntegrity(List<User> personas)
         {
             List<decimal> L = new List<decimal>();
             int DVV = FactoryDAL.DVVRepository.SelectOne(100);
@@ -145,7 +145,7 @@ namespace BaseServices.BLL
         /// <returns>Retorna un valor booleano.</returns>
         public bool CheckIntegrity()
         {
-            var listapersonas = FactoryDAL.PersonaRepository.SelectAllIntegrityData().ToList();
+            var listapersonas = FactoryDAL.UserRepository.SelectAllIntegrityData().ToList();
 
             if (CheckAccountsIntegrity(listapersonas) == true && CheckPersonaIntegrity(listapersonas) == true)
                 return true;
@@ -162,7 +162,7 @@ namespace BaseServices.BLL
         {
             List<decimal> numeros = new List<decimal>();
 
-            foreach (var c in FactoryDAL.PersonaRepository.SelectAllIntegrityData().ToList())
+            foreach (var c in FactoryDAL.UserRepository.SelectAllIntegrityData().ToList())
             {
                 numeros.Add(Convert.ToDecimal(c.DVH));
             }
@@ -174,10 +174,10 @@ namespace BaseServices.BLL
         /// Actualiza el valor DVH utilizando el Guid de un usuario.
         /// </summary>
         /// <param name="c"></param>
-        public void UpdateDVH(Persona c)
+        public void UpdateDVH(User c)
         {
-            c = FactoryDAL.PersonaRepository.SelectIntegrityData(c.Guid);
-            FactoryDAL.PersonaRepository.UpdateDVH(c.Guid, Convert.ToInt32(CalculateDVH(c.Guid.ToString() + c.Usuario + c.Contraseña + c.Correo + c.TipoUsuario.ToString())));
+            c = FactoryDAL.UserRepository.SelectIntegrityData(c.Id);
+            FactoryDAL.UserRepository.UpdateDVH(c.Id, Convert.ToInt32(CalculateDVH(c.Id.ToString() + c.Username + c.HashedPassword + c.Email)));
 
             UpdateDVV(100);
         }

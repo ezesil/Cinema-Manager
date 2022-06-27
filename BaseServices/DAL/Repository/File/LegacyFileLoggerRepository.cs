@@ -15,7 +15,7 @@ namespace BaseServices.DAL.Repository.File
     /// <summary>
     /// Repositorio de bitacoras en archivo plano. Las versiones marcadas como "legacy" estan obsoletas y no funcionan correctamente. Utilice las versiones no-legacy en su lugar.
     /// </summary>
-    internal class LegacyFileLoggerRepository : IGenericLegacyRepository<Log>
+    internal class FileLoggerRepository : IGenericLogRepository<string>
     {
         string FilePath;
         string LogPath;
@@ -27,7 +27,7 @@ namespace BaseServices.DAL.Repository.File
         /// Constructor que toma un string de conexión como parametro.
         /// </summary>
         /// <param name="_Conn"></param>
-        public LegacyFileLoggerRepository(string _Conn)
+        public FileLoggerRepository(string _Conn)
         {
             FilePath = _Conn;
             Init();                  
@@ -111,5 +111,6 @@ namespace BaseServices.DAL.Repository.File
                 }
             }           
         }
+
     }
 }

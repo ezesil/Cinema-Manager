@@ -1,5 +1,4 @@
 ﻿using BaseServices.DAL.Interfaces;
-using BaseServices.DAL.Tools;
 using BaseServices.Services;
 using System;
 using System.Collections.Generic;
@@ -30,50 +29,45 @@ namespace BaseServices.DAL.Repository.Sql
         #endregion
 
 
-        public int Backup(string name, string path)
+        public bool Backup(string name, string path)
         {
             try
             {
-                SqlHelper.SetMasterMode();
 
                 var parameters = new SqlParameter[2] {
                     new SqlParameter("@name", name),
                     new SqlParameter("@path", path)
                 };
 
-                return Convert.ToInt32(SqlHelper.ExecuteNonQuery(BackupStatement, CommandType.StoredProcedure, parameters));
-
-
+                return SqlRepository.ExecuteStoreProcedure(parameters, BackupStatement);
             }
 
             catch (Exception ex)
             {
                 _exhandler.Handle(ex);
-                return 0;
+                return false;
             }
             
 
         }
 
-        public int Restore(string name, string path)
+        public bool Restore(string name, string path)
         {
             try
             {
-                SqlHelper.SetMasterMode();
 
                 var parameters = new SqlParameter[2] {
-                new SqlParameter("@name", name),
-                new SqlParameter("@path", path)
+                    new SqlParameter("@name", name),
+                    new SqlParameter("@path", path)
                 };
 
-
-                return Convert.ToInt32(SqlHelper.ExecuteNonQuery(RestoreStatement, CommandType.StoredProcedure, parameters));
+                return SqlRepository.ExecuteStoreProcedure(parameters, RestoreStatement);
             }
 
             catch(Exception ex)
             {
                 _exhandler.Handle(ex);
-                return 0;
+                return false;
             }
         }
     }

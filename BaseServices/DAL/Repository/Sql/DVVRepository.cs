@@ -1,5 +1,4 @@
 ﻿using BaseServices.DAL.Interfaces;
-using BaseServices.DAL.Tools;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -38,13 +37,7 @@ namespace BaseServices.DAL.Repository.Sql
         /// <param name="dvv"></param>
         public void Update(int id, int dvv)
         {
-            SqlHelper.SetSqlMode();
-            SqlHelper.ExecuteNonQuery(UpdateStatement, CommandType.Text, new SqlParameter[]
-            {
-                    //DVV
-                    new SqlParameter("@Entity_ID", id),
-                    new SqlParameter("@DVV", dvv),                   
-            });
+            throw new NotImplementedException();
 
         }
 
@@ -55,24 +48,7 @@ namespace BaseServices.DAL.Repository.Sql
         /// <returns></returns>
         public int SelectOne(int id)
         {
-            SqlHelper.SetSqlMode();
-            using (var dr = SqlHelper.ExecuteReader(SelectOneStatement, System.Data.CommandType.Text,
-                                     new SqlParameter[] { new SqlParameter("@id", id) }))
-            {
-                Object[] values = new Object[dr.FieldCount];
-
-                while(dr.Read())
-                    dr.GetValues(values);
-
-                return Convert.ToInt32(values[0]);
-
-            }
-
-
-
-
-
-
+            throw new NotImplementedException();
         }
     }
 }

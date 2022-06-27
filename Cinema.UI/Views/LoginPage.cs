@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cinema.UI.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,16 @@ namespace Cinema.UI.Views
 {
     public partial class LoginPage : UserControl
     {
-        public LoginPage()
+        public NavigationManager _navigationManager { get; set; }
+        public LoginPage(NavigationManager navigationManager)
         {
             InitializeComponent();
+            _navigationManager = navigationManager;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            _navigationManager.MenuOnLogin();
         }
     }
 }

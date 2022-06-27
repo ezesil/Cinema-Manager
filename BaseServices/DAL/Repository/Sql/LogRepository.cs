@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BaseServices.DAL.Tools;
 using System.Data.SqlClient;
 using BaseServices.DAL.Repository.Sql.Adapter;
 using BaseServices.DAL.Interfaces;
@@ -14,7 +13,7 @@ namespace BaseServices.DAL.Repository.Sql
     /// <summary>
     /// Clase de tipo repositorio para bitacoras en Sql Server.
     /// </summary>
-    internal class SqlLoggerRepository : IGenericLogRepository<Log>
+    internal class LogRepository : IGenericLogRepository<Log>
     {
         #region Statements
         private string InsertString
@@ -32,7 +31,7 @@ namespace BaseServices.DAL.Repository.Sql
         /// <summary>
         /// Constructor por defecto.
         /// </summary>
-        public SqlLoggerRepository()
+        public LogRepository()
         {
 
         }
@@ -43,16 +42,7 @@ namespace BaseServices.DAL.Repository.Sql
         /// <param name="log">Bitacora de tipo Log.</param>
         public void Insert(Log log)
         {
-            SqlHelper.SetLogMode();
-            if (log.StackTrace == null)
-                log.StackTrace = "NULL";
-            SqlHelper.ExecuteNonQuery(InsertString, System.Data.CommandType.Text, new SqlParameter[]
-            {
-                new SqlParameter("@Mensaje", log.Message.Replace(Convert.ToChar("'"),'"')),
-                new SqlParameter("@Severidad", log.SeverityLevel.ToString()),
-                new SqlParameter("@StackTrace", log.StackTrace)
-
-            });
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -61,18 +51,7 @@ namespace BaseServices.DAL.Repository.Sql
         /// <returns>Retorna un IEnumerable de bitacoras.</returns>
         public IEnumerable<Log> SelectAll()
         {
-            SqlHelper.SetLogMode();
-            using (var dr = SqlHelper.ExecuteReader(SelectAllString, System.Data.CommandType.Text))
-            {
-                Object[] values = new Object[dr.FieldCount];
-
-                while (dr.Read())
-                {
-                    dr.GetValues(values);
-                    yield return LogSqlAdapter.Instance.Adapt(values);
-                }
-            }
+            throw new NotImplementedException();
         }
-      
     }
 }

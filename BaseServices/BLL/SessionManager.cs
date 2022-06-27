@@ -1,12 +1,8 @@
-﻿using BaseServices.Domain.Control_de_acceso;
-using BaseServices.Domain.Exceptions;
-using BaseServices.Domain.Login;
+﻿using BaseServices.Domain;
+using BaseServices.Domain.Control_de_acceso;
 using BaseServices.Services;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BaseServices.BLL
 {
@@ -15,9 +11,9 @@ namespace BaseServices.BLL
         ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
         LogService _logger = ServiceContainer.Get<LogService>();
 
-        DAL.Interfaces.ILoginRepository<Persona> repo = DAL.Factory.FactoryDAL.PersonaRepository;
+        DAL.Interfaces.IUserRepository<User> repo = DAL.Factory.FactoryDAL.UserRepository;
 
-        private Persona CurrentUserData;
+        private User CurrentUserData;
 
         #region single
 
@@ -36,7 +32,7 @@ namespace BaseServices.BLL
 
         private SessionManager()
         {
-            repo = BaseServices.DAL.Factory.FactoryDAL.PersonaRepository;
+            repo = BaseServices.DAL.Factory.FactoryDAL.UserRepository;
         }
         #endregion
 
@@ -48,7 +44,7 @@ namespace BaseServices.BLL
                 if (this.UserIsNull)
                     return "None";
 
-                return this.CurrentUserData.Correo;
+                return this.CurrentUserData.Email;
             }
         }
 
@@ -60,7 +56,7 @@ namespace BaseServices.BLL
                 if (this.UserIsNull)
                     return Guid.Parse("0000000000000000000000000");
 
-                return CurrentUserData.Guid;
+                return CurrentUserData.Id;
             }
         }
 
@@ -83,16 +79,16 @@ namespace BaseServices.BLL
         /// <summary>
         /// Obtiene un listado de los permisos del usuario actual. Retorna null si no hay usuario logeado en el sistema.
         /// </summary>
-        public List<Permiso> CurrentUserPermissions
-        {
-            get
-            {
-                if (this.UserIsNull)
-                    return null;
+        //public List<Permiso> CurrentUserPermissions
+        //{
+        //    get
+        //    {
+        //        if (this.UserIsNull)
+        //            return null;
 
-                return CurrentUserData.Permisos;
-            }
-        }
+        //        return CurrentUserData.;
+        //    }
+        //}
 
         /// <summary>
         /// Obtiene el nombre de usuario del usuario actual. Retorna null si no hay usuario logeado en el sistema.
@@ -104,7 +100,7 @@ namespace BaseServices.BLL
                 if (this.UserIsNull)
                     return null;
 
-                return CurrentUserData.Usuario;
+                return CurrentUserData.Username;
             }
         }
 
@@ -119,7 +115,7 @@ namespace BaseServices.BLL
         public bool LoginAttempCorreo(string correo, string contraseña)
         {
            
-            var user = repo.GetPassCorreo(new Persona() { Correo = correo });
+            var user = repo.GetPassCorreo(new User() { Email = correo });
 
             if (user == null)
             {
@@ -127,11 +123,11 @@ namespace BaseServices.BLL
             }
 
 
-            if (HashingService.Current.VerificarContraseña(contraseña, user.Contraseña))
+            if (HashingService.Current.VerificarContraseña(contraseña, user.HashedPassword))
             {
                 try
                 {
-                    user.Correo = correo;
+                    user.Email = correo;
                     CurrentUserData = repo.SelectUserDataByEmailAddress(user);
                     return true;
                 }
@@ -156,20 +152,20 @@ namespace BaseServices.BLL
         /// <param name="usuario"></param>
         /// <param name="contraseña"></param>
         /// <returns></returns>
-        public bool LoginAttempUser(string usuario, string contraseña)
+        public bool AttempLogin(string usuario, string contraseña)
         {
-            var user = repo.GetPassUsuario(new Persona() { Usuario = usuario });
+            var user = repo.GetPassUsuario(new User() { Username = usuario });
             
             if(user == null)
             {
                 return false;
             }      
 
-            else if (HashingService.Current.VerificarContraseña(contraseña, user.Contraseña))
+            else if (HashingService.Current.VerificarContraseña(contraseña, user.HashedPassword))
             {
                 try
                 {
-                    user.Usuario = usuario;
+                    user.Username = usuario;
                     CurrentUserData = repo.SelectUserDataByUsername(user);
                     
                     return true;

@@ -12,9 +12,9 @@ namespace BaseServices.DAL.Interfaces
     interface IBackupRestoreRepository
     {
 
-        int Backup(string db, string path);
+        bool Backup(string db, string path);
 
-        int Restore(string db, string path);
+        bool Restore(string db, string path);
 
 
     }

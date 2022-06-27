@@ -29,12 +29,12 @@ namespace BaseServices.BLL.Logger
         /// <summary>
         /// Repositorio de registros en Sql server.
         /// </summary>
-        private IGenericLegacyRepository<Log> SqlLog;
+        private IGenericLogRepository<Log> SqlLog;
 
         /// <summary>
         /// Repositorio de registros en archivo plano.
         /// </summary>
-        private IGenericLegacyRepository<Log> FileLog;
+        private IGenericLogRepository<Log> FileLog;
 
 
         /// <summary>
@@ -60,20 +60,21 @@ namespace BaseServices.BLL.Logger
             { 
                 if (SourceType is Log.LogType.Sql)
                 {
-                    SqlLog = new LegacySqlLoggerRepository(SourceString);
-                    SqlLog.Insert(Message);
+                    //SqlLog = new LegacySqlLoggerRepository(SourceString);
+                    //SqlLog.Insert(Message);
                 }
 
                 else if (SourceType is Log.LogType.File)
                 {
-                    FileLog = new LegacyFileLoggerRepository(SourceString);
-                    FileLog.Insert(Message);
+                    //FileLog = new FileLoggerRepository(SourceString);
+                    //FileLog.Insert(Message);
                 }
 
                 else
                 {
                     throw new Exception("SourceType Error. Codigo de error: BSLO01");
                 }
+                throw new NotImplementedException();
             }
 
             catch(Exception ex)
@@ -93,20 +94,22 @@ namespace BaseServices.BLL.Logger
             {
                 if (SourceType is Log.LogType.Sql)
                 {
-                    SqlLog = new LegacySqlLoggerRepository(SourceString);
-                    return SqlLog.SelectAll().ToArray();
+                    //SqlLog = new LegacySqlLoggerRepository(SourceString);
+                    //return SqlLog.SelectAll().ToArray();
                 }
 
                 else if (SourceType is Log.LogType.File)
                 {
-                    FileLog = new LegacyFileLoggerRepository(SourceString);
-                    return FileLog.SelectAll().ToArray();
+                    //FileLog = new FileLoggerRepository(SourceString);
+                    //return FileLog.SelectAll().ToArray();
                 }
 
                 else
                 {
                     throw new Exception("SourceType Error. Codigo de error: BSLO02");
                 }
+
+                throw new NotImplementedException();
             }
             catch (Exception ex)
             {

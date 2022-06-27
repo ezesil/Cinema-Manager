@@ -19,6 +19,7 @@ namespace BaseServices.Services
         /// <param name="ex">Excepcion.</param>
         public void Handle(Exception ex)
         {
+            return;
             ExceptionManager.Current.Handle(ex);
         }
 
@@ -28,6 +29,7 @@ namespace BaseServices.Services
         /// <param name="ex">Excepcion.</param>
         public void Handle(Exception ex, Log log)
         {
+            return;
             ExceptionManager.Current.Handle(ex, log);
         }
 
@@ -37,6 +39,7 @@ namespace BaseServices.Services
         /// <param name="ex">Excepcion.</param>
         public void Handle(Exception ex, string message, Log.Severity severity)
         {
+            return;
             var log = new Log(message, severity, ex.StackTrace);
             ExceptionManager.Current.Handle(ex, log);
         }

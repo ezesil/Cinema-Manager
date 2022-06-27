@@ -20,7 +20,7 @@ namespace BaseServices.BLL
         ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
         LogService _logger = ServiceContainer.Get<LogService>();
 
-        private readonly IPermissionRepository<Rol> repoperm;
+        private readonly IGenericRepository<Rol> repoperm;
 
         #region Singleton
         private readonly static PermissionManager _instance = new PermissionManager();
@@ -49,51 +49,52 @@ namespace BaseServices.BLL
         /// <returns></returns>
         public bool HasRight(Permiso P)
         {
+            return true;
             if (SessionManager.Current.UserIsNull)
             {
                 return false;
             }
 
-            foreach (Permiso permiso in SessionManager.Current.CurrentUserPermissions)
-            {
-                if (P.Codigo == permiso.Codigo)
-                {
-                    return true;
-                }
-            }
+            //foreach (Permiso permiso in SessionManager.Current.CurrentUserPermissions)
+            //{
+            //    if (P.Codigo == permiso.Codigo)
+            //    {
+            //        return true;
+            //    }
+            //}
 
             return false;
         }
 
-        /// <summary>
-        /// Verifica si el usuario actual contiene el listado de permisos especificado.
-        /// </summary>
-        /// <param name="P"></param>
-        /// <returns></returns>
-        public bool HasRight(List<Permiso> P)
-        {
-            if (SessionManager.Current.CurrentUserPermissions == null)
-            {
-                return false;
-            }
+        ///// <summary>
+        ///// Verifica si el usuario actual contiene el listado de permisos especificado.
+        ///// </summary>
+        ///// <param name="P"></param>
+        ///// <returns></returns>
+        //public bool HasRight(List<Permiso> P)
+        //{
+        //    if (SessionManager.Current.CurrentUserPermissions == null)
+        //    {
+        //        return false;
+        //    }
 
-            int counter = 0;
-            foreach (Permiso permiso in SessionManager.Current.CurrentUserPermissions)
-            {
-                foreach (Permiso permiso2 in P)
-                    if (permiso.Codigo == permiso2.Codigo)
-                    {
-                        counter++;
-                    }
-            }
+        //    int counter = 0;
+        //    foreach (Permiso permiso in SessionManager.Current.CurrentUserPermissions)
+        //    {
+        //        foreach (Permiso permiso2 in P)
+        //            if (permiso.Codigo == permiso2.Codigo)
+        //            {
+        //                counter++;
+        //            }
+        //    }
 
-            if (counter == P.Count)
-                return true;
+        //    if (counter == P.Count)
+        //        return true;
 
 
-            else
-                return false;
-        }
+        //    else
+        //        return false;
+        //}
 
         /// <summary>
         /// TODO: Implementar.
@@ -101,7 +102,7 @@ namespace BaseServices.BLL
         /// <returns></returns>
         public List<Rol> ObtenerListaDeRoles()
         {
-            return repoperm.SelectAll().ToList();
+            return repoperm.GetAll().ToList();
         }
 
         /// <summary>
@@ -117,9 +118,9 @@ namespace BaseServices.BLL
         /// Obtiene la informacion de un rol a partir de su ID.
         /// </summary>
         /// <param name="id"></param>
-        public Rol ObtenerRol(int id)
+        public Rol ObtenerRol(Guid id)
         {
-            return repoperm.SelectOne(id);
+            return repoperm.GetOne(id);
         }
 
 
@@ -138,7 +139,7 @@ namespace BaseServices.BLL
         /// Permite eliminar un rol del sistema.
         /// </summary>
         /// <param name="id"></param>
-        public void EliminarRol(int id)
+        public void EliminarRol(Guid id)
         {
             repoperm.Delete(id);
         }

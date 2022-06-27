@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BaseServices.DAL.Interfaces;
-using BaseServices.Domain.Login;
 using BaseServices.Domain.Control_de_acceso;
 using ApplicationSettings = BaseServices.Domain.Settings.ApplicationSettings;
-using Persona = BaseServices.Domain.Login.Persona;
 using BaseServices.Domain.Logs;
+using BaseServices.Domain;
 
 namespace BaseServices.DAL.Factory
 {
@@ -55,7 +54,7 @@ namespace BaseServices.DAL.Factory
         /// <summary>
         /// Instancia del repositorio de Personas para los servicios de base.
         /// </summary>
-        public static ILoginRepository<Persona> PersonaRepository { get; private set; }
+        public static IUserRepository<User> UserRepository { get; private set; }
 
         /// <summary>
         /// Instancia del repositorio del servicio de soporte de multi-lenguaje.
@@ -70,7 +69,7 @@ namespace BaseServices.DAL.Factory
         /// <summary>
         /// Instancia del repositorio de permisos.
         /// </summary>
-        public static IPermissionRepository<Rol> RolRepository { get; private set; }
+        public static IGenericRepository<Rol> RolRepository { get; private set; }
 
 
         static FactoryDAL()
@@ -81,18 +80,31 @@ namespace BaseServices.DAL.Factory
             JsonRepository = ApplicationSettings.Instance.JsonRepository;
 
 
-            RolRepository = (IPermissionRepository<Rol>)Activator.CreateInstance(Type.GetType("BaseServices." + BaseSqlRepository + ".RolRepository"));
-            BackupRestoreRepository = (IBackupRestoreRepository)Activator.CreateInstance(Type.GetType("BaseServices." + BaseSqlRepository + ".BackupRestoreRepository"));
-            DVVRepository = (IGenericDVVRepository)Activator.CreateInstance(Type.GetType("BaseServices." + BaseSqlRepository + ".DVVRepository"));
-            LanguageRepository = (ILanguageRepository)Activator.CreateInstance(Type.GetType("BaseServices." + JsonRepository + ".LanguageRepository" ));
-            PersonaRepository = (ILoginRepository<Persona>)Activator.CreateInstance(Type.GetType("BaseServices." + BaseSqlRepository + ".PersonaRepository"));
-            FileLogRepository = (IGenericLogRepository<Log>)Activator.CreateInstance(Type.GetType("BaseServices." + FileRepository + ".FileRepository"));
-            SqlLogRepository = (IGenericLogRepository<Log>)Activator.CreateInstance(Type.GetType("BaseServices." + SqlLogRepositorio + ".SqlLoggerRepository"));
+            RolRepository = CreateInstance<IGenericRepository<Rol>>("BaseServices." + BaseSqlRepository + ".RolRepository");
+            BackupRestoreRepository = CreateInstance<IBackupRestoreRepository>("BaseServices." + BaseSqlRepository + ".BackupRestoreRepository");
+            DVVRepository = CreateInstance<IGenericDVVRepository>("BaseServices." + BaseSqlRepository + ".DVVRepository");
+            LanguageRepository = CreateInstance<ILanguageRepository>("BaseServices." + JsonRepository + ".LanguageRepository");
+            UserRepository = CreateInstance<IUserRepository<User>>("BaseServices." + BaseSqlRepository + ".UserRepository");
+            FileLogRepository = CreateInstance<IGenericLogRepository<Log>>("BaseServices." + FileRepository + ".FileRepository");
+            SqlLogRepository = CreateInstance<IGenericLogRepository<Log>>("BaseServices." + SqlLogRepositorio + ".LogRepository");
 
+
+
+
+
+            //BackupRestoreRepository = (IBackupRestoreRepository)Activator.CreateInstance(Type.GetType("BaseServices." + BaseSqlRepository + ".BackupRestoreRepository"));
+            //DVVRepository = (IGenericDVVRepository)Activator.CreateInstance(Type.GetType("BaseServices." + BaseSqlRepository + ".DVVRepository"));
+            //LanguageRepository = (ILanguageRepository)Activator.CreateInstance(Type.GetType("BaseServices." + JsonRepository + ".LanguageRepository" ));
+            //PersonaRepository = (ILoginRepository<Persona>)Activator.CreateInstance(Type.GetType("BaseServices." + BaseSqlRepository + ".PersonaRepository"));
+            //FileLogRepository = (IGenericLogRepository<Log>)Activator.CreateInstance(Type.GetType("BaseServices." + FileRepository + ".FileRepository"));
+            //SqlLogRepository = (IGenericLogRepository<Log>)Activator.CreateInstance(Type.GetType("BaseServices." + SqlLogRepositorio + ".SqlLoggerRepository"));
         }
 
 
-
+        private static T CreateInstance<T>(string type)
+        {
+            return (T)Activator.CreateInstance(Type.GetType(type));
+        }
 
 
 

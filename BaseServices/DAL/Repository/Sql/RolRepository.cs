@@ -1,10 +1,8 @@
 ﻿using BaseServices.DAL.Interfaces;
 using BaseServices.DAL.Repository.Sql.Adapter;
-using BaseServices.DAL.Tools;
 using BaseServices.Domain.Control_de_acceso;
 using BaseServices.Domain.Exceptions;
 using BaseServices.Services;
-using Cinema.DAL.Repository.SqlServer;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -18,27 +16,27 @@ namespace BaseServices.DAL.Repository.Sql
     internal class RolRepository : SqlRepository<Rol, RolAdapter>, IGenericRepository<Rol>
     {
         #region Statements
-        private string InsertStatement
+        private static string InsertQuery
         {
             get => "INSERT INTO [dbo].[Rol] (id_rol, permisos, nombre_rol) VALUES (@id_rol, @permisos, @nombre_rol)";
         }
 
-        private string UpdateStatement
+        private static string UpdateQuery
         {
             get => "UPDATE [dbo].[Rol] SET permisos = @permisos, nombre_rol = @nombre_rol WHERE id_rol = @id_rol";
         }
 
-        private string DeleteStatement
+        private static string DeleteQuery
         {
             get => "DELETE FROM [dbo].[Rol] WHERE id_rol = @id_rol";
         }
 
-        private string SelectOneStatement
+        private static string SelectQuery
         {
             get => "SELECT id_rol, permisos, nombre_rol FROM [dbo].[Rol] WHERE id_rol = @id_rol";
         }
 
-        private string SelectAllStatement
+        private static string SelectAllQuery
         {
             get => "SELECT id_rol, nombre_rol, permisos FROM [dbo].[Rol]";
         }
@@ -46,130 +44,34 @@ namespace BaseServices.DAL.Repository.Sql
 
         ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
         LogService _logger = ServiceContainer.Get<LogService>();
-        // TODO: Reformar todos los servicios de base y la conexion a base de datos
-        public void Insert(Rol c)
+
+        public RolRepository() : base(DeleteQuery, SelectAllQuery, SelectQuery, InsertQuery, UpdateQuery)
         {
-
-            try
-            {
-                SqlHelper.SetSqlMode();
-                SqlHelper.ExecuteNonQuery(InsertStatement, CommandType.Text, new SqlParameter[]
-                {
-                        new SqlParameter("@id_rol", c.IdRol),
-                        new SqlParameter("@permisos", c.PermisosString),
-                        new SqlParameter("@nombre_rol", c.NombreRol)
-                });
-
-
-            }
-            catch (Exception ex)
-            {
-                _exhandler.Handle(ex);
-            }
-            
         }
 
-
-        public IEnumerable<Rol> GetAll()
+        public Rol GetOne(Guid g)
         {
-            SqlHelper.SetSqlMode();
-            using (var dr = SqlHelper.ExecuteReader(SelectAllStatement, System.Data.CommandType.Text))
-            {
-                Object[] values = new Object[dr.FieldCount];
-
-                while (dr.Read())
-                {
-                    dr.GetValues(values);
-                    yield return RolAdapter.Current.Adapt(values);
-                }
-            }
-
+            throw new NotImplementedException();
         }
 
-
-        public Rol GetOne(int id)
+        public void Delete(Guid g)
         {
-            try
-            {
-                SqlHelper.SetSqlMode();
-                using (var dr = SqlHelper.ExecuteReader(SelectOneStatement, System.Data.CommandType.Text,
-                                        new SqlParameter[] { new SqlParameter("@id_rol", id) }))
-                {
-                    Object[] values = new Object[dr.FieldCount];
-
-                    Rol item = null;
-
-                    while (dr.Read())
-                    {
-                        dr.GetValues(values);
-                        item = RolAdapter.Current.Adapt(values);
-                    }
-
-                    return item;
-                }
-
-            }
-
-            catch (Exception sqlError)
-            {
-                _exhandler.Handle(sqlError);
-                return null;
-            }
+            throw new NotImplementedException();
         }
 
-       
+        public void Insert(Rol o)
+        {
+            throw new NotImplementedException();
+        }
 
         public void Update(Rol o)
         {
-            try
-            {
-                SqlHelper.SetSqlMode();
-                SqlHelper.ExecuteNonQuery(UpdateStatement, CommandType.Text, new SqlParameter[]
-                {
-                        new SqlParameter("@permisos", o.PermisosString ),
-                        new SqlParameter("@nombre_rol", o.NombreRol ),
-                        new SqlParameter("@id_rol", o.IdRol ),
-                });
-
-            }
-
-
-            catch (Exception ex)
-            {
-                _exhandler.Handle(ex);
-            }
-
+            throw new NotImplementedException();
         }
 
-        public void Delete(int obj)
+        public IEnumerable<Rol> GetAll()
         {
-            try
-            {
-                SqlHelper.SetSqlMode();
-                SqlHelper.ExecuteNonQuery(DeleteStatement, CommandType.Text, new SqlParameter[]
-                {   
-                        new SqlParameter("@id_rol", obj),
-                });
-            }
-            catch (Exception ex)
-            {
-                _exhandler.Handle(ex);
-            }
+            throw new NotImplementedException();
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

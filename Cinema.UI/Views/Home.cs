@@ -95,7 +95,8 @@ namespace Cinema.UI.Views
 
         public void MenuOnLogin()
         {
-            if (_sessionService.UserHasPermission(Permission.Administrator))
+            //if (_sessionService.UserHasPermission(Permission.Administrator))
+            if (true)
             {
                 _navigationManager.ClearNavigationButtons();
                 _navigationManager.CreateButton(BotonInicio_Click, "BotonInicio", "text_home").Show();
