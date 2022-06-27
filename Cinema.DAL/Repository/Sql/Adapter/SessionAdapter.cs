@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cinema.DAL.Repository.SqlServer.Adapter
+namespace Cinema.DAL.Repository.Sql.Adapter
 {
-    public class MovieAdapter : IGenericAdapter<Movie>
+    public class SessionAdapter : IGenericAdapter<Session>
     {
-        public Movie Adapt(object[] values)
+        public Session Adapt(object[] values)
         {
             throw new NotImplementedException();
         }

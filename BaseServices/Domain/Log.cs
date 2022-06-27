@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BaseServices.Domain.Logs
+namespace BaseServices.Domain
 {
     /// <summary>
     /// Clase base para las bitacoras.

@@ -1,5 +1,5 @@
 ﻿using BaseServices.BLL;
-using BaseServices.Domain.Settings;
+using BaseServices.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,7 +43,7 @@ namespace BaseServices.Services
         /// <returns></returns>
         public string TranslateCode(string code)
         {
-            return LanguageManager.GetTranslation(currentlanguage, code);
+            return LanguageBLL.GetTranslation(currentlanguage, code);
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace BaseServices.Services
         /// <returns>Retorna un diccionario con las claves y nombres de los lenguajes.</returns>
         public Dictionary<string, string> GetSupportedLanguages()
         {
-            return LanguageManager.GetSupportedLanguages();
+            return LanguageBLL.GetSupportedLanguages();
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace BaseServices.Services
         public bool LanguageIsSupported(string nuevolenguaje)
         {
 
-            foreach (string language in LanguageManager.GetSupportedLanguages().Keys.ToArray<string>())
+            foreach (string language in LanguageBLL.GetSupportedLanguages().Keys.ToArray<string>())
             {
                 if (nuevolenguaje == language)
                 {

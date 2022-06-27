@@ -1,6 +1,6 @@
 ﻿using BaseServices.BLL.Logger;
 using BaseServices.Contracts;
-using BaseServices.Domain.Logs;
+using BaseServices.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +12,14 @@ namespace BaseServices.Services
     /// <summary>
     /// Servicio para el registro de eventos.
     /// </summary>
-    public class LogService
+    public class Logger
     {
-        private LogService _logger;
+        private Logger _logger;
 
-        internal LogService GetInstance()
+        internal Logger GetInstance()
         {
             if( _logger == null )
-                _logger = new LogService();
+                _logger = new Logger();
 
             return _logger;
 
@@ -39,7 +39,7 @@ namespace BaseServices.Services
         /// Permite el registro de eventos en ambos origenes de datos (Archivo plano y Sql Server).
         /// </summary>
         /// <param name="L">Registro del evento.</param>
-        public void Log(string message, Log.Severity severity = Domain.Logs.Log.Severity.Low, string stackTrace = "")
+        public void Log(string message, Log.Severity severity = Domain.Log.Severity.Low, string stackTrace = "")
         {
             var L = new Log(message, severity, stackTrace);
             WarningNotifier.Instance.ScanLogMessage(L);

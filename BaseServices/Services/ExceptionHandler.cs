@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BaseServices.BLL;
-using BaseServices.Domain.Logs;
+using BaseServices.Domain;
 
 namespace BaseServices.Services
 {
@@ -20,7 +20,7 @@ namespace BaseServices.Services
         public void Handle(Exception ex)
         {
             return;
-            ExceptionManager.Current.Handle(ex);
+            ExceptionBLL.Current.Handle(ex);
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace BaseServices.Services
         public void Handle(Exception ex, Log log)
         {
             return;
-            ExceptionManager.Current.Handle(ex, log);
+            ExceptionBLL.Current.Handle(ex, log);
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace BaseServices.Services
         {
             return;
             var log = new Log(message, severity, ex.StackTrace);
-            ExceptionManager.Current.Handle(ex, log);
+            ExceptionBLL.Current.Handle(ex, log);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using BaseServices.Domain.Control_de_acceso;
-using BaseServices.Services;
+﻿using BaseServices.Services;
 using Cinema.UI.Headers;
 using Cinema.UI.Views;
 using System;

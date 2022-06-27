@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BaseServices.Domain.Control_de_acceso
+namespace BaseServices.Domain
 {
     /// <summary>
     /// Representa un permiso utilizado para control de acceso a formularios.
@@ -14,7 +14,7 @@ namespace BaseServices.Domain.Control_de_acceso
     /// Tipos de permisos.
     /// </summary>
     public enum Permission
-    {     
+    {
         /// <summary>
         /// Permisos de administrador del sistema.
         /// </summary>

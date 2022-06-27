@@ -13,18 +13,18 @@ namespace BaseServices.BLL
     /// <summary>
     /// Provee herramientas para la ejecucion de copias de seguridad y restauracion de bases de datos.
     /// </summary>
-    internal class BackupManager
+    internal class BackupBLL
     {
         ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
-        LogService _logger = ServiceContainer.Get<LogService>();
+        Services.Logger _logger = ServiceContainer.Get<Services.Logger>();
 
         #region Singleton
-        private readonly static BackupManager _instance = new BackupManager();
+        private readonly static BackupBLL _instance = new BackupBLL();
 
         /// <summary>
         /// Propiedad estatica que permite accesar los atributos, propiedades y metodos publicos de una clase con patrón Singleton.
         /// </summary>
-        public static BackupManager Current
+        public static BackupBLL Current
         {
             get
             {
@@ -32,7 +32,7 @@ namespace BaseServices.BLL
             }
         }
 
-        private BackupManager()
+        private BackupBLL()
         {
 
         }

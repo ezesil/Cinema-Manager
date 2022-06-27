@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Text;
 
-namespace BaseServices.Domain.Settings
+namespace BaseServices.Domain
 {
     /// <summary>
     /// Clase que encapsula la configuracion de la aplicacion. Las configuraciones son extraídas de AppSettings.
@@ -61,6 +61,11 @@ namespace BaseServices.Domain.Settings
         protected string _BaseSqlRepository;
 
         /// <summary>
+        /// Ubicacion de los repositorios SQL de negocio.
+        /// </summary>
+        protected string _repository;
+
+        /// <summary>
         /// 
         /// </summary>
         protected Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
@@ -77,6 +82,7 @@ namespace BaseServices.Domain.Settings
         {
 
             _FileLogRepository = ConfigurationManager.AppSettings["FileLogs"];
+            _repository = ConfigurationManager.AppSettings["Repository"];
             _SqlLogRepository = ConfigurationManager.AppSettings["SqlLogs"];
             _FilePath = ConfigurationManager.AppSettings["FilePath"];
             _SqlLogConnString = ConfigurationManager.ConnectionStrings["SqlLogConnString"].ConnectionString;
@@ -120,6 +126,17 @@ namespace BaseServices.Domain.Settings
             get
             {
                 return _SqlConnString;
+            }
+        }
+
+        /// <summary>
+        /// String que indica la ubicacion de los repositorios de archivos.
+        /// </summary>
+        public string Repository
+        {
+            get
+            {
+                return _repository;
             }
         }
 

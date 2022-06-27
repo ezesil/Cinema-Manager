@@ -1,5 +1,4 @@
-﻿using BaseServices.Domain.Exceptions;
-using BaseServices.Domain.Settings;
+﻿using BaseServices.Domain;
 using BaseServices.Services;
 using Cinema.DAL.Interfaces;
 using Cinema.Domain;
@@ -8,15 +7,16 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cinema.DAL.Repository.SqlServer
+namespace Cinema.DAL.Repository.Sql
 {
     public abstract class SqlRepository<TEntity, TAdapter>
         where TEntity : class, new()
         where TAdapter : IGenericAdapter<TEntity>, new()
-    { 
+    {
         private string DeleteQuery { get; set; }
         private string SelectAllQuery { get; set; }
         private string SelectQuery { get; set; }
@@ -25,10 +25,10 @@ namespace Cinema.DAL.Repository.SqlServer
 
         private string connString { get => ApplicationSettings.Instance.SqlConnString; }
 
-        private TAdapter? genericAdapter { get; }
+        private TAdapter? genericAdapter { get; set; }
 
         private ExceptionHandler exceptionHandler { get; }
-        private LogService logService { get; }
+        private Logger logService { get; }
 
 
 
@@ -40,27 +40,30 @@ namespace Cinema.DAL.Repository.SqlServer
             InsertQuery = insertQuery;
             UpdateQuery = updateQuery;
             exceptionHandler = ServiceContainer.Get<ExceptionHandler>();
-            logService = ServiceContainer.Get<LogService>();
-            genericAdapter = default(TAdapter);
+            logService = ServiceContainer.Get<Logger>();
+            genericAdapter = new TAdapter();
         }
 
-        public virtual int Delete(SqlParameter[] parameters, string queryOverride = "")
+        public virtual int Delete(object parameters, string queryOverride = "")
         {
             try
             {
                 var query = DeleteQuery;
-                if (queryOverride == null || queryOverride == "")
+                if (queryOverride != null && queryOverride != "")
                     query = queryOverride;
+
+                if (genericAdapter == null)
+                    genericAdapter = new TAdapter();
 
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.Parameters.Add(parameters);
+                        cmd.Parameters.AddRange(GetParameters(parameters));
 
                         conn.Open();
-                        return cmd.ExecuteNonQuery();                       
+                        return cmd.ExecuteNonQuery();
                     }
                 }
             }
@@ -74,8 +77,11 @@ namespace Cinema.DAL.Repository.SqlServer
         public virtual IEnumerable<TEntity> GetAll(string queryOverride = "")
         {
             var query = SelectAllQuery;
-            if (queryOverride == null || queryOverride == "")
+            if (queryOverride != null && queryOverride != "")
                 query = queryOverride;
+
+            if (genericAdapter == null)
+                genericAdapter = new TAdapter();
 
             SqlConnection conn = new SqlConnection(connString);
             SqlDataReader reader;
@@ -85,28 +91,31 @@ namespace Cinema.DAL.Repository.SqlServer
                 conn.Open();
                 using (reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
                 {
-                    Object[] values = new Object[reader.FieldCount];
+                    object[] values = new object[reader.FieldCount];
 
                     while (reader.Read())
                     {
                         reader.GetValues(values);
-                        yield return genericAdapter?.Adapt(values); ;
+                        yield return genericAdapter.Adapt(values);
                     }
-                }                 
-            }       
+                }
+            }
         }
 
-        public virtual TEntity GetOne(SqlParameter[] parameters, string queryOverride = "")
+        public virtual TEntity GetOne(object parameters, string queryOverride = "")
         {
             try
             {
                 var query = SelectQuery;
-                if (queryOverride == null || queryOverride == "")
+                if (queryOverride != null && queryOverride != "")
                     query = queryOverride;
+
+                if (genericAdapter == null)
+                    genericAdapter = new TAdapter();
 
                 SqlConnection conn = new SqlConnection(connString);
                 SqlDataReader reader;
-                Object[]? values = null;
+                object[]? values = null;
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.CommandType = CommandType.Text;
@@ -114,11 +123,11 @@ namespace Cinema.DAL.Repository.SqlServer
                     using (reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
                     {
 
-                        values = new Object[reader.FieldCount];
+                        values = new object[reader.FieldCount];
 
                         while (reader.Read())
                         {
-                            reader.GetValues(values);                           
+                            reader.GetValues(values);
                         }
                     }
                 }
@@ -132,11 +141,15 @@ namespace Cinema.DAL.Repository.SqlServer
             }
         }
 
-        public virtual int Insert(SqlParameter[] parameters, string queryOverride = "")
+        public virtual int Insert(object parameters, string queryOverride = "")
         {
             var query = InsertQuery;
-            if (queryOverride == null || queryOverride == "")
+            if (queryOverride != null && queryOverride != "")
                 query = queryOverride;
+
+            if (genericAdapter == null)
+                genericAdapter = new TAdapter();
+
             try
             {
                 using (SqlConnection conn = new SqlConnection(connString))
@@ -144,7 +157,7 @@ namespace Cinema.DAL.Repository.SqlServer
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.Parameters.AddRange(parameters);
+                        cmd.Parameters.AddRange(GetParameters(parameters));
 
                         conn.Open();
                         return cmd.ExecuteNonQuery();
@@ -159,20 +172,23 @@ namespace Cinema.DAL.Repository.SqlServer
             }
         }
 
-        public virtual int Update(SqlParameter[] parameters, string queryOverride = "")
+        public virtual int Update(object parameters, string queryOverride = "")
         {
             try
             {
                 var query = UpdateQuery;
-                if (queryOverride == null || queryOverride == "")
+                if (queryOverride != null && queryOverride != "")
                     query = queryOverride;
+
+                if (genericAdapter == null)
+                    genericAdapter = new TAdapter();
 
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.Parameters.AddRange(parameters);
+                        cmd.Parameters.AddRange(GetParameters(parameters));
 
                         conn.Open();
                         return cmd.ExecuteNonQuery();
@@ -187,6 +203,22 @@ namespace Cinema.DAL.Repository.SqlServer
             }
         }
 
+        private SqlParameter[] GetParameters(object args)
+        {
+            Type myType = args.GetType();
+            IList<PropertyInfo> props = new List<PropertyInfo>(myType.GetProperties());
 
+            var parameters = new SqlParameter[props.Count];
+
+            int i = 0;
+            foreach (PropertyInfo prop in props)
+            {   
+                parameters[i] = new SqlParameter("@" + prop.Name, prop.GetValue(args,null));
+                object propValue = prop.GetValue(args, null);
+                i++;
+            }
+
+            return parameters;
+        }
     }
 }

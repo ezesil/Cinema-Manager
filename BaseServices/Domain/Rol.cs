@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BaseServices.Domain.Control_de_acceso
+namespace BaseServices.Domain
 {
     /// <summary>
     /// Representa el rol de una persona en el sistema.
     /// </summary>
-    public class Rol 
+    public class Rol
     {
 
         /// <summary>
@@ -31,9 +31,9 @@ namespace BaseServices.Domain.Control_de_acceso
         /// <param name="rights">Lista de permisos de tipo Permiso.PermissionType.</param>
         public Rol(int id, string nombre, List<Permiso> rights)
         {
-            this.IdRol = id;
-            this.NombreRol = nombre;
-            this.PermisoList = rights;
+            IdRol = id;
+            NombreRol = nombre;
+            PermisoList = rights;
         }
 
 
@@ -46,9 +46,9 @@ namespace BaseServices.Domain.Control_de_acceso
         /// <param name="rights">Lista de permisos de tipo Permiso.PermissionType.</param>
         public Rol(int id, string nombre, string rights)
         {
-            this.IdRol = id;
-            this.NombreRol = nombre;
-            this.PermisosString = rights;
+            IdRol = id;
+            NombreRol = nombre;
+            PermisosString = rights;
         }
 
 
@@ -78,20 +78,20 @@ namespace BaseServices.Domain.Control_de_acceso
                 _permissions = value;
 
 
-                for(int i = 0;i < value.Count - 2;i++)
+                for (int i = 0; i < value.Count - 2; i++)
                 {
                     _permisos += value[i].Codigo + ";";
                 }
 
                 _permisos += value[value.Count - 1];
-                               
-            } 
+
+            }
         }
 
         /// <summary>
         /// Permisos pertenecientes al rol en formato string.
         /// </summary>
-        public string PermisosString 
+        public string PermisosString
         {
             get
             {
@@ -104,7 +104,7 @@ namespace BaseServices.Domain.Control_de_acceso
                 {
                     _permissions.Add(new Permiso(item));
                 }
-            } 
+            }
         }
 
         /// <summary>

@@ -1,19 +1,16 @@
-﻿using BaseServices.Domain.Control_de_acceso;
-using BaseServices.Domain.Logs;
+﻿using BaseServices.Domain;
 using BaseServices.Services;
 using Cinema.UI.AdminViews;
-using Cinema.UI.Extensions;
 using Cinema.UI.Services;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using static BaseServices.Domain.Control_de_acceso.Permiso;
 
 namespace Cinema.UI.Views
 {
     public partial class AdminPanel : UserControl
     {
-        private LogService _logger;
+        private Logger _logger;
         private NavigationManager _navigationManager;
         private SessionService _session;
         private ExceptionHandler _exmanager;
@@ -27,7 +24,7 @@ namespace Cinema.UI.Views
 
         public AdminPanel(
             NavigationManager navigationManager,
-            LogService logger, 
+            Logger logger, 
             ExceptionHandler exmanager,
             BackupPanel backupPanel,
             PermissionsPanel permissionsPanel,

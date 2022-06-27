@@ -4,9 +4,6 @@ using Cinema.UI.Services;
 using Cinema.UI.Views;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Cinema.UI
@@ -32,7 +29,7 @@ namespace Cinema.UI
             services.AddSingleton<ExceptionHandler>();
             services.AddSingleton<HashingService>();
             services.AddSingleton<LanguageService>();
-            services.AddSingleton<LogService>();
+            services.AddSingleton<Logger>();
 
             // Servicios de la UI
             services.AddSingleton<ControlTranslationService>();

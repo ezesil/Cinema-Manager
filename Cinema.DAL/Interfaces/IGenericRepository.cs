@@ -31,12 +31,12 @@ namespace Cinema.DAL.Interfaces
         /// </summary>
         /// <param name="g"></param>
         /// <returns></returns>
-        T GetOne(Guid guid);
+        T GetOne(Guid? guid);
 
         /// <summary>
         /// Elimina un registro del repositorio.
         /// </summary>
         /// <param name="g"></param>
-        void Delete(Guid guid);
+        void Delete(Guid? guid);
     }
 }

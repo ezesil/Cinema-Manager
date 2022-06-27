@@ -1,6 +1,5 @@
 ﻿using BaseServices.DAL.Factory;
 using BaseServices.Domain;
-using BaseServices.Domain.Logs;
 using BaseServices.Services;
 using System;
 using System.Collections.Generic;
@@ -14,21 +13,21 @@ namespace BaseServices.BLL
     /// <summary>
     /// Gestiona los procesos de generacion de digito verificador.
     /// </summary>
-    internal class CheckDigitManager
+    internal class CheckDigitBLL
     {
 
         ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
-        LogService _logger = ServiceContainer.Get<LogService>();
+        Services.Logger _logger = ServiceContainer.Get<Services.Logger>();
 
         private static List<User> PersonasConFallos = new List<User>();
 
         #region Singleton
-        private readonly static CheckDigitManager _instance = new CheckDigitManager();
+        private readonly static CheckDigitBLL _instance = new CheckDigitBLL();
 
         /// <summary>
         /// Propiedad estatica que permite accesar los atributos, propiedades y metodos publicos de una clase con patrón Singleton.
         /// </summary>
-        public static CheckDigitManager Current
+        public static CheckDigitBLL Current
         {
             get
             {
@@ -36,7 +35,7 @@ namespace BaseServices.BLL
             }
         }
 
-        private CheckDigitManager()
+        private CheckDigitBLL()
         {
 
         }
@@ -139,48 +138,48 @@ namespace BaseServices.BLL
 
         }
 
-        /// <summary>
-        /// Chequea la integridad de los datos de inicio de sesion.
-        /// </summary>
-        /// <returns>Retorna un valor booleano.</returns>
-        public bool CheckIntegrity()
-        {
-            var listapersonas = FactoryDAL.UserRepository.SelectAllIntegrityData().ToList();
+        ///// <summary>
+        ///// Chequea la integridad de los datos de inicio de sesion.
+        ///// </summary>
+        ///// <returns>Retorna un valor booleano.</returns>
+        //public bool CheckIntegrity()
+        //{
+        //    var listapersonas = FactoryDAL.UserRepository.SelectAllIntegrityData().ToList();
 
-            if (CheckAccountsIntegrity(listapersonas) == true && CheckPersonaIntegrity(listapersonas) == true)
-                return true;
+        //    if (CheckAccountsIntegrity(listapersonas) == true && CheckPersonaIntegrity(listapersonas) == true)
+        //        return true;
 
-            else
-                return false;
-        }
+        //    else
+        //        return false;
+        //}
 
-        /// <summary>
-        /// Actualiza el DVV de una entidad. Debe usarse despues de ingresar cambios a una cuenta de usuario.
-        /// </summary>
-        /// <param name="id"></param>
-        public void UpdateDVV(int id)
-        {
-            List<decimal> numeros = new List<decimal>();
+        ///// <summary>
+        ///// Actualiza el DVV de una entidad. Debe usarse despues de ingresar cambios a una cuenta de usuario.
+        ///// </summary>
+        ///// <param name="id"></param>
+        //public void UpdateDVV(int id)
+        //{
+        //    List<decimal> numeros = new List<decimal>();
 
-            foreach (var c in FactoryDAL.UserRepository.SelectAllIntegrityData().ToList())
-            {
-                numeros.Add(Convert.ToDecimal(c.DVH));
-            }
+        //    foreach (var c in FactoryDAL.UserRepository.SelectAllIntegrityData().ToList())
+        //    {
+        //        numeros.Add(Convert.ToDecimal(c.DVH));
+        //    }
               
-            FactoryDAL.DVVRepository.Update(id, Convert.ToInt32(CalculateDVV(numeros)));
-        }
+        //    FactoryDAL.DVVRepository.Update(id, Convert.ToInt32(CalculateDVV(numeros)));
+        //}
 
-        /// <summary>
-        /// Actualiza el valor DVH utilizando el Guid de un usuario.
-        /// </summary>
-        /// <param name="c"></param>
-        public void UpdateDVH(User c)
-        {
-            c = FactoryDAL.UserRepository.SelectIntegrityData(c.Id);
-            FactoryDAL.UserRepository.UpdateDVH(c.Id, Convert.ToInt32(CalculateDVH(c.Id.ToString() + c.Username + c.HashedPassword + c.Email)));
+        ///// <summary>
+        ///// Actualiza el valor DVH utilizando el Guid de un usuario.
+        ///// </summary>
+        ///// <param name="c"></param>
+        //public void UpdateDVH(User c)
+        //{
+        //    c = FactoryDAL.UserRepository.SelectIntegrityData(c.Id);
+        //    FactoryDAL.UserRepository.UpdateDVH(c.Id, Convert.ToInt32(CalculateDVH(c.Id.ToString() + c.Username + c.HashedPassword + c.Email)));
 
-            UpdateDVV(100);
-        }
+        //    UpdateDVV(100);
+        //}
 
     }
 }

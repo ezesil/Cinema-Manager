@@ -6,8 +6,8 @@ using BaseServices.DAL.Factory;
 using BaseServices.DAL.Repository.Sql;
 using System;
 using BaseServices.DAL.Repository.File;
-using BaseServices.Domain.Logs;
 using BaseServices.Services;
+using BaseServices.Domain;
 
 namespace BaseServices.BLL.Logger
 {

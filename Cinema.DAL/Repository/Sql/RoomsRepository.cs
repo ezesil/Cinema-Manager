@@ -1,5 +1,5 @@
 ﻿using Cinema.DAL.Interfaces;
-using Cinema.DAL.Repository.SqlServer.Adapter;
+using Cinema.DAL.Repository.Sql.Adapter;
 using Cinema.Domain;
 using System;
 using System.Collections.Generic;
@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cinema.DAL.Repository.SqlServer
+namespace Cinema.DAL.Repository.Sql
 {
-    public class SessionRepository : SqlRepository<Session, SessionAdapter>, IGenericRepository<Session>
+    public class RoomsRepository : SqlRepository<Room, RoomAdapter>, IGenericRepository<Room>
     {
         private static string DeleteQuery
         { get => ""; }
@@ -22,31 +22,32 @@ namespace Cinema.DAL.Repository.SqlServer
         private static string UpdateQuery
         { get => ""; }
 
-        public SessionRepository() : base(DeleteQuery, SelectAllQuery, SelectQuery, InsertQuery, UpdateQuery)
+        public RoomsRepository() : base(DeleteQuery, SelectAllQuery, SelectQuery, InsertQuery, UpdateQuery)
         {
         }
 
-        public void Insert(Session obj)
-        {
-            throw new NotImplementedException();
-        }
 
-        public void Update(Session obj)
+        public void Delete(Guid? guid)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Session> GetAll()
+        public IEnumerable<Room> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public Session GetOne(Guid guid)
+        public Room GetOne(Guid? guid)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Guid guid)
+        public void Insert(Room obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Room obj)
         {
             throw new NotImplementedException();
         }

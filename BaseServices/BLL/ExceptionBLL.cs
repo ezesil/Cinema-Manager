@@ -1,5 +1,5 @@
-﻿using BaseServices.Domain.Exceptions;
-using BaseServices.Domain.Logs;
+﻿using BaseServices.Domain;
+using BaseServices.Exceptions;
 using BaseServices.Services;
 using System;
 using System.Collections.Generic;
@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace BaseServices.BLL
 {
-    internal class ExceptionManager
+    internal class ExceptionBLL
     {
         ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
-        LogService _logger;
+        Services.Logger _logger;
         #region
-        private readonly static ExceptionManager _instance = new ExceptionManager();
+        private readonly static ExceptionBLL _instance = new ExceptionBLL();
 
-        public static ExceptionManager Current
+        public static ExceptionBLL Current
         {
             get
             {
@@ -24,9 +24,9 @@ namespace BaseServices.BLL
             }
         }
 
-        private ExceptionManager()
+        private ExceptionBLL()
         {
-            _logger = ServiceContainer.Get<LogService>();
+            _logger = ServiceContainer.Get<Services.Logger>();
         }
         #endregion
 

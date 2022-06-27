@@ -7,8 +7,8 @@ using BaseServices.Contracts;
 using System.IO;
 using BaseServices.DAL.Interfaces;
 using BaseServices.DAL.Factory;
-using BaseServices.Domain.Logs;
 using BaseServices.Services;
+using BaseServices.Domain;
 
 namespace BaseServices.BLL.Logger
 {

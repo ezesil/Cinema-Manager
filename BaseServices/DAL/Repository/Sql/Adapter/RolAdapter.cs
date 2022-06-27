@@ -1,5 +1,5 @@
 ﻿using BaseServices.DAL.Interfaces;
-using BaseServices.Domain.Control_de_acceso;
+using BaseServices.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;

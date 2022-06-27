@@ -11,17 +11,17 @@ namespace BaseServices.BLL
     /// <summary>
     /// Clase gestora de servicios de Hashing.
     /// </summary>
-    internal class HashingManager
+    internal class HashingBLL
     {
         ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
-        LogService _logger = ServiceContainer.Get<LogService>();
+        Services.Logger _logger = ServiceContainer.Get<Services.Logger>();
 
-        private readonly static HashingManager _instance = new HashingManager();
+        private readonly static HashingBLL _instance = new HashingBLL();
 
         /// <summary>
         /// Propiedad estatica que permite accesar los atributos, propiedades y metodos publicos de una clase con patrón Singleton.
         /// </summary>
-        public static HashingManager Current
+        public static HashingBLL Current
         {
             get
             {
@@ -29,7 +29,7 @@ namespace BaseServices.BLL
             }
         }
         
-        private HashingManager()
+        private HashingBLL()
         {
 
         }

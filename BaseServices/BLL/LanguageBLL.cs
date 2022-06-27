@@ -1,23 +1,22 @@
 ﻿using BaseServices.Domain;
-using BaseServices.Domain.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BaseServices.DAL.Interfaces;
-using BaseServices.Domain.Settings;
 using BaseServices.Services;
+using BaseServices.Exceptions;
 
 namespace BaseServices.BLL
 {
     /// <summary>
     /// Gestor del sistema de multiples lenguajes.
     /// </summary>
-    public static class LanguageManager
+    public static class LanguageBLL
     {
         static ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
-        static LogService _logger = ServiceContainer.Get<LogService>();
+        static Services.Logger _logger = ServiceContainer.Get<Services.Logger>();
 
         /// <summary>
         /// Repositorio de lenguajes.
@@ -37,7 +36,7 @@ namespace BaseServices.BLL
         /// <summary>
         /// Constructor estatico del gestor de lenguajes.
         /// </summary>
-        static LanguageManager()
+        static LanguageBLL()
         {
             langrepo = BaseServices.DAL.Factory.FactoryDAL.LanguageRepository;
             Init();          
@@ -176,7 +175,7 @@ namespace BaseServices.BLL
 
             catch(Exception ex)
             {
-                ExceptionManager.Current.Handle(ex as BLLException);
+                ExceptionBLL.Current.Handle(ex as BLLException);
                 return key;
             }
         }
@@ -195,7 +194,7 @@ namespace BaseServices.BLL
             
             catch(Exception ex)
             {
-                ExceptionManager.Current.Handle(ex as BLLException); // TODO: Crear excepcion especifica
+                ExceptionBLL.Current.Handle(ex as BLLException); // TODO: Crear excepcion especifica
                 var i = new Dictionary<string, string>();
                 i.Add("es", "Español");
                 return i;

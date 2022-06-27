@@ -10,8 +10,7 @@ using BaseServices.DAL.Interfaces;
 using BaseServices.DAL.Factory;
 using BaseServices.DAL.Repository.File.Adapter;
 using BaseServices.DAL.Repository.Sql.Adapter;
-using BaseServices.Domain.Logs;
-using BaseServices.Domain.Settings;
+using BaseServices.Domain;
 
 namespace BaseServices.DAL.Repository.File
 {

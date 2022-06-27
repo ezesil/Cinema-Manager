@@ -26,7 +26,7 @@ namespace BaseServices.Services
         /// <param name="cadena"></param>
         public decimal CalcularDVH(string cadena)
         {
-            return CheckDigitManager.Current.CalculateDVH(cadena);
+            return CheckDigitBLL.Current.CalculateDVH(cadena);
         }
 
 
@@ -37,35 +37,35 @@ namespace BaseServices.Services
         /// <returns></returns>
         public decimal CalcularDVV(decimal[] cadena)
         {
-            return CheckDigitManager.Current.CalculateDVV(cadena.ToList());
+            return CheckDigitBLL.Current.CalculateDVV(cadena.ToList());
         }
 
 
-        /// <summary>
-        /// Verifica la integridad de los datos. Retorna True si no hay errores, False si hubo errores.
-        /// </summary>
-        /// <returns></returns>
-        public bool CheckIntegrity()
-        {
-            return CheckDigitManager.Current.CheckIntegrity();
-        }
+        ///// <summary>
+        ///// Verifica la integridad de los datos. Retorna True si no hay errores, False si hubo errores.
+        ///// </summary>
+        ///// <returns></returns>
+        //public bool CheckIntegrity()
+        //{
+        //    return CheckDigitBLL.Current.CheckIntegrity();
+        //}
 
-        /// <summary>
-        /// Metodo que permite actualizar el DVV de una entidad.
-        /// </summary>
-        public void UpdateDVV(int id)
-        {
-            CheckDigitManager.Current.UpdateDVV(id);
-        }
+        ///// <summary>
+        ///// Metodo que permite actualizar el DVV de una entidad.
+        ///// </summary>
+        //public void UpdateDVV(int id)
+        //{
+        //    CheckDigitBLL.Current.UpdateDVV(id);
+        //}
 
-        /// <summary>
-        /// Actualizar el valor DVH de un objeto Persona en la base de datos.
-        /// </summary>
-        /// <param name="p"></param>
-        public void UpdateDVH(User p)
-        {
-            CheckDigitManager.Current.UpdateDVH(p);
-        }
+        ///// <summary>
+        ///// Actualizar el valor DVH de un objeto Persona en la base de datos.
+        ///// </summary>
+        ///// <param name="p"></param>
+        //public void UpdateDVH(User p)
+        //{
+        //    CheckDigitBLL.Current.UpdateDVH(p);
+        //}
 
 
 

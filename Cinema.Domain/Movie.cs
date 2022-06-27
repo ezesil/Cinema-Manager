@@ -8,7 +8,7 @@ namespace Cinema.Domain
 {
     public class Movie : Entity
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
         public string Name { get; set; }
         public string Language { get; set; }
         public string SubtitleLanguage { get; set; }

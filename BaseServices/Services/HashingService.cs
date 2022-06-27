@@ -33,7 +33,7 @@ namespace BaseServices.Services
         /// <returns>Retorna un objeto string que contiene el valor de hash de la contraseña.</returns>
         public string HashPassword(string password)
         {
-            return HashingManager.Current.CreatePasswordHash(password);
+            return HashingBLL.Current.CreatePasswordHash(password);
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace BaseServices.Services
         /// <returns></returns>
         public bool VerificarContraseña(string password, string storedhash)
         {
-            return HashingManager.VerifyPassword(password, storedhash);
+            return HashingBLL.VerifyPassword(password, storedhash);
         }
 
 

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cinema.DAL.Repository.SqlServer.Adapter
+namespace Cinema.DAL.Repository.Sql.Adapter
 {
     public class TicketAdapter : IGenericAdapter<Ticket>
     {

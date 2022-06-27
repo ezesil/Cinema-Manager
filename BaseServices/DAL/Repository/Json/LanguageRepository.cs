@@ -8,8 +8,8 @@ using Newtonsoft.Json.Linq;
 using System.IO;
 using BaseServices.Domain;
 using BaseServices.DAL.Interfaces;
-using BaseServices.Domain.Exceptions;
 using BaseServices.Services;
+using BaseServices.Exceptions;
 
 namespace BaseServices.DAL.Repository.Json
 {
@@ -19,7 +19,7 @@ namespace BaseServices.DAL.Repository.Json
     internal class LanguageRepository : ILanguageRepository
     {
         ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
-        LogService _logger = ServiceContainer.Get<LogService>();
+        Logger _logger = ServiceContainer.Get<Logger>();
 
         /// <summary>
         /// Busca y carga un archivo de lenguaje de formato JSON. La carpeta de busca por defecto es \locale\.

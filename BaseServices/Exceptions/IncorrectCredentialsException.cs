@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BaseServices.Domain.Exceptions
+namespace BaseServices.Exceptions
 {
     /// <summary>
     /// Representa un error de credenciales incorrectas.

@@ -13,11 +13,11 @@ namespace Cinema.UI.Views
 {
     public partial class CreateTicketPage : UserControl
     {
-        private LogService _logger;
+        private Logger _logger;
         private SessionService _session;
         private ExceptionHandler _exmanager;
 
-        public CreateTicketPage(LogService logger, ExceptionHandler exmanager)
+        public CreateTicketPage(Logger logger, ExceptionHandler exmanager)
         {
             InitializeComponent();
             this.Name = "Creacion de ticket";

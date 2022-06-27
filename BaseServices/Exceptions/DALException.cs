@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BaseServices.Domain.Exceptions
+namespace BaseServices.Exceptions
 {
     /// <summary>
     /// Representa errores ocurridos durante el acceso a datos.

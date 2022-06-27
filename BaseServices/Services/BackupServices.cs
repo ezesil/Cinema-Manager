@@ -19,7 +19,7 @@ namespace BaseServices.Services
         /// </summary>
         public void BackupDatabase(string dbname, string path)
         {
-            BackupManager.Current.PerformBackup(dbname, path);
+            BackupBLL.Current.PerformBackup(dbname, path);
         }
 
 
@@ -28,7 +28,7 @@ namespace BaseServices.Services
         /// </summary>
         public void RestoreDatabase(string dbname, string path)
         {
-            BackupManager.Current.PerformRestore(dbname, path);
+            BackupBLL.Current.PerformRestore(dbname, path);
         }
 
 

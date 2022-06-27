@@ -1,5 +1,5 @@
 ﻿using BaseServices.BLL;
-using BaseServices.Domain.Control_de_acceso;
+using BaseServices.Domain;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -37,7 +37,7 @@ namespace BaseServices.Services
         {
             get
             {
-                return SessionManager.Current.UserIsNull;
+                return SessionBLL.Current.UserIsNull;
 
             }
         }
@@ -51,7 +51,7 @@ namespace BaseServices.Services
             {
                 if (UserIsNull)
                     return "None";
-                return SessionManager.Current.CurrentUserName;
+                return SessionBLL.Current.CurrentUserName;
             }
         }
 
@@ -64,7 +64,7 @@ namespace BaseServices.Services
             {
                 if (UserIsNull)
                     return Guid.Parse("00000000-0000-0000-0000-000000000000");
-                return SessionManager.Current.CurrentUserGuid;
+                return SessionBLL.Current.CurrentUserGuid;
             }
         }
 
@@ -78,27 +78,27 @@ namespace BaseServices.Services
                 if (UserIsNull)
                     return "None";
 
-                return SessionManager.Current.CurrentUserAddress;
+                return SessionBLL.Current.CurrentUserAddress;
             }
         }
 
-        /// <summary>
-        /// Efectúa un intento de inicio de sesión.
-        /// </summary>
-        /// <param name="identificador">Nombre de usuario o contraseña.</param>
-        /// <param name="contraseña">Contraseña en texto plano.</param>
-        /// <returns></returns>
-        public bool LoginAttemp(string identificador, string contraseña)
-        {
-            if (identificador.Contains("@") && identificador.Contains(".com"))
-                return SessionManager.Current.LoginAttempCorreo(identificador, contraseña);
-            else
-                return SessionManager.Current.AttempLogin(identificador, contraseña);
-        }
+        ///// <summary>
+        ///// Efectúa un intento de inicio de sesión.
+        ///// </summary>
+        ///// <param name="identificador">Nombre de usuario o contraseña.</param>
+        ///// <param name="contraseña">Contraseña en texto plano.</param>
+        ///// <returns></returns>
+        //public bool LoginAttemp(string identificador, string contraseña)
+        //{
+        //    if (identificador.Contains("@") && identificador.Contains(".com"))
+        //        return SessionBLL.Current.LoginAttempCorreo(identificador, contraseña);
+        //    else
+        //        return SessionBLL.Current.AttempLogin(identificador, contraseña);
+        //}
 
         public void Logout()
         {
-            SessionManager.Current.Logout();
+            SessionBLL.Current.Logout();
         }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace BaseServices.Services
             if (SessionService.Current.UserIsNull)
                 return false;
 
-            return PermissionManager.Current.HasRight(permiso);
+            return PermissionBLL.Current.HasRight(permiso);
         }
 
         /// <summary>

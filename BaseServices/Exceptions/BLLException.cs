@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BaseServices.Domain.Exceptions
+namespace BaseServices.Exceptions
 {
     /// <summary>
     /// Representa errores ocurridos durante la logica de negocio. Tambien puede ser una excepcion de tipo acceso a datos si es interna.
@@ -29,7 +29,7 @@ namespace BaseServices.Domain.Exceptions
         /// </summary>
         /// <param name="message"></param>
         /// <param name="IsBusinessException"></param>
-        public BLLException(String message, bool IsBusinessException = false) : base(message)
+        public BLLException(string message, bool IsBusinessException = false) : base(message)
         {
             this.IsBusinessException = IsBusinessException;
         }
@@ -50,7 +50,7 @@ namespace BaseServices.Domain.Exceptions
         /// <param name="message"></param>
         /// <param name="ex"></param>
         /// <param name="IsBusinessException"></param>
-        public BLLException(String message, Exception ex, bool IsBusinessException = false) : base(message, ex)
+        public BLLException(string message, Exception ex, bool IsBusinessException = false) : base(message, ex)
         {
             this.IsBusinessException = IsBusinessException;
         }

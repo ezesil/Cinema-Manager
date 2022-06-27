@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using BaseServices.Contracts;
 using BaseServices.DAL.Interfaces;
 using BaseServices.DAL.Factory;
-using BaseServices.Domain.Logs;
+using BaseServices.Domain;
 
 namespace BaseServices.BLL.Logger
 {

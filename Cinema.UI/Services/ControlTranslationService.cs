@@ -5,11 +5,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BaseServices.Domain.Logs;
-using BaseServices.Domain.Settings;
 using System.Windows.Forms;
 using static System.Windows.Forms.Control;
 using BaseServices.Services;
+using BaseServices.Domain;
 
 namespace Cinema.UI.Services
 {
@@ -30,10 +29,10 @@ namespace Cinema.UI.Services
 
         private static string currentlanguage = ApplicationSettings.Instance.LastLanguage;
         private List<string> failedcodes = new List<string>();
-        private LogService _logger;
+        private Logger _logger;
         
 
-        public ControlTranslationService(LogService logger)
+        public ControlTranslationService(Logger logger)
         {
             _logger = logger;
         }
@@ -76,7 +75,7 @@ namespace Cinema.UI.Services
         /// <returns></returns>
         public string TranslateCode(string code)
         {
-            return LanguageManager.GetTranslation(currentlanguage, code);
+            return LanguageBLL.GetTranslation(currentlanguage, code);
         }
 
         /// <summary>
@@ -279,7 +278,7 @@ namespace Cinema.UI.Services
         /// <returns>Retorna un diccionario con las claves y nombres de los lenguajes.</returns>
         public Dictionary<string, string> GetSupportedLanguages()
         {
-            return LanguageManager.GetSupportedLanguages();
+            return LanguageBLL.GetSupportedLanguages();
         }
 
         /// <summary>
@@ -310,7 +309,7 @@ namespace Cinema.UI.Services
         public bool LanguageIsSupported(string nuevolenguaje)
         {
 
-            foreach (string language in LanguageManager.GetSupportedLanguages().Keys.ToArray())
+            foreach (string language in LanguageBLL.GetSupportedLanguages().Keys.ToArray())
             {
                 if (nuevolenguaje == language)
                 {

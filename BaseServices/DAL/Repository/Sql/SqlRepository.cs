@@ -1,7 +1,7 @@
 ﻿using BaseServices.DAL.Interfaces;
-using BaseServices.Domain.Exceptions;
-using BaseServices.Domain.Settings;
+using BaseServices.Domain;
 using BaseServices.Services;
+using Cinema.Domain;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -27,7 +27,7 @@ namespace BaseServices.DAL.Repository.Sql
         private TAdapter? genericAdapter { get; }
 
         private ExceptionHandler exceptionHandler { get; }
-        private LogService logService { get; }
+        private Logger logService { get; }
 
 
 
@@ -39,7 +39,7 @@ namespace BaseServices.DAL.Repository.Sql
             InsertQuery = insertQuery;
             UpdateQuery = updateQuery;
             exceptionHandler = ServiceContainer.Get<ExceptionHandler>();
-            logService = ServiceContainer.Get<LogService>();
+            logService = ServiceContainer.Get<Logger>();
             genericAdapter = default(TAdapter);
         }
 

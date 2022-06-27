@@ -8,7 +8,7 @@ using System.IO;
 using System.Configuration;
 using System.ComponentModel;
 using BaseServices.DAL.Repository.File.Adapter;
-using BaseServices.Domain.Logs;
+using BaseServices.Domain;
 
 namespace BaseServices.DAL.Repository.File
 {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BaseServices.DAL.Interfaces;
-using BaseServices.Domain.Logs;
+using BaseServices.Domain;
 
 namespace BaseServices.DAL.Repository.Sql.Adapter
 {

@@ -1,5 +1,4 @@
-﻿using BaseServices.Domain.Control_de_acceso;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -9,26 +8,27 @@ using System.Threading.Tasks;
 using BaseServices.DAL.Interfaces;
 using BaseServices.DAL.Factory;
 using BaseServices.Services;
+using BaseServices.Domain;
 
 namespace BaseServices.BLL
 {
     /// <summary>
     /// Provee herramientas para la gestion de permisos de formulario.
     /// </summary>
-    internal class PermissionManager
+    internal class PermissionBLL
     {
         ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
-        LogService _logger = ServiceContainer.Get<LogService>();
+        Services.Logger _logger = ServiceContainer.Get<Services.Logger>();
 
         private readonly IGenericRepository<Rol> repoperm;
 
         #region Singleton
-        private readonly static PermissionManager _instance = new PermissionManager();
+        private readonly static PermissionBLL _instance = new PermissionBLL();
 
         /// <summary>
         /// Propiedad estatica que permite accesar los atributos, propiedades y metodos publicos de una clase con patrón Singleton.
         /// </summary>
-        public static PermissionManager Current
+        public static PermissionBLL Current
         {
             get
             {
@@ -36,7 +36,7 @@ namespace BaseServices.BLL
             }
         }
 
-        private PermissionManager()
+        private PermissionBLL()
         {
             repoperm = FactoryDAL.RolRepository;
         }
@@ -50,7 +50,7 @@ namespace BaseServices.BLL
         public bool HasRight(Permiso P)
         {
             return true;
-            if (SessionManager.Current.UserIsNull)
+            if (SessionBLL.Current.UserIsNull)
             {
                 return false;
             }
