@@ -12,15 +12,16 @@ namespace Cinema.DAL.Repository.Sql
     public class RoomsRepository : SqlRepository<Room, RoomAdapter>, IGenericRepository<Room>
     {
         private static string DeleteQuery
-        { get => ""; }
+        { get => "DELETE FROM [CinemaDB].[dbo].[Salas] where guid_sala = @Id"; }
         private static string SelectAllQuery
-        { get => ""; }
+        { get => "SELECT [guid_sala],[codigo_identificador],[es_pantalla_gigante],[es_3D],[activo] FROM [CinemaDB].[dbo].[Salas]"; }
         private static string SelectQuery
-        { get => ""; }
+        { get => "SELECT [guid_sala],[codigo_identificador],[es_pantalla_gigante],[es_3D],[activo] FROM [CinemaDB].[dbo].[Salas] where [guid_sala] = @Id"; }
         private static string InsertQuery
-        { get => ""; }
+        { get => "INSERT INTO [CinemaDB].[dbo].[Salas] ([codigo_identificador],[es_pantalla_gigante],[es_3D],[activo]) values (@Identifier, @HasBigPicture, @Has3D, @IsActive)"; }
         private static string UpdateQuery
-        { get => ""; }
+        { get => "UPDATE [CinemaDB].[dbo].[Salas] SET [codigo_identificador] = @Identifier,[es_pantalla_gigante] = @HasBigPicture,[es_3D] = @Has3D,[activo] = @IsActive where [guid_pelicula] = @Id"; }
+
 
         public RoomsRepository() : base(DeleteQuery, SelectAllQuery, SelectQuery, InsertQuery, UpdateQuery)
         {
@@ -29,27 +30,27 @@ namespace Cinema.DAL.Repository.Sql
 
         public void Delete(Guid? guid)
         {
-            throw new NotImplementedException();
+            base.Delete(new { Id = guid });
         }
 
         public IEnumerable<Room> GetAll()
         {
-            throw new NotImplementedException();
+            return base.GetAll();
         }
 
         public Room GetOne(Guid? guid)
         {
-            throw new NotImplementedException();
+            return base.GetOne(new { Id = guid });
         }
 
         public void Insert(Room obj)
         {
-            throw new NotImplementedException();
+            base.Insert(obj);
         }
 
         public void Update(Room obj)
         {
-            throw new NotImplementedException();
+            base.Update(obj);
         }
     }
 }

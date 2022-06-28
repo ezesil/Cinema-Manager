@@ -12,15 +12,16 @@ namespace Cinema.DAL.Repository.Sql
     public class SessionRepository : SqlRepository<Session, SessionAdapter>, IGenericRepository<Session>
     {
         private static string DeleteQuery
-        { get => ""; }
+        { get => "DELETE FROM [CinemaDB].[dbo].[Sesion] where [guid_sesion] = @Id"; }
         private static string SelectAllQuery
-        { get => ""; }
+        { get => "SELECT [guid_sesion],[fecha],[guid_pelicula],[guid_sala] FROM [CinemaDB].[dbo].[Sesiones]"; }
         private static string SelectQuery
-        { get => ""; }
+        { get => "SELECT [guid_sesion],[fecha],[guid_pelicula],[guid_sala] FROM [CinemaDB].[dbo].[Sesiones] where [guid_sesion] = @Id"; }
         private static string InsertQuery
-        { get => ""; }
+        { get => "INSERT INTO [CinemaDB].[dbo].[Sesiones] ([fecha],[guid_pelicula],[guid_sala]) values (@Date, @MovieId, @RoomId)";}
         private static string UpdateQuery
-        { get => ""; }
+        { get => "UPDATE [CinemaDB].[dbo].[Sesiones] SET [fecha] = @Date,[guid_pelicula] = @MovieId,[guid_sala] = @RoomId where [guid_sesion] = @Id"; }
+
 
         public SessionRepository() : base(DeleteQuery, SelectAllQuery, SelectQuery, InsertQuery, UpdateQuery)
         {
@@ -28,27 +29,27 @@ namespace Cinema.DAL.Repository.Sql
 
         public void Insert(Session obj)
         {
-            throw new NotImplementedException();
+            base.Insert(obj);
         }
 
         public void Update(Session obj)
         {
-            throw new NotImplementedException();
+            base.Update(obj);
         }
 
         public IEnumerable<Session> GetAll()
         {
-            throw new NotImplementedException();
+            return base.GetAll();
         }
 
         public Session GetOne(Guid? guid)
         {
-            throw new NotImplementedException();
+            return base.GetOne(new { Id = guid });
         }
 
         public void Delete(Guid? guid)
         {
-            throw new NotImplementedException();
+            base.Delete(new { Id = guid });
         }
     }
 }

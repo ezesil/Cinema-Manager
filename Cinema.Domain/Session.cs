@@ -8,9 +8,9 @@ namespace Cinema.Domain
 {
     public class Session : Entity
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
         public DateTime Date { get; set; }
-        public Guid MovieId { get; set; }
-        public Guid RoomId { get; set; }
+        public Guid? MovieId { get; set; }
+        public Guid? RoomId { get; set; }
     }
 }

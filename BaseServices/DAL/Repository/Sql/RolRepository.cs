@@ -14,10 +14,11 @@ namespace BaseServices.DAL.Repository.Sql
 {
     internal class RolRepository : SqlRepository<Rol, RolAdapter>, IGenericRepository<Rol>
     {
+        // TODO: Necesita rediseño
         #region Statements
         private static string InsertQuery
         {
-            get => "INSERT INTO [dbo].[Rol] (id_rol, permisos, nombre_rol) VALUES (@id_rol, @permisos, @nombre_rol)";
+            get => "INSERT INTO [dbo].[Rol] (id_rol, permisos, nombre_rol) VALUES (@Id, @permisos, @nombre_rol)";
         }
 
         private static string UpdateQuery
@@ -48,29 +49,10 @@ namespace BaseServices.DAL.Repository.Sql
         {
         }
 
-        public Rol GetOne(Guid g)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(Guid g)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Insert(Rol o)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Rol o)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Rol> GetAll()
-        {
-            throw new NotImplementedException();
-        }
+        public void Insert(Rol obj) => base.Insert(obj);
+        public void Update(Rol obj) => base.Update(obj);
+        public IEnumerable<Rol> GetAll() => base.GetAll();
+        public Rol GetOne(Guid guid) => base.GetOne(new { Id = guid });
+        public void Delete(Guid guid) => base.Delete(new { Id = guid });
     }
 }

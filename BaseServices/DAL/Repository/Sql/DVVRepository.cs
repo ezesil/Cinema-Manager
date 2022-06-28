@@ -1,4 +1,5 @@
 ﻿using BaseServices.DAL.Interfaces;
+using BaseServices.DAL.Repository.Sql.Adapter;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,23 +13,24 @@ namespace BaseServices.DAL.Repository.Sql
     /// <summary>
     /// Repositorio de digito verificador vertical.
     /// </summary>
-    internal class DVVRepository : IGenericDVVRepository
+    internal class DVVRepository : SqlRepository<Object, GenericObjAdapter<object>>, IGenericDVVRepository
     {
-        #region Statements
 
-        private string UpdateStatement
+        private static string DeleteQuery
+        { get => ""; }
+        private static string SelectAllQuery
+        { get => ""; }
+        private static string InsertQuery
+        { get => ""; }
+        private static string SelectQuery
+        { get => "SELECT DVV FROM [dbo].[DigitoVerificadorVertical] WHERE Entity_ID = @id"; }
+        private static string UpdateQuery
+        { get => "UPDATE [dbo].[DigitoVerificadorVertical] SET DVV = @dvv WHERE Entity_ID = @id"; }
+
+        public DVVRepository()
+            : base(DeleteQuery, SelectAllQuery, SelectQuery, InsertQuery, UpdateQuery)
         {
-            get => "UPDATE [dbo].[DigitoVerificadorVertical] SET DVV = @DVV WHERE Entity_ID = @Entity_ID";
         }
-
-
-        private string SelectOneStatement
-        {
-            get => "SELECT DVV FROM [dbo].[DigitoVerificadorVertical] WHERE Entity_ID = @id";
-        }
-        #endregion
-
-
 
         /// <summary>
         /// Permite actualizar el DVV.
@@ -37,7 +39,7 @@ namespace BaseServices.DAL.Repository.Sql
         /// <param name="dvv"></param>
         public void Update(int id, int dvv)
         {
-            throw new NotImplementedException();
+            base.Update(new {id, dvv});
 
         }
 
@@ -48,7 +50,7 @@ namespace BaseServices.DAL.Repository.Sql
         /// <returns></returns>
         public int SelectOne(int id)
         {
-            throw new NotImplementedException();
+            return (int)base.GetOne(new { id });
         }
     }
 }

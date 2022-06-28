@@ -125,9 +125,8 @@ namespace Cinema.UI.Services
             await Task.Run(() => NavigateTo<T>());
         }
 
-        public Button CreateButton(EventHandler handler, string name, string buttontag = "Boton")
+        public Button CreateButton(EventHandler handler, string name, string buttontag = "Boton", Color? colorOverride = null)
         {        
-            //List<Button>? buttons = _currentContainer?.Controls?.OfType<Button>().ToList();
             if(_currentButtons == null || _currentButtons.Count == 0)
             {
                 var button = GetNavigationButton();
@@ -144,6 +143,8 @@ namespace Cinema.UI.Services
                 //_currentContainer.Controls.Add(button);
                 button.Show();
                 button.BringToFront();
+                if (colorOverride != null)
+                    button.BackColor = (Color)colorOverride;
                 return button;
             }
             else
@@ -158,9 +159,10 @@ namespace Cinema.UI.Services
                 button.Visible = true;
                 button.Enabled = true;
                 _currentForm.Controls.Add(button);
-                //_currentContainer.Controls.Add(button);
                 button.Show();
                 button.BringToFront();
+                if (colorOverride != null)
+                    button.BackColor = (Color)colorOverride;
                 return button;
             }
         }

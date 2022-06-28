@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,7 +16,7 @@ namespace BaseServices.DAL.Repository.Sql
     public abstract class SqlRepository<TEntity, TAdapter>
         where TEntity : class, new()
         where TAdapter : IGenericAdapter<TEntity>, new()
-    { 
+    {
         private string DeleteQuery { get; set; }
         private string SelectAllQuery { get; set; }
         private string SelectQuery { get; set; }
@@ -24,14 +25,14 @@ namespace BaseServices.DAL.Repository.Sql
 
         private static string connString { get => ApplicationSettings.Instance.SqlConnString; }
 
-        private TAdapter? genericAdapter { get; }
+        private TAdapter? genericAdapter { get; set; }
 
         private ExceptionHandler exceptionHandler { get; }
         private Logger logService { get; }
 
 
 
-        public SqlRepository(string deleteQuery = "", string selectAllQuery = "", string selectQuery = "", string insertQuery = "", string updateQuery = "")
+        public SqlRepository(string deleteQuery, string selectAllQuery, string selectQuery, string insertQuery, string updateQuery)
         {
             DeleteQuery = deleteQuery;
             SelectAllQuery = selectAllQuery;
@@ -40,26 +41,29 @@ namespace BaseServices.DAL.Repository.Sql
             UpdateQuery = updateQuery;
             exceptionHandler = ServiceContainer.Get<ExceptionHandler>();
             logService = ServiceContainer.Get<Logger>();
-            genericAdapter = default(TAdapter);
+            genericAdapter = new TAdapter();
         }
 
-        public virtual int Delete(SqlParameter[] parameters, string queryOverride = "")
+        public virtual int Delete(object parameters, string queryOverride = "")
         {
             try
             {
                 var query = DeleteQuery;
-                if (queryOverride == null || queryOverride == "")
+                if (queryOverride != null && queryOverride != "")
                     query = queryOverride;
+
+                if (genericAdapter == null)
+                    genericAdapter = new TAdapter();
 
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.Parameters.Add(parameters);
+                        cmd.Parameters.AddRange(SqlRepository.GetParameters(parameters));
 
                         conn.Open();
-                        return cmd.ExecuteNonQuery();                       
+                        return cmd.ExecuteNonQuery();
                     }
                 }
             }
@@ -73,8 +77,11 @@ namespace BaseServices.DAL.Repository.Sql
         public virtual IEnumerable<TEntity> GetAll(string queryOverride = "")
         {
             var query = SelectAllQuery;
-            if (queryOverride == null || queryOverride == "")
+            if (queryOverride != null && queryOverride != "")
                 query = queryOverride;
+
+            if (genericAdapter == null)
+                genericAdapter = new TAdapter();
 
             SqlConnection conn = new SqlConnection(connString);
             SqlDataReader reader;
@@ -84,28 +91,31 @@ namespace BaseServices.DAL.Repository.Sql
                 conn.Open();
                 using (reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
                 {
-                    Object[] values = new Object[reader.FieldCount];
+                    object[] values = new object[reader.FieldCount];
 
                     while (reader.Read())
                     {
                         reader.GetValues(values);
-                        yield return genericAdapter?.Adapt(values); ;
+                        yield return genericAdapter.Adapt(values);
                     }
-                }                 
-            }       
+                }
+            }
         }
 
-        public virtual TEntity GetOne(SqlParameter[] parameters, string queryOverride = "")
+        public virtual TEntity GetOne(object parameters, string queryOverride = "")
         {
             try
             {
                 var query = SelectQuery;
-                if (queryOverride == null || queryOverride == "")
+                if (queryOverride != null && queryOverride != "")
                     query = queryOverride;
+
+                if (genericAdapter == null)
+                    genericAdapter = new TAdapter();
 
                 SqlConnection conn = new SqlConnection(connString);
                 SqlDataReader reader;
-                Object[]? values = null;
+                object[]? values = null;
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.CommandType = CommandType.Text;
@@ -113,11 +123,11 @@ namespace BaseServices.DAL.Repository.Sql
                     using (reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
                     {
 
-                        values = new Object[reader.FieldCount];
+                        values = new object[reader.FieldCount];
 
                         while (reader.Read())
                         {
-                            reader.GetValues(values);                           
+                            reader.GetValues(values);
                         }
                     }
                 }
@@ -131,11 +141,15 @@ namespace BaseServices.DAL.Repository.Sql
             }
         }
 
-        public virtual int Insert(SqlParameter[] parameters, string queryOverride = "")
+        public virtual int Insert(object parameters, string queryOverride = "")
         {
             var query = InsertQuery;
-            if (queryOverride == null || queryOverride == "")
+            if (queryOverride != null && queryOverride != "")
                 query = queryOverride;
+
+            if (genericAdapter == null)
+                genericAdapter = new TAdapter();
+
             try
             {
                 using (SqlConnection conn = new SqlConnection(connString))
@@ -143,7 +157,7 @@ namespace BaseServices.DAL.Repository.Sql
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.Parameters.AddRange(parameters);
+                        cmd.Parameters.AddRange(SqlRepository.GetParameters(parameters));
 
                         conn.Open();
                         return cmd.ExecuteNonQuery();
@@ -158,20 +172,23 @@ namespace BaseServices.DAL.Repository.Sql
             }
         }
 
-        public virtual int Update(SqlParameter[] parameters, string queryOverride = "")
+        public virtual int Update(object parameters, string queryOverride = "")
         {
             try
             {
                 var query = UpdateQuery;
-                if (queryOverride == null || queryOverride == "")
+                if (queryOverride != null && queryOverride != "")
                     query = queryOverride;
+
+                if (genericAdapter == null)
+                    genericAdapter = new TAdapter();
 
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.Parameters.AddRange(parameters);
+                        cmd.Parameters.AddRange(SqlRepository.GetParameters(parameters));
 
                         conn.Open();
                         return cmd.ExecuteNonQuery();
@@ -210,27 +227,25 @@ namespace BaseServices.DAL.Repository.Sql
     {
         private static string connString { get => ApplicationSettings.Instance.SqlConnString; }
 
-        //public static bool ExecuteStoreProcedure<TAdapter>(SqlParameter[] parameters, string storedName)
-        //{
-        //    TAdapter? genericAdapter = default(TAdapter);
+        internal static SqlParameter[] GetParameters(object args)
+        {
+            Type myType = args.GetType();
+            IList<PropertyInfo> props = new List<PropertyInfo>(myType.GetProperties());
 
+            var parameters = new SqlParameter[props.Count];
 
-        //    Object[] values;
-        //    using (SqlConnection conn = new SqlConnection(connString))
-        //    {
-        //        using (SqlCommand cmd = new SqlCommand(storedName, conn))
-        //        {
-        //            cmd.CommandType = CommandType.StoredProcedure;
-        //            conn.Open();
+            int i = 0;
+            foreach (PropertyInfo prop in props)
+            {
+                parameters[i] = new SqlParameter("@" + prop.Name, prop.GetValue(args, null));
+                object propValue = prop.GetValue(args, null);
+                i++;
+            }
 
-        //            cmd.ExecuteNonQuery();
+            return parameters;
+        }
 
-        //            return true;
-        //        }
-        //    }
-        //}
-
-        public static bool ExecuteStoreProcedure(SqlParameter[] parameters, string storedName)
+        public static bool ExecuteStoreProcedure(object parameters, string storedName)
         {
             Object[] values;
             using (SqlConnection conn = new SqlConnection(connString))
@@ -238,6 +253,7 @@ namespace BaseServices.DAL.Repository.Sql
                 using (SqlCommand cmd = new SqlCommand(storedName, conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddRange(GetParameters(parameters));
                     conn.Open();
 
                     cmd.ExecuteNonQuery();

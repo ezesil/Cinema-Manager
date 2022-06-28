@@ -12,15 +12,16 @@ namespace Cinema.DAL.Repository.Sql
     public class TicketsRepository : SqlRepository<Ticket, TicketAdapter>, IGenericRepository<Ticket>
     {
         private static string DeleteQuery
-        { get => ""; }
+        { get => "DELETE FROM [CinemaDB].[dbo].[Tickets] where [guid_ticket] = @Id"; }
         private static string SelectAllQuery
-        { get => ""; }
+        { get => "SELECT [guid_ticket],[fecha_creacion],[fila],[asiento],[guid_sesion],[guid_usuario_creador] FROM [CinemaDB].[dbo].[Tickets]"; }
         private static string SelectQuery
-        { get => ""; }
+        { get => "SELECT [guid_ticket],[fecha_creacion],[fila],[asiento],[guid_sesion],[guid_usuario_creador] FROM [CinemaDB].[dbo].[Tickets] where [guid_ticket] = @Id"; }
         private static string InsertQuery
-        { get => ""; }
+        { get => "INSERT INTO [CinemaDB].[dbo].[Salas] ([fecha_creacion],[fila],[asiento],[guid_sesion],[guid_usuario_creador]) values (@CreationTime, @Row, @Seat, @SesionId, @CreatorUserId)"; }
         private static string UpdateQuery
-        { get => ""; }
+        { get => "UPDATE [CinemaDB].[dbo].[Salas] SET [fecha_creacion] = @CreationTime,[fila] = @Row,[asiento] = @Seat,[guid_sesion] = @SesionId,[guid_usuario_creador] = @CreatorUserId where [guid_pelicula] = @Id"; }
+
 
         public TicketsRepository() : base(DeleteQuery, SelectAllQuery, SelectQuery, InsertQuery, UpdateQuery)
         {
@@ -28,27 +29,27 @@ namespace Cinema.DAL.Repository.Sql
 
         public void Insert(Ticket obj)
         {
-            throw new NotImplementedException();
+            base.Insert(obj);
         }
 
         public void Update(Ticket obj)
         {
-            throw new NotImplementedException();
+            base.Update(obj);
         }
 
         public IEnumerable<Ticket> GetAll()
         {
-            throw new NotImplementedException();
+            return base.GetAll();
         }
 
         public Ticket GetOne(Guid? guid)
         {
-            throw new NotImplementedException();
+            return base.GetOne(new { Id = guid });
         }
 
         public void Delete(Guid? guid)
         {
-            throw new NotImplementedException();
+            base.Delete(new { Id = guid });
         }
     }
 }

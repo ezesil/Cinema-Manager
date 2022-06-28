@@ -13,27 +13,24 @@ namespace BaseServices.DAL.Repository.Sql
     /// <summary>
     /// Clase de tipo repositorio para bitacoras en Sql Server.
     /// </summary>
-    internal class LogRepository : IGenericLogRepository<Log>
+    internal class LogRepository : SqlRepository<Log, LogSqlAdapter>,IGenericLogRepository<Log>
     {
-        #region Statements
-        private string InsertString
-        {
-            get => "INSERT INTO [Log] (log_message, severity, traza) VALUES (@Mensaje, @Severidad,@StackTrace)";
-        }
+
+        private static string DeleteQuery
+        { get => ""; }
+        private static string SelectAllQuery
+        { get => "SELECT fecha_evento, log_message, severity, traza FROM [dbo].[Log]"; }
+        private static string InsertQuery
+        { get => "INSERT INTO [Log] (log_message, severity, traza) VALUES (@Mensaje, @Severidad,@StackTrace)"; }
+        private static string SelectQuery
+        { get => ""; }
+        private static string UpdateQuery
+        { get => ""; }
 
 
-        private string SelectAllString
-        {
-            get => "SELECT fecha_evento, log_message, severity, traza FROM [dbo].[Log]";
-        }
-        #endregion
-
-        /// <summary>
-        /// Constructor por defecto.
-        /// </summary>
         public LogRepository()
+            : base(DeleteQuery, SelectAllQuery, SelectQuery, InsertQuery, UpdateQuery)
         {
-
         }
 
         /// <summary>
@@ -42,7 +39,7 @@ namespace BaseServices.DAL.Repository.Sql
         /// <param name="log">Bitacora de tipo Log.</param>
         public void Insert(Log log)
         {
-            throw new NotImplementedException();
+            base.Insert(log);
         }
 
         /// <summary>
@@ -51,7 +48,7 @@ namespace BaseServices.DAL.Repository.Sql
         /// <returns>Retorna un IEnumerable de bitacoras.</returns>
         public IEnumerable<Log> SelectAll()
         {
-            throw new NotImplementedException();
+            return base.GetAll();
         }
     }
 }

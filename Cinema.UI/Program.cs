@@ -54,6 +54,7 @@ namespace Cinema.UI
             services.AddSingleton<MoviesPage>();
             services.AddSingleton<SessionsPage>();
             services.AddSingleton<TicketsPage>();
+            services.AddSingleton<RoomsPage>();
 
             ServiceProvider serviceProvider = services.BuildServiceProvider();
 

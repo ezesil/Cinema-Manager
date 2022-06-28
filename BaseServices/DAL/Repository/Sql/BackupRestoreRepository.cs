@@ -33,35 +33,21 @@ namespace BaseServices.DAL.Repository.Sql
         {
             try
             {
-
-                var parameters = new SqlParameter[2] {
-                    new SqlParameter("@name", name),
-                    new SqlParameter("@path", path)
-                };
-
-                return SqlRepository.ExecuteStoreProcedure(parameters, BackupStatement);
+                return SqlRepository.ExecuteStoreProcedure(new {name, path}, BackupStatement);
             }
 
             catch (Exception ex)
             {
                 _exhandler.Handle(ex);
                 return false;
-            }
-            
-
+            }          
         }
 
         public bool Restore(string name, string path)
         {
             try
             {
-
-                var parameters = new SqlParameter[2] {
-                    new SqlParameter("@name", name),
-                    new SqlParameter("@path", path)
-                };
-
-                return SqlRepository.ExecuteStoreProcedure(parameters, RestoreStatement);
+                return SqlRepository.ExecuteStoreProcedure(new { name, path }, RestoreStatement);
             }
 
             catch(Exception ex)

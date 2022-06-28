@@ -17,5 +17,10 @@ namespace Cinema.UI.Views
             InitializeComponent();
             this.Name = "Tickets";
         }
+
+        private void Buscar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

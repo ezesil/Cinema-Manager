@@ -55,6 +55,11 @@ namespace Cinema.UI.Views
             _navigationManager.NavigateTo<SessionsPage>();
         }
 
+        private void BtnSalas_Click(object sender, EventArgs e)
+        {
+            _navigationManager.NavigateTo<SessionsPage>();
+        }
+
         private void BtnPeliculas_Click(object sender, EventArgs e)
         {
             _navigationManager.NavigateTo<MoviesPage>();
@@ -103,6 +108,7 @@ namespace Cinema.UI.Views
                 _navigationManager.CreateButton(BtnGenerarTicket_Click, "BtnGenerarTicket", "text_generateticket").Show();
                 _navigationManager.CreateButton(BtnTickets_Click, "BtnTickets", "text_tickets").Show();
                 _navigationManager.CreateButton(BtnSesiones_Click, "BtnSesiones", "text_sessions").Show();
+                _navigationManager.CreateButton(BtnSalas_Click, "BtnSalas", "text_rooms").Show();
                 _navigationManager.CreateButton(BtnPeliculas_Click, "BtnPeliculas", "text_movies").Show();
                 _navigationManager.CreateButton(BtnAdministracion_Click, "BtnAdministracion", "text_administration").Show();
                 _navigationManager.CreateButton(BtnLogout_Click, "BtnLogout", "text_logout").Show();
@@ -115,6 +121,7 @@ namespace Cinema.UI.Views
                 _navigationManager.CreateButton(BtnGenerarTicket_Click, "BtnGenerarTicket", "text_generateticket").Show();
                 _navigationManager.CreateButton(BtnTickets_Click, "BtnTickets", "text_tickets").Show();
                 _navigationManager.CreateButton(BtnSesiones_Click, "BtnSesiones", "text_sessions").Show();
+                _navigationManager.CreateButton(BtnSalas_Click, "BtnSalas", "text_rooms").Show();
                 _navigationManager.CreateButton(BtnPeliculas_Click, "BtnPeliculas", "text_movies").Show();
                 _navigationManager.CreateButton(BtnLogout_Click, "BtnLogout", "text_logout").Show();
                 _navigationManager.CreateButton(BtnExit_Click, "BtnExit", "text_exit").Show();

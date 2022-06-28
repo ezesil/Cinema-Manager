@@ -82,7 +82,7 @@ namespace Cinema.UI.Views
         {
             Movie movie = new Movie()
             {
-                Id = (Guid)currentMovieGuid,
+                Id = currentMovieGuid,
                 Name = TxtNombre.Text,
                 Language = TxtIdioma.Text,
                 SubtitleLanguage = TxtSubtitulos.Text,
@@ -99,7 +99,7 @@ namespace Cinema.UI.Views
         {
             Movie movie = new Movie()
             {
-                Id = (Guid)currentMovieGuid,
+                Id = currentMovieGuid,
                 Name = TxtNombre.Text,
                 Language = TxtIdioma.Text,
                 SubtitleLanguage = TxtSubtitulos.Text,

@@ -11,7 +11,7 @@ namespace BaseServices.DAL.Repository.Sql.Adapter
     /// <summary>
     /// Clase de tipo Adaptador.
     /// </summary>
-    internal class LogSqlAdapter
+    internal class LogSqlAdapter : IGenericAdapter<Log>
 	{      
 		/// <summary>
 		/// Adapta el vector de objetos correspondiente a un objeto de bitacora.
