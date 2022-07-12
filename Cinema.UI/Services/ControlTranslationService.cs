@@ -31,7 +31,6 @@ namespace Cinema.UI.Services
         private List<string> failedcodes = new List<string>();
         private Logger _logger;
         
-
         public ControlTranslationService(Logger logger)
         {
             _logger = logger;
@@ -43,7 +42,7 @@ namespace Cinema.UI.Services
         /// </summary>
         /// <param name="controls"></param>
         /// <returns>Retorna dos listados. El primer listado corresponde al listado de codigos utilizados. El segundo listado correponde al listado de controles sin traduccion.</returns>
-        public List<string>[] CheckControlsTranslationStatus(IList<Control> controls)
+        public List<string>[] CheckControlsTranslationStatus<T>(IList<T> controls) where T : Control
         {
             List<string>[] translatecodes = new List<string>[2] 
             {
@@ -84,7 +83,6 @@ namespace Cinema.UI.Services
         /// <param name="f"></param>
         public void TryTranslateForm(ControlCollection f)
         {
-
             foreach (Control item in f)
             {
                 if (item.Tag != null)
@@ -114,7 +112,6 @@ namespace Cinema.UI.Services
         /// <param name="form"></param>
         public void TryTranslateForm(Form form)
         {
-
             string trad = TranslateCode(form.Tag?.ToString());
             if (trad == form.Tag?.ToString())
             {

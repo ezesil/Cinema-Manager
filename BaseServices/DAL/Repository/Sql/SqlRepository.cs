@@ -23,17 +23,20 @@ namespace BaseServices.DAL.Repository.Sql
         private string InsertQuery { get; set; }
         private string UpdateQuery { get; set; }
 
-        private static string connString { get => ApplicationSettings.Instance.SqlConnString; }
+        private string connString { get => RepositoryType == RepoType.Cinema ? ApplicationSettings.Instance.SqlConnString : ApplicationSettings.Instance.SqlLogConnString; }
 
         private TAdapter? genericAdapter { get; set; }
 
         private ExceptionHandler exceptionHandler { get; }
         private Logger logService { get; }
 
+        private RepoType RepositoryType { get; set; }
 
 
-        public SqlRepository(string deleteQuery, string selectAllQuery, string selectQuery, string insertQuery, string updateQuery)
+
+        public SqlRepository(string deleteQuery, string selectAllQuery, string selectQuery, string insertQuery, string updateQuery, RepoType type = RepoType.Cinema)
         {
+            RepositoryType = type;
             DeleteQuery = deleteQuery;
             SelectAllQuery = selectAllQuery;
             SelectQuery = selectQuery;
@@ -157,7 +160,7 @@ namespace BaseServices.DAL.Repository.Sql
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.Parameters.AddRange(SqlRepository.GetParameters(parameters));
+                        cmd.Parameters.AddRange(SqlRepository.GetParameters(parameters, query));
 
                         conn.Open();
                         return cmd.ExecuteNonQuery();
@@ -203,7 +206,7 @@ namespace BaseServices.DAL.Repository.Sql
             }
         }
 
-        public static bool ExecuteStoreProcedure(SqlParameter[] parameters, string storedName)
+        public bool ExecuteStoreProcedure(SqlParameter[] parameters, string storedName)
         {
             Object[] values;
             using (SqlConnection conn = new SqlConnection(connString))
@@ -212,7 +215,7 @@ namespace BaseServices.DAL.Repository.Sql
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     conn.Open();
-                    
+
                     cmd.ExecuteNonQuery();
 
                     return true;
@@ -232,17 +235,36 @@ namespace BaseServices.DAL.Repository.Sql
             Type myType = args.GetType();
             IList<PropertyInfo> props = new List<PropertyInfo>(myType.GetProperties());
 
-            var parameters = new SqlParameter[props.Count];
+            var parameters = new List<SqlParameter>();
 
             int i = 0;
             foreach (PropertyInfo prop in props)
             {
-                parameters[i] = new SqlParameter("@" + prop.Name, prop.GetValue(args, null));
-                object propValue = prop.GetValue(args, null);
+                parameters.Add(new SqlParameter("@" + prop.Name, prop.GetValue(args, null)));
                 i++;
             }
 
-            return parameters;
+            return parameters.ToArray();
+        }
+
+        internal static SqlParameter[] GetParameters(object args, string query)
+        {
+            Type myType = args.GetType();
+            IList<PropertyInfo> props = new List<PropertyInfo>(myType.GetProperties());
+
+            var parameters = new List<SqlParameter>();
+
+            int i = 0;
+            foreach (PropertyInfo prop in props)
+            {
+                if (query.Contains("@" + prop.Name))
+                {
+                    parameters.Add(new SqlParameter("@" + prop.Name, prop.GetValue(args, null)));
+                }
+                i++;
+            }
+
+            return parameters.ToArray();
         }
 
         public static bool ExecuteStoreProcedure(object parameters, string storedName)
@@ -262,5 +284,11 @@ namespace BaseServices.DAL.Repository.Sql
                 }
             }
         }
+    }
+
+    public enum RepoType
+    {
+        Cinema,
+        Log
     }
 }

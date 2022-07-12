@@ -12,12 +12,14 @@ namespace BaseServices.Domain
         /// <summary>
         /// Mensaje del evento.
         /// </summary>
-        public string Message;
+        public string Message { get; set; }
 
         /// <summary>
         /// Nivel de severidad del evento.
         /// </summary>
-        public Severity SeverityLevel;
+        public Severity SeverityLevel { get; set; }
+
+        public string SeverityName { get => SeverityLevel.ToString(); }
 
         /// <summary>
         /// Constructor por defecto.
@@ -118,7 +120,7 @@ namespace BaseServices.Domain
         /// </summary>
         public string StackTrace { get; set; }
 
-        public string Fecha { get; set; }
+        public string Fecha { get; set; } = DateTime.Now.ToString();
 
     }
 }

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Cinema.UI.Extensions
-{
+{  
     internal static class GridViewAdapters
     {
         public static DataTable Adapt(IEnumerable<Movie> movies)

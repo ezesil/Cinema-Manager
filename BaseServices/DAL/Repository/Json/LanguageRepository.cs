@@ -54,7 +54,7 @@ namespace BaseServices.DAL.Repository.Json
         {
             try
             {
-                StreamReader sr = new StreamReader(Directory.GetCurrentDirectory().ToString() + "\\locale\\" + "supportedlanguages" + ".json");
+                StreamReader sr = new StreamReader(Directory.GetCurrentDirectory().ToString() + "\\Locale\\" + "supportedlanguages" + ".json");
 
                 var json = sr.ReadToEnd();
 

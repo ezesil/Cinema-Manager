@@ -20,10 +20,12 @@ namespace BaseServices.DAL.Repository.Sql.Adapter
 		/// <returns>Retorna un objeto de tipo Log.</returns>
 		public Log Adapt(object[] item)
 		{
+			Log.Severity severity;
 			Log L = new Log();
 			L.Fecha = "[" + item[0].ToString() + "]";
 			L.Message = item[1].ToString();
-			Enum.TryParse(item[2].ToString(), out L.SeverityLevel);
+			Enum.TryParse(item[2].ToString(), out severity);
+			L.SeverityLevel = severity;
 			L.StackTrace = item[3].ToString();
 
 			return L;

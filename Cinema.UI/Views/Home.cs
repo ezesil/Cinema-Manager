@@ -23,15 +23,16 @@ namespace Cinema.UI.Views
         private SessionService _sessionService;
 
         public Home(NavigationManager navigationManager, 
-            SessionService sessionService)
+            SessionService sessionService, ControlTranslationService controlTranslationService)
         {
             InitializeComponent();
+
+            ControlTranslationService.refresher += () => controlTranslationService.TryTranslateForm(this.Controls);
 
             _navigationManager = navigationManager;
             _sessionService = sessionService;
             _navigationManager.SetHeaderContainer(splitContainer2.Panel2);
             _navigationManager.SetHeaderTitle("Inicio");
-
             _navigationManager.Setup(this, splitContainer1.Panel2);
         }
 
@@ -96,6 +97,8 @@ namespace Cinema.UI.Views
             _navigationManager.CreateButton(BtnLogin_Click, "BotonLogin", "text_login").Show();
 
             _navigationManager.NavigateTo<LoginPage>();
+
+            ControlTranslationService.refresher.Invoke();
         }
 
         public void MenuOnLogin()
@@ -135,6 +138,7 @@ namespace Cinema.UI.Views
                 _navigationManager.CreateButton(BtnLogout_Click, "BtnLogout", "text_logout").Show();
                 _navigationManager.CreateButton(BtnExit_Click, "BtnExit", "text_exit").Show();
             }
+            ControlTranslationService.refresher.Invoke();
         }
 
     }

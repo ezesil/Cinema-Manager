@@ -21,7 +21,9 @@ namespace BaseServices.DAL.Repository.Sql
         private static string SelectAllQuery
         { get => "SELECT fecha_evento, log_message, severity, traza FROM [dbo].[Log]"; }
         private static string InsertQuery
-        { get => "INSERT INTO [Log] (log_message, severity, traza) VALUES (@Mensaje, @Severidad,@StackTrace)"; }
+        { get => "INSERT INTO [Log] (log_message, severity, traza, fecha_evento) VALUES (@Message, @SeverityName, @StackTrace, @Fecha)"; }
+        //private static string InsertQuery
+        //{ get => "INSERT INTO [Log] (log_message, severity, traza, fecha_evento) VALUES (@Message, @SeverityLevel, @StackTrace, @Fecha)"; }
         private static string SelectQuery
         { get => ""; }
         private static string UpdateQuery
@@ -29,7 +31,7 @@ namespace BaseServices.DAL.Repository.Sql
 
 
         public LogRepository()
-            : base(DeleteQuery, SelectAllQuery, SelectQuery, InsertQuery, UpdateQuery)
+            : base(DeleteQuery, SelectAllQuery, SelectQuery, InsertQuery, UpdateQuery, RepoType.Log)
         {
         }
 
