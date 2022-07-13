@@ -59,6 +59,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(48, 15);
             this.label2.TabIndex = 4;
+            this.label2.Tag = "text_movie";
             this.label2.Text = "Pelicula";
             // 
             // label3
@@ -70,6 +71,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(49, 15);
             this.label3.TabIndex = 5;
+            this.label3.Tag = "text_variant";
             this.label3.Text = "Variante";
             // 
             // comboBox3
@@ -91,6 +93,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(24, 15);
             this.label4.TabIndex = 7;
+            this.label4.Tag = "text_day";
             this.label4.Text = "Día";
             // 
             // label5
@@ -102,6 +105,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(115, 15);
             this.label5.TabIndex = 9;
+            this.label5.Tag = "text_available_hours";
             this.label5.Text = "Horarios disponibles";
             // 
             // button1
@@ -112,6 +116,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(142, 51);
             this.button1.TabIndex = 10;
+            this.button1.Tag = "text_clear_fields";
             this.button1.Text = "Limpiar campos";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -125,6 +130,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(142, 51);
             this.button2.TabIndex = 11;
+            this.button2.Tag = "text_get_seats";
             this.button2.Text = "Ver asientos";
             this.button2.UseVisualStyleBackColor = false;
             // 

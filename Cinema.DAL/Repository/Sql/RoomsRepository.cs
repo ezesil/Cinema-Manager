@@ -33,9 +33,9 @@ namespace Cinema.DAL.Repository.Sql
             base.Delete(new { Id = guid });
         }
 
-        public IEnumerable<Room> GetAll()
+        public IEnumerable<Room> GetAll(object paramss = null)
         {
-            return base.GetAll();
+            return base.GetAll(paramss);
         }
 
         public Room GetOne(Guid? guid)

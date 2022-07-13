@@ -37,9 +37,9 @@ namespace Cinema.DAL.Repository.Sql
             base.Update(obj);
         }
 
-        public IEnumerable<Movie> GetAll()
+        public IEnumerable<Movie> GetAll(object paramss = null)
         {
-            return base.GetAll();
+            return base.GetAll(paramss);
         }
 
         public Movie GetOne(Guid? guid)

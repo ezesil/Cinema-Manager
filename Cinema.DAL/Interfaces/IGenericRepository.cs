@@ -24,7 +24,7 @@ namespace Cinema.DAL.Interfaces
         /// Obtiene todos los registros del repositorio.
         /// </summary>
         /// <returns></returns>
-        IEnumerable<T> GetAll();
+        IEnumerable<T> GetAll(object parameters = null);
 
         /// <summary>
         /// Obtiene un registro del repositorio.

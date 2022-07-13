@@ -37,9 +37,9 @@ namespace Cinema.Business
         #endregion
 
 
-        public List<Ticket> GetAllTickets()
+        public List<Ticket> GetAllTickets(DateTime FechaDesde, DateTime FechaHasta)
         {
-            return _repo.GetAll().ToList();
+            return _repo.GetAll(new { FechaDesde, FechaHasta } ).ToList();
         }
 
 

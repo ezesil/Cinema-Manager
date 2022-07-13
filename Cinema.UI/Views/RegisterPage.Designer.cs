@@ -49,6 +49,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(112, 15);
             this.label1.TabIndex = 0;
+            this.label1.Tag = "text_username";
             this.label1.Text = "Nombre de usuario:";
             // 
             // label2
@@ -58,6 +59,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(70, 15);
             this.label2.TabIndex = 1;
+            this.label2.Tag = "text_password";
             this.label2.Text = "Contraseña:";
             // 
             // label3
@@ -67,6 +69,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 15);
             this.label3.TabIndex = 2;
+            this.label3.Tag = "text_email";
             this.label3.Text = "E-mail:";
             // 
             // label4
@@ -76,6 +79,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(108, 15);
             this.label4.TabIndex = 3;
+            this.label4.Tag = "text_fullname";
             this.label4.Text = "Nombre completo:";
             // 
             // label5
@@ -85,6 +89,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(30, 15);
             this.label5.TabIndex = 4;
+            this.label5.Tag = "text_dni";
             this.label5.Text = "DNI:";
             // 
             // textBox1
@@ -135,6 +140,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(332, 37);
             this.label6.TabIndex = 10;
+            this.label6.Tag = "text_register_new_user";
             this.label6.Text = "Registrar un nuevo usuario";
             // 
             // button1
@@ -144,8 +150,10 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(332, 41);
             this.button1.TabIndex = 11;
+            this.button1.Tag = "text_register";
             this.button1.Text = "Registrar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // RegisterPage
             // 

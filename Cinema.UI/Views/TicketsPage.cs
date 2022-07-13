@@ -20,7 +20,7 @@ namespace Cinema.UI.Views
 
         private void Buscar_Click(object sender, EventArgs e)
         {
-
+            var items = Cinema.Business.TicketsBLL.Current.GetAllTickets(DateTimeDesde.Value, DateTimeHasta.Value);
         }
     }
 }

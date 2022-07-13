@@ -14,7 +14,7 @@ namespace Cinema.DAL.Repository.Sql
         private static string DeleteQuery
         { get => "DELETE FROM [CinemaDB].[dbo].[Tickets] where [guid_ticket] = @Id"; }
         private static string SelectAllQuery
-        { get => "SELECT [guid_ticket],[fecha_creacion],[fila],[asiento],[guid_sesion],[guid_usuario_creador] FROM [CinemaDB].[dbo].[Tickets]"; }
+        { get => "SELECT [guid_ticket],[fecha_creacion],[fila],[asiento],[guid_sesion],[guid_usuario_creador] FROM [CinemaDB].[dbo].[Tickets] WHERE @Filter = 1 OR [fecha_creacion] BETWEEN @FechaDesde AND @FechaHasta"; }
         private static string SelectQuery
         { get => "SELECT [guid_ticket],[fecha_creacion],[fila],[asiento],[guid_sesion],[guid_usuario_creador] FROM [CinemaDB].[dbo].[Tickets] where [guid_ticket] = @Id"; }
         private static string InsertQuery
@@ -37,9 +37,9 @@ namespace Cinema.DAL.Repository.Sql
             base.Update(obj);
         }
 
-        public IEnumerable<Ticket> GetAll()
+        public IEnumerable<Ticket> GetAll(object paramss)
         {
-            return base.GetAll();
+            return base.GetAll(paramss);
         }
 
         public Ticket GetOne(Guid? guid)

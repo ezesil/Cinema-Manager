@@ -37,9 +37,9 @@ namespace Cinema.DAL.Repository.Sql
             base.Update(obj);
         }
 
-        public IEnumerable<Session> GetAll()
+        public IEnumerable<Session> GetAll(object paramss = null)
         {
-            return base.GetAll();
+            return base.GetAll(paramss);
         }
 
         public Session GetOne(Guid? guid)

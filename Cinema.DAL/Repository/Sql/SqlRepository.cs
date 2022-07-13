@@ -74,7 +74,7 @@ namespace Cinema.DAL.Repository.Sql
             }
         }
 
-        public virtual IEnumerable<TEntity> GetAll(string queryOverride = "")
+        public virtual IEnumerable<TEntity> GetAll(object paramss = null, string queryOverride = "")
         {
             var query = SelectAllQuery;
             if (queryOverride != null && queryOverride != "")
@@ -87,6 +87,16 @@ namespace Cinema.DAL.Repository.Sql
             SqlDataReader reader;
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
+                if (paramss != null)
+                {
+                    cmd.Parameters.AddRange(GetParameters(paramss));
+                    cmd.Parameters.Add(new SqlParameter("@Filter", "1"));
+                }
+                else
+                {
+                    cmd.Parameters.Add(new SqlParameter("@Filter", "0"));
+                }
+
                 cmd.CommandType = CommandType.Text;
                 conn.Open();
                 using (reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
