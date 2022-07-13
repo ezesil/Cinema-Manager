@@ -32,8 +32,8 @@ namespace Cinema.UI
             services.AddSingleton<Logger>();
 
             // Servicios de la UI
-            services.AddSingleton<ControlTranslationService>();
             services.AddSingleton<NavigationManager>();
+            services.AddSingleton<ControlTranslationService>();
 
             // Paneles de administracion
             services.AddTransient<BackupPanel>();

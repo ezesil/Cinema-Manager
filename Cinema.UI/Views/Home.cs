@@ -21,14 +21,22 @@ namespace Cinema.UI.Views
     {
         private NavigationManager _navigationManager;
         private SessionService _sessionService;
+        private ControlTranslationService _controlTranslationService;
 
         public Home(NavigationManager navigationManager, 
             SessionService sessionService, ControlTranslationService controlTranslationService)
         {
             InitializeComponent();
 
-            ControlTranslationService.refresher += () => controlTranslationService.TryTranslateForm(this.Controls);
+            _controlTranslationService = controlTranslationService;
 
+            controlTranslationService.OnRefresh += () => 
+            {
+                controlTranslationService.TryTranslateForm(this.Controls);
+                controlTranslationService.TryTranslateForm(this.splitContainer1.Panel1.Controls);
+                controlTranslationService.TryTranslateForm(this.splitContainer1.Panel2.Controls);
+            };
+           
             _navigationManager = navigationManager;
             _sessionService = sessionService;
             _navigationManager.SetHeaderContainer(splitContainer2.Panel2);
@@ -81,7 +89,6 @@ namespace Cinema.UI.Views
             _sessionService.Logout();
             _navigationManager.ClearNavigationButtons();
             _navigationManager.CreateButton(BtnLogin_Click, "BotonLogin", "text_login").Show();
-            _navigationManager.CreateButton(BtnLogout_Click, "BtnLogout", "text_logout").Show();
             _navigationManager.CreateButton(BtnExit_Click, "BtnExit", "text_exit").Show();
             _navigationManager.NavigateTo<LoginPage>();
         }
@@ -95,10 +102,8 @@ namespace Cinema.UI.Views
         private void Home_Load(object sender, EventArgs e)
         {
             _navigationManager.CreateButton(BtnLogin_Click, "BotonLogin", "text_login").Show();
-
             _navigationManager.NavigateTo<LoginPage>();
-
-            ControlTranslationService.refresher.Invoke();
+            _controlTranslationService.TriggerTranslation();
         }
 
         public void MenuOnLogin()
@@ -138,7 +143,8 @@ namespace Cinema.UI.Views
                 _navigationManager.CreateButton(BtnLogout_Click, "BtnLogout", "text_logout").Show();
                 _navigationManager.CreateButton(BtnExit_Click, "BtnExit", "text_exit").Show();
             }
-            ControlTranslationService.refresher.Invoke();
+
+            _controlTranslationService.TriggerTranslation();
         }
 
     }

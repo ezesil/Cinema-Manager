@@ -25,17 +25,22 @@ namespace Cinema.UI.Services
         /// <summary>
         /// Instancia del refrescador de lenguaje. Invocar para traducir todos los formularios y controles suscritos.
         /// </summary>
-        public static LanguageRefresh refresher;
+        public event LanguageRefresh OnRefresh;
 
         private static string currentlanguage = ApplicationSettings.Instance.LastLanguage;
         private List<string> failedcodes = new List<string>();
         private Logger _logger;
         
-        public ControlTranslationService(Logger logger)
+        public ControlTranslationService(Logger logger, NavigationManager translationService)
         {
+            translationService.OnNavigated += TriggerTranslation; 
             _logger = logger;
         }
 
+        public void TriggerTranslation()
+        {
+            OnRefresh.Invoke();
+        }
 
         /// <summary>
         /// Verifica el estado de traduccion del formulario.

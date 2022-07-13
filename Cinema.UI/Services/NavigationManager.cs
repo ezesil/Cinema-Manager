@@ -23,7 +23,8 @@ namespace Cinema.UI.Services
 
         private List<Button>? _currentButtons;
 
-        private event EventHandler<EventArgs> OnNavigate; 
+        public delegate void OnNavigatedEvent();
+        public event OnNavigatedEvent OnNavigated; 
 
         public NavigationManager Setup(Home currentform, SplitterPanel container, UserControl? currentPanel = null)
         {          
@@ -78,7 +79,7 @@ namespace Cinema.UI.Services
                 _currentContainer.Controls.Add(userControl);
             });
 
-
+            OnNavigated.Invoke();
 
             return userControl;
         }
@@ -125,7 +126,7 @@ namespace Cinema.UI.Services
             await Task.Run(() => NavigateTo<T>());
         }
 
-        public Button CreateButton(EventHandler handler, string name, string buttontag = "Boton", Color? colorOverride = null)
+        public Button CreateButton(EventHandler handler, string name, string buttontag = "", Color? colorOverride = null)
         {        
             if(_currentButtons == null || _currentButtons.Count == 0)
             {
