@@ -52,7 +52,7 @@ namespace BaseServices.DAL.Factory
         /// <summary>
         /// Instancia del repositorio de Personas para los servicios de base.
         /// </summary>
-        public static IGenericRepository<User> UserRepository { get; private set; }
+        public static IUserRepository<User> UserRepository { get; private set; }
 
         /// <summary>
         /// Instancia del repositorio del servicio de soporte de multi-lenguaje.
@@ -82,7 +82,7 @@ namespace BaseServices.DAL.Factory
             BackupRestoreRepository = CreateInstance<IBackupRestoreRepository>("BaseServices." + BaseSqlRepository + ".BackupRestoreRepository");
             DVVRepository = CreateInstance<IGenericDVVRepository>("BaseServices." + BaseSqlRepository + ".DVVRepository");
             LanguageRepository = CreateInstance<ILanguageRepository>("BaseServices." + JsonRepository + ".LanguageRepository");
-            UserRepository = CreateInstance<IGenericRepository<User>>("BaseServices." + BaseSqlRepository + ".UsersRepository");
+            UserRepository = CreateInstance<IUserRepository<User>>("BaseServices." + BaseSqlRepository + ".UsersRepository");
             FileLogRepository = CreateInstance<IGenericLogRepository<Log>>("BaseServices." + FileRepository + ".FileRepository");
             SqlLogRepository = CreateInstance<IGenericLogRepository<Log>>("BaseServices." + SqlLogRepositorio + ".LogRepository");
 

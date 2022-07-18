@@ -14,6 +14,14 @@ namespace BaseServices.Services
     {
         private readonly static SessionService _instance = new SessionService();
 
+        public delegate void OnLoginEventHandler();
+        public event OnLoginEventHandler OnSuccessfulLogin;
+
+        public delegate void OnLogoutEventHandler();
+        public event OnLogoutEventHandler OnSuccessfulLogout;
+
+        
+
         /// <summary>
         /// Propiedad estatica que permite accesar los atributos, propiedades y metodos publicos de una clase con patrón Singleton.
         /// </summary>

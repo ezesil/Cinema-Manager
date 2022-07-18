@@ -3,6 +3,7 @@ using BaseServices.Domain;
 using BaseServices.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BaseServices.BLL
 {
@@ -11,7 +12,7 @@ namespace BaseServices.BLL
         ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
         Services.Logger _logger = ServiceContainer.Get<Services.Logger>();
 
-        IGenericRepository<User> repo = DAL.Factory.FactoryDAL.UserRepository;
+        IUserRepository<User> repo = DAL.Factory.FactoryDAL.UserRepository;
 
         private User CurrentUserData;
 
@@ -54,7 +55,7 @@ namespace BaseServices.BLL
             get
             {
                 if (this.UserIsNull)
-                    return Guid.Parse("0000000000000000000000000");
+                    return Guid.Empty;
 
                 return CurrentUserData.Id;
             }
@@ -106,91 +107,99 @@ namespace BaseServices.BLL
 
 
 
-        ///// <summary>
-        ///// Intentar un inicio de sesion utilizando la direccion de correo del usuario.
-        ///// </summary>
-        ///// <param name="correo"></param>
-        ///// <param name="contraseña"></param>
-        ///// <returns></returns>
-        //public bool LoginAttempCorreo(string correo, string contraseña)
-        //{
-           
-        //    var user = repo.GetPassCorreo(new User() { Email = correo });
+        /// <summary>
+        /// Intentar un inicio de sesion utilizando la direccion de correo del usuario.
+        /// </summary>
+        /// <param name="correo"></param>
+        /// <param name="contraseña"></param>
+        /// <returns></returns>
+        public bool LoginAttempByEmail(string correo, string contraseña)
+        {
 
-        //    if (user == null)
-        //    {
-        //        return false;
-        //    }
+            try
+            {
+                var user = repo.SelectUserDataByEmailAddressAndPassword(correo, HashingService.Current.HashPassword(contraseña));
 
+                if (user == null)
+                {
+                    return false;
+                }
 
-        //    if (HashingService.Current.VerificarContraseña(contraseña, user.HashedPassword))
-        //    {
-        //        try
-        //        {
-        //            user.Email = correo;
-        //            CurrentUserData = repo.SelectUserDataByEmailAddress(user);
-        //            return true;
-        //        }
+                user.Email = correo;
+                CurrentUserData = user;
+                return true;
+            }
 
-        //        catch (Exception ex)
-        //        {
-        //            _exhandler.Handle(ex);
-        //            return false;
-        //        }
+            catch (Exception ex)
+            {
+                _exhandler.Handle(ex);
+                return false;
+            }
+        }
 
-        //    }
+        /// <summary>
+        /// Intentar un inicio de sesion utilizando el nombre de usuario.
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <param name="contraseña"></param>
+        /// <returns></returns>
+        public bool AttempLoginByUsername(string usuario, string contraseña)
+        {
+            try
+            {
+                var user = repo.SelectUserDataByUsernameAndPassword(usuario, HashingService.Current.HashPassword(contraseña));
 
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
+                if (user == null)
+                {
+                    return false;
+                }
 
-        ///// <summary>
-        ///// Intentar un inicio de sesion utilizando el nombre de usuario.
-        ///// </summary>
-        ///// <param name="usuario"></param>
-        ///// <param name="contraseña"></param>
-        ///// <returns></returns>
-        //public bool AttempLogin(string usuario, string contraseña)
-        //{
-        //    var user = repo.GetPassUsuario(new User() { Username = usuario });
-            
-        //    if(user == null)
-        //    {
-        //        return false;
-        //    }      
+                user.Email = user.Email;
+                CurrentUserData = user;
+                return true;
+            }
 
-        //    else if (HashingService.Current.VerificarContraseña(contraseña, user.HashedPassword))
-        //    {
-        //        try
-        //        {
-        //            user.Username = usuario;
-        //            CurrentUserData = repo.SelectUserDataByUsername(user);
-                    
-        //            return true;
-        //        }
+            catch (Exception ex)
+            {
+                _exhandler.Handle(ex);
+                return false;
+            }
+        }
 
-        //        catch(Exception ex)
-        //        {
-        //            _exhandler.Handle(ex);
-        //            return false;
-        //        }
-                
-        //    }
+        /// <summary>
+        /// Registra un usuario en el sistema.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public bool RegisterUser(User user)
+        {
+            try
+            {
+                return repo.Insert(user) > 0 ? true : false;
+            }
+            catch (Exception ex)
+            {
+                _exhandler.Handle(ex);
+                return false;
+            }
+        }
 
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
+        public List<User> GetAllUsers()
+        {
+            return repo.SelectAll().ToList();
+        }
+
+        public User GetUser(Guid Id)
+        {
+            return repo.Select(Id);
+        }
 
         public void Logout()
         {
             CurrentUserData = null;
         }
 
-        
+
 
 
 

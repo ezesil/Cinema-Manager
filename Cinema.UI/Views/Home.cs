@@ -39,6 +39,10 @@ namespace Cinema.UI.Views
            
             _navigationManager = navigationManager;
             _sessionService = sessionService;
+
+            _sessionService.OnSuccessfulLogin += MenuOnLogin;
+            _sessionService.OnSuccessfulLogout += MenuOnLogout;
+
             _navigationManager.SetHeaderContainer(splitContainer2.Panel2);
             _navigationManager.SetHeaderTitle("Inicio");
             _navigationManager.Setup(this, splitContainer1.Panel2);
@@ -86,11 +90,7 @@ namespace Cinema.UI.Views
 
         private void BtnLogout_Click(object sender, EventArgs e)
         {
-            _sessionService.Logout();
-            _navigationManager.ClearNavigationButtons();
-            _navigationManager.CreateButton(BtnLogin_Click, "BotonLogin", "text_login").Show();
-            _navigationManager.CreateButton(BtnExit_Click, "BtnExit", "text_exit").Show();
-            _navigationManager.NavigateTo<LoginPage>();
+            _sessionService.Logout();           
         }
 
         private void BtnExit_Click(object sender, EventArgs e)
@@ -101,9 +101,10 @@ namespace Cinema.UI.Views
 
         private void Home_Load(object sender, EventArgs e)
         {
+            _navigationManager.ClearNavigationButtons();
             _navigationManager.CreateButton(BtnLogin_Click, "BotonLogin", "text_login").Show();
+            _navigationManager.CreateButton(BtnExit_Click, "BtnExit", "text_exit").Show();
             _navigationManager.NavigateTo<LoginPage>();
-            _controlTranslationService.TriggerTranslation();
         }
 
         public void MenuOnLogin()
@@ -119,6 +120,7 @@ namespace Cinema.UI.Views
                 _navigationManager.CreateButton(BtnSalas_Click, "BtnSalas", "text_rooms").Show();
                 _navigationManager.CreateButton(BtnPeliculas_Click, "BtnPeliculas", "text_movies").Show();
                 _navigationManager.CreateButton(BtnAdministracion_Click, "BtnAdministracion", "text_administration").Show();
+                _navigationManager.CreateButton(BtnRegistrarUsuario_Click, "BtnRegistrarUSuario", "text_registeruser").Show();
                 _navigationManager.CreateButton(BtnLogout_Click, "BtnLogout", "text_logout").Show();
                 _navigationManager.CreateButton(BtnExit_Click, "BtnExit", "text_exit").Show();
             }
@@ -145,6 +147,19 @@ namespace Cinema.UI.Views
             }
 
             _controlTranslationService.TriggerTranslation();
+        }
+
+        private void BtnRegistrarUsuario_Click(object? sender, EventArgs e)
+        {
+            
+        }
+
+        private void MenuOnLogout()
+        {
+            _navigationManager.ClearNavigationButtons();
+            _navigationManager.CreateButton(BtnLogin_Click, "BotonLogin", "text_login").Show();
+            _navigationManager.CreateButton(BtnExit_Click, "BtnExit", "text_exit").Show();
+            _navigationManager.NavigateTo<LoginPage>();
         }
 
     }

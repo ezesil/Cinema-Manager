@@ -47,6 +47,11 @@ namespace BaseServices.DAL.Repository.Sql
             genericAdapter = new TAdapter();
         }
 
+
+        public virtual int Delete(string query, object parameters)
+        {
+            return Delete(parameters, query);
+        }
         public virtual int Delete(object parameters, string queryOverride = "")
         {
             try
@@ -105,6 +110,11 @@ namespace BaseServices.DAL.Repository.Sql
             }
         }
 
+
+        public virtual TEntity GetOne(string query, object parameters)
+        {
+            return GetOne(parameters, query);
+        }
         public virtual TEntity GetOne(object parameters, string queryOverride = "")
         {
             try
@@ -144,6 +154,10 @@ namespace BaseServices.DAL.Repository.Sql
             }
         }
 
+        public virtual int Insert(string query, object parameters)
+        {
+            return Insert(parameters, query);
+        }
         public virtual int Insert(object parameters, string queryOverride = "")
         {
             var query = InsertQuery;
@@ -175,6 +189,10 @@ namespace BaseServices.DAL.Repository.Sql
             }
         }
 
+        public virtual int Update(string query, object parameters)
+        {
+            return Update(parameters, query);
+        }
         public virtual int Update(object parameters, string queryOverride = "")
         {
             try
