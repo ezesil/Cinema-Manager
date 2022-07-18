@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace BaseServices.Domain
@@ -61,42 +62,52 @@ namespace BaseServices.Domain
             /// <summary>
             /// Valor de severidad nulo.
             /// </summary>
+            [Description("None")]
             None,
             /// <summary>
             /// Valor de severidad bajo.
             /// </summary>
+            [Description("Low")]
             Low,
             /// <summary>
             /// Valor de severidad medio.
             /// </summary>
+            [Description("Medium")]
             Medium,
             /// <summary>
             /// Valor de severidad alto.
             /// </summary>
+            [Description("High")]
             High,
             /// <summary>
             /// Valor de severidad critico.
             /// </summary>
+            [Description("Critical")]
             Critical,
             /// <summary>
             /// Valor de severidad fatal.
             /// </summary>
+            [Description("Fatal")]
             Fatal,
             /// <summary>
             /// Valor de severidad desconocido.
             /// </summary>
+            [Description("Unknown")]
             Unknown,
             /// <summary>
             /// Valor de severidad de error logico.
             /// </summary>
+            [Description("LogicError")]
             LogicError,
             /// <summary>
             /// Valor de severidad de acceso a datos.
             /// </summary>
+            [Description("DataAccessError")]
             DataAccessError,
             /// <summary>
             /// Valor de severidad de informacion de depuracion. 
             /// </summary>
+            [Description("DebugInformation")]
             DebugInformation,
         }
 

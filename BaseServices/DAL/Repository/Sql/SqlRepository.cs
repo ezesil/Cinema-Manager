@@ -132,10 +132,11 @@ namespace BaseServices.DAL.Repository.Sql
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.CommandType = CommandType.Text;
+                    if(parameters != null)
+                        cmd.Parameters.AddRange(SqlRepository.GetParameters(parameters, query));
                     conn.Open();
                     using (reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
                     {
-
                         values = new object[reader.FieldCount];
 
                         while (reader.Read())

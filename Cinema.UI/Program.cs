@@ -1,3 +1,4 @@
+using BaseServices.Domain;
 using BaseServices.Services;
 using Cinema.UI.AdminViews;
 using Cinema.UI.Services;
@@ -25,7 +26,7 @@ namespace Cinema.UI
             // Servicios de BaseServices
             services.AddSingleton<BackupServices>();
             services.AddSingleton<SessionService>();
-            services.AddSingleton<CheckerDigitService>();
+            services.AddSingleton<IntegrityService>();
             services.AddSingleton<ExceptionHandler>();
             services.AddSingleton<HashingService>();
             services.AddSingleton<LanguageService>();
@@ -57,12 +58,85 @@ namespace Cinema.UI
             services.AddSingleton<RoomsPage>();
 
             ServiceProvider serviceProvider = services.BuildServiceProvider();
-
             DependencyService.SetInstance(serviceProvider);
+
+            var integrityService = DependencyService.Get<IntegrityService>();
+
+            var session = ServiceContainer.Get<SessionService>();
+
+            var user = new User(
+                Guid.NewGuid(),
+                "admin",
+                "administrador",
+                "correo@correo.com",
+                "nombrecompleto",
+                "400000000");
+
+            var item = session.RegisterUser(user);
+
+
+            string autologinmode = "admin";
+            var homeform = DependencyService.Get<Home>();
+            var sessionService = DependencyService.Get<SessionService>();
+            var languageService = DependencyService.Get<LanguageService>();
+            var exhandler = DependencyService.Get<ExceptionHandler>();
+
+            languageService.SetLanguage("es");
+
+            // Evita el chequeo si es true
+            bool chequeo = true;
+            // modo de pruebas, si algo falla se logea como admin
+            bool debugmode = true;
+
+            try
+            {
+                if (chequeo == false)
+                {
+                    try
+                    {
+                        chequeo = integrityService.CheckIntegrity();
+                    }
+
+                    catch (Exception ex)
+                    {
+                        throw new Exception($"{languageService.TranslateCode("integrity_check_genericerror")}. Mensaje de origen: {ex.Message}", ex);                       
+                    }
+                }
+
+                else if (chequeo)
+                {
+                    if (autologinmode == "admin")
+                    {
+                        var res = sessionService.TryLogin("admin", "administrador");
+                    }
+
+                    else if (autologinmode == "recepcionista")
+                    {
+                        var res = sessionService.TryLogin("anuncianteprueba1", "descarga33");
+                    }
             
-            var homeform = serviceProvider.GetRequiredService<Home>();
-            Application.Run(homeform);
-            
+                    Application.Run(homeform);           
+                }
+
+                else
+                {
+                    throw new Exception(languageService.TranslateCode("integrity_check_failed"));
+                }
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                exhandler.Handle(ex);
+
+                if (debugmode == true)
+                {
+                    sessionService.TryLogin("admin", "descargandomal33");
+                    Application.Run(homeform);
+                }
+
+                Application.Exit();
+            }
         }
     }
 }

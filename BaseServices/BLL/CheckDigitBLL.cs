@@ -4,6 +4,7 @@ using BaseServices.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ namespace BaseServices.BLL
         private static List<User> PersonasConFallos = new List<User>();
 
         #region Singleton
-        private readonly static CheckDigitBLL _instance = new CheckDigitBLL();
+        private static CheckDigitBLL _instance = new CheckDigitBLL();
 
         /// <summary>
         /// Propiedad estatica que permite accesar los atributos, propiedades y metodos publicos de una clase con patrón Singleton.
@@ -31,6 +32,9 @@ namespace BaseServices.BLL
         {
             get
             {
+                if(_instance == null)
+                    _instance = new CheckDigitBLL();
+
                 return _instance;
             }
         }
@@ -87,7 +91,7 @@ namespace BaseServices.BLL
             foreach (var c in personas)
             {
                 numeros.Add(Convert.ToDecimal(c.DVH));
-                if (Convert.ToInt32(c.DVH) != Convert.ToInt32(CalculateDVH(c.Id.ToString() + c.Username + c.HashedPassword + c.Email)))
+                if (Convert.ToInt32(c.DVH) != Convert.ToInt32(CalcularDVH(c)))
                 {
                     PersonasConFallos.Add(c);
                 }
@@ -115,7 +119,7 @@ namespace BaseServices.BLL
         /// </summary>
         /// <param name="personas"></param>
         /// <returns></returns>
-        private bool CheckPersonaIntegrity(List<User> personas)
+        private bool CheckUsersIntegrity(List<User> personas)
         {
             List<decimal> L = new List<decimal>();
             int DVV = FactoryDAL.DVVRepository.SelectOne(100);
@@ -132,54 +136,72 @@ namespace BaseServices.BLL
 
             else
             {
-                _logger.Log("Error de chequeo de integridad en la cuentas: Faltan datos.", Log.Severity.Critical);
+                _logger.Log("Error de chequeo de integridad en la cuentas: Faltan datos.", Log.Severity.Fatal);
                 return false;
             }
 
         }
 
-        ///// <summary>
-        ///// Chequea la integridad de los datos de inicio de sesion.
-        ///// </summary>
-        ///// <returns>Retorna un valor booleano.</returns>
-        //public bool CheckIntegrity()
-        //{
-        //    var listapersonas = FactoryDAL.UserRepository.SelectAllIntegrityData().ToList();
+        /// <summary>
+        /// Chequea la integridad de los datos de inicio de sesion.
+        /// </summary>
+        /// <returns>Retorna un valor booleano.</returns>
+        public bool CheckIntegrity()
+        {
+            var listapersonas = FactoryDAL.UserRepository.SelectAll().ToList();
 
-        //    if (CheckAccountsIntegrity(listapersonas) == true && CheckPersonaIntegrity(listapersonas) == true)
-        //        return true;
+            if (CheckAccountsIntegrity(listapersonas) == true && CheckUsersIntegrity(listapersonas) == true)
+                return true;
+            else
+                return false;
+        }
 
-        //    else
-        //        return false;
-        //}
+        /// <summary>
+        /// Actualiza el DVV de una entidad. Debe usarse despues de ingresar cambios a una cuenta de usuario.
+        /// </summary>
+        /// <param name="id"></param>
+        public void UpdateDVV(int id)
+        {
+            List<decimal> numeros = new List<decimal>();
 
-        ///// <summary>
-        ///// Actualiza el DVV de una entidad. Debe usarse despues de ingresar cambios a una cuenta de usuario.
-        ///// </summary>
-        ///// <param name="id"></param>
-        //public void UpdateDVV(int id)
-        //{
-        //    List<decimal> numeros = new List<decimal>();
+            foreach (var c in FactoryDAL.UserRepository.SelectAll().ToList())
+            {
+                numeros.Add(Convert.ToDecimal(c.DVH));
+            }
 
-        //    foreach (var c in FactoryDAL.UserRepository.SelectAllIntegrityData().ToList())
-        //    {
-        //        numeros.Add(Convert.ToDecimal(c.DVH));
-        //    }
-              
-        //    FactoryDAL.DVVRepository.Update(id, Convert.ToInt32(CalculateDVV(numeros)));
-        //}
+            FactoryDAL.DVVRepository.Update(id, Convert.ToInt32(CalculateDVV(numeros)));
+        }
 
-        ///// <summary>
-        ///// Actualiza el valor DVH utilizando el Guid de un usuario.
-        ///// </summary>
-        ///// <param name="c"></param>
-        //public void UpdateDVH(User c)
-        //{
-        //    c = FactoryDAL.UserRepository.SelectIntegrityData(c.Id);
-        //    FactoryDAL.UserRepository.UpdateDVH(c.Id, Convert.ToInt32(CalculateDVH(c.Id.ToString() + c.Username + c.HashedPassword + c.Email)));
+        /// <summary>
+        /// Actualiza el valor DVH utilizando el Guid de un usuario.
+        /// </summary>
+        /// <param name="c"></param>
+        public void UpdateDVH(Guid Id)
+        {
+            var user = FactoryDAL.UserRepository.Select(Id);
+            FactoryDAL.UserRepository.UpdateDVH(Id, Convert.ToInt32(CalcularDVH(user)));
 
-        //    UpdateDVV(100);
-        //}
+            UpdateDVV(100);
+        }
 
+        /// <summary>
+        /// Calcula el digito verficador horizontal para el objecto especificado.
+        /// </summary>
+        /// <param name="obj"></param>
+        public decimal CalcularDVH(object obj)
+        {
+            Type myType = obj.GetType();
+            IList<PropertyInfo> props = new List<PropertyInfo>(myType.GetProperties());
+
+            StringBuilder sb = new StringBuilder();
+
+            foreach (PropertyInfo prop in props)
+            {
+                if(prop.Name.ToLower() != "dvh" || prop.Name.ToLower().Contains("dvh"))
+                    sb.Append($"{prop.Name}:{prop.GetValue(obj, null)}");
+            }
+
+            return CalculateDVH(sb.ToString());
+        }
     }
 }

@@ -14,6 +14,8 @@ namespace BaseServices.BLL
 
         IUserRepository<User> repo = DAL.Factory.FactoryDAL.UserRepository;
 
+        List<Permiso> permisos = new List<Permiso>();
+
         private User CurrentUserData;
 
         #region single
@@ -37,7 +39,6 @@ namespace BaseServices.BLL
         }
         #endregion
 
-
         public string CurrentUserAddress
         {
             get
@@ -49,7 +50,6 @@ namespace BaseServices.BLL
             }
         }
 
-
         public Guid CurrentUserGuid
         {
             get
@@ -60,7 +60,6 @@ namespace BaseServices.BLL
                 return CurrentUserData.Id;
             }
         }
-
 
         /// <summary>
         /// Indica si el usuario es nulo.
@@ -76,20 +75,19 @@ namespace BaseServices.BLL
             }
         }
 
+        // <summary>
+        // Obtiene un listado de los permisos del usuario actual.Retorna null si no hay usuario logeado en el sistema.
+        // </summary>
+        public List<Permiso> CurrentUserPermissions
+        {
+            get
+            {
+                if (this.UserIsNull)
+                    return null;
 
-        /// <summary>
-        /// Obtiene un listado de los permisos del usuario actual. Retorna null si no hay usuario logeado en el sistema.
-        /// </summary>
-        //public List<Permiso> CurrentUserPermissions
-        //{
-        //    get
-        //    {
-        //        if (this.UserIsNull)
-        //            return null;
-
-        //        return CurrentUserData.;
-        //    }
-        //}
+                return permisos;
+            }
+        }
 
         /// <summary>
         /// Obtiene el nombre de usuario del usuario actual. Retorna null si no hay usuario logeado en el sistema.
@@ -105,29 +103,34 @@ namespace BaseServices.BLL
             }
         }
 
-
-
         /// <summary>
         /// Intentar un inicio de sesion utilizando la direccion de correo del usuario.
         /// </summary>
         /// <param name="correo"></param>
-        /// <param name="contraseña"></param>
+        /// <param name="password"></param>
         /// <returns></returns>
-        public bool LoginAttempByEmail(string correo, string contraseña)
+        public bool LoginByEmail(string correo, string password)
         {
 
             try
             {
-                var user = repo.SelectUserDataByEmailAddressAndPassword(correo, HashingService.Current.HashPassword(contraseña));
+                var user = repo.SelectUserDataByEmailAddress(correo);
 
                 if (user == null)
                 {
                     return false;
                 }
 
-                user.Email = correo;
-                CurrentUserData = user;
-                return true;
+                if (HashingService.Current.VerificarContraseña(password, user.Password))
+                {
+                    user.Email = user.Email;
+                    CurrentUserData = user;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
 
             catch (Exception ex)
@@ -141,22 +144,29 @@ namespace BaseServices.BLL
         /// Intentar un inicio de sesion utilizando el nombre de usuario.
         /// </summary>
         /// <param name="usuario"></param>
-        /// <param name="contraseña"></param>
+        /// <param name="password"></param>
         /// <returns></returns>
-        public bool AttempLoginByUsername(string usuario, string contraseña)
+        public bool LoginByUsername(string usuario, string password)
         {
             try
             {
-                var user = repo.SelectUserDataByUsernameAndPassword(usuario, HashingService.Current.HashPassword(contraseña));
+                var user = repo.SelectUserDataByUsername(usuario);
 
                 if (user == null)
                 {
                     return false;
                 }
 
-                user.Email = user.Email;
-                CurrentUserData = user;
-                return true;
+                if (HashingService.Current.VerificarContraseña(password, user.Password))
+                {
+                    user.Email = user.Email;
+                    CurrentUserData = user;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
 
             catch (Exception ex)
@@ -179,6 +189,7 @@ namespace BaseServices.BLL
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 _exhandler.Handle(ex);
                 return false;
             }
@@ -194,14 +205,10 @@ namespace BaseServices.BLL
             return repo.Select(Id);
         }
 
-        public void Logout()
+        public bool Logout()
         {
             CurrentUserData = null;
+            return true;
         }
-
-
-
-
-
     }
 }

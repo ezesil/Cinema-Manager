@@ -12,7 +12,6 @@ namespace BaseServices.Domain
     /// </summary>
     public class Rol
     {
-
         /// <summary>
         /// Constructor por defecto.
         /// </summary>
@@ -20,8 +19,6 @@ namespace BaseServices.Domain
         {
 
         }
-
-
 
         /// <summary>
         /// Constructor que recibe un entero, un string y un listado de permisos como parametro.
@@ -36,8 +33,6 @@ namespace BaseServices.Domain
             PermisoList = rights;
         }
 
-
-
         /// <summary>
         /// Constructor que recibe un entero, un string y un listado de permisos como parametro.
         /// </summary>
@@ -51,8 +46,6 @@ namespace BaseServices.Domain
             PermisosString = rights;
         }
 
-
-
         /// <summary>
         /// Atributo interno para los permisos en formato string.
         /// </summary>
@@ -62,7 +55,6 @@ namespace BaseServices.Domain
         /// Lista interna de permisos en formato de objetos Permiso.
         /// </summary>
         private List<Permiso> _permissions = new List<Permiso>();
-
 
         /// <summary>
         /// Listado de permisos pertenecientes a un rol.
@@ -76,7 +68,6 @@ namespace BaseServices.Domain
             private set
             {
                 _permissions = value;
-
 
                 for (int i = 0; i < value.Count - 2; i++)
                 {
@@ -112,13 +103,9 @@ namespace BaseServices.Domain
         /// </summary>
         public string NombreRol { get; private set; }
 
-
         /// <summary>
         /// ID perteneciente al Rol.
         /// </summary>
         public int IdRol { get; private set; }
-
-
-
     }
 }

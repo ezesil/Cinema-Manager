@@ -91,7 +91,6 @@ namespace BaseServices.BLL
             return ConstantTimeComparison(passwordGuessByteArr, actualPasswordByteArr);
         }
 
-
         /// <summary>
         /// Calcula la diferencia entre las contraseñas usando un algoritmo de tiempo constante.
         /// </summary>

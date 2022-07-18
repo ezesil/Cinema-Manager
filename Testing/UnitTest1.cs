@@ -1,4 +1,6 @@
 using NUnit.Framework;
+using BaseServices.Services;
+using BaseServices.Domain;
 
 namespace Testing
 {
@@ -12,18 +14,17 @@ namespace Testing
         [Test]
         public void Test1()
         {
-            Assert.Pass();
-        }
+            var session = ServiceContainer.Get<SessionService>();
 
-        [Test]
-        public void Test2()
-        {
-            Assert.Pass();
-        }
+            var user = new User(
+                new System.Guid(), 
+                "admin", 
+                "administrador", 
+                "correo@correo.com", 
+                "nombrecompleto", 
+                "40000000");
 
-        [Test]
-        public void Test3()
-        {
+            session.RegisterUser(user);
             Assert.Pass();
         }
     }

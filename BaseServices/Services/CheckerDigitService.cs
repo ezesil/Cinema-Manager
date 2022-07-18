@@ -3,6 +3,7 @@ using BaseServices.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,15 +14,15 @@ namespace BaseServices.Services
     /// <summary>
     /// Provee servicios de tipo Digito Verificador Horizontal y Vertical.
     /// </summary>
-    public class CheckerDigitService
+    public class IntegrityService
     {
-        public CheckerDigitService()
+        public IntegrityService()
         {
 
         }
 
         /// <summary>
-        /// Calcula el digito verficiador horizontal para la cadena de bytes especificada.
+        /// Calcula el digito verficador horizontal para la cadena de string especificada.
         /// </summary>
         /// <param name="cadena"></param>
         public decimal CalcularDVH(string cadena)
@@ -29,6 +30,10 @@ namespace BaseServices.Services
             return CheckDigitBLL.Current.CalculateDVH(cadena);
         }
 
+        public decimal CalcularDVH(object obj)
+        {         
+            return CheckDigitBLL.Current.CalcularDVH(obj);
+        }
 
         /// <summary>
         /// Obtiene el digito verficiador vertical para la cadena de DVH especificada.
@@ -40,15 +45,14 @@ namespace BaseServices.Services
             return CheckDigitBLL.Current.CalculateDVV(cadena.ToList());
         }
 
-
-        ///// <summary>
-        ///// Verifica la integridad de los datos. Retorna True si no hay errores, False si hubo errores.
-        ///// </summary>
-        ///// <returns></returns>
-        //public bool CheckIntegrity()
-        //{
-        //    return CheckDigitBLL.Current.CheckIntegrity();
-        //}
+        /// <summary>
+        /// Verifica la integridad de los datos. Retorna True si no hay errores, False si hubo errores.
+        /// </summary>
+        /// <returns></returns>
+        public bool CheckIntegrity()
+        {
+            return CheckDigitBLL.Current.CheckIntegrity();
+        }
 
         ///// <summary>
         ///// Metodo que permite actualizar el DVV de una entidad.

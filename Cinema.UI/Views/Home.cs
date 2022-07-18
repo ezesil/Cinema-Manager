@@ -22,21 +22,21 @@ namespace Cinema.UI.Views
         private NavigationManager _navigationManager;
         private SessionService _sessionService;
         private ControlTranslationService _controlTranslationService;
-
-        public Home(NavigationManager navigationManager, 
+        bool firstload = true;
+        public Home(NavigationManager navigationManager,
             SessionService sessionService, ControlTranslationService controlTranslationService)
         {
             InitializeComponent();
 
             _controlTranslationService = controlTranslationService;
 
-            controlTranslationService.OnRefresh += () => 
+            controlTranslationService.OnRefresh += () =>
             {
                 controlTranslationService.TryTranslateForm(this.Controls);
                 controlTranslationService.TryTranslateForm(this.splitContainer1.Panel1.Controls);
                 controlTranslationService.TryTranslateForm(this.splitContainer1.Panel2.Controls);
             };
-           
+
             _navigationManager = navigationManager;
             _sessionService = sessionService;
 
@@ -90,7 +90,7 @@ namespace Cinema.UI.Views
 
         private void BtnLogout_Click(object sender, EventArgs e)
         {
-            _sessionService.Logout();           
+            _sessionService.Logout();
         }
 
         private void BtnExit_Click(object sender, EventArgs e)
@@ -101,10 +101,17 @@ namespace Cinema.UI.Views
 
         private void Home_Load(object sender, EventArgs e)
         {
-            _navigationManager.ClearNavigationButtons();
-            _navigationManager.CreateButton(BtnLogin_Click, "BotonLogin", "text_login").Show();
-            _navigationManager.CreateButton(BtnExit_Click, "BtnExit", "text_exit").Show();
-            _navigationManager.NavigateTo<LoginPage>();
+            if (_sessionService.UserIsNull)
+            {
+                _navigationManager.ClearNavigationButtons();
+                _navigationManager.CreateButton(BtnLogin_Click, "BotonLogin", "text_login").Show();
+                _navigationManager.CreateButton(BtnExit_Click, "BtnExit", "text_exit").Show();
+                _navigationManager.NavigateTo<LoginPage>();
+            }
+            else
+            {
+                MenuOnLogin();
+            }
         }
 
         public void MenuOnLogin()
@@ -123,8 +130,9 @@ namespace Cinema.UI.Views
                 _navigationManager.CreateButton(BtnRegistrarUsuario_Click, "BtnRegistrarUSuario", "text_registeruser").Show();
                 _navigationManager.CreateButton(BtnLogout_Click, "BtnLogout", "text_logout").Show();
                 _navigationManager.CreateButton(BtnExit_Click, "BtnExit", "text_exit").Show();
+                _navigationManager.NavigateTo<MainPage>();
             }
-            else if (_sessionService.UserHasPermission(Permission.Manager))
+            else if (_sessionService.UserHasPermission(PermissionType.Manager))
             {
                 _navigationManager.ClearNavigationButtons();
                 _navigationManager.CreateButton(BotonInicio_Click, "BotonInicio", "text_home").Show();
@@ -135,8 +143,9 @@ namespace Cinema.UI.Views
                 _navigationManager.CreateButton(BtnPeliculas_Click, "BtnPeliculas", "text_movies").Show();
                 _navigationManager.CreateButton(BtnLogout_Click, "BtnLogout", "text_logout").Show();
                 _navigationManager.CreateButton(BtnExit_Click, "BtnExit", "text_exit").Show();
+                _navigationManager.NavigateTo<MainPage>();
             }
-            else if (_sessionService.UserHasPermission(Permission.Receptionist))
+            else if (_sessionService.UserHasPermission(PermissionType.Receptionist))
             {
                 _navigationManager.ClearNavigationButtons();
                 _navigationManager.CreateButton(BotonInicio_Click, "BotonInicio", "text_home").Show();
@@ -144,14 +153,18 @@ namespace Cinema.UI.Views
                 _navigationManager.CreateButton(BtnTickets_Click, "BtnTickets", "text_tickets").Show();
                 _navigationManager.CreateButton(BtnLogout_Click, "BtnLogout", "text_logout").Show();
                 _navigationManager.CreateButton(BtnExit_Click, "BtnExit", "text_exit").Show();
+                _navigationManager.NavigateTo<MainPage>();
+            }
+            else
+            {
+                throw new Exception("Usuario sin permisos");
             }
 
-            _controlTranslationService.TriggerTranslation();
         }
 
         private void BtnRegistrarUsuario_Click(object? sender, EventArgs e)
         {
-            
+
         }
 
         private void MenuOnLogout()

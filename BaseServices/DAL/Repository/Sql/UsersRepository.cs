@@ -20,9 +20,9 @@ namespace BaseServices.DAL.Repository.Sql
         private static string SelectQuery
         { get => "SELECT TOP(1) [guid_usuario], [nombredeusuario], [contraseña], [emailprincipal], [habilitado], [DVH], [nombre_completo], [dni_usuario] FROM [CinemaDB].[dbo].[Usuario] WHERE guid_usuario = @Id"; }
         private static string InsertQuery 
-        { get => "INSERT INTO Users ([guid_usuario], [nombredeusuario], [contraseña], [emailprincipal], [habilitado], [DVH], [nombre_completo], [dni_usuario]) values (@Id, @Username, @HashedPassword, @Email, @Enabled, @DVH, @FullName, @DNI)"; }
+        { get => "INSERT INTO Usuario ([guid_usuario], [nombredeusuario], [contraseña], [emailprincipal], [habilitado], [DVH], [nombre_completo], [dni_usuario]) values (@Id, @Username, @Password, @Email, @Enabled, @DVH, @FullName, @DNI)"; }
         private static string UpdateQuery
-        { get => "UPDATE Users SET [guid_usuario] = @Id, [nombredeusuario] = @Username, [contraseña] = @HashedPassword, [emailprincipal] = @Email, [habilitado] = @Enabled, [DVH] = @DVH, [nombre_completo] = @FullName, [dni_usuario] = @DNI"; }
+        { get => "UPDATE Usuario SET [guid_usuario] = @Id, [nombredeusuario] = @Username, [contraseña] = @HashedPassword, [emailprincipal] = @Email, [habilitado] = @Enabled, [DVH] = @DVH, [nombre_completo] = @FullName, [dni_usuario] = @DNI"; }
         private static string SelectWhereUserQuery
         { get => "SELECT TOP(1) [guid_usuario], [nombredeusuario], [contraseña], [emailprincipal], [habilitado], [DVH], [nombre_completo], [dni_usuario] FROM [CinemaDB].[dbo].[Usuario] WHERE [nombredeusuario] = @Username"; }
         private static string SelectWhereEmailQuery

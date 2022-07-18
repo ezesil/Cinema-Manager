@@ -12,7 +12,7 @@ namespace Cinema.UI.Views
     {
         private Logger _logger;
         private NavigationManager _navigationManager;
-        private SessionService _session;
+        private SessionService _sessionService;
         private ExceptionHandler _exmanager;
         private BackupPanel _backupPanel;
         private PermissionsPanel _permissionsPanel;
@@ -26,6 +26,7 @@ namespace Cinema.UI.Views
             NavigationManager navigationManager,
             Logger logger, 
             ExceptionHandler exmanager,
+            SessionService sessionService,
             BackupPanel backupPanel,
             PermissionsPanel permissionsPanel,
             RolesPanel rolesPanel,
@@ -38,18 +39,18 @@ namespace Cinema.UI.Views
             InitializeComponent();
 
             // Title
-            this.Name = "Panel de administrador";
+            this.Tag = "text_admin_panel";
             
             // Services
             _logger = logger;
-            _session = SessionService.Current;
+            _sessionService = sessionService;
             _exmanager = exmanager;
             _navigationManager = navigationManager;
 
             try
             {
-                //if (_session.UserIsNull || !_permissions.HasPermission(PermissionType.Administrator))
-                //    throw new Exception("Intento de acceso ilegal a herramientas de permisos elevados.");
+                if (true || _sessionService.UserIsNull || !_sessionService.UserHasPermission(PermissionType.Administrator))
+                    throw new Exception("Intento de acceso ilegal a herramientas de permisos elevados.");
 
                 AddPanel(backupPanel);
                 AddPanel(permissionsPanel);
@@ -61,7 +62,7 @@ namespace Cinema.UI.Views
             }
             catch (Exception ex)
             {
-                _exmanager.Handle(ex, ex.Message + " Datos del usuario: Guid: " + SessionService.Current.CurrentUserGuid + ", Nombre: " + SessionService.Current.CurrentUser + ", Correo: " + SessionService.Current.CurrentUserCorreo, Log.Severity.Critical);
+                _exmanager.Handle(ex, ex.Message + " Datos del usuario: Guid: " + _sessionService.CurrentUserGuid + ", Nombre: " + _sessionService.CurrentUser + ", Correo: " + _sessionService.CurrentUserCorreo, Log.Severity.Critical);
                 _navigationManager.NavigateTo<MainPage>();
             }
 

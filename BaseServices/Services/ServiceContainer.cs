@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace BaseServices.Services
 {
+    /// <summary>
+    /// Contenedor de servicios. Permite obtener y registrar una instancia de una clase. 
+    /// Requiere un constructor sin parametros.
+    /// </summary>
     public static class ServiceContainer
     {
         private static List<object> objList = new List<object>();

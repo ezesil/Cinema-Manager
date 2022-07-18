@@ -19,8 +19,9 @@ namespace BaseServices.BLL
     {
         ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
         Services.Logger _logger = ServiceContainer.Get<Services.Logger>();
+        SessionService _sessionService = ServiceContainer.Get<SessionService>();
 
-        private readonly IGenericRepository<Rol> repoperm;
+        private readonly IGenericRepository<Rol> repoperm = FactoryDAL.RolRepository;
 
         #region Singleton
         private readonly static PermissionBLL _instance = new PermissionBLL();
@@ -38,7 +39,7 @@ namespace BaseServices.BLL
 
         private PermissionBLL()
         {
-            repoperm = FactoryDAL.RolRepository;
+            
         }
         #endregion
 
@@ -47,7 +48,7 @@ namespace BaseServices.BLL
         /// </summary>
         /// <param name="P"></param>
         /// <returns></returns>
-        public bool HasRight(Permiso P)
+        public bool HasRight(PermissionType P)
         {
             return true;
             if (SessionBLL.Current.UserIsNull)
@@ -55,46 +56,46 @@ namespace BaseServices.BLL
                 return false;
             }
 
-            //foreach (Permiso permiso in SessionManager.Current.CurrentUserPermissions)
-            //{
-            //    if (P.Codigo == permiso.Codigo)
-            //    {
-            //        return true;
-            //    }
-            //}
+            foreach (Permiso permiso in SessionBLL.Current.CurrentUserPermissions)
+            {
+                if (P == permiso.Type)
+                {
+                    return true;
+                }
+            }
 
             return false;
         }
 
-        ///// <summary>
-        ///// Verifica si el usuario actual contiene el listado de permisos especificado.
-        ///// </summary>
-        ///// <param name="P"></param>
-        ///// <returns></returns>
-        //public bool HasRight(List<Permiso> P)
-        //{
-        //    if (SessionManager.Current.CurrentUserPermissions == null)
-        //    {
-        //        return false;
-        //    }
+        /// <summary>
+        /// Verifica si el usuario actual contiene el listado de permisos especificado.
+        /// </summary>
+        /// <param name="P"></param>
+        /// <returns></returns>
+        public bool HasRights(List<Permiso> P)
+        {
+            if (SessionBLL.Current.CurrentUserPermissions == null)
+            {
+                return false;
+            }
 
-        //    int counter = 0;
-        //    foreach (Permiso permiso in SessionManager.Current.CurrentUserPermissions)
-        //    {
-        //        foreach (Permiso permiso2 in P)
-        //            if (permiso.Codigo == permiso2.Codigo)
-        //            {
-        //                counter++;
-        //            }
-        //    }
+            int counter = 0;
+            foreach (Permiso permiso in SessionBLL.Current.CurrentUserPermissions)
+            {
+                foreach (Permiso permiso2 in P)
+                    if (permiso.Codigo == permiso2.Codigo)
+                    {
+                        counter++;
+                    }
+            }
 
-        //    if (counter == P.Count)
-        //        return true;
+            if (counter == P.Count)
+                return true;
 
 
-        //    else
-        //        return false;
-        //}
+            else
+                return false;
+        }
 
         /// <summary>
         /// TODO: Implementar.
@@ -123,8 +124,6 @@ namespace BaseServices.BLL
             return repoperm.GetOne(id);
         }
 
-
-
         /// <summary>
         /// Permite crear un rol del sistema.
         /// </summary>
@@ -134,7 +133,6 @@ namespace BaseServices.BLL
             repoperm.Insert(R);
         }
 
-
         /// <summary>
         /// Permite eliminar un rol del sistema.
         /// </summary>
@@ -143,41 +141,5 @@ namespace BaseServices.BLL
         {
             repoperm.Delete(id);
         }
-
-
-
-    }
-
-
-
-
-
-
-    /// <summary>
-    /// Provee metodos especiales para la extraccion de permisos.
-    /// </summary>
-    internal static class PermissionExtractor
-    {
-        /// <summary>
-        /// Obtiene el codigo de permiso a partir de un Enum de permiso.
-        /// </summary>
-        /// <param name="e"></param>
-        /// <returns></returns>
-        public static string GetDescription(this Enum e)
-        {
-            var attribute =
-                e.GetType()
-                    .GetTypeInfo()
-                    .GetMember(e.ToString())
-                    .FirstOrDefault(member => member.MemberType == MemberTypes.Field)
-                    .GetCustomAttributes(typeof(DescriptionAttribute), false)
-                    .SingleOrDefault()
-                    as DescriptionAttribute;
-
-            return attribute?.Description ?? e.ToString();
-        }
-
-
-
-    }
+    }    
 }

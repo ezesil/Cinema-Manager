@@ -30,7 +30,6 @@ namespace BaseServices.BLL
         }
         #endregion
 
-
         public void Handle(Exception ex, Log? log = null)
         {
             if (ex == null)
@@ -54,11 +53,8 @@ namespace BaseServices.BLL
                 else
                 {
                     _logger.Log(ex.Message, Log.Severity.Unknown, ex.StackTrace?.ToString());
-                }
-                
+                }              
             }
-
-
         }
 
         private void Handle(BLLException ex)
@@ -82,8 +78,5 @@ namespace BaseServices.BLL
             _logger.Log(ex.Message, Log.Severity.DataAccessError);
             throw new BLLException(ex.Message, ex);
         }
-
-
-
     }
 }

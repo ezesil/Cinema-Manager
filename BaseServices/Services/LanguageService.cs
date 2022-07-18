@@ -13,8 +13,6 @@ namespace BaseServices.Services
     /// </summary>
     public class LanguageService
     {
-        #region Singleton
-
         /// <summary>
         /// Delegado para el refresco de traducciones.
         /// </summary>
@@ -25,11 +23,10 @@ namespace BaseServices.Services
         /// </summary>
         public LanguageRefresh refresher;
 
-        private LanguageService()
+        public LanguageService()
         {
 
         }
-        #endregion
 
         /// <summary>
         /// Lenguaje actual, extraído de Application settings como "ultimo lenguaje".
@@ -68,7 +65,6 @@ namespace BaseServices.Services
                 CurrentLanguage = nuevolenguaje;
                 return true;
             }
-
             else
             {
                 return false;
@@ -90,9 +86,7 @@ namespace BaseServices.Services
                     CurrentLanguage = ApplicationSettings.Instance.LastLanguage;
                     return true;
                 }
-
             }
-
             return false;
         }
 
@@ -105,7 +99,6 @@ namespace BaseServices.Services
             {
                 return currentlanguage;
             }
-
             protected set
             {
                 ApplicationSettings.Instance.LastLanguage = value.ToString();

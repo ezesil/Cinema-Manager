@@ -1,5 +1,6 @@
 ﻿using BaseServices.BLL;
 using BaseServices.Domain;
+using BaseServices.Services.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,30 +9,19 @@ using System.Threading;
 namespace BaseServices.Services
 {
     /// <summary>
-    /// Provee servicios de inicio de sesión.
+    /// Provee servicios de sesión de usuario.
     /// </summary>
     public class SessionService
     {
-        private readonly static SessionService _instance = new SessionService();
-
         public delegate void OnLoginEventHandler();
         public event OnLoginEventHandler OnSuccessfulLogin;
 
         public delegate void OnLogoutEventHandler();
         public event OnLogoutEventHandler OnSuccessfulLogout;
 
-        
+        private IntegrityService _checkerDigitService => ServiceContainer.Get<IntegrityService>();
 
-        /// <summary>
-        /// Propiedad estatica que permite accesar los atributos, propiedades y metodos publicos de una clase con patrón Singleton.
-        /// </summary>
-        public static SessionService Current
-        {
-            get
-            {
-                return _instance;
-            }
-        }
+        private bool initialized = false;
 
         public SessionService()
         {
@@ -46,7 +36,6 @@ namespace BaseServices.Services
             get
             {
                 return SessionBLL.Current.UserIsNull;
-
             }
         }
 
@@ -90,23 +79,50 @@ namespace BaseServices.Services
             }
         }
 
-        ///// <summary>
-        ///// Efectúa un intento de inicio de sesión.
-        ///// </summary>
-        ///// <param name="identificador">Nombre de usuario o contraseña.</param>
-        ///// <param name="contraseña">Contraseña en texto plano.</param>
-        ///// <returns></returns>
-        //public bool LoginAttemp(string identificador, string contraseña)
-        //{
-        //    if (identificador.Contains("@") && identificador.Contains(".com"))
-        //        return SessionBLL.Current.LoginAttempCorreo(identificador, contraseña);
-        //    else
-        //        return SessionBLL.Current.AttempLogin(identificador, contraseña);
-        //}
+        /// <summary>
+        /// Efectúa un intento de inicio de sesión.
+        /// </summary>
+        /// <param name="identifier">Nombre de usuario o contraseña.</param>
+        /// <param name="pass">Contraseña en texto plano.</param>
+        /// <returns></returns>
+        public bool TryLogin(string identifier, string pass)
+        {
+            if (identifier.Contains("@") && identifier.Contains(".com"))
+            {
+                if (SessionBLL.Current.LoginByEmail(identifier, pass))
+                {
+                    OnSuccessfulLogin.Invoke();
+                    return true;
+                }
+                else
+                    return false;
+            }
+            else
+            {
+                if (SessionBLL.Current.LoginByUsername(identifier, pass))
+                {
+                    if(initialized)
+                        OnSuccessfulLogin.Invoke();
+                    else
+                        initialized = true;
+                    return true;
+                }
+                else
+                    return false;
+            }
+        }
+
+        public bool RegisterUser(User user)
+        {
+            user.DVH = _checkerDigitService.CalcularDVH(user);
+            user.Password = HashingService.Current.HashPassword(user.Password);
+            return SessionBLL.Current.RegisterUser(user);
+        }
 
         public void Logout()
         {
             SessionBLL.Current.Logout();
+            OnSuccessfulLogout.Invoke();
         }
 
         /// <summary>
@@ -114,14 +130,12 @@ namespace BaseServices.Services
         /// </summary>
         /// <param name="CodigoPermiso"></param>
         /// <returns>Retorna un booleano indicando si el usuario posee o no los permisos. Retorna siempre false si no hay usuario logeado en el sistema.</returns>
-        public bool UserHasPermission(Permission CodigoPermiso)
+        public bool UserHasPermission(PermissionType CodigoPermiso)
         {
-            Permiso permiso = new Permiso(PermissionExtractor.GetDescription(CodigoPermiso));
-
-            if (SessionService.Current.UserIsNull)
+            if (UserIsNull)
                 return false;
 
-            return PermissionBLL.Current.HasRight(permiso);
+            return PermissionBLL.Current.HasRight(CodigoPermiso);
         }
 
         /// <summary>

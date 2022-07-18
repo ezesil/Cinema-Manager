@@ -16,9 +16,9 @@ namespace BaseServices.DAL.Repository.Sql.Adapter
             {
                 Id = Guid.Parse(values[0].ToString()),
                 Username = (string)values[1],
-                HashedPassword = (string)values[2],
+                Password = (string)values[2],
                 Email = (string)values[3],
-                Enabled = (bool)values[4],
+                Enabled = int.Parse(values[4].ToString()) == 1 ? true : false,
                 DVH = (int)values[5],
                 FullName = (string)values[6],
                 DNI = (string)values[7]
