@@ -139,12 +139,18 @@ namespace BaseServices.DAL.Repository.Sql
                     {
                         values = new object[reader.FieldCount];
 
+                        if (!reader.HasRows)
+                        {
+                            return null;
+                        }
+
                         while (reader.Read())
                         {
-                            reader.GetValues(values);
+                            reader.GetValues(values);                          
                         }
                     }
                 }
+
                 return genericAdapter?.Adapt(values);
             }
 

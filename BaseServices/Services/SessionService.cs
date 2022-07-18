@@ -91,7 +91,14 @@ namespace BaseServices.Services
             {
                 if (SessionBLL.Current.LoginByEmail(identifier, pass))
                 {
-                    OnSuccessfulLogin.Invoke();
+                    try
+                    {
+                        OnSuccessfulLogin.Invoke();
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
                     return true;
                 }
                 else
@@ -101,10 +108,14 @@ namespace BaseServices.Services
             {
                 if (SessionBLL.Current.LoginByUsername(identifier, pass))
                 {
-                    if(initialized)
+                    try
+                    {
                         OnSuccessfulLogin.Invoke();
-                    else
-                        initialized = true;
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
                     return true;
                 }
                 else

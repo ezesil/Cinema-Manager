@@ -75,7 +75,7 @@ namespace Cinema.UI
             var item = session.RegisterUser(user);
 
 
-            string autologinmode = "admin";
+            string autologinmode = "";
             var homeform = DependencyService.Get<Home>();
             var sessionService = DependencyService.Get<SessionService>();
             var languageService = DependencyService.Get<LanguageService>();

@@ -19,8 +19,8 @@ namespace Cinema.UI.Views
         private SessionService _sessionService;
 
         ControlTranslationService _controlTranslationService { get; set; }
-        public LoginPage(NavigationManager navigationManager, 
-            ControlTranslationService controlTranslationService, 
+        public LoginPage(NavigationManager navigationManager,
+            ControlTranslationService controlTranslationService,
             SessionService sessionService)
         {
             InitializeComponent();
@@ -36,7 +36,44 @@ namespace Cinema.UI.Views
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var res = _sessionService.TryLogin(TxtUserEmail.Text, TxtPassword.Text);
+            HideError();
+            TxtUserEmail.Enabled = false;
+            TxtPassword.Enabled = false;
+
+            Task.Delay(2000).Wait();
+            try
+            {
+                if (_sessionService.TryLogin(TxtUserEmail.Text, TxtPassword.Text))
+                {
+                    _navigationManager.NavigateTo<MainPage>();
+                }
+                else
+                {
+                    ShowError();
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowMessageBox(ex.Message);
+            }
+            TxtUserEmail.Enabled = true;
+            TxtPassword.Enabled = true;
+        }
+
+        private void HideError()
+        {
+            TxtError.Visible = false;
+        }
+
+        private void ShowError(string error = "Nombre de usuario o contraseña incorrectos.")
+        {
+            TxtError.Text = error;
+            TxtError.Visible = true;
+        }
+
+        private void ShowMessageBox(string text = "Ocurrió un error inesperado. Intente nuevamente en unos minutos.")
+        {
+            MessageBox.Show(text);
         }
 
         private void LoginPage_Load(object sender, EventArgs e)

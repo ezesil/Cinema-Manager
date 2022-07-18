@@ -45,7 +45,7 @@ namespace Cinema.UI.Views
 
             _navigationManager.SetHeaderContainer(splitContainer2.Panel2);
             _navigationManager.SetHeaderTitle("Inicio");
-            _navigationManager.Setup(this, splitContainer1.Panel2);
+            _navigationManager.Setup(this, splitContainer1.Panel1, splitContainer1.Panel2);
         }
 
         private void BotonInicio_Click(object sender, EventArgs e)
@@ -122,7 +122,7 @@ namespace Cinema.UI.Views
                 _navigationManager.ClearNavigationButtons();
                 _navigationManager.CreateButton(BotonInicio_Click, "BotonInicio", "text_home").Show();
                 _navigationManager.CreateButton(BtnGenerarTicket_Click, "BtnGenerarTicket", "text_generateticket").Show();
-                _navigationManager.CreateButton(BtnTickets_Click, "BtnTickets", "text_tickets").Show();
+                _navigationManager.CreateButton(BtnTickets_Click, "BtnTickets", "text_tickets").BringToFront();
                 _navigationManager.CreateButton(BtnSesiones_Click, "BtnSesiones", "text_sessions").Show();
                 _navigationManager.CreateButton(BtnSalas_Click, "BtnSalas", "text_rooms").Show();
                 _navigationManager.CreateButton(BtnPeliculas_Click, "BtnPeliculas", "text_movies").Show();

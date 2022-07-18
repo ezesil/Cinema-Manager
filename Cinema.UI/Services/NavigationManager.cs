@@ -14,7 +14,10 @@ namespace Cinema.UI.Services
     public class NavigationManager
     {
         private UserControl? _currentUserControl;
-        private SplitterPanel? _currentContainer;
+        private SplitterPanel? _userControlContainer;
+
+        //private UserControl? _currentNavMenuControl;
+        private SplitterPanel? _currentNavMenuContainer;
 
         private SplitterPanel? _currentHeaderContainer;
         private GenericHeader? _currentHeader;
@@ -26,12 +29,19 @@ namespace Cinema.UI.Services
         public delegate void OnNavigatedEvent();
         public event OnNavigatedEvent OnNavigated; 
 
-        public NavigationManager Setup(Home currentform, SplitterPanel container, UserControl? currentPanel = null)
+        public NavigationManager Setup(Home currentform, SplitterPanel navMenuContainer, SplitterPanel userControlContainer, UserControl? currentPanel = null)
         {          
-            _currentContainer = container;
+            _userControlContainer = userControlContainer;
             _currentUserControl = currentPanel;
             _currentForm = currentform;
             _currentButtons = new List<Button>();
+            _currentNavMenuContainer = navMenuContainer;
+
+            _currentNavMenuContainer.AutoScroll = true;
+            _currentNavMenuContainer.VerticalScroll.Visible = false;
+            _currentNavMenuContainer.HorizontalScroll.Enabled = false;
+            _currentNavMenuContainer.HorizontalScroll.Visible = false;
+
             return this;
         }
 
@@ -57,7 +67,7 @@ namespace Cinema.UI.Services
             var userControl = DependencyService.Get<T>();
 
             if (_currentUserControl == userControl
-                || _currentContainer == null
+                || _userControlContainer == null
                 || _currentHeaderContainer == null
                 || _currentHeader == null)
                 return null;
@@ -67,19 +77,19 @@ namespace Cinema.UI.Services
             userControl.Focus();
 
 
-            _currentContainer.Invoke((MethodInvoker)delegate
+            _userControlContainer.Invoke((MethodInvoker)delegate
             {
 
-                _currentContainer.Controls.Clear();
+                _userControlContainer.Controls.Clear();
 
                 _currentUserControl = userControl;
                 SetHeaderTitle(_currentUserControl.Name);
                 _currentUserControl.Visible = true;
 
-                _currentContainer.Controls.Add(userControl);
+                _userControlContainer.Controls.Add(userControl);
             });
 
-            OnNavigated.Invoke();
+            OnNavigated?.Invoke();
 
             return userControl;
         }
@@ -93,14 +103,11 @@ namespace Cinema.UI.Services
 
             foreach (var button in _currentButtons)
             {
-                button.Invoke((MethodInvoker)delegate
-                {
-                    if (button != currentbutton)
-                        EnableButton(button);
+                if (button != currentbutton)
+                    EnableButton(button);
 
-                    else
-                        DisableButton(button);
-                });
+                else
+                    DisableButton(button);
             }
         }
 
@@ -130,7 +137,7 @@ namespace Cinema.UI.Services
         {        
             if(_currentButtons == null || _currentButtons.Count == 0)
             {
-                var button = GetNavigationButton();
+                var button = GetNavigationButton(_currentButtons.Count);
                 button.Tag = buttontag;
                 button.Text = buttontag;
                 button.Name = name;
@@ -140,13 +147,14 @@ namespace Cinema.UI.Services
                 _currentButtons.Add(button);
                 button.Visible = true;
                 button.Enabled = true;
-                _currentForm.Controls.Add(button);
-                //_currentContainer.Controls.Add(button);
+                _currentNavMenuContainer.Controls.Add(button);
+                _currentNavMenuContainer.Show();
                 button.Show();
                 button.BringToFront();
                 if (colorOverride != null)
                     button.BackColor = (Color)colorOverride;
                 return button;
+                
             }
             else
             {
@@ -159,7 +167,8 @@ namespace Cinema.UI.Services
                 _currentButtons.Add(button);
                 button.Visible = true;
                 button.Enabled = true;
-                _currentForm.Controls.Add(button);
+                _currentNavMenuContainer.Controls.Add(button);
+                _currentNavMenuContainer.Show();
                 button.Show();
                 button.BringToFront();
                 if (colorOverride != null)
@@ -171,7 +180,7 @@ namespace Cinema.UI.Services
         private Button GetNavigationButton(int position = 0)
         {
             Button button = new Button();
-            button.Location = new Point(-2, 0 + (position * 50) + 90);
+            button.Location = new Point(-2, 0 + (position * 50));
             button.ForeColor = Color.Silver;
             button.Enabled = true;
             button.Size = new Size(162, 50);
@@ -194,7 +203,7 @@ namespace Cinema.UI.Services
         {
             foreach(var button in _currentButtons)
             {
-                _currentForm.Controls.Remove(button);
+                _currentNavMenuContainer.Controls.Remove(button);
             }
             _currentButtons.Clear();
         }

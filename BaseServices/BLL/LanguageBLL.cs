@@ -163,10 +163,12 @@ namespace BaseServices.BLL
         /// <param name="key"></param>
         /// <returns></returns>
         public static string GetTranslation(string lang, string key)
-        {
-            
+        {         
             try
             {
+                if (key == null)
+                    return null;
+
                 if(langs[lang].Keys.Contains<string>(key))
                     return langs[lang][key];
 

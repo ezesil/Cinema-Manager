@@ -12,17 +12,24 @@ namespace BaseServices.DAL.Repository.Sql.Adapter
     {
         public User Adapt(object[] values)
         {
-            return new User()
+            try
             {
-                Id = Guid.Parse(values[0].ToString()),
-                Username = (string)values[1],
-                Password = (string)values[2],
-                Email = (string)values[3],
-                Enabled = int.Parse(values[4].ToString()) == 1 ? true : false,
-                DVH = (int)values[5],
-                FullName = (string)values[6],
-                DNI = (string)values[7]
-            };
+                return new User()
+                {
+                    Id = Guid.Parse(values[0].ToString()),
+                    Username = (string)values[1],
+                    Password = (string)values[2],
+                    Email = (string)values[3],
+                    Enabled = int.Parse(values[4].ToString()) == 1 ? true : false,
+                    DVH = (int)values[5],
+                    FullName = (string)values[6],
+                    DNI = (string)values[7]
+                };
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
     }
 }

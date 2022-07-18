@@ -35,6 +35,7 @@
             this.TxtUserEmail = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.TxtError = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label3
@@ -106,10 +107,24 @@
             this.label4.Tag = "text_noaccount_contact_manager";
             this.label4.Text = "Si no posee una cuenta, contacte con su gerente a cargo";
             // 
+            // TxtError
+            // 
+            this.TxtError.AutoSize = true;
+            this.TxtError.BackColor = System.Drawing.SystemColors.Control;
+            this.TxtError.ForeColor = System.Drawing.Color.Red;
+            this.TxtError.Location = new System.Drawing.Point(30, 256);
+            this.TxtError.Name = "TxtError";
+            this.TxtError.Size = new System.Drawing.Size(242, 15);
+            this.TxtError.TabIndex = 12;
+            this.TxtError.Tag = "text_username";
+            this.TxtError.Text = "Nombre de usuario o contraseña incorrectos";
+            this.TxtError.Visible = false;
+            // 
             // LoginPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.TxtError);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
@@ -135,5 +150,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox TxtPassword;
+        private System.Windows.Forms.Label TxtError;
     }
 }
