@@ -70,7 +70,7 @@ namespace Cinema.UI.Views
 
         private void BtnSalas_Click(object sender, EventArgs e)
         {
-            _navigationManager.NavigateTo<SessionsPage>();
+            _navigationManager.NavigateTo<RoomsPage>();
         }
 
         private void BtnPeliculas_Click(object sender, EventArgs e)

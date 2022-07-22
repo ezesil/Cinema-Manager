@@ -236,6 +236,7 @@
             this.Controls.Add(this.label3);
             this.Name = "TicketsPage";
             this.Size = new System.Drawing.Size(1013, 486);
+            this.Load += new System.EventHandler(this.TicketsPage_Load);
             ((System.ComponentModel.ISupportInitialize)(this.GridPrincipal)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

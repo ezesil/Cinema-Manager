@@ -18,9 +18,9 @@ namespace Cinema.DAL.Repository.Sql
         private static string SelectQuery
         { get => "SELECT [guid_sala],[codigo_identificador],[es_pantalla_gigante],[es_3D],[activo] FROM [CinemaDB].[dbo].[Salas] where [guid_sala] = @Id"; }
         private static string InsertQuery
-        { get => "INSERT INTO [CinemaDB].[dbo].[Salas] ([codigo_identificador],[es_pantalla_gigante],[es_3D],[activo]) values (@Identifier, @HasBigPicture, @Has3D, @IsActive)"; }
+        { get => "INSERT INTO [CinemaDB].[dbo].[Salas] ([guid_sala], [codigo_identificador],[es_pantalla_gigante],[es_3D],[activo]) values (@Id, @Identifier, @HasBigScreen, @Has3D, @IsActive)"; }
         private static string UpdateQuery
-        { get => "UPDATE [CinemaDB].[dbo].[Salas] SET [codigo_identificador] = @Identifier,[es_pantalla_gigante] = @HasBigPicture,[es_3D] = @Has3D,[activo] = @IsActive where [guid_pelicula] = @Id"; }
+        { get => "UPDATE [CinemaDB].[dbo].[Salas] SET [codigo_identificador] = @Identifier,[es_pantalla_gigante] = @HasBigScreen,[es_3D] = @Has3D,[activo] = @IsActive where [guid_sala] = @Id"; }
 
 
         public RoomsRepository() : base(DeleteQuery, SelectAllQuery, SelectQuery, InsertQuery, UpdateQuery)
@@ -45,6 +45,7 @@ namespace Cinema.DAL.Repository.Sql
 
         public void Insert(Room obj)
         {
+            obj.Id = Guid.NewGuid();
             base.Insert(obj);
         }
 

@@ -1,4 +1,5 @@
-﻿using Cinema.Business;
+﻿using BaseServices.Services;
+using Cinema.Business;
 using Cinema.Domain;
 using Cinema.UI.Extensions;
 using System;
@@ -16,38 +17,32 @@ namespace Cinema.UI.Views
     public partial class RoomsPage : UserControl
     {
         private Guid? currentRoomGuid;
-
-        public RoomsPage()
+        private LanguageService _languageService;
+        public RoomsPage(LanguageService languageService)
         {
             InitializeComponent();
-            this.Name = "Peliculas";
+            _languageService = languageService;
+            this.Name = "text_rooms";
         }
 
-        private void MoviesPage_Load(object sender, EventArgs e)
+        private void RoomsPage_Load(object sender, EventArgs e)
         {
-            GridPrincipal.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            GridPrincipal.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            GridPrincipal.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            GridPrincipal.ReadOnly = true;
-            GridPrincipal.CellClick += GridCellClick;
+            GridPrincipal.SetupBehaviour(GridCellClick);
             ComboActivo.Items.Add("No");
             ComboActivo.Items.Add("Si");
-        }
-
-        private string GetCellValue(object sender, int index)
-        {
-            return (sender as DataGridView).SelectedRows[0]?.Cells[index]?.Value?.ToString();
         }
 
         private void GridCellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
-                currentRoomGuid = Guid.Parse(GetCellValue(sender, 0));
-                TxtIdentificador.Text = GetCellValue(sender, 1);
-                ComboPantallaGigante.SelectedIndex = bool.Parse(GetCellValue(sender, 2).ToString()) ? 1 : 0;
-                Combo3D.SelectedIndex = bool.Parse(GetCellValue(sender, 3).ToString()) ? 1 : 0;
-                ComboActivo.SelectedIndex = bool.Parse(GetCellValue(sender, 4).ToString()) ? 1 : 0;
+                var room = GridPrincipal.GetCellValues<Room>();
+
+                currentRoomGuid = room.Id;
+                TxtIdentificador.Text = room.Identifier;
+                ComboPantallaGigante.SelectedIndex = room.HasBigScreen ? 1 : 0;
+                Combo3D.SelectedIndex = room.Has3D ? 1 : 0;
+                ComboActivo.SelectedIndex = room.IsActive ? 1 : 0;
             }
             catch (Exception ex)
             {
@@ -55,15 +50,11 @@ namespace Cinema.UI.Views
             }
         }
 
-        private void LoadData(DataTable dt)
-        {
-            this.GridPrincipal.DataSource = null;
-            this.GridPrincipal.DataSource = dt;
-        }
-
         private void Actualizar_Click(object sender, EventArgs e)
         {
-            LoadData(GridViewAdapters.Adapt(RoomsBLL.Current.GetAllRooms()));
+            GridPrincipal.Clear();
+            RoomsBLL.Current.GetAllRooms().ForEach(x => GridPrincipal.Add(x));
+            GridPrincipal.UpdateNames<Room>(x => _languageService.TranslateCode(x));       
         }
 
         private void LimpiarCampos_Click(object sender, EventArgs e)
@@ -109,6 +100,5 @@ namespace Cinema.UI.Views
             RoomsBLL.Current.DeleteRoom(currentRoomGuid);
             BtnActualizar.PerformClick();
         }
-
     }
 }

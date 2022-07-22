@@ -49,7 +49,7 @@ namespace Cinema.UI.Views
 
             try
             {
-                if (true || _sessionService.UserIsNull || !_sessionService.UserHasPermission(PermissionType.Administrator))
+                if (false && (_sessionService.UserIsNull || !_sessionService.UserHasPermission(PermissionType.Administrator)))
                     throw new Exception("Intento de acceso ilegal a herramientas de permisos elevados.");
 
                 AddPanel(backupPanel);
@@ -102,6 +102,11 @@ namespace Cinema.UI.Views
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabControl1_SelectedIndexChanged_1(object sender, EventArgs e)
         {
 
         }

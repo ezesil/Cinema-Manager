@@ -39,7 +39,7 @@ namespace Cinema.UI.Views
             HideError();
             TxtUserEmail.Enabled = false;
             TxtPassword.Enabled = false;
-
+            button1.Enabled = false;
             Task.Delay(2000).Wait();
             try
             {
@@ -58,6 +58,7 @@ namespace Cinema.UI.Views
             }
             TxtUserEmail.Enabled = true;
             TxtPassword.Enabled = true;
+            button1.Enabled = true;
         }
 
         private void HideError()

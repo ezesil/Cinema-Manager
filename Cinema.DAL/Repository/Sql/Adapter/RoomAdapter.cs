@@ -12,7 +12,14 @@ namespace Cinema.DAL.Repository.Sql.Adapter
     {
         public Room Adapt(object[] values)
         {
-            throw new NotImplementedException();
+            return new Room()
+            {
+                Id = Guid.Parse(values[0]?.ToString()),
+                Identifier = values[1]?.ToString(),
+                HasBigScreen = (bool)values[2],
+                Has3D = (bool)values[3],
+                IsActive = (bool)values[4]
+            };
         }
     }
 }

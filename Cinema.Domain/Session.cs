@@ -12,5 +12,10 @@ namespace Cinema.Domain
         public DateTime Date { get; set; }
         public Guid? MovieId { get; set; }
         public Guid? RoomId { get; set; }
+
+        public override string ToString()
+        {
+            return Date.ToString();
+        }
     }
 }

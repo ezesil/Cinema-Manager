@@ -14,6 +14,5 @@ namespace Cinema.Domain
         public int? Seat { get; set; }
         public Guid? SessionId { get; set; }
         public Guid? CreatorUserId { get; set; }
-
     }
 }

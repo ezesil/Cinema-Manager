@@ -12,7 +12,13 @@ namespace Cinema.DAL.Repository.Sql.Adapter
     {
         public Session Adapt(object[] values)
         {
-            throw new NotImplementedException();
+            return new Session()
+            {
+                Id = Guid.Parse(values[0].ToString()),
+                Date = DateTime.Parse(values[1].ToString()),
+                MovieId = Guid.Parse(values[2].ToString()),
+                RoomId = Guid.Parse(values[3].ToString())
+            };
         }
     }
 }

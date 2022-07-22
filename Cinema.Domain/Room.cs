@@ -10,8 +10,13 @@ namespace Cinema.Domain
     {
         public Guid? Id { get; set; }
         public string Identifier { get; set; }
-        public bool HasBigScreen { get; set; }
-        public bool Has3D { get; set; }
-        public bool IsActive { get; set; }
+        public bool HasBigScreen { get; set; } = false;
+        public bool Has3D { get; set; } = false;
+        public bool IsActive { get; set; } = false;
+
+        public override string ToString()
+        {
+            return Identifier;
+        }
     }
 }

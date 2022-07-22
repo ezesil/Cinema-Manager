@@ -132,6 +132,7 @@ namespace Cinema.UI
                 if (debugmode == true)
                 {
                     sessionService.TryLogin("admin", "descargandomal33");
+                    homeform = DependencyService.Get<Home>();
                     Application.Run(homeform);
                 }
 

@@ -128,7 +128,8 @@ namespace Cinema.DAL.Repository.Sql
                 object[]? values = null;
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandType = CommandType.Text;                    
+                    cmd.Parameters.AddRange(GetParameters(parameters));
                     conn.Open();
                     using (reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
                     {

@@ -163,9 +163,11 @@
             // 
             // GridPrincipal
             // 
+            this.GridPrincipal.AllowUserToOrderColumns = true;
             this.GridPrincipal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.GridPrincipal.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.GridPrincipal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridPrincipal.Location = new System.Drawing.Point(23, 26);
             this.GridPrincipal.Name = "GridPrincipal";
@@ -219,6 +221,7 @@
             this.Controls.Add(this.GridPrincipal);
             this.Name = "RoomsPage";
             this.Size = new System.Drawing.Size(980, 428);
+            this.Load += new System.EventHandler(this.RoomsPage_Load);
             ((System.ComponentModel.ISupportInitialize)(this.GridPrincipal)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

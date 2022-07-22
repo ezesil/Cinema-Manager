@@ -40,7 +40,7 @@ namespace Cinema.Business
             return _repo.GetAll().ToList();
         }
 
-        public Movie GetMovie(Guid id)
+        public Movie GetMovie(Guid? id)
         {
             return _repo.GetOne(id);
         }

@@ -16,9 +16,9 @@ namespace Cinema.DAL.Repository.Sql
         private static string SelectAllQuery
         { get => "SELECT [guid_sesion],[fecha],[guid_pelicula],[guid_sala] FROM [CinemaDB].[dbo].[Sesiones]"; }
         private static string SelectQuery
-        { get => "SELECT [guid_sesion],[fecha],[guid_pelicula],[guid_sala] FROM [CinemaDB].[dbo].[Sesiones] where [guid_sesion] = @Id"; }
+        { get => "SELECT [guid_sesion],[fecha],[guid_pelicula],[guid_sala] FROM [CinemaDB].[dbo].[Sesiones] where [guid_sesion] = @Id"; } 
         private static string InsertQuery
-        { get => "INSERT INTO [CinemaDB].[dbo].[Sesiones] ([fecha],[guid_pelicula],[guid_sala]) values (@Date, @MovieId, @RoomId)";}
+        { get => "INSERT INTO [CinemaDB].[dbo].[Sesiones] ([guid_sesion],[fecha],[guid_pelicula],[guid_sala]) values (@Id, @Date, @MovieId, @RoomId)";}
         private static string UpdateQuery
         { get => "UPDATE [CinemaDB].[dbo].[Sesiones] SET [fecha] = @Date,[guid_pelicula] = @MovieId,[guid_sala] = @RoomId where [guid_sesion] = @Id"; }
 

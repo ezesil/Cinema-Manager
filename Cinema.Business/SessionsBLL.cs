@@ -9,57 +9,57 @@ using System.Threading.Tasks;
 
 namespace Cinema.Business
 {
-    public class RoomsBLL
+    public class SessionsBLL
     {
-        private readonly IGenericRepository<Room> _repo = FactoryDAL.RoomRepository;
+        private readonly IGenericRepository<Session> _repo = FactoryDAL.SessionRepository;
 
         #region Singleton
-        private static RoomsBLL _instance = new RoomsBLL();
+        private static SessionsBLL _instance = new SessionsBLL();
 
         /// <summary>
         /// Instancia actual de la clase.
         /// </summary>
-        public static RoomsBLL Current
+        public static SessionsBLL Current
         {
             get
             {
                 if (_instance == null)
-                    _instance = new RoomsBLL();
+                    _instance = new SessionsBLL();
 
                 return _instance;
             }
         }
 
-        private RoomsBLL()
+        private SessionsBLL()
         {
 
         }
         #endregion
 
 
-        public List<Room> GetAllRooms()
+        public List<Session> GetAllSessions()
         {
             return _repo.GetAll().ToList();
         }
 
-        public Room GetRoom(Guid? id)
+        public Session GetSession(Guid id)
         {
             return _repo.GetOne(id);
         }
 
-        public void CreateRoom(Room room)
+        public void CreateSession(Session session)
         {
-            _repo.Insert(room);
+            _repo.Insert(session);
         }
 
-        public void UpdateRoom(Room room)
+        public void UpdateSession(Session session)
         {
-            _repo.Update(room);
+            _repo.Update(session);
         }
 
-        public void DeleteRoom(Guid? roomid)
+        public void DeleteSession(Guid? id)
         {
-            _repo.Delete(roomid);
+            _repo.Delete(id);
         }
 
     }
