@@ -12,33 +12,37 @@ using System.Threading.Tasks;
 
 namespace BaseServices.DAL.Repository.Sql
 {
-    internal class RolRepository : SqlRepository<Rol, RolAdapter>, IGenericRepository<Rol>
+    internal class RolRepository : SqlRepository<Rol, RolAdapter>, IGenericRepository<Rol, int>
     {
-        // TODO: Necesita rediseño
         #region Statements
         private static string InsertQuery
         {
-            get => "INSERT INTO [dbo].[Rol] (id_rol, permisos, nombre_rol) VALUES (@Id, @permisos, @nombre_rol)";
+            get => "INSERT INTO [dbo].[Roles] (id_rol, nombre_rol) VALUES (@Id, @Nombre)";
         }
 
         private static string UpdateQuery
         {
-            get => "UPDATE [dbo].[Rol] SET permisos = @permisos, nombre_rol = @nombre_rol WHERE id_rol = @id_rol";
+            get => "UPDATE [dbo].[Roles] SET nombre_rol = @nombre_rol WHERE id_rol = @Id";
         }
 
         private static string DeleteQuery
         {
-            get => "DELETE FROM [dbo].[Rol] WHERE id_rol = @id_rol";
+            get => "DELETE FROM [dbo].[Roles] WHERE id_rol = @Id";
         }
 
         private static string SelectQuery
         {
-            get => "SELECT id_rol, permisos, nombre_rol FROM [dbo].[Rol] WHERE id_rol = @id_rol";
+            get => "SELECT id_rol, nombre_rol FROM [dbo].[Roles] WHERE id_rol = @Id";
         }
 
         private static string SelectAllQuery
         {
-            get => "SELECT id_rol, nombre_rol, permisos FROM [dbo].[Rol]";
+            get => "SELECT id_rol, nombre_rol FROM [dbo].[Roles]";
+        }
+
+        private static string SelectAllByUserQuery
+        {
+            get => "SELECT id_rol, nombre_rol FROM [dbo].[Roles]";
         }
         #endregion
 
@@ -49,10 +53,11 @@ namespace BaseServices.DAL.Repository.Sql
         {
         }
 
-        public void Insert(Rol obj) => base.Insert(obj);
-        public void Update(Rol obj) => base.Update(obj);
+        public int Insert(Rol obj) => base.Insert(obj);
+        public int Update(Rol obj) => base.Update(obj);
         public IEnumerable<Rol> GetAll() => base.GetAll();
-        public Rol GetOne(Guid guid) => base.GetOne(new { Id = guid });
-        public void Delete(Guid guid) => base.Delete(new { Id = guid });
+        public IEnumerable<Rol> GetAll(object args = null) => base.GetAll(args, SelectAllByUserQuery);
+        public Rol GetOne(int Id) => base.GetOne(new { Id });
+        public int Delete(int Id) => base.Delete(new { Id });
     }
 }

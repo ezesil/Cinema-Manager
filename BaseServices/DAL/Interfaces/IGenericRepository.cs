@@ -9,19 +9,19 @@ namespace BaseServices.DAL.Interfaces
     /// <summary>
     /// Interfaz para repositorios genericos.
     /// </summary>
-    internal interface IGenericRepository<T> where T: class, new()
+    internal interface IGenericRepository<T, TMainId> where T: class, new()
     {
         /// <summary>
         /// Inserta un objeto en el repositorio.
         /// </summary>
         /// <param name="o"></param>
-        void Insert(T o);
+        int Insert(T o);
 
         /// <summary>
         /// Actualiza un registro en el repositorio.
         /// </summary>
         /// <param name="o"></param>
-        void Update(T o);
+        int Update(T o);
 
         /// <summary>
         /// Obtiene todos los registros del repositorio.
@@ -30,17 +30,23 @@ namespace BaseServices.DAL.Interfaces
         IEnumerable<T> GetAll();
 
         /// <summary>
+        /// Obtiene todos los registros del repositorio con argumentos extra.
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<T> GetAll(object args = null);
+
+        /// <summary>
         /// Obtiene un registro del repositorio.
         /// </summary>
         /// <param name="g"></param>
         /// <returns></returns>
-        T GetOne(Guid g);
+        T GetOne(TMainId g);
 
         /// <summary>
         /// Elimina un registro del repositorio.
         /// </summary>
         /// <param name="g"></param>
-        void Delete(Guid g);
+        int Delete(TMainId g);
 
 
     }

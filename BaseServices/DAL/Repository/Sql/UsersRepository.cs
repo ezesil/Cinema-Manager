@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BaseServices.DAL.Repository.Sql
 {
-    public class UsersRepository : SqlRepository<User, UserAdapter>, IUserRepository<User>
+    public class UsersRepository : SqlRepository<User, UserAdapter>, IGenericRepository<User, Guid>, IUserRepository
     {
         private static string DeleteQuery 
         { get => "DELETE * FROM USERS WHERE guid_usuario = @Usuario"; }
@@ -37,9 +37,11 @@ namespace BaseServices.DAL.Repository.Sql
         {    
         }
 
-        public User Select(Guid guid) => base.GetOne(new { Id = guid });
+        public User GetOne(Guid guid) => base.GetOne(new { Id = guid });
 
-        public IEnumerable<User> SelectAll() => base.GetAll();
+        public IEnumerable<User> GetAll() => base.GetAll();
+
+        public IEnumerable<User> GetAll(object args = null) => base.GetAll(args);
 
         public int Insert(User obj) => base.Insert(obj);
 

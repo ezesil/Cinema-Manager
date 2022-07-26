@@ -9,88 +9,154 @@ using System.Threading.Tasks;
 namespace BaseServices.Domain
 {
     /// <summary>
-    /// Representa un permiso utilizado para control de acceso a formularios.
-    /// </summary>
-    /// <summary>
     /// Tipos de permisos.
     /// </summary>
-    public enum PermissionType
+    public enum Permission
     {
-
+        /// <summary>
+        /// Permiso vacío
+        /// </summary>
         None,
 
         /// <summary>
-        /// Permisos de administrador del sistema.
+        /// Permiso para pagina inicio
         /// </summary>
-        [Description("Cinema.Administrator")]
-        Administrator,
+        [Description("Cinema.MainPage")]
+        MainPage,
 
         /// <summary>
-        /// Permisos del gerente del sistema.
+        /// Permiso para pagina de creacion de tickets
         /// </summary>
-        [Description("Cinema.Manager")]
-        Manager,
+        [Description("Cinema.CreateTicketPage")]
+        CreateTicketPage,
 
         /// <summary>
-        /// Permisos del recepcionista del sistema.
+        /// Permiso para pagina de gestion de peliculas
         /// </summary>
-        [Description("Cinema.Receptionist")]
-        Receptionist,
+        [Description("Cinema.MoviesPage")]
+        MoviesPage,
+
+        /// <summary>
+        /// Permiso para pagina de registro
+        /// </summary>
+        [Description("Cinema.RegisterPage")]
+        RegisterPage,
+
+        /// <summary>
+        /// Permiso para pagina de gestion de salas
+        /// </summary>
+        [Description("Cinema.RoomsPage")]
+        RoomsPage,
+
+        /// <summary>
+        /// Permiso para pagina de gestion de sesiones
+        /// </summary>
+        [Description("Cinema.SessionsPage")]
+        SessionsPage,
+
+        /// <summary>
+        /// Permiso para pagina de gestion de tickets
+        /// </summary>
+        [Description("Cinema.TicketsPage")]
+        TicketsPage,
+
+        /// <summary>
+        /// Permiso para pagina de administrador del sistema
+        /// </summary>
+        [Description("Cinema.AdminPanel")]
+        AdminPanel,
+
+        /// <summary>
+        /// Permiso para pagina de backups
+        /// </summary>
+        [Description("Cinema.Administrator.BackupPanel")]
+        BackupPanel,
+
+        /// <summary>
+        /// Permiso para pagina de gestion de digito verificador
+        /// </summary>
+        [Description("Cinema.Administrator.CheckerDigitPanel")]
+        CheckerDigitPanel,
+
+        /// <summary>
+        /// Permiso para pagina de gestion de lenguajes
+        /// </summary>
+        [Description("Cinema.Administrator.LanguagesPanel")]
+        LanguagesPanel,
+
+        /// <summary>
+        /// Permiso para pagina de logs 
+        /// </summary>
+        [Description("Cinema.Administrator.LogsPanel")]
+        LogsPanel,
+
+        /// <summary>
+        /// Permiso para pagina de gestion de permisos
+        /// </summary>
+        [Description("Cinema.Administrator.PermissionsPanel")]
+        PermissionsPanel,
+
+        /// <summary>
+        /// Permiso para pagina de digito verificador
+        /// </summary>
+        [Description("Cinema.Administrator.RolesPanel")]
+        RolesPanel,
+
+        /// <summary>
+        /// Permiso para pagina de digito verificador
+        /// </summary>
+        [Description("Cinema.Administrator.UsersPanel")]
+        UsersPanel
     }
+    public static class PermissionTranslator
+    {
+        public static Dictionary<string, Permission?> permissions = new Dictionary<string, Permission?>();
+
+        public static Permission? GetPermissionType(string code)
+        {
+            return permissions[code] != null ? permissions[code] : Permission.None;
+        }
+
+        static PermissionTranslator()
+        {
+            foreach (Permission perm in Enum.GetValues(typeof(Permission)))
+            {
+                permissions.Add(perm.ToTextCode(), perm);
+            }
+        }
+    }
+
     public class Permiso
     {
-        Dictionary<string, PermissionType> permissions;
-
-        /// <summary>
-        /// Constructor que recibe un codigo de permiso como parametro.
-        /// </summary>
-        /// <param name="permission"></param>
-        public Permiso(PermissionType permission)
+        public Permiso()
         {
-            SetupPermissions();
-            Type = permission;
+
+        }
+
+        public Permiso(int id, string code)
+        {
+            Id = id;
+            Codigo = code;
+            PermissionType = PermissionTranslator.GetPermissionType(code);
+        }
+
+        public Permiso(int id, Permission permission)
+        {
+            Id = id;
             Codigo = permission.ToTextCode();
+            PermissionType = permission;
         }
-
-        /// <summary>
-        /// Constructor que recibe un codigo de permiso como parametro.
-        /// </summary>
-        /// <param name="permission"></param>
-        public Permiso(string permission)
-        {
-            SetupPermissions();
-            Type = permissions[permission];
-            Codigo = permission;
-        }
-
-        /// <summary>
-        /// Representa un codigo unico de permiso
-        /// </summary>
-        public PermissionType Type { get; private set; }
 
         /// <summary>
         /// Representa un codigo unico interno de permiso
         /// </summary>
-        public string Codigo { get; private set; }
+        public string Codigo { get; set; }
 
-        private void SetupPermissions()
-        {
-            foreach (PermissionType type in Enum.GetValues(typeof(PermissionType)))
-            {
-                permissions = new Dictionary<string, PermissionType>();
-                permissions.Add(type.ToTextCode(), type);
-            }
-
-        }
+        public Permission? PermissionType { get; }
 
         /// <summary>
-        /// Permite obtener un permiso a partir de su codigo de texto.
+        /// Codigo unico de permiso
         /// </summary>
-        /// <param name="code"></param>
-        /// <returns></returns>
-        public PermissionType GetPermissionType(string code)
-        {
-            return permissions[code];
-        }
+        public int Id { get; set; }
     }
 }

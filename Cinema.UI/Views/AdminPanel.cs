@@ -49,16 +49,24 @@ namespace Cinema.UI.Views
 
             try
             {
-                if (false && (_sessionService.UserIsNull || !_sessionService.UserHasPermission(PermissionType.Administrator)))
+                if (false || (_sessionService.UserIsNull || !_sessionService.UserHasPermission(Permission.AdminPanel)))
                     throw new Exception("Intento de acceso ilegal a herramientas de permisos elevados.");
 
-                AddPanel(backupPanel);
-                AddPanel(permissionsPanel);
-                AddPanel(rolesPanel);
-                AddPanel(usersPanel);
-                AddPanel(checkerDigitPanel);
-                AddPanel(languagesPanel);
-                AddPanel(logsPanel);
+                if (true || _sessionService.UserHasPermission(Permission.BackupPanel))
+                    AddPanel(backupPanel);
+                if (true || _sessionService.UserHasPermission(Permission.PermissionsPanel))
+                    AddPanel(permissionsPanel);
+                if (true || _sessionService.UserHasPermission(Permission.RolesPanel))
+                    AddPanel(rolesPanel);
+                if (true || _sessionService.UserHasPermission(Permission.UsersPanel))
+                    AddPanel(usersPanel);
+                if (true || _sessionService.UserHasPermission(Permission.CheckerDigitPanel))
+                    AddPanel(checkerDigitPanel);
+                if (true || _sessionService.UserHasPermission(Permission.LanguagesPanel))
+                    AddPanel(languagesPanel);
+                if (true || _sessionService.UserHasPermission(Permission.LogsPanel))
+                    AddPanel(logsPanel);
+
             }
             catch (Exception ex)
             {

@@ -116,7 +116,6 @@ namespace Cinema.UI.Views
 
         public void MenuOnLogin()
         {
-            //if (_sessionService.UserHasPermission(Permission.Administrator))
             if (true)
             {
                 _navigationManager.ClearNavigationButtons();
@@ -132,33 +131,34 @@ namespace Cinema.UI.Views
                 _navigationManager.CreateButton(BtnExit_Click, "BtnExit", "text_exit").Show();
                 _navigationManager.NavigateTo<MainPage>();
             }
-            else if (_sessionService.UserHasPermission(PermissionType.Manager))
-            {
-                _navigationManager.ClearNavigationButtons();
-                _navigationManager.CreateButton(BotonInicio_Click, "BotonInicio", "text_home").Show();
+
+            _navigationManager.CreateButton(BotonInicio_Click, "BotonInicio", "text_home").Show();
+
+            if (_sessionService.UserHasPermission(Permission.CreateTicketPage))
                 _navigationManager.CreateButton(BtnGenerarTicket_Click, "BtnGenerarTicket", "text_generateticket").Show();
+
+            if (_sessionService.UserHasPermission(Permission.TicketsPage))
                 _navigationManager.CreateButton(BtnTickets_Click, "BtnTickets", "text_tickets").Show();
+
+            if (_sessionService.UserHasPermission(Permission.SessionsPage))
                 _navigationManager.CreateButton(BtnSesiones_Click, "BtnSesiones", "text_sessions").Show();
+
+            if (_sessionService.UserHasPermission(Permission.RoomsPage))
                 _navigationManager.CreateButton(BtnSalas_Click, "BtnSalas", "text_rooms").Show();
+
+            if (_sessionService.UserHasPermission(Permission.MoviesPage))
                 _navigationManager.CreateButton(BtnPeliculas_Click, "BtnPeliculas", "text_movies").Show();
-                _navigationManager.CreateButton(BtnLogout_Click, "BtnLogout", "text_logout").Show();
-                _navigationManager.CreateButton(BtnExit_Click, "BtnExit", "text_exit").Show();
-                _navigationManager.NavigateTo<MainPage>();
-            }
-            else if (_sessionService.UserHasPermission(PermissionType.Receptionist))
-            {
-                _navigationManager.ClearNavigationButtons();
-                _navigationManager.CreateButton(BotonInicio_Click, "BotonInicio", "text_home").Show();
-                _navigationManager.CreateButton(BtnGenerarTicket_Click, "BtnGenerarTicket", "text_generateticket").Show();
-                _navigationManager.CreateButton(BtnTickets_Click, "BtnTickets", "text_tickets").Show();
-                _navigationManager.CreateButton(BtnLogout_Click, "BtnLogout", "text_logout").Show();
-                _navigationManager.CreateButton(BtnExit_Click, "BtnExit", "text_exit").Show();
-                _navigationManager.NavigateTo<MainPage>();
-            }
-            else
-            {
-                throw new Exception("Usuario sin permisos");
-            }
+
+            if (_sessionService.UserHasPermission(Permission.AdminPanel))
+                _navigationManager.CreateButton(BtnAdministracion_Click, "BtnAdministracion", "text_administration").Show();
+
+            if (_sessionService.UserHasPermission(Permission.RegisterPage))
+                _navigationManager.CreateButton(BtnRegistrarUsuario_Click, "BtnRegistrarUSuario", "text_registeruser").Show();
+
+            _navigationManager.CreateButton(BtnLogout_Click, "BtnLogout", "text_logout").Show();
+            _navigationManager.CreateButton(BtnExit_Click, "BtnExit", "text_exit").Show();
+
+            _navigationManager.NavigateTo<MainPage>();
 
         }
 

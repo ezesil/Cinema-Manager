@@ -52,7 +52,7 @@ namespace BaseServices.DAL.Factory
         /// <summary>
         /// Instancia del repositorio de Personas para los servicios de base.
         /// </summary>
-        public static IUserRepository<User> UserRepository { get; private set; }
+        public static IUserRepository UserRepository { get; private set; }
 
         /// <summary>
         /// Instancia del repositorio del servicio de soporte de multi-lenguaje.
@@ -67,8 +67,9 @@ namespace BaseServices.DAL.Factory
         /// <summary>
         /// Instancia del repositorio de permisos.
         /// </summary>
-        public static IGenericRepository<Rol> RolRepository { get; private set; }
+        public static IGenericRepository<Rol, int> RolRepository { get; private set; }
 
+        public static IGenericRepository<Permiso, int> PermisoRepository { get; private set; }
 
         static FactoryDAL()
         {
@@ -78,11 +79,11 @@ namespace BaseServices.DAL.Factory
             JsonRepository = ApplicationSettings.Instance.JsonRepository;
 
 
-            RolRepository = CreateInstance<IGenericRepository<Rol>>("BaseServices." + BaseSqlRepository + ".RolRepository");
+            RolRepository = CreateInstance<IGenericRepository<Rol, int>>("BaseServices." + BaseSqlRepository + ".RolRepository");
             BackupRestoreRepository = CreateInstance<IBackupRestoreRepository>("BaseServices." + BaseSqlRepository + ".BackupRestoreRepository");
             DVVRepository = CreateInstance<IGenericDVVRepository>("BaseServices." + BaseSqlRepository + ".DVVRepository");
             LanguageRepository = CreateInstance<ILanguageRepository>("BaseServices." + JsonRepository + ".LanguageRepository");
-            UserRepository = CreateInstance<IUserRepository<User>>("BaseServices." + BaseSqlRepository + ".UsersRepository");
+            UserRepository = CreateInstance<IUserRepository>("BaseServices." + BaseSqlRepository + ".UsersRepository");
             FileLogRepository = CreateInstance<IGenericLogRepository<Log>>("BaseServices." + FileRepository + ".FileRepository");
             SqlLogRepository = CreateInstance<IGenericLogRepository<Log>>("BaseServices." + SqlLogRepositorio + ".LogRepository");
 

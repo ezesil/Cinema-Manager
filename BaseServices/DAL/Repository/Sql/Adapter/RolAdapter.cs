@@ -12,7 +12,11 @@ namespace BaseServices.DAL.Repository.Sql.Adapter
     {
         public Rol Adapt(object[] values)
         {
-            return new Rol(Convert.ToInt32(values[0].ToString()), values[1].ToString(), values[2].ToString());
+            return new Rol()
+            {
+                Id = (int)values[0],
+                Nombre = (string)values[1]
+            };
         }
     }
 }

@@ -141,33 +141,12 @@ namespace BaseServices.Services
         /// </summary>
         /// <param name="CodigoPermiso"></param>
         /// <returns>Retorna un booleano indicando si el usuario posee o no los permisos. Retorna siempre false si no hay usuario logeado en el sistema.</returns>
-        public bool UserHasPermission(PermissionType CodigoPermiso)
+        public bool UserHasPermission(Permission CodigoPermiso)
         {
             if (UserIsNull)
                 return false;
 
             return PermissionBLL.Current.HasRight(CodigoPermiso);
-        }
-
-        /// <summary>
-        /// Comprueba si el usuario posee todos los permisos especificados.
-        /// </summary>
-        /// <param name="CodigoPermiso"></param>
-        /// <returns>Retorna un valor booleando indicando si posee los permisos necesarios.</returns>
-        //public bool HasPermission(Permission[] CodigoPermiso)
-        //{
-        //    List<Permiso> permisos = new List<Permiso>();
-        //    foreach (var item in CodigoPermiso)
-        //    {
-        //        permisos.Add(new Permiso(PermissionExtractor.GetDescription(item)));
-        //    }
-
-
-        //    if (SessionService.Current.UserIsNull)
-        //        return false;
-
-        //    return PermissionManager.Current.HasRight(permisos);
-        //}
-
+        }       
     }
 }

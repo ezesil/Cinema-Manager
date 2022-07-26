@@ -10,11 +10,16 @@ namespace BaseServices.BLL
     internal class SessionBLL
     {
         ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
+
         Services.Logger _logger = ServiceContainer.Get<Services.Logger>();
 
-        IUserRepository<User> repo = DAL.Factory.FactoryDAL.UserRepository;
+        IGenericRepository<User, Guid> repo = DAL.Factory.FactoryDAL.UserRepository as IGenericRepository<User, Guid>;
 
-        List<Permiso> permisos = new List<Permiso>();
+        IGenericRepository<Rol, int> _rolrepo = DAL.Factory.FactoryDAL.RolRepository;
+
+        IGenericRepository<Permiso, int> _permisorepo = DAL.Factory.FactoryDAL.PermisoRepository;
+
+        List<Rol> userRoles = new List<Rol>();
 
         private User CurrentUserData;
 
@@ -35,7 +40,7 @@ namespace BaseServices.BLL
 
         private SessionBLL()
         {
-            repo = BaseServices.DAL.Factory.FactoryDAL.UserRepository;
+
         }
         #endregion
 
@@ -78,14 +83,29 @@ namespace BaseServices.BLL
         // <summary>
         // Obtiene un listado de los permisos del usuario actual.Retorna null si no hay usuario logeado en el sistema.
         // </summary>
-        public List<Permiso> CurrentUserPermissions
+        public List<Rol> CurrentUserRoles
         {
             get
             {
                 if (this.UserIsNull)
                     return null;
 
-                return permisos;
+                return userRoles;
+            }
+        }
+
+        // <summary>
+        // Obtiene un listado de los permisos del usuario actual.Retorna null si no hay usuario logeado en el sistema.
+        // </summary>
+        public List<Permiso> CurrentUserPermissions
+        {
+            get
+            {
+                if (this.UserIsNull)
+                    return null;
+                var perms = new List<Permiso>();
+                userRoles.ForEach(role => perms.AddRange(role.Permisos));
+                return perms;
             }
         }
 
@@ -114,7 +134,7 @@ namespace BaseServices.BLL
 
             try
             {
-                var user = repo.SelectUserDataByEmailAddress(correo);
+                var user = (repo as IUserRepository).SelectUserDataByEmailAddress(correo);
 
                 if (user == null)
                 {
@@ -123,6 +143,7 @@ namespace BaseServices.BLL
 
                 if (HashingService.Current.VerificarContraseña(password, user.Password))
                 {
+                    SetupRoles(user);
                     user.Email = user.Email;
                     CurrentUserData = user;
                     return true;
@@ -150,7 +171,7 @@ namespace BaseServices.BLL
         {
             try
             {
-                var user = repo.SelectUserDataByUsername(usuario);
+                var user = (repo as IUserRepository).SelectUserDataByUsername(usuario);
 
                 if (user == null)
                 {
@@ -159,6 +180,7 @@ namespace BaseServices.BLL
 
                 if (HashingService.Current.VerificarContraseña(password, user.Password))
                 {
+                    SetupRoles(user);
                     user.Email = user.Email;
                     CurrentUserData = user;
                     return true;
@@ -195,14 +217,20 @@ namespace BaseServices.BLL
             }
         }
 
+        private void SetupRoles(User user)
+        {
+            userRoles = _rolrepo.GetAll(new { UserId = user.Id }).ToList();
+            userRoles.ForEach(rol => rol.Permisos = _permisorepo.GetAll(new { IdRol = rol.Id }).ToList());
+        }
+
         public List<User> GetAllUsers()
         {
-            return repo.SelectAll().ToList();
+            return repo.GetAll().ToList();
         }
 
         public User GetUser(Guid Id)
         {
-            return repo.Select(Id);
+            return repo.GetOne(Id);
         }
 
         public bool Logout()

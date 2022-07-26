@@ -34,13 +34,13 @@ namespace Cinema.UI.Views
             };
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
             HideError();
             TxtUserEmail.Enabled = false;
             TxtPassword.Enabled = false;
             button1.Enabled = false;
-            Task.Delay(2000).Wait();
+            await Task.Delay(2000);
             try
             {
                 if (_sessionService.TryLogin(TxtUserEmail.Text, TxtPassword.Text))

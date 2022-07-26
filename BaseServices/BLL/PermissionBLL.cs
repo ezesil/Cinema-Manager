@@ -21,7 +21,10 @@ namespace BaseServices.BLL
         Services.Logger _logger = ServiceContainer.Get<Services.Logger>();
         SessionService _sessionService = ServiceContainer.Get<SessionService>();
 
-        private readonly IGenericRepository<Rol> repoperm = FactoryDAL.RolRepository;
+        private readonly IGenericRepository<Rol, int> _rolrepo = FactoryDAL.RolRepository;
+        private readonly IGenericRepository<Permiso, int> _permrepo = FactoryDAL.PermisoRepository;
+
+
 
         #region Singleton
         private readonly static PermissionBLL _instance = new PermissionBLL();
@@ -48,7 +51,7 @@ namespace BaseServices.BLL
         /// </summary>
         /// <param name="P"></param>
         /// <returns></returns>
-        public bool HasRight(PermissionType P)
+        public bool HasRight(Permission P)
         {
             return true;
             if (SessionBLL.Current.UserIsNull)
@@ -58,7 +61,7 @@ namespace BaseServices.BLL
 
             foreach (Permiso permiso in SessionBLL.Current.CurrentUserPermissions)
             {
-                if (P == permiso.Type)
+                if (P == permiso.PermissionType)
                 {
                     return true;
                 }
@@ -80,6 +83,7 @@ namespace BaseServices.BLL
             }
 
             int counter = 0;
+
             foreach (Permiso permiso in SessionBLL.Current.CurrentUserPermissions)
             {
                 foreach (Permiso permiso2 in P)
@@ -103,7 +107,7 @@ namespace BaseServices.BLL
         /// <returns></returns>
         public List<Rol> ObtenerListaDeRoles()
         {
-            return repoperm.GetAll().ToList();
+            return _rolrepo.GetAll().ToList();
         }
 
         /// <summary>
@@ -111,7 +115,7 @@ namespace BaseServices.BLL
         /// </summary>
         public void ModificarRol(Rol R)
         {
-            repoperm.Update(R);
+            _rolrepo.Update(R);
         }
         
         // select all, select one, insert, delete, update
@@ -119,9 +123,9 @@ namespace BaseServices.BLL
         /// Obtiene la informacion de un rol a partir de su ID.
         /// </summary>
         /// <param name="id"></param>
-        public Rol ObtenerRol(Guid id)
+        public Rol ObtenerRol(int id)
         {
-            return repoperm.GetOne(id);
+            return _rolrepo.GetOne(id);
         }
 
         /// <summary>
@@ -130,16 +134,16 @@ namespace BaseServices.BLL
         /// <param name="R"></param>
         public void CrearRol(Rol R)
         {
-            repoperm.Insert(R);
+            _rolrepo.Insert(R);
         }
 
         /// <summary>
         /// Permite eliminar un rol del sistema.
         /// </summary>
         /// <param name="id"></param>
-        public void EliminarRol(Guid id)
+        public void EliminarRol(int id)
         {
-            repoperm.Delete(id);
+            _rolrepo.Delete(id);
         }
     }    
 }

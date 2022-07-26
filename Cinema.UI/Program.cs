@@ -64,17 +64,6 @@ namespace Cinema.UI
 
             var session = ServiceContainer.Get<SessionService>();
 
-            var user = new User(
-                Guid.NewGuid(),
-                "admin",
-                "administrador",
-                "correo@correo.com",
-                "nombrecompleto",
-                "400000000");
-
-            var item = session.RegisterUser(user);
-
-
             string autologinmode = "";
             var homeform = DependencyService.Get<Home>();
             var sessionService = DependencyService.Get<SessionService>();

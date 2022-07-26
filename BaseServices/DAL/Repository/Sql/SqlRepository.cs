@@ -82,7 +82,7 @@ namespace BaseServices.DAL.Repository.Sql
             }
         }
 
-        public virtual IEnumerable<TEntity> GetAll(string queryOverride = "")
+        public virtual IEnumerable<TEntity> GetAll(object parameters = null, string queryOverride = "")
         {
             var query = SelectAllQuery;
             if (queryOverride != null && queryOverride != "")
@@ -95,6 +95,8 @@ namespace BaseServices.DAL.Repository.Sql
             SqlDataReader reader;
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
+                if (parameters != null)
+                    cmd.Parameters.AddRange(SqlRepository.GetParameters(parameters));
                 cmd.CommandType = CommandType.Text;
                 conn.Open();
                 using (reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))

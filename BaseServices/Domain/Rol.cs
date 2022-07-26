@@ -1,6 +1,7 @@
 ﻿using BaseServices.BLL;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,87 +26,63 @@ namespace BaseServices.Domain
         /// </summary>
         /// <param name="id">ID del rol.</param>
         /// <param name="nombre">Nombre del rol.</param>
-        /// <param name="rights">Lista de permisos de tipo Permiso.PermissionType.</param>
-        public Rol(int id, string nombre, List<Permiso> rights)
+        /// <param name="permisos">Lista de permisos de tipo Permiso.PermissionType.</param>
+        public Rol(int id, string nombre, List<Permiso> permisos)
         {
-            IdRol = id;
-            NombreRol = nombre;
-            PermisoList = rights;
+            Id = id;
+            Nombre = nombre;
+            Permisos = permisos;
         }
-
-        /// <summary>
-        /// Constructor que recibe un entero, un string y un listado de permisos como parametro.
-        /// </summary>
-        /// <param name="id">ID del rol.</param>
-        /// <param name="nombre">Nombre del rol.</param>
-        /// <param name="rights">Lista de permisos de tipo Permiso.PermissionType.</param>
-        public Rol(int id, string nombre, string rights)
-        {
-            IdRol = id;
-            NombreRol = nombre;
-            PermisosString = rights;
-        }
-
-        /// <summary>
-        /// Atributo interno para los permisos en formato string.
-        /// </summary>
-        private string _permisos = "";
-
-        /// <summary>
-        /// Lista interna de permisos en formato de objetos Permiso.
-        /// </summary>
-        private List<Permiso> _permissions = new List<Permiso>();
-
-        /// <summary>
-        /// Listado de permisos pertenecientes a un rol.
-        /// </summary>
-        public List<Permiso> PermisoList
-        {
-            get
-            {
-                return _permissions;
-            }
-            private set
-            {
-                _permissions = value;
-
-                for (int i = 0; i < value.Count - 2; i++)
-                {
-                    _permisos += value[i].Codigo + ";";
-                }
-
-                _permisos += value[value.Count - 1];
-
-            }
-        }
-
-        /// <summary>
-        /// Permisos pertenecientes al rol en formato string.
-        /// </summary>
-        public string PermisosString
-        {
-            get
-            {
-                return _permisos;
-            }
-            private set
-            {
-                _permisos = value;
-                foreach (string item in value.Split(';'))
-                {
-                    _permissions.Add(new Permiso(item));
-                }
-            }
-        }
-
-        /// <summary>
-        /// Nombre perteneciente al rol.
-        /// </summary>
-        public string NombreRol { get; private set; }
 
         /// <summary>
         /// ID perteneciente al Rol.
         /// </summary>
-        public int IdRol { get; private set; }
+        public int Id { get; set; }
+
+        /// <summary>
+        /// Nombre perteneciente al rol.
+        /// </summary>
+        public string Nombre { get; set; }
+
+        /// <summary>
+        /// Listado de permisos pertenecientes a un rol.
+        /// </summary>
+        public List<Permiso> Permisos { get; set; }
+    }
+
+    /// <summary>
+    /// Representa un permiso utilizado para control de acceso a formularios.
+    /// </summary>
+    /// <summary>
+    /// Tipos de permisos.
+    /// </summary>
+    public enum RoleType
+    {
+
+        None,
+
+        /// <summary>
+        /// Rol de administrador del sistema.
+        /// </summary>
+        [Description("Cinema.Administrator")]
+        Administrator,
+
+        /// <summary>
+        /// Rol del gerente del sistema.
+        /// </summary>
+        [Description("Cinema.Manager")]
+        Manager,
+
+        /// <summary>
+        /// Rol del recepcionista del sistema.
+        /// </summary>
+        [Description("Cinema.Receptionist")]
+        Receptionist,
+
+        /// <summary>
+        /// Rol del testing del sistema.
+        /// </summary>
+        [Description("Cinema.Test")]
+        Test
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BaseServices.DAL.Factory;
+using BaseServices.DAL.Interfaces;
 using BaseServices.Domain;
 using BaseServices.Services;
 using System;
@@ -16,11 +17,15 @@ namespace BaseServices.BLL
     /// </summary>
     internal class CheckDigitBLL
     {
+        readonly int USERS_ENTITY_ID = 100;
 
         ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
         Services.Logger _logger = ServiceContainer.Get<Services.Logger>();
 
-        private static List<User> PersonasConFallos = new List<User>();
+        IUserRepository _userrepo = FactoryDAL.UserRepository;
+        IGenericDVVRepository _dvvrepo = FactoryDAL.DVVRepository;
+
+        private List<User> PersonasConFallos = new List<User>();
 
         #region Singleton
         private static CheckDigitBLL _instance = new CheckDigitBLL();
@@ -122,7 +127,7 @@ namespace BaseServices.BLL
         private bool CheckUsersIntegrity(List<User> personas)
         {
             List<decimal> L = new List<decimal>();
-            int DVV = FactoryDAL.DVVRepository.SelectOne(100);
+            int DVV = _dvvrepo.SelectOne(USERS_ENTITY_ID);
 
             foreach (var persona in personas)
             {
@@ -148,7 +153,7 @@ namespace BaseServices.BLL
         /// <returns>Retorna un valor booleano.</returns>
         public bool CheckIntegrity()
         {
-            var listapersonas = FactoryDAL.UserRepository.SelectAll().ToList();
+            var listapersonas = (_userrepo as IGenericRepository<User, Guid>).GetAll().ToList();
 
             if (CheckAccountsIntegrity(listapersonas) == true && CheckUsersIntegrity(listapersonas) == true)
                 return true;
@@ -164,7 +169,7 @@ namespace BaseServices.BLL
         {
             List<decimal> numeros = new List<decimal>();
 
-            foreach (var c in FactoryDAL.UserRepository.SelectAll().ToList())
+            foreach (var c in (_userrepo as IGenericRepository<User, Guid>).GetAll().ToList())
             {
                 numeros.Add(Convert.ToDecimal(c.DVH));
             }
@@ -178,10 +183,11 @@ namespace BaseServices.BLL
         /// <param name="c"></param>
         public void UpdateDVH(Guid Id)
         {
-            var user = FactoryDAL.UserRepository.Select(Id);
-            FactoryDAL.UserRepository.UpdateDVH(Id, Convert.ToInt32(CalcularDVH(user)));
+            var user = (_userrepo as IGenericRepository<User, Guid>).GetOne(Id);
 
-            UpdateDVV(100);
+            _userrepo.UpdateDVH(Id, Convert.ToInt32(CalcularDVH(user)));
+
+            UpdateDVV(USERS_ENTITY_ID);
         }
 
         /// <summary>
@@ -198,7 +204,7 @@ namespace BaseServices.BLL
             foreach (PropertyInfo prop in props)
             {
                 if(prop.Name.ToLower() != "dvh" || prop.Name.ToLower().Contains("dvh"))
-                    sb.Append($"{prop.Name}:{prop.GetValue(obj, null)}");
+                    sb.Append($"{ prop.Name }:{ prop.GetValue(obj) }\n");
             }
 
             return CalculateDVH(sb.ToString());

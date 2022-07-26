@@ -21,8 +21,7 @@ namespace BaseServices.Services.Extensions
                     .SingleOrDefault()
                     as DescriptionAttribute;
 
-            return attribute?.Description ?? e.ToString();
-            
+            return attribute?.Description ?? e.ToString();            
         }       
     }
 }
