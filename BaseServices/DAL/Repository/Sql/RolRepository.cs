@@ -17,12 +17,12 @@ namespace BaseServices.DAL.Repository.Sql
         #region Statements
         private static string InsertQuery
         {
-            get => "INSERT INTO [dbo].[Roles] (id_rol, nombre_rol) VALUES (@Id, @Nombre)";
+            get => "INSERT INTO [dbo].[Roles] (nombre_rol) VALUES (@Nombre)";
         }
 
         private static string UpdateQuery
         {
-            get => "UPDATE [dbo].[Roles] SET nombre_rol = @nombre_rol WHERE id_rol = @Id";
+            get => "UPDATE [dbo].[Roles] SET nombre_rol = @Nombre WHERE id_rol = @Id";
         }
 
         private static string DeleteQuery
@@ -42,7 +42,8 @@ namespace BaseServices.DAL.Repository.Sql
 
         private static string SelectAllByUserQuery
         {
-            get => "SELECT id_rol, nombre_rol FROM [dbo].[Roles]";
+            get => 
+                "SELECT rr.id_rol, rr.nombre_rol FROM [dbo].[Roles] rr JOIN [dbo].[UsuariosXRoles] ur ON ur.guid_usuario = @UserId AND ur.id_rol = rr.id_rol";
         }
         #endregion
 

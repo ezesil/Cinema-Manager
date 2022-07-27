@@ -15,12 +15,12 @@ namespace BaseServices.DAL.Repository.Sql
         #region Statements
         private static string InsertQuery
         {
-            get => "INSERT INTO [dbo].[Permisos] (id_permiso, codigo_permiso) VALUES (@Id, @Nombre)";
+            get => "INSERT INTO [dbo].[Permisos] (codigo_permiso) VALUES (@Codigo)";
         }
 
         private static string UpdateQuery
         {
-            get => "UPDATE [dbo].[Permisos] SET nombre_rol = @codigo_permiso WHERE id_permiso = @Id";
+            get => "UPDATE [dbo].[Permisos] SET codigo_permiso = @Codigo WHERE id_permiso = @Id";
         }
 
         private static string DeleteQuery

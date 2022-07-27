@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace BaseServices.DAL.Repository.Sql
 {
-    internal class RolPermisoRepository : SqlRepository<RolPermisoRelation, RolePermissionAdapter>, IGenericRepository<RolPermisoRelation, int>
+    internal class RolPermisoRepository : SqlRepository<RolPermisoRelation, RolePermissionAdapter>, IRolPermisoRepository
     {
         private static string DeleteQuery
-        { get => "DELETE * FROM [CinemaDB].[dbo].[RolesXPermisos] WHERE id_rol = @IdRol AND id_permiso = @IdPermiso"; }     
+        { get => "DELETE FROM [CinemaDB].[dbo].[RolesXPermisos] WHERE id_rol = @IdRol AND id_permiso = @IdPermiso"; }     
         private static string SelectAllQuery
         { get => "SELECT [id_rol], [id_permiso] FROM [CinemaDB].[dbo].[RolesXPermisos]"; }
         private static string SelectAllByRoleQuery
@@ -68,6 +68,10 @@ namespace BaseServices.DAL.Repository.Sql
             throw new NotImplementedException();
         }
 
+        public int Delete(RolPermisoRelation R)
+        {
+            return base.Delete(new { IdRol = R.IdRol, IdPermiso = R.IdPermiso });
+        }
 
         //public int DeletePermission(int IdRol, int IdPermiso) => base.Delete(new { IdRol, IdPermiso });
         //public int DeletePermissions(List<RolPermisoRelation> permisos)

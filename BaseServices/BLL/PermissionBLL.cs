@@ -21,10 +21,7 @@ namespace BaseServices.BLL
         Services.Logger _logger = ServiceContainer.Get<Services.Logger>();
         SessionService _sessionService = ServiceContainer.Get<SessionService>();
 
-        private readonly IGenericRepository<Rol, int> _rolrepo = FactoryDAL.RolRepository;
         private readonly IGenericRepository<Permiso, int> _permrepo = FactoryDAL.PermisoRepository;
-
-
 
         #region Singleton
         private readonly static PermissionBLL _instance = new PermissionBLL();
@@ -101,49 +98,60 @@ namespace BaseServices.BLL
                 return false;
         }
 
+
         /// <summary>
         /// TODO: Implementar.
         /// </summary>
         /// <returns></returns>
-        public List<Rol> ObtenerListaDeRoles()
+        public List<Permiso> ObtenerListaDePermisos()
         {
-            return _rolrepo.GetAll().ToList();
+            return _permrepo.GetAll().ToList();
         }
+
+        /// <summary>
+        /// TODO: Implementar.
+        /// </summary>
+        /// <returns></returns>
+        public List<Permiso> ObtenerListaDePermisos(Rol r)
+        {
+            return _permrepo.GetAll(new { IdRol = r.Id }).ToList();
+        }
+
 
         /// <summary>
         /// Permite modificar el registro de un Rol.
         /// </summary>
-        public void ModificarRol(Rol R)
+        public void ModificarPermiso(Permiso R)
         {
-            _rolrepo.Update(R);
+            _permrepo.Update(R);
         }
-        
+
         // select all, select one, insert, delete, update
         /// <summary>
         /// Obtiene la informacion de un rol a partir de su ID.
         /// </summary>
         /// <param name="id"></param>
-        public Rol ObtenerRol(int id)
+        public Permiso ObtenerPermiso(int id)
         {
-            return _rolrepo.GetOne(id);
+            return _permrepo.GetOne(id);
         }
 
         /// <summary>
         /// Permite crear un rol del sistema.
         /// </summary>
         /// <param name="R"></param>
-        public void CrearRol(Rol R)
+        public void CrearPermiso(Permiso R)
         {
-            _rolrepo.Insert(R);
+            _permrepo.Insert(R);
         }
 
         /// <summary>
         /// Permite eliminar un rol del sistema.
         /// </summary>
         /// <param name="id"></param>
-        public void EliminarRol(int id)
+        public void EliminarPermiso(int id)
         {
-            _rolrepo.Delete(id);
+            _permrepo.Delete(id);
         }
     }    
 }

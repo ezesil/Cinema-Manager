@@ -26,10 +26,28 @@ namespace Cinema.UI.Extensions
             grid.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
             grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            grid.DataBindingComplete += BindingComplete;
             grid.ReadOnly = true;
 
             if (cellClickEvent != null)
                 grid.CellClick += cellClickEvent;
+        }
+
+        private static void BindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            try
+            {
+                var grid = (sender as DataGridView);
+
+                for(int i = 0; i < grid.Columns.Count-1; i++)
+                {
+                    grid.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         private static TOut GetTuple<TOut>(params object[] values)
@@ -183,6 +201,15 @@ namespace Cinema.UI.Extensions
                     dt.Columns.Add(prop.Name);
                 }
 
+                var row = new List<string>();
+
+                foreach (var prop in props)
+                {
+                    row.Add(prop.GetValue(obj).ToString());
+                }
+
+                dt.Rows.Add(row.ToArray());
+
                 grid.DataSource = null;
                 grid.DataSource = dt;
             }
@@ -192,6 +219,13 @@ namespace Cinema.UI.Extensions
 
                 foreach (var prop in props)
                 {
+                    var value = prop.GetValue(obj);
+                    if (value == null)
+                    {
+                        row.Add("");
+                        continue;
+                    }
+
                     row.Add(prop.GetValue(obj).ToString());
                 }
 
@@ -231,7 +265,7 @@ namespace Cinema.UI.Extensions
                 int i = 0;
                 foreach (DataColumn column in columns)
                 {
-                    if(func != null)
+                    if (func != null)
                         column.ColumnName = GetDescription<T>(props[i].Name);
                     else
                         column.ColumnName = func?.Invoke(GetDescription<T>(props[i].Name));

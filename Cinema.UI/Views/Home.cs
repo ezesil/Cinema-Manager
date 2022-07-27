@@ -45,7 +45,7 @@ namespace Cinema.UI.Views
 
             _navigationManager.SetHeaderContainer(splitContainer2.Panel2);
             _navigationManager.SetHeaderTitle("Inicio");
-            _navigationManager.Setup(this, splitContainer1.Panel1, splitContainer1.Panel2);
+            _navigationManager.Setup(this, splitContainer1.Panel1, splitContainer1.Panel2, _sessionService);
         }
 
         private void BotonInicio_Click(object sender, EventArgs e)
@@ -55,32 +55,32 @@ namespace Cinema.UI.Views
 
         private void BtnGenerarTicket_Click(object sender, EventArgs e)
         {
-            _navigationManager.NavigateTo<CreateTicketPage>();
+            _navigationManager.NavigateTo<CreateTicketPage>(x => x.UserHasPermission(Permission.CreateTicketPage));
         }
 
         private void BtnTickets_Click(object sender, EventArgs e)
         {
-            _navigationManager.NavigateTo<TicketsPage>();
+            _navigationManager.NavigateTo<TicketsPage>(x => x.UserHasPermission(Permission.TicketsPage));
         }
 
         private void BtnSesiones_Click(object sender, EventArgs e)
         {
-            _navigationManager.NavigateTo<SessionsPage>();
+            _navigationManager.NavigateTo<SessionsPage>(x => x.UserHasPermission(Permission.SessionsPage));
         }
 
         private void BtnSalas_Click(object sender, EventArgs e)
         {
-            _navigationManager.NavigateTo<RoomsPage>();
+            _navigationManager.NavigateTo<RoomsPage>(x => x.UserHasPermission(Permission.RoomsPage));
         }
 
         private void BtnPeliculas_Click(object sender, EventArgs e)
         {
-            _navigationManager.NavigateTo<MoviesPage>();
+            _navigationManager.NavigateTo<MoviesPage>(x => x.UserHasPermission(Permission.MoviesPage));
         }
 
         private void BtnAdministracion_Click(object sender, EventArgs e)
         {
-            _navigationManager.NavigateTo<AdminPanel>();
+            _navigationManager.NavigateTo<AdminPanel>(x => x.UserHasPermission(Permission.AdminPanel));
         }
 
         private void BtnLogin_Click(object sender, EventArgs e)
@@ -116,21 +116,7 @@ namespace Cinema.UI.Views
 
         public void MenuOnLogin()
         {
-            if (true)
-            {
-                _navigationManager.ClearNavigationButtons();
-                _navigationManager.CreateButton(BotonInicio_Click, "BotonInicio", "text_home").Show();
-                _navigationManager.CreateButton(BtnGenerarTicket_Click, "BtnGenerarTicket", "text_generateticket").Show();
-                _navigationManager.CreateButton(BtnTickets_Click, "BtnTickets", "text_tickets").BringToFront();
-                _navigationManager.CreateButton(BtnSesiones_Click, "BtnSesiones", "text_sessions").Show();
-                _navigationManager.CreateButton(BtnSalas_Click, "BtnSalas", "text_rooms").Show();
-                _navigationManager.CreateButton(BtnPeliculas_Click, "BtnPeliculas", "text_movies").Show();
-                _navigationManager.CreateButton(BtnAdministracion_Click, "BtnAdministracion", "text_administration").Show();
-                _navigationManager.CreateButton(BtnRegistrarUsuario_Click, "BtnRegistrarUSuario", "text_registeruser").Show();
-                _navigationManager.CreateButton(BtnLogout_Click, "BtnLogout", "text_logout").Show();
-                _navigationManager.CreateButton(BtnExit_Click, "BtnExit", "text_exit").Show();
-                _navigationManager.NavigateTo<MainPage>();
-            }
+            _navigationManager.ClearNavigationButtons();
 
             _navigationManager.CreateButton(BotonInicio_Click, "BotonInicio", "text_home").Show();
 
@@ -158,8 +144,7 @@ namespace Cinema.UI.Views
             _navigationManager.CreateButton(BtnLogout_Click, "BtnLogout", "text_logout").Show();
             _navigationManager.CreateButton(BtnExit_Click, "BtnExit", "text_exit").Show();
 
-            _navigationManager.NavigateTo<MainPage>();
-
+            _navigationManager.NavigateTo<MainPage>(x => x.UserHasPermission(Permission.MainPage));
         }
 
         private void BtnRegistrarUsuario_Click(object? sender, EventArgs e)

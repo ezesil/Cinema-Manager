@@ -27,10 +27,15 @@ namespace Cinema.UI.Services
         private List<Button>? _currentButtons;
 
         public delegate void OnNavigatedEvent();
-        public event OnNavigatedEvent OnNavigated; 
+        public event OnNavigatedEvent OnNavigated;
 
-        public NavigationManager Setup(Home currentform, SplitterPanel navMenuContainer, SplitterPanel userControlContainer, UserControl? currentPanel = null)
-        {          
+        public delegate void BeforeNavigatingEvent();
+        public event BeforeNavigatingEvent BeforeNavigating;
+
+        private SessionService _sessionService;
+
+        public NavigationManager Setup(Home currentform, SplitterPanel navMenuContainer, SplitterPanel userControlContainer, SessionService sessionService = null, UserControl? currentPanel = null)
+        {
             _userControlContainer = userControlContainer;
             _currentUserControl = currentPanel;
             _currentForm = currentform;
@@ -41,6 +46,8 @@ namespace Cinema.UI.Services
             _currentNavMenuContainer.VerticalScroll.Visible = false;
             _currentNavMenuContainer.HorizontalScroll.Enabled = false;
             _currentNavMenuContainer.HorizontalScroll.Visible = false;
+
+            _sessionService = sessionService;
 
             return this;
         }
@@ -62,8 +69,23 @@ namespace Cinema.UI.Services
             _currentHeader.SetHeaderTitle(name);
         }
 
-        public T? NavigateTo<T>(object? args = null) where T : UserControl
+        public T? NavigateTo<T>(object? args) where T : UserControl
         {
+            return NavigateTo<T>(null, args);
+        }
+
+        public T? NavigateTo<T>(Func<SessionService, bool> canNavigateVerifier = null, object? args = null) where T : UserControl
+        {
+            if(canNavigateVerifier != null && _sessionService != null)
+            {
+                if (!canNavigateVerifier.Invoke(_sessionService))
+                {
+                    NavigateTo<MainPage>();
+                    throw new Exception("El verificador especificado no arrojó un resultado positivo.");
+                }
+            }
+
+
             var userControl = DependencyService.Get<T>();
 
             if (_currentUserControl == userControl
@@ -134,8 +156,8 @@ namespace Cinema.UI.Services
         }
 
         public Button CreateButton(EventHandler handler, string name, string buttontag = "", Color? colorOverride = null)
-        {        
-            if(_currentButtons == null || _currentButtons.Count == 0)
+        {
+            if (_currentButtons == null || _currentButtons.Count == 0)
             {
                 var button = GetNavigationButton(_currentButtons.Count);
                 button.Tag = buttontag;
@@ -143,7 +165,7 @@ namespace Cinema.UI.Services
                 button.Name = name;
                 button.Click += handler;
                 button.Click += SetSelectedButton;
-                DisableButton(button);             
+                DisableButton(button);
                 _currentButtons.Add(button);
                 button.Visible = true;
                 button.Enabled = true;
@@ -154,7 +176,7 @@ namespace Cinema.UI.Services
                 if (colorOverride != null)
                     button.BackColor = (Color)colorOverride;
                 return button;
-                
+
             }
             else
             {
@@ -201,7 +223,7 @@ namespace Cinema.UI.Services
 
         public void ClearNavigationButtons()
         {
-            foreach(var button in _currentButtons)
+            foreach (var button in _currentButtons)
             {
                 _currentNavMenuContainer.Controls.Remove(button);
             }

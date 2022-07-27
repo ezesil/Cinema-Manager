@@ -31,6 +31,7 @@ namespace Cinema.UI
             services.AddSingleton<HashingService>();
             services.AddSingleton<LanguageService>();
             services.AddSingleton<Logger>();
+            services.AddSingleton<RolePermissionManagementService>();
 
             // Servicios de la UI
             services.AddSingleton<NavigationManager>();

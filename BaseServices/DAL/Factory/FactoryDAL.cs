@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BaseServices.DAL.Interfaces;
 using ApplicationSettings = BaseServices.Domain.ApplicationSettings;
 using BaseServices.Domain;
+using BaseServices.DAL.Repository.Sql;
 
 namespace BaseServices.DAL.Factory
 {
@@ -71,6 +72,8 @@ namespace BaseServices.DAL.Factory
 
         public static IGenericRepository<Permiso, int> PermisoRepository { get; private set; }
 
+        public static IRolPermisoRepository RolPermisoRepository { get; private set; }
+
         static FactoryDAL()
         {
             FileRepository = ApplicationSettings.Instance.FileRepository;
@@ -78,7 +81,8 @@ namespace BaseServices.DAL.Factory
             BaseSqlRepository = ApplicationSettings.Instance.BaseSqlRepository;
             JsonRepository = ApplicationSettings.Instance.JsonRepository;
 
-
+            RolPermisoRepository = CreateInstance<IRolPermisoRepository> ("BaseServices." + BaseSqlRepository + ".RolPermisoRepository");
+            PermisoRepository = CreateInstance<IGenericRepository< Permiso, int>> ("BaseServices." + BaseSqlRepository + ".PermisoRepository");
             RolRepository = CreateInstance<IGenericRepository<Rol, int>>("BaseServices." + BaseSqlRepository + ".RolRepository");
             BackupRestoreRepository = CreateInstance<IBackupRestoreRepository>("BaseServices." + BaseSqlRepository + ".BackupRestoreRepository");
             DVVRepository = CreateInstance<IGenericDVVRepository>("BaseServices." + BaseSqlRepository + ".DVVRepository");

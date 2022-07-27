@@ -114,7 +114,12 @@ namespace BaseServices.Domain
 
         public static Permission? GetPermissionType(string code)
         {
-            return permissions[code] != null ? permissions[code] : Permission.None;
+            return permissions.TryGetValue(code, out Permission? perm) ? perm : null;
+        }
+
+        public static bool Exists(string code)
+        {
+            return permissions.TryGetValue(code, out Permission? perm);
         }
 
         static PermissionTranslator()
@@ -148,15 +153,15 @@ namespace BaseServices.Domain
         }
 
         /// <summary>
-        /// Representa un codigo unico interno de permiso
+        /// Codigo unico de permiso
         /// </summary>
-        public string Codigo { get; set; }
+        public int Id { get; set; }
 
         public Permission? PermissionType { get; }
 
         /// <summary>
-        /// Codigo unico de permiso
+        /// Representa un codigo unico interno de permiso
         /// </summary>
-        public int Id { get; set; }
+        public string Codigo { get; set; }
     }
 }

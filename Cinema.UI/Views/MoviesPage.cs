@@ -48,10 +48,7 @@ namespace Cinema.UI.Views
                 var Activo,
                 var Duracion
                 ) = GridPrincipal.GetCellValues<(Guid, string, string, string, bool, string)>();
-
-                
-               var test = GridPrincipal.GetCellValues<Movie>();
-
+               
                 currentMovieGuid = MovieGuid;
                 TxtNombre.Text = Nombre;
                 TxtIdioma.Text = Idioma;

@@ -21,8 +21,6 @@ namespace BaseServices.Services
 
         private IntegrityService _checkerDigitService => ServiceContainer.Get<IntegrityService>();
 
-        private bool initialized = false;
-
         public SessionService()
         {
 

@@ -68,7 +68,7 @@ namespace BaseServices.DAL.Repository.Sql
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.Parameters.AddRange(SqlRepository.GetParameters(parameters));
+                        cmd.Parameters.AddRange(SqlRepository.GetParameters(parameters, query));
 
                         conn.Open();
                         return cmd.ExecuteNonQuery();
@@ -96,7 +96,7 @@ namespace BaseServices.DAL.Repository.Sql
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
                 if (parameters != null)
-                    cmd.Parameters.AddRange(SqlRepository.GetParameters(parameters));
+                    cmd.Parameters.AddRange(SqlRepository.GetParameters(parameters, query));
                 cmd.CommandType = CommandType.Text;
                 conn.Open();
                 using (reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
@@ -218,7 +218,7 @@ namespace BaseServices.DAL.Repository.Sql
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.Parameters.AddRange(SqlRepository.GetParameters(parameters));
+                        cmd.Parameters.AddRange(SqlRepository.GetParameters(parameters, query));
 
                         conn.Open();
                         return cmd.ExecuteNonQuery();
