@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,37 +26,42 @@ namespace Cinema.UI.AdminViews
 
         private void BtnExaminarBackup_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "*.bak | Archivos de copia de seguridad";
-            saveFileDialog.Title = _languageService.TranslateCode("text_save_backup");
-            saveFileDialog.RestoreDirectory = true;
+            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
 
-            if (saveFileDialog.ShowDialog() != DialogResult.OK || saveFileDialog.ShowDialog() != DialogResult.Yes)
-                return;
-            if (saveFileDialog.CheckPathExists)
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
-                _backupServices.BackupDatabase(ComboDb.Text, saveFileDialog.FileName);
+                BtnBackup.Enabled = ComboDb.SelectedIndex != -1 ? true : false;
+                TxtBackup.Text = folderBrowserDialog.SelectedPath;               
             }
         }
 
         private void BtnExaminarRestore_Click(object sender, EventArgs e)
         {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Archivos de copia de seguridad | *.bak";
 
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                TxtRestore.Text = ofd.FileName;
+                BtnRestore.Enabled = ComboDb.SelectedIndex != -1 ? true : false;
+
+            }
         }
 
         private void BtnBackup_Click(object sender, EventArgs e)
         {
-
+            _backupServices.BackupDatabase(ComboDb.Text, TxtBackup.Text);
         }
 
         private void BtnRestore_Click(object sender, EventArgs e)
         {
-
+            _backupServices.RestoreDatabase(ComboDb.Text, TxtRestore.Text);
         }
 
         private void ComboDb_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            BtnExaminarBackup.Enabled = ComboDb.SelectedIndex != -1 ? true : false;
+            BtnExaminarRestore.Enabled = ComboDb.SelectedIndex != -1 ? true : false;
         }
     }
 }

@@ -21,6 +21,11 @@ namespace BaseServices.Domain
         protected readonly string _SqlConnString;
 
         /// <summary>
+        /// String de conexión de Sql Server para base master.
+        /// </summary>
+        protected readonly string _MasterConnString;
+
+        /// <summary>
         /// String que indica la ubicacion de los repositorios de archivos.
         /// </summary>
         protected readonly string _FileRepository;
@@ -85,14 +90,15 @@ namespace BaseServices.Domain
             _repository = ConfigurationManager.AppSettings["Repository"];
             _SqlLogRepository = ConfigurationManager.AppSettings["SqlLogs"];
             _FilePath = ConfigurationManager.AppSettings["FilePath"];
-            _SqlLogConnString = ConfigurationManager.ConnectionStrings["SqlLogConnString"].ConnectionString;
-            _SqlConnString = ConfigurationManager.ConnectionStrings["MainConString"].ConnectionString;
             _FileRepository = ConfigurationManager.AppSettings["FileRepository"].ToString();
             _SqlRepository = ConfigurationManager.AppSettings["SqlServerRepository"].ToString();
             _JsonRepository = ConfigurationManager.AppSettings["JsonRepository"].ToString();
             _LastLanguage = ConfigurationManager.AppSettings["LastLang"].ToString();
             _BaseSqlRepository = ConfigurationManager.AppSettings["BaseSqlServerRepository"].ToString();
 
+            _SqlLogConnString = ConfigurationManager.ConnectionStrings["SqlLogConnString"].ConnectionString;
+            _SqlConnString = ConfigurationManager.ConnectionStrings["MainConString"].ConnectionString;
+            _MasterConnString = ConfigurationManager.ConnectionStrings["MasterConnString"].ConnectionString;
 
         }
 
@@ -233,6 +239,17 @@ namespace BaseServices.Domain
             get
             {
                 return _BaseSqlRepository;
+            }
+        }
+
+        /// <summary>
+        /// String de conexión de Sql Server para base master.
+        /// </summary>
+        public string MasterConnString
+        {
+            get 
+            { 
+                return _MasterConnString; 
             }
         }
     }

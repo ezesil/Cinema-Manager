@@ -294,10 +294,12 @@ namespace BaseServices.DAL.Repository.Sql
             return parameters.ToArray();
         }
 
-        public static bool ExecuteStoreProcedure(object parameters, string storedName)
+        public static bool ExecuteStoreProcedure(object parameters, string storedName, string connectionString = null)
         {
             Object[] values;
-            using (SqlConnection conn = new SqlConnection(connString))
+            var connstring = connectionString ?? connString;
+
+            using (SqlConnection conn = new SqlConnection(connstring))
             {
                 using (SqlCommand cmd = new SqlCommand(storedName, conn))
                 {

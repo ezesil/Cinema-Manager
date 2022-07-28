@@ -1,4 +1,5 @@
 ﻿using BaseServices.DAL.Interfaces;
+using BaseServices.Domain;
 using BaseServices.Services;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,7 @@ namespace BaseServices.DAL.Repository.Sql
         {
             try
             {
-                return SqlRepository.ExecuteStoreProcedure(new {name, path}, BackupStatement);
+                return SqlRepository.ExecuteStoreProcedure(new {name, path}, BackupStatement, ApplicationSettings.Instance.MasterConnString);
             }
 
             catch (Exception ex)
@@ -47,7 +48,7 @@ namespace BaseServices.DAL.Repository.Sql
         {
             try
             {
-                return SqlRepository.ExecuteStoreProcedure(new { name, path }, RestoreStatement);
+                return SqlRepository.ExecuteStoreProcedure(new { name, path }, RestoreStatement, ApplicationSettings.Instance.MasterConnString);
             }
 
             catch(Exception ex)

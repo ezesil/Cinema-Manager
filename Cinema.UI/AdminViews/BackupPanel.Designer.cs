@@ -97,6 +97,7 @@
             // 
             // BtnExaminarBackup
             // 
+            this.BtnExaminarBackup.Enabled = false;
             this.BtnExaminarBackup.ForeColor = System.Drawing.Color.Black;
             this.BtnExaminarBackup.Location = new System.Drawing.Point(354, 114);
             this.BtnExaminarBackup.Name = "BtnExaminarBackup";
@@ -109,6 +110,7 @@
             // 
             // BtnExaminarRestore
             // 
+            this.BtnExaminarRestore.Enabled = false;
             this.BtnExaminarRestore.ForeColor = System.Drawing.Color.Black;
             this.BtnExaminarRestore.Location = new System.Drawing.Point(354, 208);
             this.BtnExaminarRestore.Name = "BtnExaminarRestore";
@@ -130,6 +132,7 @@
             // 
             // BtnRestore
             // 
+            this.BtnRestore.Enabled = false;
             this.BtnRestore.ForeColor = System.Drawing.Color.Black;
             this.BtnRestore.Location = new System.Drawing.Point(60, 237);
             this.BtnRestore.Name = "BtnRestore";
@@ -142,6 +145,7 @@
             // 
             // BtnBackup
             // 
+            this.BtnBackup.Enabled = false;
             this.BtnBackup.ForeColor = System.Drawing.Color.Black;
             this.BtnBackup.Location = new System.Drawing.Point(60, 143);
             this.BtnBackup.Name = "BtnBackup";
