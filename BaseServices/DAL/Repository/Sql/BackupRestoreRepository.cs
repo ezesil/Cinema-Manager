@@ -18,12 +18,12 @@ namespace BaseServices.DAL.Repository.Sql
         #region Statements
         private string BackupStatement
         {
-            get => "dbo.BackupDB";
+            get => "master.dbo.BackupDB";
         }
 
         private string RestoreStatement
         {
-            get => "dbo.RestoreDB";
+            get => "master.dbo.RestoreDB";
         }
 
         #endregion

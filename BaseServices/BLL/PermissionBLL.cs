@@ -50,7 +50,9 @@ namespace BaseServices.BLL
         /// <returns></returns>
         public bool HasRight(Permission P)
         {
-            return true;
+            if (_sessionService.CurrentUser == "admin")
+                return true;
+
             if (SessionBLL.Current.UserIsNull)
             {
                 return false;

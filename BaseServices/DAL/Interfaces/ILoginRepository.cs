@@ -11,7 +11,7 @@ namespace BaseServices.DAL.Interfaces
     /// Interfaz para los repositorios de cuentas de usuario.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IUserRepository
+    internal interface IUserRepository : IGenericRepository<User, Guid>
     {           
         /// <summary>
         /// Obtiene los datos personales del usuario utilizando su nombre de usuario.

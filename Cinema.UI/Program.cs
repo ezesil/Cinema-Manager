@@ -73,6 +73,19 @@ namespace Cinema.UI
 
             languageService.SetLanguage("es");
 
+
+            //var user = new User()
+            //{
+            //    Id = Guid.NewGuid(),
+            //    Username = "admin",
+            //    Password = "administrador",
+            //    Email = "admin@admin.com",
+            //    FullName = "nombre",
+            //    Enabled = true,         
+            //    DNI = "40000000",
+            //};
+            //sessionService.RegisterUser(user);
+
             // Evita el chequeo si es true
             bool chequeo = true;
             // modo de pruebas, si algo falla se logea como admin

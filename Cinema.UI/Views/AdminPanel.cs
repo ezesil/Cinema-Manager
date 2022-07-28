@@ -84,14 +84,17 @@ namespace Cinema.UI.Views
             _logsPanel = logsPanel;
         }
 
-        private void AddPanel(UserControl panel)
+        private TabPage AddPanel(UserControl panel)
         {
+            panel.AutoScroll = true;
             TabPage tp = new TabPage(panel.Name);
             tp.ForeColor = Color.Black;
+            tp.AutoScroll = true;
             tp.Font = new Font("Arial", 9 , FontStyle.Bold);
             panel.Dock = DockStyle.Fill;
             tabControl1.TabPages.Add(tp);
             tp.Controls.Add(panel);
+            return tp;
         }
 
         private void AdminPanel_Load(object sender, EventArgs e)
