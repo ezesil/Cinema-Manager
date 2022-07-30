@@ -1,6 +1,7 @@
 ﻿using BaseServices.Domain;
 using BaseServices.Exceptions;
 using BaseServices.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,9 @@ namespace BaseServices.BLL
 {
     internal class ExceptionBLL
     {
-        ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
+        ExceptionHandler _exhandler = ServiceContainer.Instance.GetService<ExceptionHandler>();
         Services.Logger _logger;
+
         #region
         private readonly static ExceptionBLL _instance = new ExceptionBLL();
 
@@ -26,7 +28,7 @@ namespace BaseServices.BLL
 
         private ExceptionBLL()
         {
-            _logger = ServiceContainer.Get<Services.Logger>();
+            _logger = ServiceContainer.Instance.GetService<Services.Logger>();
         }
         #endregion
 
@@ -52,7 +54,7 @@ namespace BaseServices.BLL
 
                 else
                 {
-                    _logger.Log(ex.Message, Log.Severity.Unknown, ex.StackTrace?.ToString());
+                    _logger.Log(ex.Message, LogLevel.Unknown, ex.StackTrace?.ToString());
                 }              
             }
         }
@@ -62,20 +64,20 @@ namespace BaseServices.BLL
 
             if (ex.InnerException is DALException)
             {
-                _logger.Log(ex.Message, Log.Severity.DebugInformation);
+                _logger.Log(ex.Message, LogLevel.DebugInformation);
                 return;
             }
             
             else
             {
-                _logger.Log(ex.Message, Log.Severity.LogicError);
+                _logger.Log(ex.Message, LogLevel.LogicError);
                 return;
             }
         }
 
         private void Handle(DALException ex)
         {
-            _logger.Log(ex.Message, Log.Severity.DataAccessError);
+            _logger.Log(ex.Message, LogLevel.DataAccessError);
             throw new BLLException(ex.Message, ex);
         }
     }

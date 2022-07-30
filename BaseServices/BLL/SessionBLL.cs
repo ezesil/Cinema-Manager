@@ -1,6 +1,7 @@
 ﻿using BaseServices.DAL.Interfaces;
 using BaseServices.Domain;
 using BaseServices.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,9 @@ namespace BaseServices.BLL
 {
     internal class SessionBLL
     {
-        ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
+        ExceptionHandler _exhandler = ServiceContainer.Instance.GetService<ExceptionHandler>();
 
-        Services.Logger _logger = ServiceContainer.Get<Services.Logger>();
+        Services.Logger _logger = ServiceContainer.Instance.GetService<Services.Logger>();
 
         IGenericRepository<User, Guid> repo = DAL.Factory.FactoryDAL.UserRepository as IGenericRepository<User, Guid>;
 

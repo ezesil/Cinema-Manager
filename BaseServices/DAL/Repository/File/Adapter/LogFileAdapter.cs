@@ -66,7 +66,7 @@ namespace BaseServices.DAL.Repository.File.Adapter
 
 
 			//Parseo la severidad.
-			Log.Severity severidad;
+			LogLevel severidad;
 			Enum.TryParse(values[2].ToString().Split(':')[1], out severidad);
 
 

@@ -2,6 +2,7 @@
 using BaseServices.DAL.Interfaces;
 using BaseServices.Domain;
 using BaseServices.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,8 +20,8 @@ namespace BaseServices.BLL
     {
         readonly int USERS_ENTITY_ID = 100;
 
-        ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
-        Services.Logger _logger = ServiceContainer.Get<Services.Logger>();
+        ExceptionHandler _exhandler = ServiceContainer.Instance.GetService<ExceptionHandler>();
+        Services.Logger _logger = ServiceContainer.Instance.GetService<Services.Logger>();
 
         IUserRepository _userrepo = FactoryDAL.UserRepository;
         IGenericDVVRepository _dvvrepo = FactoryDAL.DVVRepository;
@@ -111,7 +112,7 @@ namespace BaseServices.BLL
             {
                 foreach(User p in PersonasConFallos)
                 {                                                      
-                    _logger.Log("Error de chequeo de integridad en el usuario: " + p.Username, Log.Severity.Critical);
+                    _logger.Log("Error de chequeo de integridad en el usuario: " + p.Username, LogLevel.Critical);
                 }
 
                 return false;
@@ -141,7 +142,7 @@ namespace BaseServices.BLL
 
             else
             {
-                _logger.Log("Error de chequeo de integridad en la cuentas: Faltan datos.", Log.Severity.Fatal);
+                _logger.Log("Error de chequeo de integridad en la cuentas: Faltan datos.", LogLevel.Fatal);
                 return false;
             }
 

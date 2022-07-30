@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using BaseServices.DAL.Interfaces;
 using BaseServices.Services;
 using BaseServices.Exceptions;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BaseServices.BLL
 {
@@ -15,8 +16,8 @@ namespace BaseServices.BLL
     /// </summary>
     public static class LanguageBLL
     {
-        static ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
-        static Services.Logger _logger = ServiceContainer.Get<Services.Logger>();
+        static ExceptionHandler _exhandler = ServiceContainer.Instance.GetService<ExceptionHandler>();
+        static Services.Logger _logger = ServiceContainer.Instance.GetService<Services.Logger>();
 
         /// <summary>
         /// Repositorio de lenguajes.

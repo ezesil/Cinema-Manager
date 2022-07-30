@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BaseServices.Services.Extensions;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
@@ -18,9 +19,9 @@ namespace BaseServices.Domain
         /// <summary>
         /// Nivel de severidad del evento.
         /// </summary>
-        public Severity SeverityLevel { get; set; }
+        public LogLevel SeverityLevel { get; set; }
 
-        public string SeverityName { get => SeverityLevel.ToString(); }
+        public string SeverityName { get => SeverityLevel.ToTextCode(); }
 
         /// <summary>
         /// Constructor por defecto.
@@ -35,7 +36,7 @@ namespace BaseServices.Domain
         /// </summary>
         /// <param name="Message"></param>
         /// <param name="SeverityLevel"></param>
-        public Log(string Message, Severity SeverityLevel)
+        public Log(string Message, LogLevel SeverityLevel)
         {
             this.Message = Message;
             this.SeverityLevel = SeverityLevel;
@@ -47,84 +48,15 @@ namespace BaseServices.Domain
         /// <param name="Message"></param>
         /// <param name="SeverityLevel"></param>
         /// <param name="StackTrace"></param>
-        public Log(string Message, Severity SeverityLevel, string StackTrace)
+        public Log(string Message, LogLevel SeverityLevel, string StackTrace)
         {
             this.Message = Message;
             this.SeverityLevel = SeverityLevel;
             this.StackTrace = StackTrace;
         }
 
-        /// <summary>
-        /// Valor de severidad para el evento.
-        /// </summary>
-        public enum Severity
-        {
-            /// <summary>
-            /// Valor de severidad nulo.
-            /// </summary>
-            [Description("None")]
-            None,
-            /// <summary>
-            /// Valor de severidad bajo.
-            /// </summary>
-            [Description("Low")]
-            Low,
-            /// <summary>
-            /// Valor de severidad medio.
-            /// </summary>
-            [Description("Medium")]
-            Medium,
-            /// <summary>
-            /// Valor de severidad alto.
-            /// </summary>
-            [Description("High")]
-            High,
-            /// <summary>
-            /// Valor de severidad critico.
-            /// </summary>
-            [Description("Critical")]
-            Critical,
-            /// <summary>
-            /// Valor de severidad fatal.
-            /// </summary>
-            [Description("Fatal")]
-            Fatal,
-            /// <summary>
-            /// Valor de severidad desconocido.
-            /// </summary>
-            [Description("Unknown")]
-            Unknown,
-            /// <summary>
-            /// Valor de severidad de error logico.
-            /// </summary>
-            [Description("LogicError")]
-            LogicError,
-            /// <summary>
-            /// Valor de severidad de acceso a datos.
-            /// </summary>
-            [Description("DataAccessError")]
-            DataAccessError,
-            /// <summary>
-            /// Valor de severidad de informacion de depuracion. 
-            /// </summary>
-            [Description("DebugInformation")]
-            DebugInformation,
-        }
 
-        /// <summary>
-        /// Valor que indica donde debe guardarse la bitacora. Obsoleto.
-        /// </summary>
-        public enum LogType
-        {
-            /// <summary>
-            /// Valor que indica que debe guardarse en archivo plano.
-            /// </summary>
-            File,
-            /// <summary>
-            /// Valor que indica que debe guardarse en una base de datos de Sql Server.
-            /// </summary>
-            Sql
-        }
+
 
         /// <summary>
         /// Contiene informacion de la traza. Util para la depuracion.
@@ -133,5 +65,77 @@ namespace BaseServices.Domain
 
         public string Fecha { get; set; } = DateTime.Now.ToString();
 
+    }
+
+    /// <summary>
+    /// Valor que indica donde debe guardarse la bitacora. Obsoleto.
+    /// </summary>
+    public enum LogType
+    {
+        /// <summary>
+        /// Valor que indica que debe guardarse en archivo plano.
+        /// </summary>
+        File,
+        /// <summary>
+        /// Valor que indica que debe guardarse en una base de datos de Sql Server.
+        /// </summary>
+        Sql
+    }
+
+    /// <summary>
+    /// Valor de severidad para el evento.
+    /// </summary>
+    public enum LogLevel
+    {
+        /// <summary>
+        /// Valor de severidad nulo.
+        /// </summary>
+        [Description("None")]
+        None,
+        /// <summary>
+        /// Valor de severidad bajo.
+        /// </summary>
+        [Description("Low")]
+        Low,
+        /// <summary>
+        /// Valor de severidad medio.
+        /// </summary>
+        [Description("Medium")]
+        Medium,
+        /// <summary>
+        /// Valor de severidad alto.
+        /// </summary>
+        [Description("High")]
+        High,
+        /// <summary>
+        /// Valor de severidad critico.
+        /// </summary>
+        [Description("Critical")]
+        Critical,
+        /// <summary>
+        /// Valor de severidad fatal.
+        /// </summary>
+        [Description("Fatal")]
+        Fatal,
+        /// <summary>
+        /// Valor de severidad desconocido.
+        /// </summary>
+        [Description("Unknown")]
+        Unknown,
+        /// <summary>
+        /// Valor de severidad de error logico.
+        /// </summary>
+        [Description("LogicError")]
+        LogicError,
+        /// <summary>
+        /// Valor de severidad de acceso a datos.
+        /// </summary>
+        [Description("DataAccessError")]
+        DataAccessError,
+        /// <summary>
+        /// Valor de severidad de informacion de depuracion. 
+        /// </summary>
+        [Description("DebugInformation")]
+        DebugInformation,
     }
 }

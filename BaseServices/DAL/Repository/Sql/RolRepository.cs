@@ -2,6 +2,7 @@
 using BaseServices.DAL.Repository.Sql.Adapter;
 using BaseServices.Domain;
 using BaseServices.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -47,8 +48,8 @@ namespace BaseServices.DAL.Repository.Sql
         }
         #endregion
 
-        ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
-        Logger _logger = ServiceContainer.Get<Logger>();
+        ExceptionHandler _exhandler = ServiceContainer.Instance.GetService<ExceptionHandler>();
+        Logger _logger = ServiceContainer.Instance.GetService<Logger>();
 
         public RolRepository() : base(DeleteQuery, SelectAllQuery, SelectQuery, InsertQuery, UpdateQuery)
         {

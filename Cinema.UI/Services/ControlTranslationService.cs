@@ -106,7 +106,7 @@ namespace Cinema.UI.Services
             }
 
             if (failedcodes.Count > 0)
-                _logger.Log("Fallos de traduccion encontrados. Lenguaje actual: " + CurrentLanguage, Log.Severity.Low, string.Join(",\n", failedcodes));
+                _logger.Log("Fallos de traduccion encontrados. Lenguaje actual: " + CurrentLanguage, LogLevel.Low, string.Join(",\n", failedcodes));
             failedcodes.Clear();
 
         }
@@ -149,7 +149,7 @@ namespace Cinema.UI.Services
             }
 
             if (failedcodes.Count > 0)
-                _logger.Log("Fallos de traduccion encontrados. Lenguaje actual: " + CurrentLanguage, Log.Severity.Low, string.Join(",\n", failedcodes));
+                _logger.Log("Fallos de traduccion encontrados. Lenguaje actual: " + CurrentLanguage, LogLevel.Low, string.Join(",\n", failedcodes));
             failedcodes.Clear();
 
         }
@@ -193,7 +193,7 @@ namespace Cinema.UI.Services
             }
 
             if (failedcodes.Count > 0)
-                _logger.Log("Fallos de traduccion encontrados. Lenguaje actual: " + CurrentLanguage, Log.Severity.Low, string.Join(",\n", failedcodes));
+                _logger.Log("Fallos de traduccion encontrados. Lenguaje actual: " + CurrentLanguage, LogLevel.Low, string.Join(",\n", failedcodes));
 
             failedcodes.Clear();
 
@@ -238,7 +238,7 @@ namespace Cinema.UI.Services
             }
 
             if (failedcodes.Count > 0)
-                _logger.Log("Fallos de traduccion encontrados. Lenguaje actual: " + CurrentLanguage, Log.Severity.Low, string.Join(",\n", failedcodes));
+                _logger.Log("Fallos de traduccion encontrados. Lenguaje actual: " + CurrentLanguage, LogLevel.Low, string.Join(",\n", failedcodes));
             failedcodes.Clear();
 
         }
@@ -269,7 +269,7 @@ namespace Cinema.UI.Services
             }
 
             if (failedcodes.Count > 0)
-                _logger.Log("Fallos de traduccion encontrados. Lenguaje actual: " + CurrentLanguage, Log.Severity.Low, string.Join(",\n", failedcodes));
+                _logger.Log("Fallos de traduccion encontrados. Lenguaje actual: " + CurrentLanguage, LogLevel.Low, string.Join(",\n", failedcodes));
             failedcodes.Clear();
 
         }

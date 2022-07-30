@@ -20,7 +20,7 @@ namespace BaseServices.DAL.Repository.Sql.Adapter
 		/// <returns>Retorna un objeto de tipo Log.</returns>
 		public Log Adapt(object[] item)
 		{
-			Log.Severity severity;
+			LogLevel severity;
 			Log L = new Log();
 			L.Fecha = "[" + item[0].ToString() + "]";
 			L.Message = item[1].ToString();

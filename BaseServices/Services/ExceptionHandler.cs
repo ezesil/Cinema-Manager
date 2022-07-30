@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using BaseServices.BLL;
 using BaseServices.Domain;
+using BaseServices.Services.Extensions;
 
 namespace BaseServices.Services
 {
@@ -13,35 +15,81 @@ namespace BaseServices.Services
     /// </summary>
     public class ExceptionHandler
     {
-        /// <summary>
-        /// Maneja y registra una excepcion.
-        /// </summary>
-        /// <param name="ex">Excepcion.</param>
-        public void Handle(Exception ex)
+        [Serializable]
+        private class GenericException : Exception
         {
-            return;
-            ExceptionBLL.Current.Handle(ex);
+            public GenericException() : base("Ocurrió un error desconocido, contacte al administrador. \nEl error fue registrado.")
+            {
+
+            }         
+        }
+
+        [Serializable]
+        private class HandledException : Exception
+        {
+            public HandledException(string message) : base(message)
+            {
+
+            }
+        }
+
+        private Dictionary<Type, string> _exceptions { get; set; }
+
+        public delegate void LogEventHandler(string message, LogLevel severity = LogLevel.Low, string stacktrace = "");
+        public event LogEventHandler OnExceptionHandled;
+
+        public ExceptionHandler()
+        {
+            if(_exceptions == null)
+                _exceptions = new Dictionary<Type, string>();
+
+            Register<GenericException>();
         }
 
         /// <summary>
-        /// Maneja y registra una excepcion.
+        /// Permite registrar una excepcion en el manejador de excepciones.
         /// </summary>
-        /// <param name="ex">Excepcion.</param>
-        public void Handle(Exception ex, Log log)
+        /// <typeparam name="TException"></typeparam>
+        /// <param name="message"></param>
+        /// <exception cref="Exception"></exception>
+        public void Register<TException>(string? message = null) where TException : Exception, new()
         {
-            return;
-            ExceptionBLL.Current.Handle(ex, log);
+            if(_exceptions.Count(x => x.Key.GetType() == typeof(TException)) > 0)
+                throw new Exception("La excepcion ya fue registrada anteriormente.");
+            
+            var exception = new TException();
+            _exceptions.Add(typeof(TException), message == null ? exception.Message : message);                   
         }
 
         /// <summary>
-        /// Maneja y registra una excepcion.
+        /// 
         /// </summary>
-        /// <param name="ex">Excepcion.</param>
-        public void Handle(Exception ex, string message, Log.Severity severity)
+        /// <typeparam name="TException"></typeparam>
+        /// <param name="ex"></param>
+        /// <returns></returns>
+        public Exception Handle<TException>(TException ex) where TException : Exception, new()
         {
-            return;
-            var log = new Log(message, severity, ex.StackTrace);
-            ExceptionBLL.Current.Handle(ex, log);
-        }
+            try
+            {
+                string? result = null;
+                if (_exceptions.TryGetValue(ex.GetType(), out result))
+                {
+                    return new HandledException(result);
+                }
+                else
+                {
+                    var stacktrace = "";
+
+                    if(OnExceptionHandled != null)
+                        OnExceptionHandled.Invoke(result, ex.GetSeverityLevel(), ex.GetFullStackTrace());
+
+                    return new GenericException();
+                }
+            }
+            catch(Exception exx)
+            {
+                return new HandledException(exx.Message);
+            }         
+        }       
     }
 }

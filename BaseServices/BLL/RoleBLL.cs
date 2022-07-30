@@ -2,6 +2,7 @@
 using BaseServices.DAL.Interfaces;
 using BaseServices.Domain;
 using BaseServices.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,9 @@ namespace BaseServices.BLL
 {
     internal class RoleBLL
     {
-        ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
-        Services.Logger _logger = ServiceContainer.Get<Services.Logger>();
-        SessionService _sessionService = ServiceContainer.Get<SessionService>();
+        ExceptionHandler _exhandler = ServiceContainer.Instance.GetService<ExceptionHandler>();
+        Services.Logger _logger = ServiceContainer.Instance.GetService<Services.Logger>();
+        SessionService _sessionService = ServiceContainer.Instance.GetService<SessionService>();
 
         private readonly IGenericRepository<Rol, int> _rolrepo = FactoryDAL.RolRepository;
 

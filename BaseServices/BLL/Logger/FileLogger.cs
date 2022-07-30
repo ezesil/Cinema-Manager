@@ -9,6 +9,7 @@ using BaseServices.DAL.Interfaces;
 using BaseServices.DAL.Factory;
 using BaseServices.Services;
 using BaseServices.Domain;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BaseServices.BLL.Logger
 {
@@ -60,7 +61,7 @@ namespace BaseServices.BLL.Logger
             }
             catch (Exception ex)
             {
-                ServiceContainer.Get<ExceptionHandler>().Handle(ex);
+                ServiceContainer.Instance.GetService<ExceptionHandler>().Handle(ex);
                 return null;
             }
 

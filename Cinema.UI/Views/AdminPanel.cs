@@ -70,7 +70,7 @@ namespace Cinema.UI.Views
             }
             catch (Exception ex)
             {
-                _exmanager.Handle(ex, ex.Message + " Datos del usuario: Guid: " + _sessionService.CurrentUserGuid + ", Nombre: " + _sessionService.CurrentUser + ", Correo: " + _sessionService.CurrentUserCorreo, Log.Severity.Critical);
+                _exmanager.Handle(ex);
                 _navigationManager.NavigateTo<MainPage>();
             }
 

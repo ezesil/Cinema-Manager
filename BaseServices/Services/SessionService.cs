@@ -1,6 +1,7 @@
 ﻿using BaseServices.BLL;
 using BaseServices.Domain;
 using BaseServices.Services.Extensions;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,11 +20,11 @@ namespace BaseServices.Services
         public delegate void OnLogoutEventHandler();
         public event OnLogoutEventHandler OnSuccessfulLogout;
 
-        private IntegrityService _checkerDigitService => ServiceContainer.Get<IntegrityService>();
+        private IntegrityService _checkerDigitService;
 
         public SessionService()
         {
-
+            _checkerDigitService = ServiceContainer.Instance.GetService<IntegrityService>();
         }
 
         /// <summary>

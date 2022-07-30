@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using BaseServices.Services;
 using BaseServices.Domain;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Testing
 {
@@ -14,7 +15,7 @@ namespace Testing
         [Test]
         public void Test1()
         {
-            var session = ServiceContainer.Get<SessionService>();
+            var session = ServiceContainer.Instance.GetService<SessionService>();
 
             var user = new User(
                 new System.Guid(), 

@@ -1,6 +1,7 @@
 ﻿using BaseServices.DAL.Factory;
 using BaseServices.DAL.Interfaces;
 using BaseServices.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,8 +16,8 @@ namespace BaseServices.BLL
     /// </summary>
     internal class BackupBLL
     {
-        ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
-        Services.Logger _logger = ServiceContainer.Get<Services.Logger>();
+        ExceptionHandler _exhandler = ServiceContainer.Instance.GetService<ExceptionHandler>();
+        Services.Logger _logger = ServiceContainer.Instance.GetService<Services.Logger>();
 
         #region Singleton
         private readonly static BackupBLL _instance = new BackupBLL();

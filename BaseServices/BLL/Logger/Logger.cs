@@ -8,6 +8,7 @@ using System;
 using BaseServices.DAL.Repository.File;
 using BaseServices.Services;
 using BaseServices.Domain;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BaseServices.BLL.Logger
 {
@@ -19,7 +20,7 @@ namespace BaseServices.BLL.Logger
         /// <summary>
         /// Tipo de origen de datos.
         /// </summary>
-        Log.LogType SourceType; 
+        LogType SourceType; 
 
         /// <summary>
         /// String del origen de datos.
@@ -36,19 +37,17 @@ namespace BaseServices.BLL.Logger
         /// </summary>
         private IGenericLogRepository<Log> FileLog;
 
-
         /// <summary>
         /// Constructor para la clase Logger.
         /// </summary>
         /// <param name="_SourceType">Origen de datos de tipo Log.LogType. </param>
         /// <param name="_SourceString">String de origen de datos.</param>
-        public Logger(Log.LogType _SourceType, string _SourceString)
+        public Logger(LogType _SourceType, string _SourceString)
         {
             SourceType = _SourceType;
             SourceString = _SourceString;
             
         }
-
 
         /// <summary>
         /// 
@@ -58,13 +57,13 @@ namespace BaseServices.BLL.Logger
         {
             try
             { 
-                if (SourceType is Log.LogType.Sql)
+                if (SourceType is LogType.Sql)
                 {
                     //SqlLog = new LegacySqlLoggerRepository(SourceString);
                     //SqlLog.Insert(Message);
                 }
 
-                else if (SourceType is Log.LogType.File)
+                else if (SourceType is LogType.File)
                 {
                     //FileLog = new FileLoggerRepository(SourceString);
                     //FileLog.Insert(Message);
@@ -74,6 +73,7 @@ namespace BaseServices.BLL.Logger
                 {
                     throw new Exception("SourceType Error. Codigo de error: BSLO01");
                 }
+
                 throw new NotImplementedException();
             }
 
@@ -92,13 +92,13 @@ namespace BaseServices.BLL.Logger
         {
             try
             {
-                if (SourceType is Log.LogType.Sql)
+                if (SourceType is LogType.Sql)
                 {
                     //SqlLog = new LegacySqlLoggerRepository(SourceString);
                     //return SqlLog.SelectAll().ToArray();
                 }
 
-                else if (SourceType is Log.LogType.File)
+                else if (SourceType is LogType.File)
                 {
                     //FileLog = new FileLoggerRepository(SourceString);
                     //return FileLog.SelectAll().ToArray();
@@ -113,14 +113,12 @@ namespace BaseServices.BLL.Logger
             }
             catch (Exception ex)
             {
-                ServiceContainer.Get<ExceptionHandler>().Handle(ex);
+                ServiceContainer.Instance.GetService<ExceptionHandler>().Handle(ex);
                 return null;
             }
 
             
         }
-
-
 
         /// <summary>
         /// Almacena una bitacora y la evalúa para notificacion urgente.
@@ -154,8 +152,6 @@ namespace BaseServices.BLL.Logger
                 Console.WriteLine(ex.Message);
                 return null;
             }
-
-
         }
     }
 }

@@ -92,7 +92,7 @@ namespace BaseServices.DAL.Repository.File
 
             using (sw = new StreamWriter(stream, Encoding.UTF8))
             {
-                sw.WriteLine(Message + " ; " + Log.Severity.None.ToString());
+                sw.WriteLine(Message + " ; " + LogLevel.None.ToString());
             }
         }
 

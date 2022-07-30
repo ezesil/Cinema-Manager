@@ -2,6 +2,7 @@
 using BaseServices.DAL.Interfaces;
 using BaseServices.Domain;
 using BaseServices.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,8 @@ namespace BaseServices.BLL
 {
     internal class RolePermissionBLL
     {
-        ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
-        Services.Logger _logger = ServiceContainer.Get<Services.Logger>();
+        ExceptionHandler _exhandler = ServiceContainer.Instance.GetService<ExceptionHandler>();
+        Services.Logger _logger = ServiceContainer.Instance.GetService<Services.Logger>();
 
         private readonly IRolPermisoRepository _repo = FactoryDAL.RolPermisoRepository;
 

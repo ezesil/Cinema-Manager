@@ -1,6 +1,8 @@
-﻿using Cinema.DAL.Interfaces;
+﻿using BaseServices.Services;
+using Cinema.DAL.Interfaces;
 using Cinema.DAL.Repository.Sql.Adapter;
 using Cinema.Domain;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +23,14 @@ namespace Cinema.DAL.Repository.Sql
         { get => "INSERT INTO [CinemaDB].[dbo].[Salas] ([guid_sala], [codigo_identificador],[es_pantalla_gigante],[es_3D],[activo]) values (@Id, @Identifier, @HasBigScreen, @Has3D, @IsActive)"; }
         private static string UpdateQuery
         { get => "UPDATE [CinemaDB].[dbo].[Salas] SET [codigo_identificador] = @Identifier,[es_pantalla_gigante] = @HasBigScreen,[es_3D] = @Has3D,[activo] = @IsActive where [guid_sala] = @Id"; }
-
+        
+        ExceptionHandler? _exhandler { get; set; }
+        Logger? _logger { get; set; }
 
         public RoomsRepository() : base(DeleteQuery, SelectAllQuery, SelectQuery, InsertQuery, UpdateQuery)
         {
+            _exhandler = ServiceContainer.Instance.GetService<ExceptionHandler>();
+            _logger = ServiceContainer.Instance.GetService<Logger>();
         }
 
 

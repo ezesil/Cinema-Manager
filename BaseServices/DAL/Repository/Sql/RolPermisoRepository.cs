@@ -2,6 +2,7 @@
 using BaseServices.DAL.Repository.Sql.Adapter;
 using BaseServices.Domain;
 using BaseServices.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,11 +32,14 @@ namespace BaseServices.DAL.Repository.Sql
         private static string DeleteByPermissionQuery
         { get => "DELETE * FROM RolesXPermisos WHERE id_permiso = @IdPermiso"; }
 
-        ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
-        Logger _logger = ServiceContainer.Get<Logger>();
+        ExceptionHandler _exhandler;
+        Logger _logger;
 
         public RolPermisoRepository() : base(DeleteQuery, SelectAllQuery, SelectQuery, InsertQuery, UpdateQuery)
         {
+            _exhandler = ServiceContainer.Instance.GetService<ExceptionHandler>();
+            _logger = ServiceContainer.Instance.GetService<Logger>();
+
         }
 
         public int Insert(RolPermisoRelation o)

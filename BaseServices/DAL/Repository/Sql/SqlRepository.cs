@@ -2,6 +2,7 @@
 using BaseServices.Domain;
 using BaseServices.Services;
 using Cinema.Domain;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -42,8 +43,8 @@ namespace BaseServices.DAL.Repository.Sql
             SelectQuery = selectQuery;
             InsertQuery = insertQuery;
             UpdateQuery = updateQuery;
-            exceptionHandler = ServiceContainer.Get<ExceptionHandler>();
-            logService = ServiceContainer.Get<Logger>();
+            exceptionHandler = ServiceContainer.Instance.GetService<ExceptionHandler>();
+            logService = ServiceContainer.Instance.GetService<Logger>();
             genericAdapter = new TAdapter();
         }
 

@@ -9,6 +9,7 @@ using BaseServices.DAL.Interfaces;
 using BaseServices.DAL.Factory;
 using BaseServices.Services;
 using BaseServices.Domain;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BaseServices.BLL
 {
@@ -17,9 +18,9 @@ namespace BaseServices.BLL
     /// </summary>
     internal class PermissionBLL
     {
-        ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
-        Services.Logger _logger = ServiceContainer.Get<Services.Logger>();
-        SessionService _sessionService = ServiceContainer.Get<SessionService>();
+        ExceptionHandler _exhandler = ServiceContainer.Instance.GetService<ExceptionHandler>();
+        Services.Logger _logger = ServiceContainer.Instance.GetService<Services.Logger>();
+        SessionService _sessionService = ServiceContainer.Instance.GetService<SessionService>();
 
         private readonly IGenericRepository<Permiso, int> _permrepo = FactoryDAL.PermisoRepository;
 

@@ -1,6 +1,7 @@
 ﻿using BaseServices.DAL.Interfaces;
 using BaseServices.Domain;
 using BaseServices.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,8 +14,8 @@ namespace BaseServices.DAL.Repository.Sql
 {
     internal class BackupRestoreRepository : IBackupRestoreRepository
     {
-        ExceptionHandler _exhandler = ServiceContainer.Get<ExceptionHandler>();
-        Logger _logger = ServiceContainer.Get<Logger>();
+        ExceptionHandler _exhandler = ServiceContainer.Instance.GetService<ExceptionHandler>();
+        Logger _logger = ServiceContainer.Instance.GetService<Logger>();
 
         #region Statements
         private string BackupStatement

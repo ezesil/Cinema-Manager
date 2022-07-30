@@ -24,14 +24,14 @@ namespace Cinema.UI
             var services = new ServiceCollection();
 
             // Servicios de BaseServices
-            services.AddSingleton<BackupServices>();
-            services.AddSingleton<SessionService>();
-            services.AddSingleton<IntegrityService>();
-            services.AddSingleton<ExceptionHandler>();
-            services.AddSingleton<HashingService>();
-            services.AddSingleton<LanguageService>();
-            services.AddSingleton<Logger>();
-            services.AddSingleton<RolePermissionManagementService>();
+            services.AddSingleton(x => ServiceContainer.Instance.GetService<BackupServices>());
+            services.AddSingleton(x => ServiceContainer.Instance.GetService<SessionService>());
+            services.AddSingleton(x => ServiceContainer.Instance.GetService<IntegrityService>());
+            services.AddSingleton(x => ServiceContainer.Instance.GetService<ExceptionHandler>());
+            services.AddSingleton(x => ServiceContainer.Instance.GetService<HashingService>());
+            services.AddSingleton(x => ServiceContainer.Instance.GetService<LanguageService>());
+            services.AddSingleton(x => ServiceContainer.Instance.GetService<Logger>());
+            services.AddSingleton(x => ServiceContainer.Instance.GetService<RolePermissionManagementService>());
 
             // Servicios de la UI
             services.AddSingleton<NavigationManager>();
@@ -63,16 +63,17 @@ namespace Cinema.UI
 
             var integrityService = DependencyService.Get<IntegrityService>();
 
-            var session = ServiceContainer.Get<SessionService>();
+            var session = ServiceContainer.Instance.GetService<SessionService>();
 
             string autologinmode = "";
             var homeform = DependencyService.Get<Home>();
             var sessionService = DependencyService.Get<SessionService>();
             var languageService = DependencyService.Get<LanguageService>();
             var exhandler = DependencyService.Get<ExceptionHandler>();
+            var logger = DependencyService.Get<Logger>();
+            exhandler.OnExceptionHandled += logger.Log;
 
             languageService.SetLanguage("es");
-
 
             //var user = new User()
             //{
