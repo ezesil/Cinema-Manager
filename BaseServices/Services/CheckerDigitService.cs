@@ -54,22 +54,22 @@ namespace BaseServices.Services
             return CheckDigitBLL.Current.CheckIntegrity();
         }
 
-        ///// <summary>
-        ///// Metodo que permite actualizar el DVV de una entidad.
-        ///// </summary>
-        //public void UpdateDVV(int id)
-        //{
-        //    CheckDigitBLL.Current.UpdateDVV(id);
-        //}
+        /// <summary>
+        /// Metodo que permite actualizar el DVV de una entidad.
+        /// </summary>
+        public void UpdateDVV(int id)
+        {
+            CheckDigitBLL.Current.UpdateDVV(id);
+        }
 
-        ///// <summary>
-        ///// Actualizar el valor DVH de un objeto Persona en la base de datos.
-        ///// </summary>
-        ///// <param name="p"></param>
-        //public void UpdateDVH(User p)
-        //{
-        //    CheckDigitBLL.Current.UpdateDVH(p);
-        //}
+        /// <summary>
+        /// Actualizar el valor DVH de un objeto Persona en la base de datos.
+        /// </summary>
+        /// <param name="id"></param>
+        public void UpdateDVH(Guid id)
+        {
+            CheckDigitBLL.Current.UpdateDVH(id);
+        }
 
 
 

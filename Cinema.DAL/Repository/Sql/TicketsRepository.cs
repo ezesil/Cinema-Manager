@@ -16,13 +16,33 @@ namespace Cinema.DAL.Repository.Sql
         private static string DeleteQuery
         { get => "DELETE FROM [CinemaDB].[dbo].[Tickets] where [guid_ticket] = @Id"; }
         private static string SelectAllQuery
-        { get => "SELECT [guid_ticket],[fecha_creacion],[fila],[asiento],[guid_sesion],[guid_usuario_creador] FROM [CinemaDB].[dbo].[Tickets] WHERE @Filter = 1 OR [fecha_creacion] BETWEEN @FechaDesde AND @FechaHasta"; }
+        {
+            get => "SELECT " +
+                "tk.[guid_ticket], " +
+                "tk.[fecha_creacion], " +
+                "tk.[fila], " +
+                "tk.[asiento], " +
+                "tk.[guid_sesion], " +
+                "tk.[guid_usuario_creador], " +
+                "usr.nombre_completo, " +
+                "ss.fecha, " +
+                "pl.nombre, " +
+                "pl.idioma, " +
+                "pl.idioma_subtitulado " +
+                "FROM [CinemaDB].[dbo].[Tickets] tk " +
+                "JOIN [CinemaDB].[dbo].[Usuario] usr on tk.guid_usuario_creador = usr.guid_usuario " +
+                "JOIN [CinemaDB].[dbo].[Sesiones] ss on ss.guid_sesion = tk.guid_sesion " +
+                "JOIN [CinemaDB].[dbo].[Peliculas] pl on pl.guid_pelicula = ss.guid_pelicula " +
+                "WHERE (@Filter = 1 AND [fecha_creacion] BETWEEN @FechaDesde AND @FechaHasta)";
+        }
+
+
         private static string SelectQuery
         { get => "SELECT [guid_ticket],[fecha_creacion],[fila],[asiento],[guid_sesion],[guid_usuario_creador] FROM [CinemaDB].[dbo].[Tickets] where [guid_ticket] = @Id"; }
         private static string InsertQuery
-        { get => "INSERT INTO [CinemaDB].[dbo].[Salas] ([fecha_creacion],[fila],[asiento],[guid_sesion],[guid_usuario_creador]) values (@CreationTime, @Row, @Seat, @SesionId, @CreatorUserId)"; }
+        { get => "INSERT INTO [CinemaDB].[dbo].[Tickets] ([fecha_creacion],[fila],[asiento],[guid_sesion],[guid_usuario_creador]) values (@CreationTime, @Row, @SeatNumber, @SessionId, @CreatorUserId)"; }
         private static string UpdateQuery
-        { get => "UPDATE [CinemaDB].[dbo].[Salas] SET [fecha_creacion] = @CreationTime,[fila] = @Row,[asiento] = @Seat,[guid_sesion] = @SesionId,[guid_usuario_creador] = @CreatorUserId where [guid_pelicula] = @Id"; }
+        { get => "UPDATE [CinemaDB].[dbo].[Tickets] SET [fecha_creacion] = @CreationTime,[fila] = @Row,[asiento] = @Seat,[guid_sesion] = @SessionId,[guid_usuario_creador] = @CreatorUserId where [guid_pelicula] = @Id"; }
 
         ExceptionHandler? _exhandler { get; set; }
         Logger? _logger { get; set; }
@@ -43,8 +63,11 @@ namespace Cinema.DAL.Repository.Sql
             base.Update(obj);
         }
 
-        public IEnumerable<Ticket> GetAll(object paramss)
+        public IEnumerable<Ticket> GetAll(object paramss = null)
         {
+            if (paramss == null)
+                paramss = new { FechaDesde = DateTime.Parse("01/01/2000 00:00"), FechaHasta = DateTime.MaxValue };
+
             return base.GetAll(paramss);
         }
 

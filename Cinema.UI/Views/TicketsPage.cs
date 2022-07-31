@@ -21,13 +21,14 @@ namespace Cinema.UI.Views
         {
             InitializeComponent();
             _languageService = languageService;
-            this.Name = "Tickets";
+            this.Name = "text_tickets";
         }
 
         private void Buscar_Click(object sender, EventArgs e)
         {
             GridPrincipal.Clear();
             TicketsBLL.Current.GetAllTickets(DateTimeDesde.Value, DateTimeHasta.Value).ForEach(x => GridPrincipal.Add(x));
+
             GridPrincipal.UpdateNames<Ticket>(x => _languageService.TranslateCode(x));
         }
 
@@ -38,14 +39,9 @@ namespace Cinema.UI.Views
 
         private void RowClick(object sender, DataGridViewCellEventArgs e)
         {
-            var ticket = GridPrincipal.GetCellValues<Ticket>();
+           
 
-            //TxtFechaCreacion.Text = ticket.CreationTime.ToString();
-            //TxtFila.Text = ticket.Row.ToString();
-            //TxtAsiento.Text = ticket.Seat.ToString();
-            //TxtFecha.Text = "";
-            //TxtPelicula.Text = "";
-            //TxtSala.Text = RoomsBLL.Current.GetRoom(ticket.SessionId());
+
 
         }
     }

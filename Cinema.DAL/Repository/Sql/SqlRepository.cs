@@ -61,7 +61,7 @@ namespace Cinema.DAL.Repository.Sql
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.Parameters.AddRange(GetParameters(parameters));
+                        cmd.Parameters.AddRange(GetParameters(parameters, query));
 
                         conn.Open();
                         return cmd.ExecuteNonQuery();
@@ -90,7 +90,7 @@ namespace Cinema.DAL.Repository.Sql
             {
                 if (paramss != null)
                 {
-                    cmd.Parameters.AddRange(GetParameters(paramss));
+                    cmd.Parameters.AddRange(GetParameters(paramss, query));
                     cmd.Parameters.Add(new SqlParameter("@Filter", "1"));
                 }
                 else
@@ -130,7 +130,7 @@ namespace Cinema.DAL.Repository.Sql
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.CommandType = CommandType.Text;                    
-                    cmd.Parameters.AddRange(GetParameters(parameters));
+                    cmd.Parameters.AddRange(GetParameters(parameters, query));
                     conn.Open();
                     using (reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
                     {
@@ -169,7 +169,7 @@ namespace Cinema.DAL.Repository.Sql
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.Parameters.AddRange(GetParameters(parameters));
+                        cmd.Parameters.AddRange(GetParameters(parameters, query));
 
                         conn.Open();
                         return cmd.ExecuteNonQuery();
@@ -200,7 +200,7 @@ namespace Cinema.DAL.Repository.Sql
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.Parameters.AddRange(GetParameters(parameters));
+                        cmd.Parameters.AddRange(GetParameters(parameters, query));
 
                         conn.Open();
                         return cmd.ExecuteNonQuery();
@@ -224,13 +224,33 @@ namespace Cinema.DAL.Repository.Sql
 
             int i = 0;
             foreach (PropertyInfo prop in props)
-            {   
-                parameters[i] = new SqlParameter("@" + prop.Name, prop.GetValue(args,null));
+            {
+
+                parameters[i] = new SqlParameter("@" + prop.Name, prop.GetValue(args, null));
                 object propValue = prop.GetValue(args, null);
+                
                 i++;
             }
 
             return parameters;
+        }
+        private SqlParameter[] GetParameters(object args, string query)
+        {
+            Type myType = args.GetType();
+            IList<PropertyInfo> props = new List<PropertyInfo>(myType.GetProperties());
+
+            var parameters = new List<SqlParameter>();
+
+            foreach (PropertyInfo prop in props)
+            {
+                var value = prop.GetValue(args, null);
+                if (query.Contains("@" + prop.Name) && value != null)
+                {
+                    parameters.Add(new SqlParameter("@" + prop.Name, prop.GetValue(args, null)));
+                }
+            }
+
+            return parameters.ToArray();
         }
     }
 }

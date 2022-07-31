@@ -1,10 +1,12 @@
 ﻿using Cinema.DAL.Interfaces;
 using Cinema.Domain;
+using Cinema.Domain.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace Cinema.DAL.Repository.Sql.Adapter
 {
@@ -14,11 +16,11 @@ namespace Cinema.DAL.Repository.Sql.Adapter
         {
             return new Room()
             {
-                Id = Guid.Parse(values[0]?.ToString()),
+                Id = values[0].ToGuid(),
                 Identifier = values[1]?.ToString(),
-                HasBigScreen = (bool)values[2],
-                Has3D = (bool)values[3],
-                IsActive = (bool)values[4]
+                HasBigScreen = values[2].ByteToBoolean(),
+                Has3D = values[3].ByteToBoolean(),
+                IsActive = values[4].ByteToBoolean()
             };
         }
     }

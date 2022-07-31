@@ -28,42 +28,42 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button3 = new System.Windows.Forms.Button();
+            this.GridLenguajes = new System.Windows.Forms.DataGridView();
+            this.BtnAgregarTraduccion = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.TxtAbreviacion = new System.Windows.Forms.TextBox();
+            this.TxtNombre = new System.Windows.Forms.TextBox();
+            this.BtnEliminarTraduccion = new System.Windows.Forms.Button();
+            this.BtnGuardarCambiosTraducciones = new System.Windows.Forms.Button();
+            this.GridTraducciones = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.BtnGuardarCambiosLenguaje = new System.Windows.Forms.Button();
+            this.BtnEliminarLenguaje = new System.Windows.Forms.Button();
+            this.BtnAgregarLenguaje = new System.Windows.Forms.Button();
+            this.TxtGuardarTodoYActualizar = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.GridLenguajes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GridTraducciones)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // GridLenguajes
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(278, 47);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(132, 354);
-            this.dataGridView1.TabIndex = 0;
+            this.GridLenguajes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GridLenguajes.Location = new System.Drawing.Point(278, 47);
+            this.GridLenguajes.Name = "GridLenguajes";
+            this.GridLenguajes.RowTemplate.Height = 25;
+            this.GridLenguajes.Size = new System.Drawing.Size(132, 354);
+            this.GridLenguajes.TabIndex = 0;
             // 
-            // button3
+            // BtnAgregarTraduccion
             // 
-            this.button3.Location = new System.Drawing.Point(718, 115);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(199, 23);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Agregar traducción";
-            this.button3.UseVisualStyleBackColor = true;
+            this.BtnAgregarTraduccion.Location = new System.Drawing.Point(718, 115);
+            this.BtnAgregarTraduccion.Name = "BtnAgregarTraduccion";
+            this.BtnAgregarTraduccion.Size = new System.Drawing.Size(199, 23);
+            this.BtnAgregarTraduccion.TabIndex = 3;
+            this.BtnAgregarTraduccion.Text = "Agregar traducción";
+            this.BtnAgregarTraduccion.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -83,46 +83,46 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "Nombre:";
             // 
-            // textBox4
+            // TxtAbreviacion
             // 
-            this.textBox4.Location = new System.Drawing.Point(80, 47);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(192, 23);
-            this.textBox4.TabIndex = 11;
+            this.TxtAbreviacion.Location = new System.Drawing.Point(80, 47);
+            this.TxtAbreviacion.Name = "TxtAbreviacion";
+            this.TxtAbreviacion.Size = new System.Drawing.Size(192, 23);
+            this.TxtAbreviacion.TabIndex = 11;
             // 
-            // textBox5
+            // TxtNombre
             // 
-            this.textBox5.Location = new System.Drawing.Point(80, 77);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(192, 23);
-            this.textBox5.TabIndex = 12;
+            this.TxtNombre.Location = new System.Drawing.Point(80, 77);
+            this.TxtNombre.Name = "TxtNombre";
+            this.TxtNombre.Size = new System.Drawing.Size(192, 23);
+            this.TxtNombre.TabIndex = 12;
             // 
-            // button4
+            // BtnEliminarTraduccion
             // 
-            this.button4.Location = new System.Drawing.Point(718, 144);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(199, 23);
-            this.button4.TabIndex = 13;
-            this.button4.Text = "Eliminar traduccion seleccionada";
-            this.button4.UseVisualStyleBackColor = true;
+            this.BtnEliminarTraduccion.Location = new System.Drawing.Point(718, 144);
+            this.BtnEliminarTraduccion.Name = "BtnEliminarTraduccion";
+            this.BtnEliminarTraduccion.Size = new System.Drawing.Size(199, 23);
+            this.BtnEliminarTraduccion.TabIndex = 13;
+            this.BtnEliminarTraduccion.Text = "Eliminar traduccion seleccionada";
+            this.BtnEliminarTraduccion.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // BtnGuardarCambiosTraducciones
             // 
-            this.button5.Location = new System.Drawing.Point(718, 173);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(199, 23);
-            this.button5.TabIndex = 14;
-            this.button5.Text = "Guardar cambios de traducciones";
-            this.button5.UseVisualStyleBackColor = true;
+            this.BtnGuardarCambiosTraducciones.Location = new System.Drawing.Point(718, 173);
+            this.BtnGuardarCambiosTraducciones.Name = "BtnGuardarCambiosTraducciones";
+            this.BtnGuardarCambiosTraducciones.Size = new System.Drawing.Size(199, 23);
+            this.BtnGuardarCambiosTraducciones.TabIndex = 14;
+            this.BtnGuardarCambiosTraducciones.Text = "Guardar cambios de traducciones";
+            this.BtnGuardarCambiosTraducciones.UseVisualStyleBackColor = true;
             // 
-            // dataGridView2
+            // GridTraducciones
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(416, 47);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowTemplate.Height = 25;
-            this.dataGridView2.Size = new System.Drawing.Size(296, 354);
-            this.dataGridView2.TabIndex = 15;
+            this.GridTraducciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GridTraducciones.Location = new System.Drawing.Point(416, 47);
+            this.GridTraducciones.Name = "GridTraducciones";
+            this.GridTraducciones.RowTemplate.Height = 25;
+            this.GridTraducciones.Size = new System.Drawing.Size(296, 354);
+            this.GridTraducciones.TabIndex = 15;
             // 
             // label1
             // 
@@ -144,66 +144,66 @@
             this.label5.TabIndex = 17;
             this.label5.Text = "Traducciones";
             // 
-            // button1
+            // BtnGuardarCambiosLenguaje
             // 
-            this.button1.Location = new System.Drawing.Point(80, 173);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(192, 23);
-            this.button1.TabIndex = 20;
-            this.button1.Text = "Guardar cambios de idiomas";
-            this.button1.UseVisualStyleBackColor = true;
+            this.BtnGuardarCambiosLenguaje.Location = new System.Drawing.Point(80, 173);
+            this.BtnGuardarCambiosLenguaje.Name = "BtnGuardarCambiosLenguaje";
+            this.BtnGuardarCambiosLenguaje.Size = new System.Drawing.Size(192, 23);
+            this.BtnGuardarCambiosLenguaje.TabIndex = 20;
+            this.BtnGuardarCambiosLenguaje.Text = "Guardar cambios de idiomas";
+            this.BtnGuardarCambiosLenguaje.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // BtnEliminarLenguaje
             // 
-            this.button2.Location = new System.Drawing.Point(80, 144);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(192, 23);
-            this.button2.TabIndex = 19;
-            this.button2.Text = "Eliminar lenguaje seleccionado";
-            this.button2.UseVisualStyleBackColor = true;
+            this.BtnEliminarLenguaje.Location = new System.Drawing.Point(80, 144);
+            this.BtnEliminarLenguaje.Name = "BtnEliminarLenguaje";
+            this.BtnEliminarLenguaje.Size = new System.Drawing.Size(192, 23);
+            this.BtnEliminarLenguaje.TabIndex = 19;
+            this.BtnEliminarLenguaje.Text = "Eliminar lenguaje seleccionado";
+            this.BtnEliminarLenguaje.UseVisualStyleBackColor = true;
             // 
-            // button6
+            // BtnAgregarLenguaje
             // 
-            this.button6.Location = new System.Drawing.Point(80, 106);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(192, 23);
-            this.button6.TabIndex = 18;
-            this.button6.Text = "Agregar lenguaje";
-            this.button6.UseVisualStyleBackColor = true;
+            this.BtnAgregarLenguaje.Location = new System.Drawing.Point(80, 106);
+            this.BtnAgregarLenguaje.Name = "BtnAgregarLenguaje";
+            this.BtnAgregarLenguaje.Size = new System.Drawing.Size(192, 23);
+            this.BtnAgregarLenguaje.TabIndex = 18;
+            this.BtnAgregarLenguaje.Text = "Agregar lenguaje";
+            this.BtnAgregarLenguaje.UseVisualStyleBackColor = true;
             // 
-            // button7
+            // TxtGuardarTodoYActualizar
             // 
-            this.button7.Location = new System.Drawing.Point(278, 407);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(434, 23);
-            this.button7.TabIndex = 21;
-            this.button7.Text = "Guardar todo y actualizar textos de la aplicacion";
-            this.button7.UseVisualStyleBackColor = true;
+            this.TxtGuardarTodoYActualizar.Location = new System.Drawing.Point(278, 407);
+            this.TxtGuardarTodoYActualizar.Name = "TxtGuardarTodoYActualizar";
+            this.TxtGuardarTodoYActualizar.Size = new System.Drawing.Size(434, 23);
+            this.TxtGuardarTodoYActualizar.TabIndex = 21;
+            this.TxtGuardarTodoYActualizar.Text = "Guardar todo y actualizar textos de la aplicacion";
+            this.TxtGuardarTodoYActualizar.UseVisualStyleBackColor = true;
             // 
             // LanguagesPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button6);
+            this.Controls.Add(this.TxtGuardarTodoYActualizar);
+            this.Controls.Add(this.BtnGuardarCambiosLenguaje);
+            this.Controls.Add(this.BtnEliminarLenguaje);
+            this.Controls.Add(this.BtnAgregarLenguaje);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dataGridView2);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.GridTraducciones);
+            this.Controls.Add(this.BtnGuardarCambiosTraducciones);
+            this.Controls.Add(this.BtnEliminarTraduccion);
+            this.Controls.Add(this.TxtNombre);
+            this.Controls.Add(this.TxtAbreviacion);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.BtnAgregarTraduccion);
+            this.Controls.Add(this.GridLenguajes);
             this.Name = "LanguagesPanel";
             this.Size = new System.Drawing.Size(933, 464);
             this.Load += new System.EventHandler(this.LanguagesPanel_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GridLenguajes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GridTraducciones)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -211,20 +211,20 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.DataGridView GridLenguajes;
+        private System.Windows.Forms.Button BtnAgregarTraduccion;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.TextBox TxtAbreviacion;
+        private System.Windows.Forms.TextBox TxtNombre;
+        private System.Windows.Forms.Button BtnEliminarTraduccion;
+        private System.Windows.Forms.Button BtnGuardarCambiosTraducciones;
+        private System.Windows.Forms.DataGridView GridTraducciones;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button BtnGuardarCambiosLenguaje;
+        private System.Windows.Forms.Button BtnEliminarLenguaje;
+        private System.Windows.Forms.Button BtnAgregarLenguaje;
+        private System.Windows.Forms.Button TxtGuardarTodoYActualizar;
     }
 }

@@ -42,7 +42,15 @@ namespace Cinema.Business
             return _repo.GetAll(new { FechaDesde, FechaHasta } ).ToList();
         }
 
+        public List<Ticket> GetAllTickets()
+        {
+            return _repo.GetAll().ToList();
+        }
 
+        public void CreateTicket(Ticket ticket)
+        {
+            _repo.Insert(ticket);
+        }
 
 
     }

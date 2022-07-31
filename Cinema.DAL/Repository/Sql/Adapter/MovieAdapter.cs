@@ -1,5 +1,6 @@
 ﻿using Cinema.DAL.Interfaces;
 using Cinema.Domain;
+using Cinema.Domain.Extensions;
 using System;
 
 
@@ -11,11 +12,11 @@ namespace Cinema.DAL.Repository.Sql.Adapter
         {
             return new Movie()
             {
-                Id = Guid.Parse(values[0].ToString()),
+                Id = values[0].ToGuid(),
                 Name = values[1].ToString(),
                 Language = values[2].ToString(),
                 SubtitleLanguage = values[3].ToString(),
-                IsActive = bool.Parse(values[4].ToString()),
+                IsActive = values[4].StringToBoolean(),
                 Duration = int.Parse(values[5].ToString())
             };
         }

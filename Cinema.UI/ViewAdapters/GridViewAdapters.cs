@@ -74,7 +74,7 @@ namespace Cinema.UI.Extensions
 
             foreach (var ticket in tickets)
             {
-                dt.Rows.Add(new object[] { ticket.Id, ticket.CreationTime, ticket.Row, ticket.Seat, ticket.SessionId, ticket.CreatorUserId });
+                dt.Rows.Add(new object[] { ticket.Id, ticket.CreationTime, ticket.Row, ticket.SeatNumber, ticket.SessionId, ticket.CreatorUserId });
             }
 
             return dt;

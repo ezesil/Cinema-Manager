@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cinema.Domain.CustomFlags;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -9,27 +10,27 @@ namespace Cinema.Domain
 {
     public class Movie : Entity
     {
-        [Description("text_id")]
+        [VisibleOnGrid("text_movieid")]
         public Guid? Id { get; set; }
 
-        [Description("text_name")]
+        [VisibleOnGrid("text_moviename")]
         public string Name { get; set; }
 
-        [Description("text_language")]
+        [VisibleOnGrid("text_movielanguage")]
         public string Language { get; set; }
 
-        [Description("text_subtitlelanguage")]
+        [VisibleOnGrid("text_subtitlelanguage")]
         public string SubtitleLanguage { get; set; }
 
-        [Description("text_isactive")]
+        [VisibleOnGrid("text_isactive")]
         public bool IsActive { get; set; }
 
-        [Description("text_duration")]
+        [VisibleOnGrid("text_duration")]
         public int Duration { get; set; }
 
         public override string ToString()
         {
-            return Name;
+            return $"{Name}, {Language}, {(SubtitleLanguage == null || SubtitleLanguage == "" ? "Sin subtitulos" : SubtitleLanguage )}";
         }
 
     }

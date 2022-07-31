@@ -73,8 +73,6 @@ namespace Cinema.UI
             var logger = DependencyService.Get<Logger>();
             exhandler.OnExceptionHandled += logger.Log;
 
-            languageService.SetLanguage("es");
-
             //var user = new User()
             //{
             //    Id = Guid.NewGuid(),
