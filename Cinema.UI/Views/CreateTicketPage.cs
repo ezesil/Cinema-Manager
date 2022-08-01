@@ -14,6 +14,9 @@ using Cinema.UI.Extensions;
 
 namespace Cinema.UI.Views
 {
+    /// <summary>
+    /// Pagina de generacion de tickets para una sesion de una pelicula.
+    /// </summary>
     public partial class CreateTicketPage : UserControl
     {
         private Logger _logger;
@@ -30,6 +33,13 @@ namespace Cinema.UI.Views
         SeatMatrix seats;
         Seat CurrentSeat;
 
+        /// <summary>
+        /// Constructor con los servicios necesarios para operar.
+        /// </summary>
+        /// <param name="logger"></param>
+        /// <param name="exmanager"></param>
+        /// <param name="languageService"></param>
+        /// <param name="sessionService"></param>
         public CreateTicketPage(Logger logger,
             ExceptionHandler exmanager,
             LanguageService languageService,
@@ -67,6 +77,9 @@ namespace Cinema.UI.Views
             ClearAll();
         }
 
+        /// <summary>
+        /// Verificar si se puede proceder con la generacion del ticket. Si es correcto, el boton de creacion se habilitará.
+        /// </summary>
         public void CanSubmit()
         {
             if (ComboPeliculas.SelectedIndex != -1 && ComboDiaSesion.SelectedIndex != -1 && GridAsientos.SelectedCells.Count > 0)
@@ -108,6 +121,9 @@ namespace Cinema.UI.Views
             ComboDiaSesion.Items.AddRange(sessions.Where(x => x.MovieId == CurrentPelicula.Id).ToArray());
         }
 
+        /// <summary>
+        /// Devuelve todos los controles a su estado inicial.
+        /// </summary>
         public void ClearAll()
         {
             ClearPeliculas();
@@ -115,6 +131,11 @@ namespace Cinema.UI.Views
             ClearAsientos();
             BtnCrearTicket.Enabled = false;       
         }
+
+
+        /// <summary>
+        /// Devuelve los controles relacionados con las peliculas a su estado inicial.
+        /// </summary>
         public void ClearPeliculas()
         {
             ComboPeliculas.Items.Clear();
@@ -123,6 +144,10 @@ namespace Cinema.UI.Views
             ComboPeliculas.Text = "";
             BtnCrearTicket.Enabled = false;
         }
+
+        /// <summary>
+        /// Devuelve los controles relacionados con la fecha de la sesión a su estado inicial.
+        /// </summary>
         public void ClearDias()
         {
             ComboDiaSesion.Items.Clear();
@@ -131,6 +156,10 @@ namespace Cinema.UI.Views
             ComboDiaSesion.Text = "";
             BtnCrearTicket.Enabled = false;
         }
+
+        /// <summary>
+        /// Devuelve los asientos en pantalla a su estado inicial.
+        /// </summary>
         public void ClearAsientos()
         {
             seats.ClearOccupied();

@@ -8,6 +8,9 @@ using System.Windows.Forms;
 
 namespace Cinema.UI.Views
 {
+    /// <summary>
+    /// Contenedor para controles de usuario que contengan herramientas de administrador.
+    /// </summary>
     public partial class AdminPanel : UserControl
     {
         private Logger _logger;
@@ -22,6 +25,20 @@ namespace Cinema.UI.Views
         private LanguagesPanel _languagesPanel;
         private LogsPanel _logsPanel;
 
+        /// <summary>
+        /// Constructor que incluye los servicios necesarios del panel de administrador.
+        /// </summary>
+        /// <param name="navigationManager"></param>
+        /// <param name="logger"></param>
+        /// <param name="exmanager"></param>
+        /// <param name="sessionService"></param>
+        /// <param name="backupPanel"></param>
+        /// <param name="permissionsPanel"></param>
+        /// <param name="rolesPanel"></param>
+        /// <param name="usersPanel"></param>
+        /// <param name="checkerDigitPanel"></param>
+        /// <param name="languagesPanel"></param>
+        /// <param name="logsPanel"></param>
         public AdminPanel(
             NavigationManager navigationManager,
             Logger logger, 

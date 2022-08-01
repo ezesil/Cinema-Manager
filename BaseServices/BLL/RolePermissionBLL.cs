@@ -77,7 +77,7 @@ namespace BaseServices.BLL
         /// <summary>
         /// Permite eliminar un rol del sistema.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="R"></param>
         public void EliminarRolPermisoRelation(RolPermisoRelation R)
         {
             _repo.Delete(R);

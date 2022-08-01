@@ -7,8 +7,17 @@ using System.Windows.Forms;
 
 namespace Cinema.UI.Extensions
 {
+    /// <summary>
+    /// Clase con metodos de extension de ComboBox.
+    /// </summary>
     public static class ComboBoxExtensions
     {
+        /// <summary>
+        /// Obtiene el objeto original que fue agregado y seleccionado en la lista interna del ComboBox.
+        /// </summary>
+        /// <typeparam name="Tout"></typeparam>
+        /// <param name="e"></param>
+        /// <returns></returns>
         public static Tout GetSelectedObject<Tout>(this ComboBox e) where Tout : class
         {
             if(e.SelectedItem != null)

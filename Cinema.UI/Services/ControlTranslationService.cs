@@ -31,12 +31,20 @@ namespace Cinema.UI.Services
         private List<string> failedcodes = new List<string>();
         private Logger _logger;
         
+        /// <summary>
+        /// Constructor con servicios necesarios para operar.
+        /// </summary>
+        /// <param name="logger"></param>
+        /// <param name="translationService"></param>
         public ControlTranslationService(Logger logger, NavigationManager translationService)
         {
             translationService.OnNavigated += TriggerTranslation; 
             _logger = logger;
         }
 
+        /// <summary>
+        /// Indica a todos los formularios registrados que deben actualizar sus traducciones.
+        /// </summary>
         public void TriggerTranslation()
         {
             if(OnRefresh != null)

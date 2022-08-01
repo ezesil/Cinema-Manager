@@ -11,12 +11,23 @@ using System.Windows.Forms;
 
 namespace Cinema.UI.AdminViews
 {
+    /// <summary>
+    /// Panel de administracion del sistema de chequeo de integridad.
+    /// </summary>
     public partial class CheckerDigitPanel : UserControl
     {
         LanguageService _languageService { get; set; }
         IntegrityService _integrityService { get; set; }
         Logger _logger { get; set; }
         ExceptionHandler _exhandler { get; set; }
+
+        /// <summary>
+        /// Constructor con servicios necesarios para operar.
+        /// </summary>
+        /// <param name="languageService"></param>
+        /// <param name="integrityService"></param>
+        /// <param name="logger"></param>
+        /// <param name="exceptionHandler"></param>
         public CheckerDigitPanel(LanguageService languageService,
             IntegrityService integrityService,
             Logger logger,

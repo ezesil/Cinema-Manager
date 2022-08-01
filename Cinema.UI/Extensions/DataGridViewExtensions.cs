@@ -31,6 +31,7 @@ namespace Cinema.UI.Extensions
         /// </summary>
         /// <param name="grid"></param>
         /// <param name="cellClickEvent"></param>
+        /// <param name="bindingAction"></param>
         public static void SetupBehaviour(this DataGridView grid, DataGridViewCellEventHandler cellClickEvent = null, Func<DataGridView, object> bindingAction = null)
         {
             grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -272,6 +273,7 @@ namespace Cinema.UI.Extensions
         /// </summary>
         /// <param name="grid"></param>
         /// <param name="obj"></param>
+        /// <param name="checkflags"></param>
         public static void Add(this DataGridView grid, object obj, bool checkflags = true)
         {
             Type type = obj.GetType();

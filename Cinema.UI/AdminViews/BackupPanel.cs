@@ -12,10 +12,18 @@ using System.Windows.Forms;
 
 namespace Cinema.UI.AdminViews
 {
+    /// <summary>
+    /// Panel de administracion de backups y restauracion de backups.
+    /// </summary>
     public partial class BackupPanel : UserControl
     {
         LanguageService _languageService;
         BackupServices _backupServices;
+        /// <summary>
+        /// Constructor con servicios de inyeccion de dependencia.
+        /// </summary>
+        /// <param name="languageService"></param>
+        /// <param name="backupServices"></param>
         public BackupPanel(LanguageService languageService, BackupServices backupServices)
         {
             InitializeComponent();
