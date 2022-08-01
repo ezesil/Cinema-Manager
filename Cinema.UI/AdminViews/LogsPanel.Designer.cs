@@ -54,6 +54,7 @@
             this.BtnObtenerLogsLocales.TabIndex = 1;
             this.BtnObtenerLogsLocales.Text = "Obtener logs locales";
             this.BtnObtenerLogsLocales.UseVisualStyleBackColor = true;
+            this.BtnObtenerLogsLocales.Click += new System.EventHandler(this.BtnObtenerLogsLocales_Click);
             // 
             // BtnObtenerLogsBd
             // 
@@ -63,6 +64,7 @@
             this.BtnObtenerLogsBd.TabIndex = 2;
             this.BtnObtenerLogsBd.Text = "Obtener logs de base de datos";
             this.BtnObtenerLogsBd.UseVisualStyleBackColor = true;
+            this.BtnObtenerLogsBd.Click += new System.EventHandler(this.BtnObtenerLogsBd_Click);
             // 
             // TxtDetalleLog
             // 
@@ -78,6 +80,7 @@
             this.TxtFiltrar.Name = "TxtFiltrar";
             this.TxtFiltrar.Size = new System.Drawing.Size(251, 23);
             this.TxtFiltrar.TabIndex = 4;
+            this.TxtFiltrar.TextChanged += new System.EventHandler(this.TxtFiltrar_TextChanged);
             // 
             // label1
             // 

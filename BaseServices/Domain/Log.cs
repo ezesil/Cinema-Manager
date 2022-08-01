@@ -1,4 +1,5 @@
 ﻿using BaseServices.Services.Extensions;
+using Cinema.Domain.CustomFlags;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,17 +12,6 @@ namespace BaseServices.Domain
     /// </summary>
     public class Log
     {
-        /// <summary>
-        /// Mensaje del evento.
-        /// </summary>
-        public string Message { get; set; }
-
-        /// <summary>
-        /// Nivel de severidad del evento.
-        /// </summary>
-        public LogLevel SeverityLevel { get; set; }
-
-        public string SeverityName { get => SeverityLevel.ToTextCode(); }
 
         /// <summary>
         /// Constructor por defecto.
@@ -56,14 +46,40 @@ namespace BaseServices.Domain
         }
 
 
+        [VisibleOnGrid("text_date")]
+        public string Fecha { get; set; } = DateTime.Now.ToString();
 
+        /// <summary>
+        /// Mensaje del evento.
+        /// </summary>
+        [VisibleOnGrid("text_message")]
+        public string Message { get; set; } = "";
+
+
+        [VisibleOnGrid("text_severityname")]
+        public string SeverityName
+        {
+            get
+            {
+                return SeverityLevel.ToTextCode();
+            }
+            set
+            {
+                SeverityLevel = (LogLevel)Enum.Parse(typeof(LogLevel), value);
+            }
+        }
 
         /// <summary>
         /// Contiene informacion de la traza. Util para la depuracion.
         /// </summary>
-        public string StackTrace { get; set; }
+        [VisibleOnGrid("text_stacktrace")]
+        public string StackTrace { get; set; } = "";
 
-        public string Fecha { get; set; } = DateTime.Now.ToString();
+
+        /// <summary>
+        /// Nivel de severidad del evento.
+        /// </summary>
+        public LogLevel SeverityLevel { get; set; } = LogLevel.Unknown;
 
     }
 

@@ -154,7 +154,7 @@ namespace BaseServices.BLL
         /// <returns>Retorna un valor booleano.</returns>
         public bool CheckIntegrity()
         {
-            var listapersonas = (_userrepo as IGenericRepository<User, Guid>).GetAll().ToList();
+            var listapersonas = _userrepo.GetAll().ToList();
 
             if (CheckAccountsIntegrity(listapersonas) == true && CheckUsersIntegrity(listapersonas) == true)
                 return true;
@@ -170,7 +170,7 @@ namespace BaseServices.BLL
         {
             List<decimal> numeros = new List<decimal>();
 
-            foreach (var c in (_userrepo as IGenericRepository<User, Guid>).GetAll().ToList())
+            foreach (var c in (_userrepo).GetAll().ToList())
             {
                 numeros.Add(Convert.ToDecimal(c.DVH));
             }
@@ -184,7 +184,7 @@ namespace BaseServices.BLL
         /// <param name="c"></param>
         public void UpdateDVH(Guid Id)
         {
-            var user = (_userrepo as IGenericRepository<User, Guid>).GetOne(Id);
+            var user = _userrepo.GetOne(Id);
 
             _userrepo.UpdateDVH(Id, Convert.ToInt32(CalcularDVH(user)));
 
@@ -204,7 +204,7 @@ namespace BaseServices.BLL
 
             foreach (PropertyInfo prop in props)
             {
-                if(prop.Name.ToLower() != "dvh" || prop.Name.ToLower().Contains("dvh"))
+                if(prop.Name.ToLower() != "dvh" && !prop.Name.ToLower().Contains("dvh"))
                     sb.Append($"{ prop.Name }:{ prop.GetValue(obj) }\n");
             }
 

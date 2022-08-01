@@ -10,29 +10,29 @@ using BaseServices.Services.Extensions;
 
 namespace BaseServices.Services
 {
+    [Serializable]
+    public class GenericException : Exception
+    {
+        public GenericException() : base("Ocurrió un error desconocido, contacte al administrador. \nEl error fue registrado.")
+        {
+
+        }
+    }
+
+    [Serializable]
+    public class HandledException : Exception
+    {
+        public HandledException(string message) : base(message)
+        {
+
+        }
+    }
+
     /// <summary>
     /// Gestiona la recepcion de excepciones para su posterior manejo.
     /// </summary>
     public class ExceptionHandler
-    {
-        [Serializable]
-        private class GenericException : Exception
-        {
-            public GenericException() : base("Ocurrió un error desconocido, contacte al administrador. \nEl error fue registrado.")
-            {
-
-            }         
-        }
-
-        [Serializable]
-        private class HandledException : Exception
-        {
-            public HandledException(string message) : base(message)
-            {
-
-            }
-        }
-
+    {      
         private Dictionary<Type, string> _exceptions { get; set; }
 
         public delegate void LogEventHandler(string message, LogLevel severity = LogLevel.Low, string stacktrace = "");
@@ -71,9 +71,17 @@ namespace BaseServices.Services
         {
             try
             {
+                if (ex.GetType() == typeof(HandledException) || ex.GetType() == typeof(GenericException))
+                {
+                    return ex;
+                }
+
                 string? result = null;
                 if (_exceptions.TryGetValue(ex.GetType(), out result))
                 {
+                    if (OnExceptionHandled != null)
+                        OnExceptionHandled.Invoke(result == null ? ex.Message : result, ex.GetSeverityLevel(), ex.GetFullStackTrace());
+
                     return new HandledException(result);
                 }
                 else
@@ -81,7 +89,7 @@ namespace BaseServices.Services
                     var stacktrace = "";
 
                     if(OnExceptionHandled != null)
-                        OnExceptionHandled.Invoke(result, ex.GetSeverityLevel(), ex.GetFullStackTrace());
+                        OnExceptionHandled.Invoke(result == null ? ex.Message : result, ex.GetSeverityLevel(), ex.GetFullStackTrace());
 
                     return new GenericException();
                 }

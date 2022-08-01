@@ -73,22 +73,12 @@ namespace Cinema.UI
             var logger = DependencyService.Get<Logger>();
             exhandler.OnExceptionHandled += logger.Log;
 
-            //var user = new User()
-            //{
-            //    Id = Guid.NewGuid(),
-            //    Username = "admin",
-            //    Password = "administrador",
-            //    Email = "admin@admin.com",
-            //    FullName = "nombre",
-            //    Enabled = true,         
-            //    DNI = "40000000",
-            //};
-            //sessionService.RegisterUser(user);
-
             // Evita el chequeo si es true
-            bool chequeo = true;
+            bool chequeo = false;
             // modo de pruebas, si algo falla se logea como admin
-            bool debugmode = true;
+            bool debugmode = false;
+
+            integrityService.UpdateDVV(100);
 
             try
             {
@@ -105,16 +95,11 @@ namespace Cinema.UI
                     }
                 }
 
-                else if (chequeo)
+                if (chequeo)
                 {
                     if (autologinmode == "admin")
                     {
                         var res = sessionService.TryLogin("admin", "administrador");
-                    }
-
-                    else if (autologinmode == "recepcionista")
-                    {
-                        var res = sessionService.TryLogin("anuncianteprueba1", "descarga33");
                     }
             
                     Application.Run(homeform);           

@@ -40,7 +40,7 @@ namespace Cinema.UI.Views
             TxtUserEmail.Enabled = false;
             TxtPassword.Enabled = false;
             button1.Enabled = false;
-            await Task.Delay(2000);
+            //await Task.Delay(2000);
             try
             {
                 if (_sessionService.TryLogin(TxtUserEmail.Text, TxtPassword.Text))

@@ -38,7 +38,7 @@ namespace Cinema.UI.AdminViews
         private void BtnExaminarRestore_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Archivos de copia de seguridad | *.bak";
+            ofd.Filter = "Sql Server Backup Files (*.bak)|*.bak";
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {

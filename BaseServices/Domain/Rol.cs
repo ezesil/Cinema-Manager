@@ -1,4 +1,5 @@
 ﻿using BaseServices.BLL;
+using Cinema.Domain.CustomFlags;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,11 +38,13 @@ namespace BaseServices.Domain
         /// <summary>
         /// ID perteneciente al Rol.
         /// </summary>
+        [VisibleOnGrid("text_id")]
         public int Id { get; set; }
 
         /// <summary>
         /// Nombre perteneciente al rol.
         /// </summary>
+        [VisibleOnGrid("text_name")]
         public string Nombre { get; set; }
 
         /// <summary>

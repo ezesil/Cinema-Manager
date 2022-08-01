@@ -70,8 +70,5 @@ namespace BaseServices.Services
         {
             CheckDigitBLL.Current.UpdateDVH(id);
         }
-
-
-
     }
 }

@@ -23,6 +23,8 @@ namespace BaseServices.DAL.Repository.Sql
         { get => "INSERT INTO Usuario ([guid_usuario], [nombredeusuario], [contraseña], [emailprincipal], [habilitado], [DVH], [nombre_completo], [dni_usuario]) values (@Id, @Username, @Password, @Email, @Enabled, @DVH, @FullName, @DNI)"; }
         private static string UpdateQuery
         { get => "UPDATE Usuario SET [guid_usuario] = @Id, [nombredeusuario] = @Username, [contraseña] = @HashedPassword, [emailprincipal] = @Email, [habilitado] = @Enabled, [DVH] = @DVH, [nombre_completo] = @FullName, [dni_usuario] = @DNI"; }
+        private static string UpdateDVHQuery
+        { get => "UPDATE Usuario SET [DVH] = @DVH where guid_usuario = @Id"; }
         private static string SelectWhereUserQuery
         { get => "SELECT TOP(1) [guid_usuario], [nombredeusuario], [contraseña], [emailprincipal], [habilitado], [DVH], [nombre_completo], [dni_usuario] FROM [CinemaDB].[dbo].[Usuario] WHERE [nombredeusuario] = @Username"; }
         private static string SelectWhereEmailQuery
@@ -49,7 +51,7 @@ namespace BaseServices.DAL.Repository.Sql
 
         public int Delete(Guid Id) => base.Delete(new { Id });
 
-        public int UpdateDVH(Guid Id, int DVH) => base.Update(new { Id, DVH });
+        public int UpdateDVH(Guid Id, int DVH) => base.Update(new { Id, DVH }, UpdateDVHQuery);
 
         public User SelectUserDataByUsername(string Username) => base.GetOne(SelectWhereUserQuery, new { Username });
 

@@ -10,22 +10,41 @@ using System.Windows.Forms;
 using BaseServices.Domain;
 using BaseServices.Services;
 using Cinema.UI.Extensions;
+using Cinema.UI.Services;
 
 namespace Cinema.UI.AdminViews
 {
     public partial class RolesPanel : UserControl
     {
         RolePermissionManagementService _rolePermissionManagementService;
+        ExceptionHandler _exhandler;
+        ControlTranslationService _controlTranslationService;
+        LanguageService _languageService;
         Rol selectedRol;
         Permiso selectedPermiso;
         Permiso selectedPermisoRelation;
         Permiso comboSelectedPermiso;
 
-        public RolesPanel(RolePermissionManagementService rolePermissionManagementService)
+        public RolesPanel(RolePermissionManagementService rolePermissionManagementService,
+            ControlTranslationService controlTranslationService,
+            LanguageService languageService,
+            ExceptionHandler exhandler)
         {
             InitializeComponent();
             this.Name = "text_roles";
+
             _rolePermissionManagementService = rolePermissionManagementService;
+            _controlTranslationService = controlTranslationService;   
+            _languageService = languageService;
+            _exhandler = exhandler;
+
+            controlTranslationService.OnRefresh += () =>
+            {
+                controlTranslationService.TryTranslateForm(this);
+                GridPermisos.UpdateNames<Permiso>(x => _languageService.TranslateCode(x));
+                GridRelaciones.UpdateNames<Permiso>(x => _languageService.TranslateCode(x));
+            };
+
             GridRoles.SetupBehaviour(OnGridRoleClick);
             GridPermisos.SetupBehaviour(OnGridPermisoClick);
             GridRelaciones.SetupBehaviour(OnGridRelationClick);
@@ -35,8 +54,8 @@ namespace Cinema.UI.AdminViews
         {
             try
             {
-                (int Id, string Permiso, string Codigo) = GridRelaciones.GetCellValues<(int, string, string)>();
-                selectedPermisoRelation = new Permiso(Id, Codigo);
+                var permiso = GridRelaciones.GetCellValues<Permiso>();
+                selectedPermisoRelation = permiso;
             }
             catch (Exception ex)
             {
@@ -93,7 +112,7 @@ namespace Cinema.UI.AdminViews
             try
             {
                 GridRoles.Clear();
-                _rolePermissionManagementService.ObtenerListaDeRoles().ForEach(x => GridRoles.Add(new { x.Id, x.Nombre }));
+                _rolePermissionManagementService.ObtenerListaDeRoles().ForEach(x => GridRoles.Add(new { x.Id, x.Nombre }, false));
             }
             catch (Exception ex)
             {
@@ -198,7 +217,7 @@ namespace Cinema.UI.AdminViews
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show(_exhandler.Handle(ex).Message);
             }
         }
 
@@ -250,7 +269,7 @@ namespace Cinema.UI.AdminViews
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show(_exhandler.Handle(ex).Message);
             }
         }
     }

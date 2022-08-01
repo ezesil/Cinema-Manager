@@ -17,12 +17,12 @@ namespace Cinema.Domain
       
         public Guid? SessionId { get; set; }
 
-        public Guid? CreatorUserId { get; set; }
 
         public string MovieName { get => Movie == null ? "" : Movie.Name; }
 
         public string SessionDate { get => Session == null ? "" : Session.Date.ToString(); }
 
+        public Guid? CreatorUserId { get; set; }
 
         [VisibleOnGrid("text_creationtime")]
         public DateTime? CreationTime { get; set; }

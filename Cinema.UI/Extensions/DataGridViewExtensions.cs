@@ -237,7 +237,7 @@ namespace Cinema.UI.Extensions
             row.Add(value.ToString());
         }
 
-        public static List<PropertyInfo> GetVisibleProperties<T>(T obj = null) where T : class
+        public static List<PropertyInfo> GetVisibleProperties<T>(T obj = null, bool checkflags = true) where T : class
         {
             Type type;
 
@@ -248,15 +248,21 @@ namespace Cinema.UI.Extensions
 
             var props = new List<PropertyInfo>();
 
-            type.GetProperties().ToList().ForEach(x =>
-            {
-                var flag = x.GetFlag<VisibleOnGrid>();
+            if(checkflags)
+                type.GetProperties().ToList().ForEach(x =>
+                {
+                    var flag = x.GetFlag<VisibleOnGrid>();
 
-                if (flag == null)
-                    return;
+                    if (flag == null)
+                        return;
 
-                props.Add(x);
-            });
+                    props.Add(x);
+                });
+            else
+                type.GetProperties().ToList().ForEach(x =>
+                {
+                    props.Add(x);
+                });
 
             return props;
         }
@@ -266,25 +272,25 @@ namespace Cinema.UI.Extensions
         /// </summary>
         /// <param name="grid"></param>
         /// <param name="obj"></param>
-        public static void Add(this DataGridView grid, object obj)
+        public static void Add(this DataGridView grid, object obj, bool checkflags = true)
         {
             Type type = obj.GetType();
 
-            List<PropertyInfo> props = GetVisibleProperties(obj);
+            List<PropertyInfo> props = GetVisibleProperties(obj, checkflags);
 
-            if (grid.Tag == null)
+            if (grid.DataSource == null)
             {
-                grid.Tag = type;
-
                 DataTable dt = new DataTable();
 
                 foreach (var prop in props)
                 {
-                    var flag = prop.GetFlag<VisibleOnGrid>();
+                    VisibleOnGrid? flag = null;
+                    if(checkflags)
+                        prop.GetFlag<VisibleOnGrid>();
 
-                    //var header = flag != null && flag.Name != "" ? flag.Name : prop.Name;
+                    var header = flag == null || flag.Name == "" ? prop.Name : flag.Name;
 
-                    dt.Columns.Add(flag.Name);
+                    dt.Columns.Add(header);
                 }
 
                 var row = new List<string>();
@@ -327,7 +333,6 @@ namespace Cinema.UI.Extensions
         public static void Clear(this DataGridView grid)
         {
             grid.DataSource = null;
-            grid.Tag = null;
         }
 
         /// <summary>
@@ -341,7 +346,7 @@ namespace Cinema.UI.Extensions
         /// <param name="func"></param>
         public static void UpdateNames<T>(this DataGridView grid, Func<string, string> func = null) where T : class
         {
-            if (grid.Tag != null)
+            if (grid.Tag != null && grid.DataSource != null)
             {
                 var type = typeof(T);
 

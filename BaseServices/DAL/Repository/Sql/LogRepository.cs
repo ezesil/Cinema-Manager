@@ -39,6 +39,8 @@ namespace BaseServices.DAL.Repository.Sql
         /// <param name="log">Bitacora de tipo Log.</param>
         public void Insert(Log log)
         {
+            log.Message = log.Message == null ? "" : log.Message;
+            log.StackTrace = log.StackTrace == null ? "" : log.StackTrace;
             base.Insert(log);
         }
 

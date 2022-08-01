@@ -60,14 +60,14 @@
             // 
             // TxtIdEntidad
             // 
-            this.TxtIdEntidad.Location = new System.Drawing.Point(121, 47);
+            this.TxtIdEntidad.Location = new System.Drawing.Point(54, 68);
             this.TxtIdEntidad.Name = "TxtIdEntidad";
             this.TxtIdEntidad.Size = new System.Drawing.Size(100, 23);
             this.TxtIdEntidad.TabIndex = 2;
             // 
             // BtnRecalcularEntidad
             // 
-            this.BtnRecalcularEntidad.Location = new System.Drawing.Point(227, 46);
+            this.BtnRecalcularEntidad.Location = new System.Drawing.Point(163, 68);
             this.BtnRecalcularEntidad.Name = "BtnRecalcularEntidad";
             this.BtnRecalcularEntidad.Size = new System.Drawing.Size(75, 23);
             this.BtnRecalcularEntidad.TabIndex = 3;
@@ -78,17 +78,18 @@
             // 
             // BtnRecalcularUsuario
             // 
-            this.BtnRecalcularUsuario.Location = new System.Drawing.Point(375, 105);
+            this.BtnRecalcularUsuario.Location = new System.Drawing.Point(308, 169);
             this.BtnRecalcularUsuario.Name = "BtnRecalcularUsuario";
             this.BtnRecalcularUsuario.Size = new System.Drawing.Size(75, 23);
             this.BtnRecalcularUsuario.TabIndex = 7;
             this.BtnRecalcularUsuario.Tag = "text_recalculate";
             this.BtnRecalcularUsuario.Text = "Recalcular";
             this.BtnRecalcularUsuario.UseVisualStyleBackColor = true;
+            this.BtnRecalcularUsuario.Click += new System.EventHandler(this.BtnRecalcularUsuario_Click);
             // 
             // TxtUsuario
             // 
-            this.TxtUsuario.Location = new System.Drawing.Point(121, 105);
+            this.TxtUsuario.Location = new System.Drawing.Point(54, 169);
             this.TxtUsuario.Name = "TxtUsuario";
             this.TxtUsuario.Size = new System.Drawing.Size(248, 23);
             this.TxtUsuario.TabIndex = 6;
@@ -96,7 +97,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(65, 108);
+            this.label3.Location = new System.Drawing.Point(54, 151);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(50, 15);
             this.label3.TabIndex = 5;
@@ -106,7 +107,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(25, 87);
+            this.label4.Location = new System.Drawing.Point(25, 130);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(213, 15);
             this.label4.TabIndex = 4;

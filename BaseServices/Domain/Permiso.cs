@@ -1,4 +1,5 @@
 ﻿using BaseServices.Services.Extensions;
+using Cinema.Domain.CustomFlags;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -155,13 +156,24 @@ namespace BaseServices.Domain
         /// <summary>
         /// Codigo unico de permiso
         /// </summary>
+        [VisibleOnGrid("text_identifier")]
         public int Id { get; set; }
 
+        [VisibleOnGrid("text_permission")]
         public Permission? PermissionType { get; }
 
         /// <summary>
         /// Representa un codigo unico interno de permiso
         /// </summary>
+        [VisibleOnGrid("text_code")]
         public string Codigo { get; set; }
+
+
+        public override string ToString()
+        {
+            return Codigo;
+        }
+
+
     }
 }

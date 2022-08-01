@@ -51,7 +51,14 @@ namespace BaseServices.DAL.Repository.Sql
 
         public virtual int Delete(string query, object parameters)
         {
-            return Delete(parameters, query);
+            try
+            {
+                return Delete(parameters, query);
+            }
+            catch (Exception ex)
+            {
+                throw exceptionHandler.Handle(ex);
+            }
         }
         public virtual int Delete(object parameters, string queryOverride = "")
         {
@@ -78,8 +85,7 @@ namespace BaseServices.DAL.Repository.Sql
             }
             catch (Exception ex)
             {
-                exceptionHandler.Handle(ex);
-                throw;
+                throw exceptionHandler.Handle(ex);
             }
         }
 
@@ -159,8 +165,7 @@ namespace BaseServices.DAL.Repository.Sql
 
             catch (Exception ex)
             {
-                exceptionHandler.Handle(ex);
-                throw;
+                throw exceptionHandler.Handle(ex);
             }
         }
 
@@ -191,11 +196,9 @@ namespace BaseServices.DAL.Repository.Sql
                     }
                 }
             }
-
             catch (Exception ex)
-            {
-                exceptionHandler.Handle(ex);
-                throw;
+            {                
+                throw exceptionHandler.Handle(ex);
             }
         }
 
@@ -226,11 +229,9 @@ namespace BaseServices.DAL.Repository.Sql
                     }
                 }
             }
-
             catch (Exception ex)
             {
-                exceptionHandler.Handle(ex);
-                throw;
+                throw exceptionHandler.Handle(ex);
             }
         }
 

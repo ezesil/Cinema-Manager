@@ -75,6 +75,7 @@ namespace BaseServices.BLL.Logger
         {
             if(FileLog == null)
                 FileLog = FactoryDAL.FileLogRepository;
+
             FileLog.Insert(L);
         }
     }

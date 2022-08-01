@@ -16,7 +16,7 @@ namespace Cinema.UI.AdminViews
         LanguageService _languageService { get; set; }
         IntegrityService _integrityService { get; set; }
         Logger _logger { get; set; }
-        ExceptionHandler _exceptionHandler { get; set; }
+        ExceptionHandler _exhandler { get; set; }
         public CheckerDigitPanel(LanguageService languageService,
             IntegrityService integrityService,
             Logger logger,
@@ -30,12 +30,32 @@ namespace Cinema.UI.AdminViews
             _languageService = languageService;
             _integrityService = integrityService;
             _logger = logger;
-            _exceptionHandler = exceptionHandler;
+            _exhandler = exceptionHandler;
         }
 
         private void BtnRecalcularEntidad_Click(object sender, EventArgs e)
         {
-            //_integrityService.
+            try
+            {
+                _integrityService.UpdateDVV(int.Parse(TxtIdEntidad.Text));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(_exhandler.Handle(ex).Message);
+            }
+        }
+
+        private void BtnRecalcularUsuario_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _integrityService.UpdateDVH(Guid.Parse(TxtUsuario.Text));
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(_exhandler.Handle(ex).Message);
+            }
         }
     }
 }
