@@ -149,11 +149,12 @@ namespace BaseServices.BLL
             SaveSupportedLanguagesFile(item);
         }
 
-        public static void AddLanguageSupport(string shortname, string name)
+        public static void AddLanguageSupport(string shortname, string name, Dictionary<string, string> lang)
         {
             var item = GetSupportedLanguages();
             item[shortname] = name;
             SaveSupportedLanguagesFile(item);
+            SaveLanguageInFile(shortname, lang);
         }
 
 

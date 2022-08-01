@@ -71,7 +71,6 @@ namespace Cinema.UI
             var languageService = DependencyService.Get<LanguageService>();
             var exhandler = DependencyService.Get<ExceptionHandler>();
             var logger = DependencyService.Get<Logger>();
-            exhandler.OnExceptionHandled += logger.Log;
 
             // Evita el chequeo si es true
             bool chequeo = false;

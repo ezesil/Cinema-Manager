@@ -105,5 +105,78 @@ namespace BaseServices.Services
                 currentlanguage = ApplicationSettings.Instance.LastLanguage;
             }
         }
+
+        /// <summary>
+        /// Obtiene el lenguaje especificado si está cargado en memoria.
+        /// </summary>
+        /// <param name="shortname"></param>
+        /// <returns></returns>
+        public Dictionary<string, string> GetLanguageFromMemory(string shortname)
+        {
+            return LanguageBLL.GetLanguageFromMemory(shortname);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void ReloadLanguages()
+        {
+            LanguageBLL.ReloadLanguages();
+        }
+
+        /// <summary>
+        /// Obtiene el lenguaje especificado si existe el archivo.
+        /// </summary>
+        /// <param name="shortname"></param>
+        /// <returns></returns>
+        public Dictionary<string, string> GetLanguageFromFile(string shortname)
+        {
+            return LanguageBLL.GetLanguageFromFile(shortname);
+        }
+
+        /// <summary>
+        /// Aplica los cambios en memoria al lenguaje especificado. 
+        /// </summary>
+        /// <param name="shortname"></param>
+        /// <param name="lang"></param>
+        public void SaveLanguageInMemory(string shortname, Dictionary<string, string> lang)
+        {
+            LanguageBLL.SaveLanguageInMemory(shortname, lang);
+        }
+
+        /// <summary>
+        /// Guarda un archivo de idioma en el archivo correspondiente al lenguaje especificado.
+        /// </summary>
+        /// <param name="shortname"></param>
+        /// <param name="lang"></param>
+        public void SaveLanguageInFile(string shortname, Dictionary<string, string> lang)
+        {
+            LanguageBLL.SaveLanguageInFile(shortname, lang);
+        }
+
+        /// <summary>
+        /// Escribe el archivo de lenguajes soportados.
+        /// </summary>
+        /// <param name="lang"></param>
+        public void SaveSupportedLanguagesFile(Dictionary<string, string> lang)
+        {
+            LanguageBLL.SaveSupportedLanguagesFile(lang);
+        }
+
+        public void CreateLanguage(string shortname, string name)
+        {
+            LanguageBLL.CreateLanguage(shortname, name);
+        }
+
+
+        public void RemoveLanguageSupport(string shortname)
+        {
+            LanguageBLL.RemoveLanguageSupport(shortname);
+        }
+
+        public void AddLanguageSupport(string shortname, string name, Dictionary<string, string> lang)
+        {
+            LanguageBLL.AddLanguageSupport(shortname, name, lang);
+        }
     }
 }

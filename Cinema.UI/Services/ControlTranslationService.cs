@@ -39,7 +39,8 @@ namespace Cinema.UI.Services
 
         public void TriggerTranslation()
         {
-            OnRefresh.Invoke();
+            if(OnRefresh != null)
+                OnRefresh.Invoke();
         }
 
         /// <summary>
