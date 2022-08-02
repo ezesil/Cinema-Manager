@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace Cinema.DAL.Repository.Sql
 {
+    /// <summary>
+    /// Repositorio de salas.
+    /// </summary>
     public class RoomsRepository : SqlRepository<Room, RoomAdapter>, IGenericRepository<Room>
     {
         private static string DeleteQuery
@@ -27,34 +30,58 @@ namespace Cinema.DAL.Repository.Sql
         ExceptionHandler? _exhandler { get; set; }
         Logger? _logger { get; set; }
 
+        /// <summary>
+        /// Constructor por defecto sin párametros.
+        /// </summary>
         public RoomsRepository() : base(DeleteQuery, SelectAllQuery, SelectQuery, InsertQuery, UpdateQuery)
         {
             _exhandler = ServiceContainer.Instance.GetService<ExceptionHandler>();
             _logger = ServiceContainer.Instance.GetService<Logger>();
         }
 
-
+        /// <summary>
+        /// Borra una sala.
+        /// </summary>
+        /// <param name="guid"></param>
         public void Delete(Guid? guid)
         {
             base.Delete(new { Id = guid });
         }
 
+        /// <summary>
+        /// Obtiene todas las salas
+        /// </summary>
+        /// <param name="paramss"></param>
+        /// <returns></returns>
         public IEnumerable<Room> GetAll(object paramss = null)
         {
             return base.GetAll(paramss);
         }
 
+        /// <summary>
+        /// Obtiene una sala.
+        /// </summary>
+        /// <param name="guid"></param>
+        /// <returns></returns>
         public Room GetOne(Guid? guid)
         {
             return base.GetOne(new { Id = guid });
         }
 
+        /// <summary>
+        /// Inserta una sala.
+        /// </summary>
+        /// <param name="obj"></param>
         public void Insert(Room obj)
         {
             obj.Id = Guid.NewGuid();
             base.Insert(obj);
         }
 
+        /// <summary>
+        /// Actualiza una sala.
+        /// </summary>
+        /// <param name="obj"></param>
         public void Update(Room obj)
         {
             base.Update(obj);

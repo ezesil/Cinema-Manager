@@ -27,7 +27,9 @@ namespace Cinema.UI.Extensions
         };
 
         /// <summary>
-        /// Configura el comportamiento requerido para ajustar las columnas al tamaño del grid, al igual que el evento Click.
+        /// Configura el comportamiento requerido para ajustar las columnas al tamaño del grid, al igual que el evento Click y una accion
+        /// por defecto en el evento BindingComplete.
+        /// La accion por defecto provoca que todas las columnas se ajusten a su contenido, excepto la ultima.
         /// </summary>
         /// <param name="grid"></param>
         /// <param name="cellClickEvent"></param>

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace BaseServices.Services.Extensions
 {
+    /// <summary>
+    /// Extensiones de Exception.
+    /// </summary>
     public static class ExceptionExtensions
     {
         /// <summary>
@@ -80,11 +83,22 @@ namespace BaseServices.Services.Extensions
             return handlerName != null ? handlerName.ToString() : "UnknownObject";
         }
 
+        /// <summary>
+        /// Obtiene la traza COMPLETA de la exception. Esto incluye todas sus inner exceptions de forma recursiva.
+        /// </summary>
+        /// <param name="ex"></param>
+        /// <returns></returns>
         public static string GetFullStackTrace(this Exception ex)
         {
             return GetStackTraces(ex);
         }
 
+        /// <summary>
+        /// Algoritmo recursivo de obtencion de trazas.
+        /// </summary>
+        /// <param name="ex"></param>
+        /// <param name="trace"></param>
+        /// <returns></returns>
         private static string GetStackTraces(Exception ex, string? trace = "")
         {
             trace += ex.StackTrace; 

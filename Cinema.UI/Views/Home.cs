@@ -17,14 +17,24 @@ using System.Windows.Forms;
 
 namespace Cinema.UI.Views
 {
+    /// <summary>
+    /// Pagina principal y contenedor de los servicios de navegacion.
+    /// </summary>
     public partial class Home : Form
     {
         private NavigationManager _navigationManager;
         private SessionService _sessionService;
         private ControlTranslationService _controlTranslationService;
-        bool firstload = true;
+
+        /// <summary>
+        /// Constructor con servicios necesarios para operar.
+        /// </summary>
+        /// <param name="navigationManager"></param>
+        /// <param name="sessionService"></param>
+        /// <param name="controlTranslationService"></param>
         public Home(NavigationManager navigationManager,
-            SessionService sessionService, ControlTranslationService controlTranslationService)
+            SessionService sessionService, 
+            ControlTranslationService controlTranslationService)
         {
             InitializeComponent();
 
@@ -114,6 +124,9 @@ namespace Cinema.UI.Views
             }
         }
 
+        /// <summary>
+        /// Metodo utilizado en caso de login existoso. 
+        /// </summary>
         public void MenuOnLogin()
         {
             _navigationManager.ClearNavigationButtons();

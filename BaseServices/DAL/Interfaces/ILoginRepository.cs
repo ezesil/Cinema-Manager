@@ -10,7 +10,6 @@ namespace BaseServices.DAL.Interfaces
     /// <summary>
     /// Interfaz para los repositorios de cuentas de usuario.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
     internal interface IUserRepository : IGenericRepository<User, Guid>
     {           
         /// <summary>

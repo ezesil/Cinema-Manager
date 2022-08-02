@@ -9,8 +9,16 @@ using System.Threading.Tasks;
 
 namespace Cinema.DAL.Repository.Sql.Adapter
 {
+    /// <summary>
+    /// Adaptador de tickets.
+    /// </summary>
     public class TicketAdapter : IGenericAdapter<Ticket>
     {
+        /// <summary>
+        /// Adapta tickets a partir de un object[];
+        /// </summary>
+        /// <param name="values"></param>
+        /// <returns></returns>
         public Ticket Adapt(object[] values)
         {
             return new Ticket()

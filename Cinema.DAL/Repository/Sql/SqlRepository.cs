@@ -14,6 +14,11 @@ using System.Threading.Tasks;
 
 namespace Cinema.DAL.Repository.Sql
 {
+    /// <summary>
+    /// Clase abstracta que contiene la implementacion necesaria para el tratamiento de repositorios.
+    /// </summary>
+    /// <typeparam name="TEntity"></typeparam>
+    /// <typeparam name="TAdapter"></typeparam>
     public abstract class SqlRepository<TEntity, TAdapter>
         where TEntity : class, new()
         where TAdapter : IGenericAdapter<TEntity>, new()
@@ -28,11 +33,18 @@ namespace Cinema.DAL.Repository.Sql
 
         private TAdapter? genericAdapter { get; set; }
 
-        private ExceptionHandler exceptionHandler { get; }
-        private Logger logService { get; }
+        private ExceptionHandler? exceptionHandler { get; }
+        private Logger? logService { get; }
 
 
-
+        /// <summary>
+        /// Constructor por defecto para el funcionamiento basico de todas las querys.
+        /// </summary>
+        /// <param name="deleteQuery"></param>
+        /// <param name="selectAllQuery"></param>
+        /// <param name="selectQuery"></param>
+        /// <param name="insertQuery"></param>
+        /// <param name="updateQuery"></param>
         public SqlRepository(string deleteQuery, string selectAllQuery, string selectQuery, string insertQuery, string updateQuery)
         {
             DeleteQuery = deleteQuery;
@@ -45,6 +57,12 @@ namespace Cinema.DAL.Repository.Sql
             genericAdapter = new TAdapter();
         }
 
+        /// <summary>
+        /// Borra un objeto.
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <param name="queryOverride"></param>
+        /// <returns></returns>
         public virtual int Delete(object parameters, string queryOverride = "")
         {
             try
@@ -70,11 +88,16 @@ namespace Cinema.DAL.Repository.Sql
             }
             catch (Exception ex)
             {
-                exceptionHandler.Handle(ex);
-                throw;
+                throw exceptionHandler.Handle(ex);
             }
         }
 
+        /// <summary>
+        /// Obtiene todos los objetos.
+        /// </summary>
+        /// <param name="paramss"></param>
+        /// <param name="queryOverride"></param>
+        /// <returns></returns>
         public virtual IEnumerable<TEntity> GetAll(object paramss = null, string queryOverride = "")
         {
             var query = SelectAllQuery;
@@ -113,6 +136,12 @@ namespace Cinema.DAL.Repository.Sql
             }
         }
 
+        /// <summary>
+        /// Obtiene un objeto.
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <param name="queryOverride"></param>
+        /// <returns></returns>
         public virtual TEntity GetOne(object parameters, string queryOverride = "")
         {
             try
@@ -148,11 +177,16 @@ namespace Cinema.DAL.Repository.Sql
 
             catch (Exception ex)
             {
-                exceptionHandler.Handle(ex);
-                throw;
+                throw exceptionHandler.Handle(ex);
             }
         }
 
+        /// <summary>
+        /// Inserta un objeto.
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <param name="queryOverride"></param>
+        /// <returns></returns>
         public virtual int Insert(object parameters, string queryOverride = "")
         {
             var query = InsertQuery;
@@ -179,11 +213,16 @@ namespace Cinema.DAL.Repository.Sql
 
             catch (Exception ex)
             {
-                exceptionHandler.Handle(ex);
-                throw;
+                throw exceptionHandler.Handle(ex);
             }
         }
 
+        /// <summary>
+        /// Actualiza un objeto.
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <param name="queryOverride"></param>
+        /// <returns></returns>
         public virtual int Update(object parameters, string queryOverride = "")
         {
             try
@@ -210,11 +249,15 @@ namespace Cinema.DAL.Repository.Sql
 
             catch (Exception ex)
             {
-                exceptionHandler.Handle(ex);
-                throw;
+                throw exceptionHandler.Handle(ex);
             }
         }
 
+        /// <summary>
+        /// Obtiene un array de SqlParameter a partir de las propiedades del objeto especificado.
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         private SqlParameter[] GetParameters(object args)
         {
             Type myType = args.GetType();
@@ -234,6 +277,13 @@ namespace Cinema.DAL.Repository.Sql
 
             return parameters;
         }
+
+        /// <summary>
+        /// Obtiene un array de SqlParameter a partir de las propiedades del objeto especificado mientras se filtra por una query.
+        /// </summary>
+        /// <param name="args"></param>
+        /// <param name="query"></param>
+        /// <returns></returns>
         private SqlParameter[] GetParameters(object args, string query)
         {
             Type myType = args.GetType();

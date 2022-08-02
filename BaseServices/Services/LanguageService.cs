@@ -23,6 +23,9 @@ namespace BaseServices.Services
         /// </summary>
         public LanguageRefresh refresher;
 
+        /// <summary>
+        /// Constructor del ervicio de lenguajes.
+        /// </summary>
         public LanguageService()
         {
 
@@ -163,17 +166,32 @@ namespace BaseServices.Services
             LanguageBLL.SaveSupportedLanguagesFile(lang);
         }
 
+        /// <summary>
+        /// Crear lenguaje.
+        /// </summary>
+        /// <param name="shortname"></param>
+        /// <param name="name"></param>
         public void CreateLanguage(string shortname, string name)
         {
             LanguageBLL.CreateLanguage(shortname, name);
         }
 
 
+        /// <summary>
+        /// Remueve el soporte un lenguaje.
+        /// </summary>
+        /// <param name="shortname"></param>
         public void RemoveLanguageSupport(string shortname)
         {
             LanguageBLL.RemoveLanguageSupport(shortname);
         }
 
+        /// <summary>
+        /// Añade soporte a un lenguaje.
+        /// </summary>
+        /// <param name="shortname"></param>
+        /// <param name="name"></param>
+        /// <param name="lang"></param>
         public void AddLanguageSupport(string shortname, string name, Dictionary<string, string> lang)
         {
             LanguageBLL.AddLanguageSupport(shortname, name, lang);

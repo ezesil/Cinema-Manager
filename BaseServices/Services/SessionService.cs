@@ -14,14 +14,31 @@ namespace BaseServices.Services
     /// </summary>
     public class SessionService
     {
+        /// <summary>
+        /// Delegado para el manejo de eventos de Login.
+        /// </summary>
         public delegate void OnLoginEventHandler();
-        public event OnLoginEventHandler OnSuccessfulLogin;
 
+        /// <summary>
+        /// Evento de login exitoso.
+        /// </summary>
+        public event OnLoginEventHandler? OnSuccessfulLogin;
+
+        /// <summary>
+        /// Delegado para el manejo de eventos de Logout.
+        /// </summary>
         public delegate void OnLogoutEventHandler();
-        public event OnLogoutEventHandler OnSuccessfulLogout;
 
-        private IntegrityService _checkerDigitService;
+        /// <summary>
+        /// Evento de successful exitoso.
+        /// </summary>
+        public event OnLogoutEventHandler? OnSuccessfulLogout;
 
+        private IntegrityService? _checkerDigitService { get; set; }
+
+        /// <summary>
+        /// Constructor por defecto. 
+        /// </summary>
         public SessionService()
         {
             _checkerDigitService = ServiceContainer.Instance.GetService<IntegrityService>();
@@ -122,6 +139,11 @@ namespace BaseServices.Services
             }
         }
 
+        /// <summary>
+        /// Registra un usuario.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public bool RegisterUser(User user)
         {
             user.Password = HashingService.Current.HashPassword(user.Password);
@@ -129,6 +151,9 @@ namespace BaseServices.Services
             return SessionBLL.Current.RegisterUser(user);
         }
 
+        /// <summary>
+        /// Deslogea al usuario del sistema.
+        /// </summary>
         public void Logout()
         {
             SessionBLL.Current.Logout();

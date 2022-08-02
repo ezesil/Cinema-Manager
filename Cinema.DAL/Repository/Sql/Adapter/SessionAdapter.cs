@@ -8,8 +8,16 @@ using System.Threading.Tasks;
 
 namespace Cinema.DAL.Repository.Sql.Adapter
 {
+    /// <summary>
+    /// Adaptadores para sesiones.
+    /// </summary>
     public class SessionAdapter : IGenericAdapter<Session>
     {
+        /// <summary>
+        /// Adapta un objet[] a una sesion.
+        /// </summary>
+        /// <param name="values"></param>
+        /// <returns></returns>
         public Session Adapt(object[] values)
         {
             return new Session()

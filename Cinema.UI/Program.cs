@@ -74,10 +74,13 @@ namespace Cinema.UI
 
             // Evita el chequeo si es true
             bool chequeo = false;
-            // modo de pruebas, si algo falla se logea como admin
+            // Modo de pruebas, si algo falla se logea como admin
             bool debugmode = false;
 
-            integrityService.UpdateDVV(100);
+            //integrityService.UpdateDVH(Guid.Parse("2ff63cdf-5e8a-4ea3-9a8b-0503d373e7c0"));
+            //integrityService.UpdateDVV(100);
+
+
 
             try
             {

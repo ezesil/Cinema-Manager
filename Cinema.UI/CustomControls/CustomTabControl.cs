@@ -20,6 +20,9 @@ namespace Cinema.UI.CustomControls
         /// </summary>
         private System.ComponentModel.Container components = null;
 
+        /// <summary>
+        /// Constructor por defecto.
+        /// </summary>
         public CustomTabControl()
         {
             // This call is required by the Windows.Forms Form Designer.
@@ -87,6 +90,10 @@ namespace Cinema.UI.CustomControls
         //controls BackColor property so we need some clever manipulation.
 
         private Color m_Backcolor = Color.Empty;
+
+        /// <summary>
+        /// Color de fondo
+        /// </summary>
         [Browsable(true), Description("The background color used to display text and graphics in a control.")]
         public override Color BackColor
         {
@@ -110,10 +117,17 @@ namespace Cinema.UI.CustomControls
                 base.OnBackColorChanged(EventArgs.Empty);
             }
         }
+        /// <summary>
+        /// Revisa el color de fondo. Si se puede serializar, devuelve true. Sino, false.
+        /// </summary>
         public bool ShouldSerializeBackColor()
         {
             return !m_Backcolor.Equals(Color.Empty);
         }
+
+        /// <summary>
+        /// Reinicia el color de fondo;
+        /// </summary>
         public override void ResetBackColor()
         {
             m_Backcolor = Color.Empty;
@@ -121,21 +135,30 @@ namespace Cinema.UI.CustomControls
         }
 
         #endregion
-
+        /// <summary>
+        /// Evento en caso de que el color del parent cambie.
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnParentBackColorChanged(EventArgs e)
         {
             base.OnParentBackColorChanged(e);
             Invalidate();
         }
 
-
+        /// <summary>
+        /// Evento en cambio de indice.
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnSelectedIndexChanged(EventArgs e)
         {
             base.OnSelectedIndexChanged(e);
             Invalidate();
         }
 
-
+        /// <summary>
+        /// Evento de dibujado.
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
@@ -191,10 +214,16 @@ namespace Cinema.UI.CustomControls
 
         }
 
-
+        /// <summary>
+        /// Occurs as a tab is being changed.
+        /// </summary>
         [Description("Occurs as a tab is being changed.")]
         public event SelectedTabPageChangeEventHandler SelectedIndexChanging;
 
+        /// <summary>
+        /// Procesa mensajes de windows.
+        /// </summary>
+        /// <param name="m"></param>
         protected override void WndProc(ref Message m)
         {
             if (m.Msg == (WM_REFLECT + WM_NOTIFY))
@@ -232,13 +261,22 @@ namespace Cinema.UI.CustomControls
 
     }
 
-
+    /// <summary>
+    /// Argumentos de evento de cambio de pagina.
+    /// </summary>
     public class TabPageChangeEventArgs : EventArgs
     {
         private TabPage _Selected = null;
         private TabPage _PreSelected = null;
-        public bool Cancel = false;
 
+        /// <summary>
+        /// Indica si se canceló la navegacion.
+        /// </summary>
+        public bool Cancel { get; set; } = false;
+
+        /// <summary>
+        /// Pagina actual.
+        /// </summary>
         public TabPage CurrentTab
         {
             get
@@ -247,7 +285,9 @@ namespace Cinema.UI.CustomControls
             }
         }
 
-
+        /// <summary>
+        /// Proxima pagina.
+        /// </summary>
         public TabPage NextTab
         {
             get
@@ -256,7 +296,11 @@ namespace Cinema.UI.CustomControls
             }
         }
 
-
+        /// <summary>
+        /// Constructor para CustomTabControl.
+        /// </summary>
+        /// <param name="CurrentTab"></param>
+        /// <param name="NextTab"></param>
         public TabPageChangeEventArgs(TabPage CurrentTab, TabPage NextTab)
         {
             _Selected = CurrentTab;
@@ -266,7 +310,11 @@ namespace Cinema.UI.CustomControls
 
     }
 
-
+    /// <summary>
+    /// Delegado invocado cuando la pagina cambia.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     public delegate void SelectedTabPageChangeEventHandler(Object sender, TabPageChangeEventArgs e);
 
 }

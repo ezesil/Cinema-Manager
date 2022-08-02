@@ -25,6 +25,13 @@ namespace Cinema.UI.AdminViews
         Permiso selectedPermisoRelation;
         Permiso comboSelectedPermiso;
 
+        /// <summary>
+        /// Constructor por defecto con servicios necesarios para operar. Hecho para contenedor de inyeccion de dependencia.
+        /// </summary>
+        /// <param name="rolePermissionManagementService"></param>
+        /// <param name="controlTranslationService"></param>
+        /// <param name="languageService"></param>
+        /// <param name="exhandler"></param>
         public RolesPanel(RolePermissionManagementService rolePermissionManagementService,
             ControlTranslationService controlTranslationService,
             LanguageService languageService,

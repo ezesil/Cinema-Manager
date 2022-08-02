@@ -6,8 +6,16 @@ using System;
 
 namespace Cinema.DAL.Repository.Sql.Adapter
 {
+    /// <summary>
+    /// Adapta un object[] a pelicula.
+    /// </summary>
     public class MovieAdapter : IGenericAdapter<Movie>
     {
+        /// <summary>
+        /// Adapta un obet
+        /// </summary>
+        /// <param name="values"></param>
+        /// <returns></returns>
         public Movie Adapt(object[] values)
         {
             return new Movie()

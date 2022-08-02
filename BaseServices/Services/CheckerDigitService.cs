@@ -16,6 +16,9 @@ namespace BaseServices.Services
     /// </summary>
     public class IntegrityService
     {
+        /// <summary>
+        /// Constructor por defecto sin parametros.
+        /// </summary>
         public IntegrityService()
         {
 
@@ -30,6 +33,11 @@ namespace BaseServices.Services
             return CheckDigitBLL.Current.CalculateDVH(cadena);
         }
 
+        /// <summary>
+        /// Calcula y debuggea el digito veriticador
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public decimal CalcularDVH(object obj)
         {         
             return CheckDigitBLL.Current.CalcularDVH(obj);

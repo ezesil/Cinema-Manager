@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Cinema.DAL.Interfaces
 {
+    /// <summary>
+    /// Repositorio generico.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IGenericRepository<T> where T : class, new()
     {
         /// <summary>
@@ -29,14 +33,14 @@ namespace Cinema.DAL.Interfaces
         /// <summary>
         /// Obtiene un registro del repositorio.
         /// </summary>
-        /// <param name="g"></param>
+        /// <param name="guid"></param>
         /// <returns></returns>
         T GetOne(Guid? guid);
 
         /// <summary>
         /// Elimina un registro del repositorio.
         /// </summary>
-        /// <param name="g"></param>
+        /// <param name="guid"></param>
         void Delete(Guid? guid);
     }
 }

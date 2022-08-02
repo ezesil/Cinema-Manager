@@ -61,7 +61,9 @@ namespace BaseServices.Domain
     /// </summary>
     public enum RoleType
     {
-
+        /// <summary>
+        /// Ninguno.
+        /// </summary>
         None,
 
         /// <summary>

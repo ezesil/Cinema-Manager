@@ -14,6 +14,11 @@ using System.Threading.Tasks;
 
 namespace BaseServices.DAL.Repository.Sql
 {
+    /// <summary>
+    /// Clase abstracta que contiene la implementacion necesaria para el tratamiento de repositorios.
+    /// </summary>
+    /// <typeparam name="TEntity"></typeparam>
+    /// <typeparam name="TAdapter"></typeparam>
     public abstract class SqlRepository<TEntity, TAdapter>
         where TEntity : class, new()
         where TAdapter : IGenericAdapter<TEntity>, new()
@@ -28,13 +33,21 @@ namespace BaseServices.DAL.Repository.Sql
 
         private TAdapter? genericAdapter { get; set; }
 
-        private ExceptionHandler exceptionHandler { get; }
-        private Logger logService { get; }
+        private ExceptionHandler? exceptionHandler { get; }
+        private Logger? logService { get; }
 
         private RepoType RepositoryType { get; set; }
 
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="deleteQuery"></param>
+        /// <param name="selectAllQuery"></param>
+        /// <param name="selectQuery"></param>
+        /// <param name="insertQuery"></param>
+        /// <param name="updateQuery"></param>
+        /// <param name="type"></param>
         public SqlRepository(string deleteQuery, string selectAllQuery, string selectQuery, string insertQuery, string updateQuery, RepoType type = RepoType.Cinema)
         {
             RepositoryType = type;
@@ -48,7 +61,12 @@ namespace BaseServices.DAL.Repository.Sql
             genericAdapter = new TAdapter();
         }
 
-
+        /// <summary>
+        /// Metodo para borrar un objeto.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public virtual int Delete(string query, object parameters)
         {
             try
@@ -60,6 +78,13 @@ namespace BaseServices.DAL.Repository.Sql
                 throw exceptionHandler.Handle(ex);
             }
         }
+
+        /// <summary>
+        /// Metodo para borrar una base de datos.
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <param name="queryOverride"></param>
+        /// <returns></returns>
         public virtual int Delete(object parameters, string queryOverride = "")
         {
             try
@@ -89,6 +114,12 @@ namespace BaseServices.DAL.Repository.Sql
             }
         }
 
+        /// <summary>
+        /// Obtiene todos los elementos especificados en la query.
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <param name="queryOverride"></param>
+        /// <returns></returns>
         public virtual IEnumerable<TEntity> GetAll(object parameters = null, string queryOverride = "")
         {
             var query = SelectAllQuery;
@@ -119,11 +150,23 @@ namespace BaseServices.DAL.Repository.Sql
             }
         }
 
-
+        /// <summary>
+        /// Obtiene un elemento de la base de datos.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public virtual TEntity GetOne(string query, object parameters)
         {
             return GetOne(parameters, query);
         }
+
+        /// <summary>
+        /// Obtiene un elemento de la base de datos.
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <param name="queryOverride"></param>
+        /// <returns></returns>
         public virtual TEntity GetOne(object parameters, string queryOverride = "")
         {
             try
@@ -169,10 +212,23 @@ namespace BaseServices.DAL.Repository.Sql
             }
         }
 
+        /// <summary>
+        /// Inserta un objeto en la base de datos.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public virtual int Insert(string query, object parameters)
         {
             return Insert(parameters, query);
         }
+
+        /// <summary>
+        /// Inserta un objeto en la base de datos.
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <param name="queryOverride"></param>
+        /// <returns></returns>
         public virtual int Insert(object parameters, string queryOverride = "")
         {
             var query = InsertQuery;
@@ -202,10 +258,23 @@ namespace BaseServices.DAL.Repository.Sql
             }
         }
 
+        /// <summary>
+        /// Actualiza un objeto en la base de datos.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public virtual int Update(string query, object parameters)
         {
             return Update(parameters, query);
         }
+
+        /// <summary>
+        /// Actualiza un objeto en la base de datos.
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <param name="queryOverride"></param>
+        /// <returns></returns>
         public virtual int Update(object parameters, string queryOverride = "")
         {
             try
@@ -235,6 +304,12 @@ namespace BaseServices.DAL.Repository.Sql
             }
         }
 
+        /// <summary>
+        /// Ejecuta un procedimiento almacenado.
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <param name="storedName"></param>
+        /// <returns></returns>
         public bool ExecuteStoreProcedure(SqlParameter[] parameters, string storedName)
         {
             Object[] values;
@@ -255,6 +330,9 @@ namespace BaseServices.DAL.Repository.Sql
 
     }
 
+    /// <summary>
+    /// Clase estatica con herramientas para obtener los parametros necesarios de un objeto, utilizando opcionalmente su query para la filtracion.
+    /// </summary>
     public static class SqlRepository
     {
         private static string connString { get => ApplicationSettings.Instance.SqlConnString; }
@@ -296,6 +374,13 @@ namespace BaseServices.DAL.Repository.Sql
             return parameters.ToArray();
         }
 
+        /// <summary>
+        /// Ejecuta un procedimiento almacenado.
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <param name="storedName"></param>
+        /// <param name="connectionString"></param>
+        /// <returns></returns>
         public static bool ExecuteStoreProcedure(object parameters, string storedName, string connectionString = null)
         {
             Object[] values;
@@ -317,9 +402,19 @@ namespace BaseServices.DAL.Repository.Sql
         }
     }
 
+    /// <summary>
+    /// Representa un tipo de repositorio.
+    /// </summary>
     public enum RepoType
     {
+        /// <summary>
+        /// Repositorio de tipo Cine.
+        /// </summary>
         Cinema,
+
+        /// <summary>
+        /// Repositorio de Logs.
+        /// </summary>
         Log
     }
 }

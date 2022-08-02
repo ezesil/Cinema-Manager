@@ -11,6 +11,9 @@ using System.Windows.Forms;
 
 namespace Cinema.UI.Services
 {
+    /// <summary>
+    /// Clase para la gestion de navegadocion en un formulario.
+    /// </summary>
     public class NavigationManager
     {
         private UserControl? _currentUserControl;
@@ -26,14 +29,40 @@ namespace Cinema.UI.Services
 
         private List<Button>? _currentButtons;
 
+        /// <summary>
+        /// Delegado despues de navegar.
+        /// </summary>
         public delegate void OnNavigatedEvent();
+
+        /// <summary>
+        /// Evento despues de navegar.
+        /// </summary>
         public event OnNavigatedEvent OnNavigated;
 
+        /// <summary>
+        /// Delegado antes de navegar.
+        /// </summary>
         public delegate void BeforeNavigatingEvent();
+
+        /// <summary>
+        /// Evento antes de navegar.
+        /// </summary>
         public event BeforeNavigatingEvent BeforeNavigating;
 
+        /// <summary>
+        /// Servicio de sessiones.
+        /// </summary>
         private SessionService _sessionService;
 
+        /// <summary>
+        /// Inicializa el servicio de gestion de navegacion con todos los parametros necesarios.
+        /// </summary>
+        /// <param name="currentform"></param>
+        /// <param name="navMenuContainer"></param>
+        /// <param name="userControlContainer"></param>
+        /// <param name="sessionService"></param>
+        /// <param name="currentPanel"></param>
+        /// <returns></returns>
         public NavigationManager Setup(Home currentform, SplitterPanel navMenuContainer, SplitterPanel userControlContainer, SessionService sessionService = null, UserControl? currentPanel = null)
         {
             _userControlContainer = userControlContainer;
@@ -52,6 +81,10 @@ namespace Cinema.UI.Services
             return this;
         }
 
+        /// <summary>
+        /// Setea el container que va a utilizarse como header del formulario.
+        /// </summary>
+        /// <param name="headerContainer"></param>
         public void SetHeaderContainer(SplitterPanel headerContainer)
         {
             _currentHeaderContainer = headerContainer;
@@ -61,6 +94,10 @@ namespace Cinema.UI.Services
             headerContainer.Controls.Add(_currentHeader);
         }
 
+        /// <summary>
+        /// Setea el titulo del header de paginas.
+        /// </summary>
+        /// <param name="name"></param>
         public void SetHeaderTitle(string name)
         {
             if (_currentHeaderContainer == null || _currentHeader == null)
@@ -69,11 +106,25 @@ namespace Cinema.UI.Services
             _currentHeader.SetHeaderTitle(name);
         }
 
+        /// <summary>
+        /// Navega a la pagina especificada en su tipo generico.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public T? NavigateTo<T>(object? args) where T : UserControl
         {
             return NavigateTo<T>(null, args);
         }
 
+        /// <summary>
+        /// Navega a la pagina especificada en su tipo generico.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="canNavigateVerifier"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public T? NavigateTo<T>(Func<SessionService, bool> canNavigateVerifier = null, object? args = null) where T : UserControl
         {
             if(canNavigateVerifier != null && _sessionService != null)
@@ -133,6 +184,10 @@ namespace Cinema.UI.Services
             }
         }
 
+        /// <summary>
+        /// Activa un boton.
+        /// </summary>
+        /// <param name="button"></param>
         public void EnableButton(Button button)
         {
             // Color de texto ~violeta/gris
@@ -143,6 +198,10 @@ namespace Cinema.UI.Services
             button.Enabled = true;
         }
 
+        /// <summary>
+        /// Desactiva un boton.
+        /// </summary>
+        /// <param name="button"></param>
         public void DisableButton(Button button)
         {
             button.BackColor = Color.FromArgb(33, 150, 243);
@@ -150,11 +209,24 @@ namespace Cinema.UI.Services
             button.Enabled = false;
         }
 
+        /// <summary>
+        /// Navegacion asincronica.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public async Task NavigateToAsync<T>() where T : UserControl
         {
             await Task.Run(() => NavigateTo<T>());
         }
 
+        /// <summary>
+        /// Crea un boton con las acciones por defecto del controlador.
+        /// </summary>
+        /// <param name="handler"></param>
+        /// <param name="name"></param>
+        /// <param name="buttontag"></param>
+        /// <param name="colorOverride"></param>
+        /// <returns></returns>
         public Button CreateButton(EventHandler handler, string name, string buttontag = "", Color? colorOverride = null)
         {
             if (_currentButtons == null || _currentButtons.Count == 0)
@@ -199,6 +271,11 @@ namespace Cinema.UI.Services
             }
         }
 
+        /// <summary>
+        /// Obtiene un boton de navegacion.
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
         private Button GetNavigationButton(int position = 0)
         {
             Button button = new Button();
@@ -221,6 +298,9 @@ namespace Cinema.UI.Services
             return button;
         }
 
+        /// <summary>
+        /// Borra todos los botones de un menu.
+        /// </summary>
         public void ClearNavigationButtons()
         {
             foreach (var button in _currentButtons)
@@ -230,6 +310,9 @@ namespace Cinema.UI.Services
             _currentButtons.Clear();
         }
 
+        /// <summary>
+        /// Metodo que indica que la 
+        /// </summary>
         public void MenuOnLogin()
         {
             _currentForm.MenuOnLogin();

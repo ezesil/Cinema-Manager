@@ -10,16 +10,37 @@ using Cinema.Domain.Extensions;
 
 namespace Cinema.Domain
 {
+    /// <summary>
+    /// Representa una matriz de asientos.
+    /// </summary>
     public class SeatMatrix
     {
+        /// <summary>
+        /// Lista de objetos de la matriz.
+        /// </summary>
         public Seat[][] Items { get; set; }
 
+        /// <summary>
+        /// Cantidad de filas
+        /// </summary>
         public int RowsCount { get => Items.Length; }
 
+        /// <summary>
+        /// Cantidad de columnas.
+        /// </summary>
         public int ColumnsCount { get => Items[0].Length; }
 
+        /// <summary>
+        /// Indica si contiene una lista interna de colecciones.
+        /// </summary>
         public bool ContainsListCollection => false;
 
+        /// <summary>
+        /// Constructor por defecto de la matriz.
+        /// </summary>
+        /// <param name="rows"></param>
+        /// <param name="columns"></param>
+        /// <param name="translator"></param>
         public SeatMatrix(int rows, int columns, Func<string, string> translator = null)
         {
             Items = new Seat[rows][];
@@ -39,6 +60,9 @@ namespace Cinema.Domain
             }
         }
 
+        /// <summary>
+        /// Limpia los asientos ocupados.
+        /// </summary>
         public void ClearOccupied()
         {
             for (var i = 0; i < Items.Length; i++)
@@ -50,6 +74,10 @@ namespace Cinema.Domain
             }
         }
 
+        /// <summary>
+        /// Convierte la matriz actual en DataTable.
+        /// </summary>
+        /// <returns></returns>
         public DataTable ToDataTable()
         {
             DataTable dt = new DataTable();

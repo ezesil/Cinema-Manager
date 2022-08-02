@@ -8,8 +8,16 @@ using System.Threading.Tasks;
 
 namespace BaseServices.DAL.Repository.Sql.Adapter
 {
+    /// <summary>
+    /// Adaptador para usuarios.
+    /// </summary>
     public class UserAdapter : IGenericAdapter<User>
     {
+        /// <summary>
+        /// Metodo para adaptar un objeto a un usuario.
+        /// </summary>
+        /// <param name="values"></param>
+        /// <returns></returns>
         public User Adapt(object[] values)
         {
             try

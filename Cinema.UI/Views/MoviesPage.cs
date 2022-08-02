@@ -14,11 +14,18 @@ using Cinema.UI.Extensions;
 
 namespace Cinema.UI.Views
 {
+    /// <summary>
+    /// Pagina de peliculas.
+    /// </summary>
     public partial class MoviesPage : UserControl
     {
         private Guid? currentMovieGuid;
         private LanguageService _languageService;
 
+        /// <summary>
+        /// Constructor por defecto.
+        /// </summary>
+        /// <param name="languageService"></param>
         public MoviesPage(LanguageService languageService)
         {
             InitializeComponent();

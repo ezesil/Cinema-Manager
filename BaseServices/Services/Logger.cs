@@ -38,7 +38,9 @@ namespace BaseServices.Services
         /// <summary>
         /// Permite el registro de eventos en ambos origenes de datos (Archivo plano y Sql Server).
         /// </summary>
-        /// <param name="L">Registro del evento.</param>
+        /// <param name="message"></param>
+        /// <param name="severity"></param>
+        /// <param name="stackTrace"></param>
         public void Log(string message, LogLevel severity = LogLevel.Low, string stackTrace = "")
         {
             var L = new Log(message, severity, stackTrace);

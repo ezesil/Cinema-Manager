@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace Cinema.DAL.Repository.Sql
 {
+    /// <summary>
+    /// Repositorio de tickets.
+    /// </summary>
     public class TicketsRepository : SqlRepository<Ticket, TicketAdapter>, IGenericRepository<Ticket>
     {
         private static string DeleteQuery
@@ -47,22 +50,39 @@ namespace Cinema.DAL.Repository.Sql
         ExceptionHandler? _exhandler { get; set; }
         Logger? _logger { get; set; }
 
+        /// <summary>
+        /// Constructor por defecto sin parametros.
+        /// </summary>
         public TicketsRepository() : base(DeleteQuery, SelectAllQuery, SelectQuery, InsertQuery, UpdateQuery)
         {
             _exhandler = ServiceContainer.Instance.GetService<ExceptionHandler>();
             _logger = ServiceContainer.Instance.GetService<Logger>();
         }
 
+        /// <summary>
+        /// Inserta un ticket.
+        /// </summary>
+        /// <param name="obj"></param>
         public void Insert(Ticket obj)
         {
             base.Insert(obj);
         }
 
+        /// <summary>
+        /// Actualiza un ticket.
+        /// </summary>
+        /// <param name="obj"></param>
         public void Update(Ticket obj)
         {
             base.Update(obj);
         }
 
+        /// <summary>
+        /// Obtiene todos los tickets. Puede recibir un objeto anonimo que incluya los siguientes parametros
+        /// para filtrar la busqueda: FechaDesde y FechaHasta.
+        /// </summary>
+        /// <param name="paramss"></param>
+        /// <returns></returns>
         public IEnumerable<Ticket> GetAll(object paramss = null)
         {
             if (paramss == null)
@@ -71,11 +91,20 @@ namespace Cinema.DAL.Repository.Sql
             return base.GetAll(paramss);
         }
 
+        /// <summary>
+        /// Obtiene un ticket.
+        /// </summary>
+        /// <param name="guid"></param>
+        /// <returns></returns>
         public Ticket GetOne(Guid? guid)
         {
             return base.GetOne(new { Id = guid });
         }
 
+        /// <summary>
+        /// Elimina un ticket.
+        /// </summary>
+        /// <param name="guid"></param>
         public void Delete(Guid? guid)
         {
             base.Delete(new { Id = guid });

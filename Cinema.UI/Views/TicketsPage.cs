@@ -14,9 +14,17 @@ using System.Windows.Forms;
 
 namespace Cinema.UI.Views
 {
+    /// <summary>
+    /// Pagina de tickets.
+    /// </summary>
     public partial class TicketsPage : UserControl
     {
         LanguageService _languageService;
+
+        /// <summary>
+        /// Constructor por defecto sin parametros.
+        /// </summary>
+        /// <param name="languageService"></param>
         public TicketsPage(LanguageService languageService)
         {
             InitializeComponent();
@@ -34,15 +42,8 @@ namespace Cinema.UI.Views
 
         private void TicketsPage_Load(object sender, EventArgs e)
         {
-            GridPrincipal.SetupBehaviour(RowClick);
+            GridPrincipal.SetupBehaviour();
         }
 
-        private void RowClick(object sender, DataGridViewCellEventArgs e)
-        {
-           
-
-
-
-        }
     }
 }

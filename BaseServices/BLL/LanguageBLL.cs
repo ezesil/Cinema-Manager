@@ -126,6 +126,11 @@ namespace BaseServices.BLL
             langrepo.WriteSupportedLanguagesFile(lang);
         }
 
+        /// <summary>
+        /// Crea un lenguaje.
+        /// </summary>
+        /// <param name="shortname"></param>
+        /// <param name="name"></param>
         public static void CreateLanguage(string shortname, string name)
         {
             Dictionary<string, string> lang = new Dictionary<string, string>();
@@ -135,12 +140,18 @@ namespace BaseServices.BLL
             SaveSupportedLanguagesFile(item);           
         }
 
+        /// <summary>
+        /// Recarga los lenguajes en memoria desde los archivos en disco.
+        /// </summary>
         public static void ReloadLanguages()
         {
             Init();
         }
 
-
+        /// <summary>
+        /// Elimina el soporte de un lenguaje.
+        /// </summary>
+        /// <param name="shortname"></param>
         public static void RemoveLanguageSupport(string shortname)
         {
             var item = GetSupportedLanguages();
@@ -149,6 +160,12 @@ namespace BaseServices.BLL
             SaveSupportedLanguagesFile(item);
         }
 
+        /// <summary>
+        /// Añade soporte a un lenguaje agregandolo a la lista y creando su archivo de lenguaje.
+        /// </summary>
+        /// <param name="shortname"></param>
+        /// <param name="name"></param>
+        /// <param name="lang"></param>
         public static void AddLanguageSupport(string shortname, string name, Dictionary<string, string> lang)
         {
             var item = GetSupportedLanguages();

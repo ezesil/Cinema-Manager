@@ -14,12 +14,20 @@ using System.Windows.Forms;
 
 namespace Cinema.UI.Views
 {
+    /// <summary>
+    /// Pagina de sesiones.
+    /// </summary>
     public partial class SessionsPage : UserControl
     {
-        private LanguageService _languageService;
-        private Session selectedSession;
-        private Room currentRoom;
-        private Movie currentMovie;
+        private LanguageService? _languageService;
+        private Session? selectedSession;
+        private Room? currentRoom;
+        private Movie? currentMovie;
+
+        /// <summary>
+        /// Constructor por defecto con los servicios necesarios para operar. Hecha para inyeccion de dependencia.
+        /// </summary>
+        /// <param name="languageService"></param>
         public SessionsPage(LanguageService languageService)
         {
             InitializeComponent();

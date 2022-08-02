@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Cinema.Business
 {
+    /// <summary>
+    /// Clase singleton para logica de salas.
+    /// </summary>
     public class RoomsBLL
     {
         private readonly IGenericRepository<Room> _repo = FactoryDAL.RoomRepository;
@@ -36,27 +39,47 @@ namespace Cinema.Business
         }
         #endregion
 
-
+        /// <summary>
+        /// Obtiene todas las salas.
+        /// </summary>
+        /// <returns></returns>
         public List<Room> GetAllRooms()
         {
             return _repo.GetAll().ToList();
         }
 
+        /// <summary>
+        /// Obtiene una sala.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Room GetRoom(Guid? id)
         {
             return _repo.GetOne(id);
         }
 
+        /// <summary>
+        /// Crea una sala.
+        /// </summary>
+        /// <param name="room"></param>
         public void CreateRoom(Room room)
         {
             _repo.Insert(room);
         }
 
+        /// <summary>
+        /// Actualiza una sala.
+        /// </summary>
+        /// <param name="room"></param>
         public void UpdateRoom(Room room)
         {
             _repo.Update(room);
         }
 
+        /// <summary>
+        /// Borra una sala.
+        /// </summary>
+        /// <param name="roomid"></param>
         public void DeleteRoom(Guid? roomid)
         {
             _repo.Delete(roomid);

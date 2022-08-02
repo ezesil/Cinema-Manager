@@ -45,7 +45,9 @@ namespace BaseServices.Domain
             this.StackTrace = StackTrace;
         }
 
-
+        /// <summary>
+        /// Fecha de creacion de la bitacora. 
+        /// </summary>
         [VisibleOnGrid("text_date")]
         public string Fecha { get; set; } = DateTime.Now.ToString();
 
@@ -55,7 +57,9 @@ namespace BaseServices.Domain
         [VisibleOnGrid("text_message")]
         public string Message { get; set; } = "";
 
-
+        /// <summary>
+        /// Nivel de severidad en formato de texto.
+        /// </summary>
         [VisibleOnGrid("text_severityname")]
         public string SeverityName
         {

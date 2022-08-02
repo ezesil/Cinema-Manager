@@ -109,19 +109,37 @@ namespace BaseServices.Domain
         [Description("Cinema.Administrator.UsersPanel")]
         UsersPanel
     }
+
+    /// <summary>
+    /// Traductor de nombres de permisos.
+    /// </summary>
     public static class PermissionTranslator
     {
+        /// <summary>
+        /// Lista interna de permisos.
+        /// </summary>
         public static Dictionary<string, Permission?> permissions = new Dictionary<string, Permission?>();
 
+        /// <summary>
+        /// Obtiene el tipo de permiso segun el codigo en formato string.
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
         public static Permission? GetPermissionType(string code)
         {
             return permissions.TryGetValue(code, out Permission? perm) ? perm : null;
         }
 
+        /// <summary>
+        /// Indica si existe el codigo en el sistema.
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
         public static bool Exists(string code)
         {
             return permissions.TryGetValue(code, out Permission? perm);
         }
+
 
         static PermissionTranslator()
         {
@@ -132,13 +150,24 @@ namespace BaseServices.Domain
         }
     }
 
+    /// <summary>
+    /// Representa un permiso del sistema.
+    /// </summary>
     public class Permiso
     {
+        /// <summary>
+        /// Constructor por defecto.
+        /// </summary>
         public Permiso()
         {
 
         }
 
+        /// <summary>
+        /// Constructor que toma un ID y un codigo de permiso como parametros.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="code"></param>
         public Permiso(int id, string code)
         {
             Id = id;
@@ -146,6 +175,11 @@ namespace BaseServices.Domain
             PermissionType = PermissionTranslator.GetPermissionType(code);
         }
 
+        /// <summary>
+        /// Constructor que toma un ID y un tipo de permiso como parametros.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="permission"></param>
         public Permiso(int id, Permission permission)
         {
             Id = id;
@@ -159,6 +193,9 @@ namespace BaseServices.Domain
         [VisibleOnGrid("text_identifier")]
         public int Id { get; set; }
 
+        /// <summary>
+        /// Tipo de permiso usando un enum.
+        /// </summary>
         [VisibleOnGrid("text_permission")]
         public Permission? PermissionType { get; }
 
@@ -168,7 +205,10 @@ namespace BaseServices.Domain
         [VisibleOnGrid("text_code")]
         public string Codigo { get; set; }
 
-
+        /// <summary>
+        /// Devuelve el codigo interno de permiso.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return Codigo;

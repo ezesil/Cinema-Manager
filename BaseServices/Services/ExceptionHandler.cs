@@ -10,18 +10,30 @@ using BaseServices.Services.Extensions;
 
 namespace BaseServices.Services
 {
+    /// <summary>
+    /// Exception generica. Error Desconocido.
+    /// </summary>
     [Serializable]
     public class GenericException : Exception
     {
+        /// <summary>
+        /// Constructor por defecto.
+        /// </summary>
         public GenericException() : base("Ocurrió un error desconocido, contacte al administrador. \nEl error fue registrado.")
         {
 
         }
     }
 
+    /// <summary>
+    /// Representa a una excepcion manejada.
+    /// </summary>
     [Serializable]
     public class HandledException : Exception
     {
+        /// <summary>
+        /// Constructor por defecto que recibe un string como mensaje.
+        /// </summary>
         public HandledException(string message) : base(message)
         {
 
@@ -34,10 +46,23 @@ namespace BaseServices.Services
     public class ExceptionHandler
     {      
         private Dictionary<Type, string> _exceptions { get; set; }
-
+        
+        /// <summary>
+        /// Delegado para el manejo de eventos de logs.
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="severity"></param>
+        /// <param name="stacktrace"></param>
         public delegate void LogEventHandler(string message, LogLevel severity = LogLevel.Low, string stacktrace = "");
+
+        /// <summary>
+        /// Evento para el manejo de logs.
+        /// </summary>
         public event LogEventHandler OnExceptionHandled;
 
+        /// <summary>
+        /// Constructor por defecto.
+        /// </summary>
         public ExceptionHandler()
         {
             if(_exceptions == null)

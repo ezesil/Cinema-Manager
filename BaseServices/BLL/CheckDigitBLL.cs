@@ -181,7 +181,7 @@ namespace BaseServices.BLL
         /// <summary>
         /// Actualiza el valor DVH utilizando el Guid de un usuario.
         /// </summary>
-        /// <param name="c"></param>
+        /// <param name="Id"></param>
         public void UpdateDVH(Guid Id)
         {
             var user = _userrepo.GetOne(Id);

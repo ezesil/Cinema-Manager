@@ -14,10 +14,18 @@ using System.Windows.Forms;
 
 namespace Cinema.UI.Views
 {
+    /// <summary>
+    /// Pagina de salas.
+    /// </summary>
     public partial class RoomsPage : UserControl
     {
         private Guid? currentRoomGuid;
         private LanguageService _languageService;
+
+        /// <summary>
+        /// Constructor por defecto con los lenguajes necesarios para operar. Hecho para contenedor de inyeccion de dependencia.
+        /// </summary>
+        /// <param name="languageService"></param>
         public RoomsPage(LanguageService languageService)
         {
             InitializeComponent();
@@ -54,7 +62,10 @@ namespace Cinema.UI.Views
         {
             GridPrincipal.Clear();
             RoomsBLL.Current.GetAllRooms().ForEach(x => GridPrincipal.Add(x));
-            GridPrincipal.UpdateNames<Room>(x => _languageService.TranslateCode(x));       
+            GridPrincipal.UpdateNames<Room>(x => _languageService.TranslateCode(x));
+
+
+            GridPrincipal.Add(new object());
         }
 
         private void LimpiarCampos_Click(object sender, EventArgs e)

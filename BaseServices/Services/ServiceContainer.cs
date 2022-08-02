@@ -13,7 +13,7 @@ namespace BaseServices.Services
     /// </summary>
     public class ServiceContainer
     {
-        public static ServiceProvider services { get; set; } = SetupServices();
+        private static ServiceProvider services { get; set; } = SetupServices();
 
         private ServiceContainer()
         {
@@ -42,6 +42,9 @@ namespace BaseServices.Services
             return service;
         }
 
+        /// <summary>
+        /// Instancia del servicio.
+        /// </summary>
         public static ServiceProvider Instance
         {
             get
@@ -53,11 +56,11 @@ namespace BaseServices.Services
             }
         }
 
-        /// <summary>
-        /// Obtiene un servicio.Si el servicio no existe, crea una instancia del mismo y la guarda en el contenedor.
-        /// </summary>
-        /// <typeparam name = "T" ></ typeparam >
-        /// < returns ></ returns >
+        ///// <summary>
+        ///// Obtiene un servicio.Si el servicio no existe, crea una instancia del mismo y la guarda en el contenedor.
+        ///// </summary>
+        ///// <typeparam name = "T" ></ typeparam >
+        ///// < returns ></ returns >
         //public T GetService<T>(Func<ServiceContainer, T> instanceDescriptor = null) where T : class
         //{
         //    var item = objList.OfType<T>().ToList();

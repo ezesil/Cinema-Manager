@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseServices", "BaseService
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cinema.UI", "Cinema.UI\Cinema.UI.csproj", "{EE06F930-896E-4D10-91AB-A6DBBABE8043}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer", "Installer\Installer.vdproj", "{19526BE4-BC6D-4A34-AAF4-8C4E83DC667F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,8 @@ Global
 		{EE06F930-896E-4D10-91AB-A6DBBABE8043}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE06F930-896E-4D10-91AB-A6DBBABE8043}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE06F930-896E-4D10-91AB-A6DBBABE8043}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19526BE4-BC6D-4A34-AAF4-8C4E83DC667F}.Debug|Any CPU.ActiveCfg = Debug
+		{19526BE4-BC6D-4A34-AAF4-8C4E83DC667F}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

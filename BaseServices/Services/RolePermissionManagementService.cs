@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace BaseServices.Services
 {
+    /// <summary>
+    /// Servicio de manejo de relaciones entre roles y permisos.
+    /// </summary>
     public class RolePermissionManagementService
     {
         //IGenericRepository<Rol, int> _rolrepo = DAL.Factory.FactoryDAL.RolRepository;
@@ -16,14 +19,16 @@ namespace BaseServices.Services
         //IGenericRepository<RolPermisoRelation, int> _rolpermrepo = DAL.Factory.FactoryDAL.RolPermisoRepository;
 
         
-
+        /// <summary>
+        /// Constructor por defecto sin parametros.
+        /// </summary>
         public RolePermissionManagementService()
         {
 
         }
 
         /// <summary>
-        /// TODO: Implementar.
+        /// Obtiene todos los permisos por rol.
         /// </summary>
         /// <returns></returns>
         public List<Permiso> ObtenerListaDePermisos()
@@ -32,7 +37,7 @@ namespace BaseServices.Services
         }
 
         /// <summary>
-        /// TODO: Implementar.
+        /// Tiene todos los permisos por rol a través del roll.
         /// </summary>
         /// <returns></returns>
         public List<Permiso> ObtenerListaDePermisos(Rol r)
@@ -48,7 +53,6 @@ namespace BaseServices.Services
             PermissionBLL.Current.ModificarPermiso(R);
         }
 
-        // select all, select one, insert, delete, update
         /// <summary>
         /// Obtiene la informacion de un rol a partir de su ID.
         /// </summary>
@@ -77,7 +81,7 @@ namespace BaseServices.Services
         }
 
         /// <summary>
-        /// TODO: Implementar.
+        /// Obtine todos los roles.
         /// </summary>
         /// <returns></returns>
         public List<Rol> ObtenerListaDeRoles()
@@ -93,7 +97,6 @@ namespace BaseServices.Services
             RoleBLL.Current.ModificarRol(R);
         }
 
-        // select all, select one, insert, delete, update
         /// <summary>
         /// Obtiene la informacion de un rol a partir de su ID.
         /// </summary>
@@ -122,7 +125,7 @@ namespace BaseServices.Services
         }
 
         /// <summary>
-        /// TODO: Implementar.
+        /// Obtiene todas las relaciones.
         /// </summary>
         /// <returns></returns>
         public List<RolPermisoRelation> ObtenerListaDeRelaciones()
@@ -138,7 +141,6 @@ namespace BaseServices.Services
             RolePermissionBLL.Current.ModificarRolPermisoRelation(R);
         }
 
-        // select all, select one, insert, delete, update
         /// <summary>
         /// Obtiene la informacion de una relacion rol-permiso a partir de su ID de rol.
         /// </summary>
@@ -160,7 +162,7 @@ namespace BaseServices.Services
         /// <summary>
         /// Permite eliminar una relacion rol-permiso del sistema.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="R"></param>
         public void EliminarRolPermisoRelation(RolPermisoRelation R)
         {
             RolePermissionBLL.Current.EliminarRolPermisoRelation(R);
