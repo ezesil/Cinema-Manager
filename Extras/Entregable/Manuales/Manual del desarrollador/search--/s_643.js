@@ -1,0 +1,1 @@
+search_result['643']=["topic_0000000000000179.html","HandledException Constructor","Constructor por defecto que recibe un string como mensaje."];

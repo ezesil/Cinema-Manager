@@ -1,0 +1,1 @@
+search_result['94']=["topic_000000000000002F.html","RoomAdapter.Adapt Method","Adapta un objeto[] a Room."];

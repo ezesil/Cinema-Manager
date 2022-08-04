@@ -1,0 +1,1 @@
+search_result['77']=["topic_0000000000000028.html","IGenericRepository\u0026lt;T\u0026gt;.GetAll Method","Obtiene todos los registros del repositorio."];

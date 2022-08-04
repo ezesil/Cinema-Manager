@@ -1,0 +1,1 @@
+search_result['185']=["topic_0000000000000055_overloads--.html","TicketsRepository.GetAll Method","Obtiene todos los tickets. Puede recibir un objeto anonimo que incluya los siguientes parametros\r\npara filtrar la busqueda: FechaDesde y FechaHasta."];

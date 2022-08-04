@@ -1,0 +1,1 @@
+search_result['359']=["topic_00000000000000C2.html","UserAdapter.Adapt Method","Metodo para adaptar un objeto a un usuario."];

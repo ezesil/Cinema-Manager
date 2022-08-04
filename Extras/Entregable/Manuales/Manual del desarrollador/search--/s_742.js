@@ -1,0 +1,1 @@
+search_result['742']=["topic_00000000000001BC.html","SessionService.UserHasPermission Method","Comprueba si el usuario posee el permiso especificado."];

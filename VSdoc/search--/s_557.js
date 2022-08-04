@@ -1,0 +1,1 @@
+search_result['557']=["topic_0000000000000156_overloads--.html","BLLException Constructor","/// Constructor que toma como parametros un mensaje y una excepcion interna.\r\n        ///"];

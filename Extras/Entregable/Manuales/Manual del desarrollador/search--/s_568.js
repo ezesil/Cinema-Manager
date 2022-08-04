@@ -1,0 +1,1 @@
+search_result['568']=["topic_000000000000015A.html","IncorrectCredentialsException Class","/// Representa un error de credenciales incorrectas.\r\n    ///"];

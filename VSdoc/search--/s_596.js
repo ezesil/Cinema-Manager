@@ -1,0 +1,1 @@
+search_result['596']=["topic_0000000000000165.html","ExceptionExtensions.SetHandler\u0026lt;T\u0026gt; Method","Permite indicar el nombre del handler que procesaba el request al momento de instanciarse la excepción.\r\nDevuelve la misma excepcion para permitir concatenar acciones."];

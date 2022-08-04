@@ -1,0 +1,1 @@
+search_result['667']=["topic_0000000000000187.html","LanguageService.TranslateCode Method","Permite traducir un codigo al idioma actual."];

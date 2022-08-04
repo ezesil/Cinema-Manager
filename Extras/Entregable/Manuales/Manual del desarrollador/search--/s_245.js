@@ -1,0 +1,1 @@
+search_result['245']=["topic_0000000000000074.html","Room.IsActive Property","Indica si la sala está activa para ser utilizada."];

@@ -1,0 +1,1 @@
+search_result['351']=["topic_00000000000000BE.html","FileRepository.SelectAll Method","Obtiene todas las bitacoras existentes en formato de archivo plano."];

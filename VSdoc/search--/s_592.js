@@ -1,0 +1,1 @@
+search_result['592']=["topic_0000000000000161.html","ExceptionExtensions.GetSeverityLevel Method","Permite obtener el nivel de severidad de una exception.\r\nEl valor por defecto es Critical."];

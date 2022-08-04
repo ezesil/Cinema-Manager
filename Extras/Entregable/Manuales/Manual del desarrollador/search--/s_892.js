@@ -1,0 +1,1 @@
+search_result['892']=["topic_0000000000000205.html","ControlTranslationService.CurrentLanguage Property","Obtiene el lenguaje actual."];

@@ -1,0 +1,1 @@
+search_result['698']=["topic_000000000000019C.html","RolePermissionManagementService Constructor","Constructor por defecto sin parametros."];

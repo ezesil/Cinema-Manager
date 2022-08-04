@@ -1,0 +1,1 @@
+search_result['480']=["topic_000000000000012A.html","PermissionTranslator.GetPermissionType Method","Obtiene el tipo de permiso segun el codigo en formato string."];

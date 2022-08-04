@@ -1,0 +1,1 @@
+search_result['405']=["topic_00000000000000D9.html","UsersRepository.GetAll (Object) Method","Obtiene todos los usuarios. Puede recibir un objeto anonimo con parametros.\r\nLas propiedades deben tener los mismos nombres de la query."];

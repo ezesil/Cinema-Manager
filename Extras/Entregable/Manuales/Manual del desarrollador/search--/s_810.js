@@ -1,0 +1,1 @@
+search_result['810']=["topic_00000000000001D8.html","CustomTabControl.ShouldSerializeBackColor Method","Revisa el color de fondo. Si se puede serializar, devuelve true. Sino, false."];

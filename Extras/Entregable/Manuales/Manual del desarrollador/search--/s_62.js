@@ -1,0 +1,1 @@
+search_result['62']=["topic_0000000000000023.html","IGenericAdapter\u0026lt;T\u0026gt; Interface","Adaptador generico."];

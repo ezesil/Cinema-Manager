@@ -1,0 +1,1 @@
+search_result['448']=["topic_00000000000000FB.html","ApplicationSettings.SqlLogConnString Property","/// String de conexion para las bitacoras en Sql Server.\r\n        ///"];

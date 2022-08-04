@@ -1,0 +1,1 @@
+search_result['598']=["topic_0000000000000167.html","ExceptionExtensions.GetFullStackTrace Method","Obtiene la traza COMPLETA de la exception. Esto incluye todas sus inner exceptions de forma recursiva."];

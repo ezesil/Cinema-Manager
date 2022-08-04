@@ -1,0 +1,1 @@
+search_result['341']=["topic_00000000000000B8.html","IGenericAdapter\u0026lt;T\u0026gt;.Adapt Method","Metodo generico para adaptadores."];

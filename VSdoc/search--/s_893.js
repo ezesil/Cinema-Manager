@@ -1,0 +1,1 @@
+search_result['893']=["topic_0000000000000206.html","ControlTranslationService.GetNonTranslatedControls Method","Obtiene todos los controles que no poseen una traduccion"];

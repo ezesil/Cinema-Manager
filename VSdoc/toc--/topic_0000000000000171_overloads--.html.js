@@ -1,0 +1,1 @@
+var breadcrumbs=[['-1',"",""],['2',"SOLUTION-WIDE PROPERTIES Reference","topic_0000000000000240.html"],['184',"BaseServices.Services Namespace","topic_000000000000016A.html"],['206',"IntegrityService Class","topic_000000000000016F.html"],['208',"Methods","topic_000000000000016F_methods--.html"],['209',"CalcularDVH Method","topic_0000000000000171_overloads--.html"]];

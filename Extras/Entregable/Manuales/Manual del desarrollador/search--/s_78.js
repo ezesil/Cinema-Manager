@@ -1,0 +1,1 @@
+search_result['78']=["topic_0000000000000029.html","IGenericRepository\u0026lt;T\u0026gt;.GetOne Method","Obtiene un registro del repositorio."];

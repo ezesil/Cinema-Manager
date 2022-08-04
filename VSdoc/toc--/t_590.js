@@ -1,0 +1,1 @@
+c['590']=[['591',"LanguageRefresh Delegate","topic_00000000000001F7.html",0],['592',"ControlTranslationService Constructor","topic_00000000000001F9.html",0],['593',"Properties","topic_00000000000001F6_props--.html",1],['595',"Methods","topic_00000000000001F6_methods--.html",1],['609',"Events","topic_00000000000001F6_events--.html",1]];

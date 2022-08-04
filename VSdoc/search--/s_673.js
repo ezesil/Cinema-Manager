@@ -1,0 +1,1 @@
+search_result['673']=["topic_000000000000018D.html","LanguageService.CurrentLanguage Property","Obtiene el lenguaje actual."];

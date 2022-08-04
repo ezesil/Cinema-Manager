@@ -1,0 +1,1 @@
+search_result['323']=["topic_00000000000000A9.html","LanguageBLL.GetLanguageFromFile Method","Obtiene el lenguaje especificado si existe el archivo."];

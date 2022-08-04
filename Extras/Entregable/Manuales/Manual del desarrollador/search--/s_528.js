@@ -1,0 +1,1 @@
+search_result['528']=["topic_0000000000000145.html","User(Guid, String, String, String, String, String) Constructor","Constructor con parametros necesarios para instanciar un usuario."];

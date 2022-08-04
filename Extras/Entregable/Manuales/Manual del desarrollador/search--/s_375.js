@@ -1,0 +1,1 @@
+search_result['375']=["topic_00000000000000CA.html","SqlRepository\u0026lt;TEntity, TAdapter\u0026gt;.GetOne (Object, String) Method","Obtiene un elemento de la base de datos."];

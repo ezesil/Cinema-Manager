@@ -1,0 +1,1 @@
+search_result['923']=["topic_0000000000000218.html","NavigationManager.ClearNavigationButtons Method","Borra todos los botones de un menu."];

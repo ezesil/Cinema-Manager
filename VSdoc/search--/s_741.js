@@ -1,0 +1,1 @@
+search_result['741']=["topic_00000000000001BB.html","SessionService.Logout Method","Deslogea al usuario del sistema."];

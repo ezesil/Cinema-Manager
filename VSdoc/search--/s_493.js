@@ -1,0 +1,1 @@
+search_result['493']=["topic_000000000000012F_overloads--.html","Permiso Constructor","Constructor que toma un ID y un tipo de permiso como parametros."];

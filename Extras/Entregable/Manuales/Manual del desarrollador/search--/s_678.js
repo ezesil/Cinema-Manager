@@ -1,0 +1,1 @@
+search_result['678']=["topic_0000000000000192.html","LanguageService.SaveLanguageInFile Method","Guarda un archivo de idioma en el archivo correspondiente al lenguaje especificado."];

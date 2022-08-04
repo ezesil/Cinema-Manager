@@ -1,0 +1,1 @@
+search_result['943']=["topic_0000000000000222.html","CreateTicketPage.ClearPeliculas Method","Devuelve los controles relacionados con las peliculas a su estado inicial."];

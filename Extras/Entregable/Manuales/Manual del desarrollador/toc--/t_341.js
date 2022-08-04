@@ -1,0 +1,1 @@
+c['341']=[['342',"IGenericAdapter\u003cT\u003e Interface","topic_0000000000000023.html",1],['345',"IGenericRepository\u003cT\u003e Interface","topic_0000000000000025.html",1]];

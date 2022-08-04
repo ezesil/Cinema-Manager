@@ -1,0 +1,1 @@
+search_result['506']=["topic_0000000000000136.html","Rol(Int32, String, List\u0026lt;Permiso\u0026gt;) Constructor","/// Constructor que recibe un entero, un string y un listado de permisos como parametro.\r\n        ///"];

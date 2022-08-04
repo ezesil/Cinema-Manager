@@ -1,0 +1,1 @@
+search_result['350']=["topic_00000000000000BD.html","FileRepository.Insert Method","Escribe un evento Log en un archivo plano."];

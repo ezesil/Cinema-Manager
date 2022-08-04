@@ -1,0 +1,1 @@
+search_result['912']=["topic_000000000000020F.html","NavigationManager.Setup Method","Inicializa el servicio de gestion de navegacion con todos los parametros necesarios."];

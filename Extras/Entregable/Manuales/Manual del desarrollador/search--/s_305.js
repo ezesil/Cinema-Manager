@@ -1,0 +1,1 @@
+search_result['305']=["topic_000000000000009A.html","Ticket.Seat Property","Cadena que representa a la fila y asiento asignados al ticket."];

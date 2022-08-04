@@ -1,0 +1,1 @@
+search_result['255']=["topic_0000000000000079.html","Seat.Occupied Property","Indica si el asiento está ocupadoi."];

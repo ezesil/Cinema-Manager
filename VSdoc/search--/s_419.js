@@ -1,0 +1,1 @@
+search_result['419']=["topic_00000000000000E3.html","ApplicationSettings Class","/// Clase que encapsula la configuracion de la aplicacion. Las configuraciones son extraídas de AppSettings.\r\n    ///"];

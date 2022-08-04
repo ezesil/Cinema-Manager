@@ -1,0 +1,1 @@
+search_result['150']=["topic_0000000000000044.html","SessionRepository Constructor","Constructor por defecto sin parametros."];

@@ -1,0 +1,1 @@
+search_result['372']=["topic_00000000000000C8.html","SqlRepository\u0026lt;TEntity, TAdapter\u0026gt;.GetAll Method","Obtiene todos los elementos especificados en la query."];

@@ -1,0 +1,1 @@
+search_result['790']=["topic_00000000000001CE.html","RolesPanel Constructor","Constructor por defecto con servicios necesarios para operar. Hecho para contenedor de inyeccion de dependencia."];

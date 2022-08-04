@@ -1,0 +1,1 @@
+search_result['689']=["topic_0000000000000198.html","Logger.Log Method","Permite el registro de eventos en ambos origenes de datos (Archivo plano y Sql Server)."];

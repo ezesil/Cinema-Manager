@@ -1,0 +1,1 @@
+var breadcrumbs=[['-1',"",""],['2',"SOLUTION-WIDE PROPERTIES Reference","topic_0000000000000240.html"],['19',"BaseServices.DAL.Interfaces Namespace","topic_00000000000000B6.html"],['20',"IGenericAdapter\u003cT\u003e Interface","topic_00000000000000B7.html"],['21',"Methods","topic_00000000000000B7_methods--.html"],['22',"Adapt Method","topic_00000000000000B8.html"]];

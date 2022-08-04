@@ -1,0 +1,1 @@
+search_result['708']=["topic_00000000000001A4.html","RolePermissionManagementService.ModificarRol Method","Permite modificar el registro de un Rol."];

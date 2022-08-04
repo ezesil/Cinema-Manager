@@ -1,0 +1,1 @@
+search_result['701']=["topic_000000000000019E.html","RolePermissionManagementService.ObtenerListaDePermisos (Rol) Method","Tiene todos los permisos por rol a través del roll."];

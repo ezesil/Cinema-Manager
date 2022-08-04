@@ -1,0 +1,1 @@
+search_result['737']=["topic_00000000000001B7.html","SessionService.CurrentUserGuid Property","Devuelve el Guid del usuario actual."];

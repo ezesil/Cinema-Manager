@@ -1,0 +1,1 @@
+search_result['495']=["topic_0000000000000131.html","Permiso.PermissionType Property","Tipo de permiso usando un enum."];

@@ -1,0 +1,1 @@
+c['615']=[['616',"BeforeNavigatingEvent Delegate","topic_000000000000020D.html",0],['617',"OnNavigatedEvent Delegate","topic_000000000000020B.html",0],['618',"Methods","topic_000000000000020A_methods--.html",1],['631',"Events","topic_000000000000020A_events--.html",1]];

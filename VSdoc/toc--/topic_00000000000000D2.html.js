@@ -1,0 +1,1 @@
+var breadcrumbs=[['-1',"",""],['2',"SOLUTION-WIDE PROPERTIES Reference","topic_0000000000000240.html"],['29',"BaseServices.DAL.Repository.Sql Namespace","topic_00000000000000C3.html"],['69',"RepoType Enumeration","topic_00000000000000D2.html"]];

@@ -1,0 +1,1 @@
+search_result['211']=["topic_0000000000000061.html","ObjectExtensions.ToGuid Method","Convierte un objeto en tipo booleano. Solo funciona si el objeto de origen es un string con formato Guid.\r\nHecho para reducir codigo en adaptadores."];

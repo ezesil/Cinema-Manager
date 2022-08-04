@@ -1,0 +1,1 @@
+search_result['242']=["topic_0000000000000071.html","Room.Identifier Property","Codigo fisico que sirve para identificar las salas a simple vista."];

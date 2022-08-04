@@ -1,0 +1,1 @@
+search_result['274']=["topic_0000000000000085.html","SeatMatrix.ContainsListCollection Property","Indica si contiene una lista interna de colecciones."];

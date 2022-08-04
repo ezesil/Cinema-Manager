@@ -1,0 +1,1 @@
+search_result['244']=["topic_0000000000000073.html","Room.Has3D Property","Indica si la sala soporta 3D."];

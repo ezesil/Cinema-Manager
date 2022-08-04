@@ -1,0 +1,1 @@
+search_result['374']=["topic_00000000000000C9_overloads--.html","SqlRepository\u0026lt;TEntity, TAdapter\u0026gt;.GetOne Method","Obtiene un elemento de la base de datos."];

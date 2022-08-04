@@ -1,0 +1,1 @@
+search_result['846']=["topic_00000000000001EB.html","ComboBoxExtensions.GetSelectedObject\u0026lt;Tout\u0026gt; Method","Obtiene el objeto original que fue agregado y seleccionado en la lista interna del ComboBox."];

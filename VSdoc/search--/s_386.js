@@ -1,0 +1,1 @@
+search_result['386']=["topic_00000000000000D0.html","SqlRepository Class","Clase estatica con herramientas para obtener los parametros necesarios de un objeto, utilizando opcionalmente su query para la filtracion."];

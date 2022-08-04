@@ -1,0 +1,1 @@
+search_result['260']=["topic_000000000000007C.html","Seat.TryParse Method","Intenta parsear el texto de un asiento a su objeto correspondiente."];

@@ -1,0 +1,1 @@
+search_result['352']=["topic_00000000000000C0.html","BaseServices.DAL.Repository.Sql.Adapter Namespace",""];

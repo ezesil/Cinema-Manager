@@ -1,0 +1,1 @@
+search_result['812']=["topic_00000000000001DA.html","CustomTabControl.OnParentBackColorChanged Method","Evento en caso de que el color del parent cambie."];

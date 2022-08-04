@@ -1,0 +1,1 @@
+search_result['593']=["topic_0000000000000162.html","ExceptionExtensions.SetSeverityLevel Method","Permite indicar el nivel de severidad de una exception.\r\nEl valor por defecto es Critical.\r\nDevuelve la misma excepcion para permitir indicar el nivel de severidad en una misma linea."];

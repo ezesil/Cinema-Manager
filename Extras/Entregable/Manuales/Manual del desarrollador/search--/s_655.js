@@ -1,0 +1,1 @@
+search_result['655']=["topic_0000000000000180.html","HashingService.Current Property","Propiedad estatica que permite accesar los atributos, propiedades y metodos publicos de una clase con patrón Singleton."];

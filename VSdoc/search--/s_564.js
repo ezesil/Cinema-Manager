@@ -1,0 +1,1 @@
+search_result['564']=["topic_0000000000000158.html","DALException(Exception) Constructor","/// Constructor que toma como parametro otra excepcion.\r\n        ///"];

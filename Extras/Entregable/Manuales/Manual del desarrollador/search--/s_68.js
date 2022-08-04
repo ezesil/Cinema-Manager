@@ -1,0 +1,1 @@
+search_result['68']=["topic_0000000000000024.html","IGenericAdapter\u0026lt;T\u0026gt;.Adapt Method","Adapta un objeto de tipo object[] en tipo T."];

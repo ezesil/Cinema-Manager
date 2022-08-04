@@ -1,0 +1,1 @@
+search_result['774']=["topic_00000000000001C8.html","LogsPanel Constructor","Constructor con los servicios necesarios para un correcto funcionamiento."];

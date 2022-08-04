@@ -1,0 +1,1 @@
+search_result['671']=["topic_000000000000018B.html","LanguageService.LanguageIsSupported Method","Verifica si el lenguaje está soportado y cargado en el sistema."];

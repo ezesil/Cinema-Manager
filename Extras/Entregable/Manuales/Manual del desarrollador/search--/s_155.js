@@ -1,0 +1,1 @@
+search_result['155']=["topic_0000000000000047.html","SessionRepository.GetAll Method","Obtiene todas las sesiones. Los parametros ingresados serán ignorados."];

@@ -1,0 +1,1 @@
+search_result['498']=["topic_0000000000000134.html","Rol Class","/// Representa el rol de una persona en el sistema.\r\n    ///"];

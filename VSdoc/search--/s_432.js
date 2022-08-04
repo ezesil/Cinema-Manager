@@ -1,0 +1,1 @@
+search_result['432']=["topic_00000000000000EB.html","_SqlLogConnString Field","/// String de conexion para las bitacoras en Sql Server.\r\n        ///"];

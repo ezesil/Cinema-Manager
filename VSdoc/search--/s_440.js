@@ -1,0 +1,1 @@
+search_result['440']=["topic_00000000000000F3.html","ApplicationSettings.Instance Property","/// Propiedad estatica que permite accesar los atributos, propiedades y metodos publicos de una clase con patrón Singleton.\r\n        ///"];

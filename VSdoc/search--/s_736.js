@@ -1,0 +1,1 @@
+search_result['736']=["topic_00000000000001B6.html","SessionService.CurrentUser Property","Devuelve el nombre de usuario actual."];

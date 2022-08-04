@@ -1,0 +1,1 @@
+search_result['566']=["topic_0000000000000159.html","DALException(String) Constructor","/// Constructor que toma como parametro un mensaje.\r\n        ///"];

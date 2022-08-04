@@ -1,0 +1,1 @@
+search_result['690']=["topic_0000000000000199.html","Logger.GetAllFileLogs Method","Obtiene todos los logs del sistema almacenados localmente en formato de archivo plano."];

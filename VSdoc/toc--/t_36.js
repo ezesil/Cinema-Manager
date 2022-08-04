@@ -1,0 +1,1 @@
+c['36']=[['37',"Delete(object, string) Method","topic_00000000000000C7.html",0],['38',"Delete(string, object) Method","topic_00000000000000C6.html",0]];

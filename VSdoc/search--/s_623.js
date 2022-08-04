@@ -1,0 +1,1 @@
+search_result['623']=["topic_0000000000000171.html","IntegrityService.CalcularDVH (String) Method","Calcula el digito verficador horizontal para la cadena de string especificada."];

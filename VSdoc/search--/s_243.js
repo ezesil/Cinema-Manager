@@ -1,0 +1,1 @@
+search_result['243']=["topic_0000000000000072.html","Room.HasBigScreen Property","Indica si la sala tiene pantalla gigante."];
