@@ -23,16 +23,19 @@ namespace Cinema.UI.Views
         private Session? selectedSession;
         private Room? currentRoom;
         private Movie? currentMovie;
+        private ExceptionHandler _exhandler;
 
         /// <summary>
         /// Constructor por defecto con los servicios necesarios para operar. Hecha para inyeccion de dependencia.
         /// </summary>
         /// <param name="languageService"></param>
-        public SessionsPage(LanguageService languageService)
+        public SessionsPage(LanguageService languageService,
+            ExceptionHandler exhandler)
         {
             InitializeComponent();
             _languageService = languageService;
             this.Name = "text_sessions";
+            _exhandler = exhandler;
         }
 
         private void SessionsPage_Load(object sender, EventArgs e)
@@ -42,9 +45,16 @@ namespace Cinema.UI.Views
 
         private void BtnBuscar_Click(object sender, EventArgs e)
         {
-            GridPrincipal.Clear();
-            SessionsBLL.Current.GetAllSessions().ForEach(session => GridPrincipal.Add(session));
-            GridPrincipal.UpdateNames<Session>(x => _languageService.TranslateCode(x));
+            try
+            {
+                GridPrincipal.Clear();
+                SessionsBLL.Current.GetAllSessions().ForEach(session => GridPrincipal.Add(session));
+                GridPrincipal.UpdateNames<Session>(x => _languageService.TranslateCode(x));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(_exhandler.Handle(ex).Message);
+            }
         }
 
         private void CellClick(object sender, EventArgs e)
@@ -73,61 +83,103 @@ namespace Cinema.UI.Views
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show(_exhandler.Handle(ex).Message);
             }
         }
 
         private void comboBuscarPelicula_DropDown(object sender, EventArgs e)
         {
-            comboBuscarPelicula.Items.Clear();
-            MoviesBLL.Current.GetAllMovies().ForEach(movie => comboBuscarPelicula.Items.Add(movie));
+            try
+            {
+                comboBuscarPelicula.Items.Clear();
+                MoviesBLL.Current.GetAllMovies().ForEach(movie => comboBuscarPelicula.Items.Add(movie));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(_exhandler.Handle(ex).Message);
+            }
         }
 
         private void comboCambiarPelicula_DropDown(object sender, EventArgs e)
         {
-            comboCambiarPelicula.Items.Clear();
-            MoviesBLL.Current.GetAllMovies().ForEach(movie => comboCambiarPelicula.Items.Add(movie));
+            try
+            {
+                comboCambiarPelicula.Items.Clear();
+                MoviesBLL.Current.GetAllMovies().ForEach(movie => comboCambiarPelicula.Items.Add(movie));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(_exhandler.Handle(ex).Message);
+            }
         }
 
 
         private void BtnModificar_Click(object sender, EventArgs e)
         {
-            var session = new Session()
+            try
             {
-                Id = selectedSession.Id,
-                Date = pickerCambiarFecha.Value.Date.Add(TimeSpan.Parse(txtHora.Text)),
-                MovieId = (comboCambiarPelicula.SelectedItem as Movie) == null ? currentMovie.Id : (comboCambiarPelicula.SelectedItem as Movie).Id,
-                RoomId = (comboCambiarSala.SelectedItem as Room) == null ? currentRoom.Id : (comboCambiarSala.SelectedItem as Room).Id
-            };
+                var session = new Session()
+                {
+                    Id = selectedSession.Id,
+                    Date = pickerCambiarFecha.Value.Date.Add(TimeSpan.Parse(txtHora.Text)),
+                    MovieId = (comboCambiarPelicula.SelectedItem as Movie) == null ? currentMovie.Id : (comboCambiarPelicula.SelectedItem as Movie).Id,
+                    RoomId = (comboCambiarSala.SelectedItem as Room) == null ? currentRoom.Id : (comboCambiarSala.SelectedItem as Room).Id
+                };
 
-            SessionsBLL.Current.UpdateSession(session);
+                SessionsBLL.Current.UpdateSession(session);
 
-            BtnBuscar.PerformClick();
+                BtnBuscar.PerformClick();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(_exhandler.Handle(ex).Message);
+            }
         }
         private void comboCambiarSala_DropDown(object sender, EventArgs e)
         {
-            comboCambiarSala.Items.Clear();
-            RoomsBLL.Current.GetAllRooms().ForEach(room => comboCambiarSala.Items.Add(room));
+            try
+            {
+                comboCambiarSala.Items.Clear();
+                RoomsBLL.Current.GetAllRooms().ForEach(room => comboCambiarSala.Items.Add(room));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(_exhandler.Handle(ex).Message);
+            }
         }
 
         private void BtnCrear_Click(object sender, EventArgs e)
         {
-            var session = new Session()
+            try
             {
-                Id = Guid.NewGuid(),
-                Date = pickerCambiarFecha.Value.Date.Add(TimeSpan.Parse(txtHora.Text)),
-                MovieId = (comboCambiarPelicula.SelectedItem as Movie).Id,
-                RoomId = (comboCambiarSala.SelectedItem as Room).Id
-            };
+                var session = new Session()
+                {
+                    Id = Guid.NewGuid(),
+                    Date = pickerCambiarFecha.Value.Date.Add(TimeSpan.Parse(txtHora.Text)),
+                    MovieId = (comboCambiarPelicula.SelectedItem as Movie).Id,
+                    RoomId = (comboCambiarSala.SelectedItem as Room).Id
+                };
 
-            SessionsBLL.Current.CreateSession(session);
-            BtnBuscar.PerformClick();
+                SessionsBLL.Current.CreateSession(session);
+                BtnBuscar.PerformClick();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(_exhandler.Handle(ex).Message);
+            }
         }
 
         private void BtnEliminar_Click(object sender, EventArgs e)
         {
-            SessionsBLL.Current.DeleteSession(selectedSession.Id);
-            BtnBuscar.PerformClick();
+            try
+            {
+                SessionsBLL.Current.DeleteSession(selectedSession.Id);
+                BtnBuscar.PerformClick();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(_exhandler.Handle(ex).Message);
+            }
         }
 
     }

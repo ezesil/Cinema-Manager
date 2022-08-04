@@ -13,6 +13,9 @@ using System.Windows.Forms;
 
 namespace Cinema.UI.AdminViews
 {
+    /// <summary>
+    /// Panel de administracion de idiomas
+    /// </summary>
     public partial class LanguagesPanel : UserControl
     {
         Logger _logger;
@@ -23,6 +26,13 @@ namespace Cinema.UI.AdminViews
         (string Abreviacion, string Nombre) CurrentIdiomaCargado = ("", "");
         (string Codigo, string Texto) CurrentTraduccion = ("", "");
 
+        /// <summary>
+        /// Constructor con los servicios necesarios para el funcionamiento del panel.
+        /// </summary>
+        /// <param name="logger"></param>
+        /// <param name="languageService"></param>
+        /// <param name="exhandler"></param>
+        /// <param name="controlTranslationService"></param>
         public LanguagesPanel(Logger logger,
             LanguageService languageService,
             ExceptionHandler exhandler,

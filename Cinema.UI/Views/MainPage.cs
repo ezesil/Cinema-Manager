@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BaseServices.Services;
+using Cinema.UI.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,12 +12,28 @@ using System.Windows.Forms;
 
 namespace Cinema.UI.Views
 {
+    /// <summary>
+    /// Pagina inicial
+    /// </summary>
     public partial class MainPage : UserControl
     {
-        public MainPage()
+        private LanguageService _languageService;
+        private ControlTranslationService _controlTranslationService;
+
+        /// <summary>
+        /// Constructor por defecto.
+        /// </summary>
+        public MainPage(LanguageService languageService,
+            ControlTranslationService controlTranslationService)
         {
             InitializeComponent();
-            this.Name = "Inicio";
+            this.Tag = "text_home";
+            this.Name = "text_home";
+
+            _languageService = languageService;
+            _controlTranslationService = controlTranslationService;
+
+            _controlTranslationService.TryTranslateForm(this);
         }
     }
 }

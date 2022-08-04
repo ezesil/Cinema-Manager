@@ -28,7 +28,7 @@ namespace BaseServices.DAL.Repository.Sql.Adapter
                     Username = (string)values[1],
                     Password = (string)values[2],
                     Email = (string)values[3],
-                    Enabled = int.Parse(values[4].ToString()) == 1 ? true : false,
+                    Enabled = bool.Parse(values[4].ToString()),
                     DVH = (int)values[5],
                     FullName = (string)values[6],
                     DNI = (string)values[7]
@@ -36,7 +36,7 @@ namespace BaseServices.DAL.Repository.Sql.Adapter
             }
             catch (Exception ex)
             {
-                return null;
+                throw;
             }
         }
     }

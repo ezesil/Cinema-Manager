@@ -162,7 +162,7 @@ namespace Cinema.UI.Views
 
         private void BtnRegistrarUsuario_Click(object? sender, EventArgs e)
         {
-
+            _navigationManager.NavigateTo<RegisterPage>(x => x.UserHasPermission(Permission.RegisterPage));
         }
 
         private void MenuOnLogout()

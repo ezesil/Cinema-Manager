@@ -33,13 +33,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.TxtUsername = new System.Windows.Forms.TextBox();
+            this.TxtContraseña = new System.Windows.Forms.TextBox();
+            this.TxtEmail = new System.Windows.Forms.TextBox();
+            this.TxtNombre = new System.Windows.Forms.TextBox();
+            this.TxtDni = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.BtnRegistrar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -92,45 +92,45 @@
             this.label5.Tag = "text_dni";
             this.label5.Text = "DNI:";
             // 
-            // textBox1
+            // TxtUsername
             // 
-            this.textBox1.Location = new System.Drawing.Point(172, 81);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(214, 29);
-            this.textBox1.TabIndex = 5;
+            this.TxtUsername.Location = new System.Drawing.Point(172, 81);
+            this.TxtUsername.Multiline = true;
+            this.TxtUsername.Name = "TxtUsername";
+            this.TxtUsername.Size = new System.Drawing.Size(214, 29);
+            this.TxtUsername.TabIndex = 5;
             // 
-            // textBox2
+            // TxtContraseña
             // 
-            this.textBox2.Location = new System.Drawing.Point(172, 116);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(214, 29);
-            this.textBox2.TabIndex = 6;
+            this.TxtContraseña.Location = new System.Drawing.Point(172, 116);
+            this.TxtContraseña.Multiline = true;
+            this.TxtContraseña.Name = "TxtContraseña";
+            this.TxtContraseña.Size = new System.Drawing.Size(214, 29);
+            this.TxtContraseña.TabIndex = 6;
             // 
-            // textBox3
+            // TxtEmail
             // 
-            this.textBox3.Location = new System.Drawing.Point(172, 151);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(214, 29);
-            this.textBox3.TabIndex = 7;
+            this.TxtEmail.Location = new System.Drawing.Point(172, 151);
+            this.TxtEmail.Multiline = true;
+            this.TxtEmail.Name = "TxtEmail";
+            this.TxtEmail.Size = new System.Drawing.Size(214, 29);
+            this.TxtEmail.TabIndex = 7;
             // 
-            // textBox4
+            // TxtNombre
             // 
-            this.textBox4.Location = new System.Drawing.Point(172, 186);
-            this.textBox4.Multiline = true;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(214, 29);
-            this.textBox4.TabIndex = 8;
+            this.TxtNombre.Location = new System.Drawing.Point(172, 186);
+            this.TxtNombre.Multiline = true;
+            this.TxtNombre.Name = "TxtNombre";
+            this.TxtNombre.Size = new System.Drawing.Size(214, 29);
+            this.TxtNombre.TabIndex = 8;
             // 
-            // textBox5
+            // TxtDni
             // 
-            this.textBox5.Location = new System.Drawing.Point(172, 221);
-            this.textBox5.Multiline = true;
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(214, 29);
-            this.textBox5.TabIndex = 9;
+            this.TxtDni.Location = new System.Drawing.Point(172, 221);
+            this.TxtDni.Multiline = true;
+            this.TxtDni.Name = "TxtDni";
+            this.TxtDni.Size = new System.Drawing.Size(214, 29);
+            this.TxtDni.TabIndex = 9;
             // 
             // label6
             // 
@@ -143,29 +143,29 @@
             this.label6.Tag = "text_register_new_user";
             this.label6.Text = "Registrar un nuevo usuario";
             // 
-            // button1
+            // BtnRegistrar
             // 
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(54, 264);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(332, 41);
-            this.button1.TabIndex = 11;
-            this.button1.Tag = "text_register";
-            this.button1.Text = "Registrar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.BtnRegistrar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BtnRegistrar.Location = new System.Drawing.Point(54, 264);
+            this.BtnRegistrar.Name = "BtnRegistrar";
+            this.BtnRegistrar.Size = new System.Drawing.Size(332, 41);
+            this.BtnRegistrar.TabIndex = 11;
+            this.BtnRegistrar.Tag = "text_register";
+            this.BtnRegistrar.Text = "Registrar";
+            this.BtnRegistrar.UseVisualStyleBackColor = true;
+            this.BtnRegistrar.Click += new System.EventHandler(this.BtnRegistrar_Click);
             // 
             // RegisterPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.BtnRegistrar);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.TxtDni);
+            this.Controls.Add(this.TxtNombre);
+            this.Controls.Add(this.TxtEmail);
+            this.Controls.Add(this.TxtContraseña);
+            this.Controls.Add(this.TxtUsername);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -185,12 +185,12 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox TxtUsername;
+        private System.Windows.Forms.TextBox TxtContraseña;
+        private System.Windows.Forms.TextBox TxtEmail;
+        private System.Windows.Forms.TextBox TxtNombre;
+        private System.Windows.Forms.TextBox TxtDni;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button BtnRegistrar;
     }
 }

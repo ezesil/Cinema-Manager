@@ -146,6 +146,10 @@ namespace BaseServices.Services
         /// <returns></returns>
         public bool RegisterUser(User user)
         {
+            if (!user.Email.Contains("@") || !user.Email.Contains(".com"))
+                throw new ArgumentException("El email ingresado no es correcto.");
+
+
             user.Password = HashingService.Current.HashPassword(user.Password);
             user.DVH = _checkerDigitService.CalcularDVH(user);
             return SessionBLL.Current.RegisterUser(user);

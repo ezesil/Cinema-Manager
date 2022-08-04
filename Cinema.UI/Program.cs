@@ -1,6 +1,7 @@
 using BaseServices.Domain;
 using BaseServices.Services;
 using Cinema.UI.AdminViews;
+using Cinema.UI.Exceptions;
 using Cinema.UI.Services;
 using Cinema.UI.Views;
 using Microsoft.Extensions.DependencyInjection;
@@ -72,14 +73,34 @@ namespace Cinema.UI
             var exhandler = DependencyService.Get<ExceptionHandler>();
             var logger = DependencyService.Get<Logger>();
 
+
+            exhandler.Register<SeatOccupiedException>("text_seat_occupied");
+
+            //var recepcionista = new User(Guid.NewGuid(),
+            //    "recepcionista",
+            //    "recepcionista",
+            //    "recepcionista@mail.com",
+            //    "recepcionista",
+            //    "41000000");
+
+            //var gerente = new User(Guid.NewGuid(),
+            //   "gerente",
+            //   "gerente",
+            //   "gerente@mail.com",
+            //   "gerente",
+            //   "42000000");
+
+
+            //var ress = sessionService.RegisterUser(gerente);
+            //if(ress) integrityService.UpdateDVH(gerente.Id);
+
+            //var res2 = sessionService.RegisterUser(recepcionista);
+            //if (res2) integrityService.UpdateDVH(recepcionista.Id);
+
             // Evita el chequeo si es true
             bool chequeo = false;
-            // Modo de pruebas, si algo falla se logea como admin
-            bool debugmode = false;
-
-            //integrityService.UpdateDVH(Guid.Parse("2ff63cdf-5e8a-4ea3-9a8b-0503d373e7c0"));
-            //integrityService.UpdateDVV(100);
-
+            // Modo de pruebas, si el chequeo de integridad falla, corrige el DVV.
+            bool debugmode = true;
 
 
             try
@@ -109,21 +130,21 @@ namespace Cinema.UI
 
                 else
                 {
-                    throw new Exception(languageService.TranslateCode("integrity_check_failed"));
+                    if(debugmode)
+                    {
+                        integrityService.UpdateDVV(100);
+                        MessageBox.Show("Debug mode on.");
+                        Application.Run(homeform);
+                    }
+                    else
+                        throw new Exception(languageService.TranslateCode("integrity_check_failed"));
                 }
             }
 
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
                 exhandler.Handle(ex);
-
-                if (debugmode == true)
-                {
-                    sessionService.TryLogin("admin", "descargandomal33");
-                    homeform = DependencyService.Get<Home>();
-                    Application.Run(homeform);
-                }
+                MessageBox.Show(ex.Message);
 
                 Application.Exit();
             }

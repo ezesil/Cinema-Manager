@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Transactions;
 
 namespace BaseServices.BLL
 {
@@ -19,6 +20,8 @@ namespace BaseServices.BLL
         IGenericRepository<Rol, int> _rolrepo = DAL.Factory.FactoryDAL.RolRepository;
 
         IGenericRepository<Permiso, int> _permisorepo = DAL.Factory.FactoryDAL.PermisoRepository;
+
+        IGenericDVVRepository _dvvrepo = DAL.Factory.FactoryDAL.DVVRepository;
 
         List<Rol> userRoles = new List<Rol>();
 
@@ -208,7 +211,14 @@ namespace BaseServices.BLL
         {
             try
             {
-                return repo.Insert(user) > 0 ? true : false;
+                var res = repo.Insert(user) > 0 ? true : false;
+
+                if (!res)
+                    return false;
+
+                ServiceContainer.Instance.GetService<IntegrityService>().UpdateDVV(100);
+
+                return true;
             }
             catch (Exception ex)
             {

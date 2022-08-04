@@ -12,6 +12,9 @@ namespace Cinema.UI.AdminViews
 {
     public partial class PermissionsPanel : UserControl
     {
+        /// <summary>
+        /// Constructor por defecto
+        /// </summary>
         public PermissionsPanel()
         {
             InitializeComponent();

@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Cinema.UI.Extensions;
+using BaseServices.Services.Extensions;
+using Cinema.UI.Exceptions;
 
 namespace Cinema.UI.Views
 {
@@ -92,11 +94,18 @@ namespace Cinema.UI.Views
 
         private void GridAsientosCellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex > seats.RowsCount || e.ColumnIndex > seats.ColumnsCount || e.RowIndex < 0 || e.ColumnIndex < 0)
-                return;
+            try
+            {
+                if (e.RowIndex > seats.RowsCount || e.ColumnIndex > seats.ColumnsCount || e.RowIndex < 0 || e.ColumnIndex < 0)
+                    return;
 
-            CurrentSeat = seats.Items[e.RowIndex][e.ColumnIndex];
-            CanSubmit();
+                CurrentSeat = seats.Items[e.RowIndex][e.ColumnIndex];
+                CanSubmit();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(_exhandler.Handle(ex).Message);
+            }
         }
 
         private void PaginaInicio_Load(object sender, EventArgs e)
@@ -106,19 +115,35 @@ namespace Cinema.UI.Views
 
         private void ComboPeliculas_DropDown(object sender, EventArgs e)
         {
-            ComboPeliculas.Items.Clear();
+            try
+            {
+                ComboPeliculas.Items.Clear();
 
-            CurrentPeliculas = MoviesBLL.Current.GetAllMovies();
-            ComboPeliculas.Items.AddRange(CurrentPeliculas.ToArray());
+                CurrentPeliculas = MoviesBLL.Current.GetAllMovies();
+                ComboPeliculas.Items.AddRange(CurrentPeliculas.ToArray());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(_exhandler.Handle(ex).Message);
+            }
             
         }
 
         private void ComboDiaSesion_DropDown(object sender, EventArgs e)
         {
-            ComboDiaSesion.Items.Clear();
+            try
+            {
+                if (ComboPeliculas.SelectedIndex == -1)
+                    return;
+                ComboDiaSesion.Items.Clear();
 
-            var sessions = SessionsBLL.Current.GetAllCompleteSessions();
-            ComboDiaSesion.Items.AddRange(sessions.Where(x => x.MovieId == CurrentPelicula.Id).ToArray());
+                var sessions = SessionsBLL.Current.GetAllCompleteSessions();
+                ComboDiaSesion.Items.AddRange(sessions.Where(x => x.MovieId == CurrentPelicula.Id).ToArray());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(_exhandler.Handle(ex).Message);
+            }
         }
 
         /// <summary>
@@ -150,11 +175,18 @@ namespace Cinema.UI.Views
         /// </summary>
         public void ClearDias()
         {
-            ComboDiaSesion.Items.Clear();
-            ComboDiaSesion.SelectedIndex = -1;
-            ComboDiaSesion.ResetText();
-            ComboDiaSesion.Text = "";
-            BtnCrearTicket.Enabled = false;
+            try
+            {
+                ComboDiaSesion.Items.Clear();
+                ComboDiaSesion.SelectedIndex = -1;
+                ComboDiaSesion.ResetText();
+                ComboDiaSesion.Text = "";
+                BtnCrearTicket.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(_exhandler.Handle(ex).Message);
+            }
         }
 
         /// <summary>
@@ -162,9 +194,16 @@ namespace Cinema.UI.Views
         /// </summary>
         public void ClearAsientos()
         {
-            seats.ClearOccupied();
-            GridAsientos.DataSource = seats.ToDataTable();
-            BtnCrearTicket.Enabled = false;
+            try
+            {
+                seats.ClearOccupied();
+                GridAsientos.DataSource = seats.ToDataTable();
+                BtnCrearTicket.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(_exhandler.Handle(ex).Message);
+            }
         }
 
 
@@ -177,12 +216,13 @@ namespace Cinema.UI.Views
 
                 CurrentPelicula = ComboPeliculas.GetSelectedObject<Movie>();
 
+                ComboDiaSesion.Enabled = CurrentPelicula == null ? false : true;
+
                 CanSubmit();
             }
             catch (Exception ex)
             {
-
-                _exhandler.Handle(ex);
+                MessageBox.Show(_exhandler.Handle(ex).Message);
             }
         }
 
@@ -198,7 +238,7 @@ namespace Cinema.UI.Views
             }
             catch (Exception ex)
             {
-                _exhandler.Handle(ex);
+                MessageBox.Show(_exhandler.Handle(ex).Message);
             }
         }
 
@@ -210,41 +250,55 @@ namespace Cinema.UI.Views
         private void BtnCrearTicket_Click(object sender, EventArgs e)
         {
 
-            var tickets = TicketsBLL.Current.GetAllTickets();
-
-            if (tickets.Where(x => x.SeatNumber == CurrentSeat.SeatNumber && x.Row == CurrentSeat.Row && x.SessionId == CurrentSession.Id).Any())
-                MessageBox.Show(_languageService.TranslateCode("text_error_seat_occupied"));
-
-            var ticket = new Ticket()
+            try
             {
-                SeatNumber = CurrentSeat.SeatNumber,
-                Row = CurrentSeat.Row,
-                Id = Guid.NewGuid(),
-                CreationTime = DateTime.Now,
-                SessionId = CurrentSession.Id,
-                CreatorUserId = _sessionService.CurrentUserGuid
-            };
+                var tickets = TicketsBLL.Current.GetAllTickets();
 
-            TicketsBLL.Current.CreateTicket(ticket);
+                if (tickets.Where(x => x.SeatNumber == CurrentSeat.SeatNumber && x.Row == CurrentSeat.Row && x.SessionId == CurrentSession.Id).Any())
+                    throw new SeatOccupiedException();
 
-            ActualizarGrid();
+                var ticket = new Ticket()
+                {
+                    SeatNumber = CurrentSeat.SeatNumber,
+                    Row = CurrentSeat.Row,
+                    Id = Guid.NewGuid(),
+                    CreationTime = DateTime.Now,
+                    SessionId = CurrentSession.Id,
+                    CreatorUserId = _sessionService.CurrentUserGuid
+                };
 
-            MessageBox.Show(_languageService.TranslateCode("text_ok_ticket_created"));
+                TicketsBLL.Current.CreateTicket(ticket);
+
+                ActualizarGrid();
+
+                MessageBox.Show(_languageService.TranslateCode("text_ok_ticket_created"));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(_exhandler.Handle(ex).Message);
+            }
         }
 
         private void ActualizarGrid()
         {
-            ClearAsientos();
-           
-            var tickets = TicketsBLL.Current.GetAllTickets().Where(x => x.SessionId == CurrentSession.Id).ToList();
+            try
+            {
+                ClearAsientos();
 
-            tickets.ForEach(x => seats.Items[x.Row][x.SeatNumber] = new Seat(x.Row, x.SeatNumber, true));
+                var tickets = TicketsBLL.Current.GetAllTickets().Where(x => x.SessionId == CurrentSession.Id).ToList();
 
-            GridAsientos.DataSource = seats.ToDataTable();
+                tickets.ForEach(x => seats.Items[x.Row][x.SeatNumber] = new Seat(x.Row, x.SeatNumber, true));
 
-            tickets.ForEach(x => GridAsientos.Rows[x.Row].Cells[x.SeatNumber].Style.BackColor = Color.Green);
+                GridAsientos.DataSource = seats.ToDataTable();
 
-            GridAsientos.ClearSelection();
+                tickets.ForEach(x => GridAsientos.Rows[x.Row].Cells[x.SeatNumber].Style.BackColor = Color.Green);
+
+                GridAsientos.ClearSelection();
+            }
+            catch (Exception ex)
+            {
+                throw _exhandler.Handle(ex);
+            }
         }
     }
 }

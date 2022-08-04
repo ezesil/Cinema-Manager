@@ -44,7 +44,9 @@ namespace BaseServices.Services
     /// Gestiona la recepcion de excepciones para su posterior manejo.
     /// </summary>
     public class ExceptionHandler
-    {      
+    {
+        private LanguageService _languageService;
+
         private Dictionary<Type, string> _exceptions { get; set; }
         
         /// <summary>
@@ -63,10 +65,12 @@ namespace BaseServices.Services
         /// <summary>
         /// Constructor por defecto.
         /// </summary>
-        public ExceptionHandler()
+        public ExceptionHandler(LanguageService languageService)
         {
             if(_exceptions == null)
                 _exceptions = new Dictionary<Type, string>();
+
+            _languageService = languageService;
 
             Register<GenericException>();
         }
@@ -104,6 +108,7 @@ namespace BaseServices.Services
                 string? result = null;
                 if (_exceptions.TryGetValue(ex.GetType(), out result))
                 {
+                    result = _languageService.TranslateCode(result);
                     if (OnExceptionHandled != null)
                         OnExceptionHandled.Invoke(result == null ? ex.Message : result, ex.GetSeverityLevel(), ex.GetFullStackTrace());
 
@@ -111,8 +116,6 @@ namespace BaseServices.Services
                 }
                 else
                 {
-                    var stacktrace = "";
-
                     if(OnExceptionHandled != null)
                         OnExceptionHandled.Invoke(result == null ? ex.Message : result, ex.GetSeverityLevel(), ex.GetFullStackTrace());
 

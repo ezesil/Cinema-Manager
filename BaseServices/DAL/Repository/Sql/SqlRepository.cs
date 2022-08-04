@@ -347,7 +347,7 @@ namespace BaseServices.DAL.Repository.Sql
             int i = 0;
             foreach (PropertyInfo prop in props)
             {
-                parameters.Add(new SqlParameter("@" + prop.Name, prop.GetValue(args, null)));
+                parameters.Add(new SqlParameter("@" + prop.Name, prop.GetValue(args, null).ToString()));
                 i++;
             }
 
@@ -366,7 +366,7 @@ namespace BaseServices.DAL.Repository.Sql
             {
                 if (query.Contains("@" + prop.Name))
                 {
-                    parameters.Add(new SqlParameter("@" + prop.Name, prop.GetValue(args, null)));
+                    parameters.Add(new SqlParameter("@" + prop.Name, prop.GetValue(args, null).ToString()));
                 }
                 i++;
             }

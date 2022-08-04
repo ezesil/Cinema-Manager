@@ -13,11 +13,19 @@ using System.Windows.Forms;
 
 namespace Cinema.UI.AdminViews
 {
+    /// <summary>
+    /// Panel de gestion de logs
+    /// </summary>
     public partial class LogsPanel : UserControl
     {
         private Logger _logger;
         private ExceptionHandler _exhandler;
 
+        /// <summary>
+        /// Constructor con los servicios necesarios para un correcto funcionamiento.
+        /// </summary>
+        /// <param name="logger"></param>
+        /// <param name="exhandler"></param>
         public LogsPanel(Logger logger,
             ExceptionHandler exhandler)
         {

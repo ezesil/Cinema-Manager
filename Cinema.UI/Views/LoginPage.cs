@@ -12,13 +12,23 @@ using System.Windows.Forms;
 
 namespace Cinema.UI.Views
 {
+    /// <summary>
+    /// Pagina de login
+    /// </summary>
     public partial class LoginPage : UserControl
     {
-        public NavigationManager _navigationManager { get; set; }
+        private NavigationManager _navigationManager { get; set; }
 
         private SessionService _sessionService;
 
         ControlTranslationService _controlTranslationService { get; set; }
+
+        /// <summary>
+        /// Constructor con los servicios necesarios para el correcto funcionamiento de la pagina
+        /// </summary>
+        /// <param name="navigationManager"></param>
+        /// <param name="controlTranslationService"></param>
+        /// <param name="sessionService"></param>
         public LoginPage(NavigationManager navigationManager,
             ControlTranslationService controlTranslationService,
             SessionService sessionService)
