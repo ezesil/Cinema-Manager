@@ -1,0 +1,1 @@
+search_result['446']=["topic_00000000000000F9.html","ApplicationSettings.FileLogRepository Property","/// String que indica la ubicacion de los repositorios de archivos planos para las bitacoras.\r\n        ///"];

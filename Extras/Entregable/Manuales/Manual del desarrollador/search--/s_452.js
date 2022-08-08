@@ -1,0 +1,1 @@
+search_result['452']=["topic_00000000000000FF.html","ApplicationSettings.MasterConnString Property","/// String de conexión de Sql Server para base master.\r\n        ///"];

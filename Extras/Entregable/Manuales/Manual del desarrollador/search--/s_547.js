@@ -1,0 +1,1 @@
+search_result['547']=["topic_0000000000000151_overloads--.html","BLLException Constructor","/// Constructor que toma un valor booleano indicando si es una excepción de logica de negocio.\r\n        ///"];

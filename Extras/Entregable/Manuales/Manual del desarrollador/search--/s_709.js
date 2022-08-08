@@ -1,0 +1,1 @@
+search_result['709']=["topic_00000000000001A5.html","RolePermissionManagementService.ObtenerRol Method","Obtiene la informacion de un rol a partir de su ID."];

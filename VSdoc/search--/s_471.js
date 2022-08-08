@@ -1,0 +1,1 @@
+search_result['471']=["topic_000000000000010C.html","LogLevel Enumeration","Valor de severidad para el evento."];

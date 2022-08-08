@@ -1,0 +1,1 @@
+search_result['383']=["topic_00000000000000CE.html","SqlRepository\u0026lt;TEntity, TAdapter\u0026gt;.Update (Object, String) Method","Actualiza un objeto en la base de datos."];

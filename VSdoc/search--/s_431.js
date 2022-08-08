@@ -1,0 +1,1 @@
+search_result['431']=["topic_00000000000000EA.html","_SqlLogRepository Field","/// String que indica la ubicacion de los repositorios de Sql Server para las bitacoras.\r\n        ///"];

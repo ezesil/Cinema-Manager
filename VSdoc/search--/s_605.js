@@ -1,0 +1,1 @@
+search_result['605']=["topic_0000000000000169.html","ServiceExtensions.ToTextCode Method","Extrae el texto de un flag Description que pueda encontrarse en un Enum."];

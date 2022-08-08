@@ -1,0 +1,1 @@
+search_result['463']=["topic_0000000000000103.html","Log(String, LogLevel, String) Constructor","Constructor que toma como parametros un mensaje, el nivel de severidad y la traza completa del evento."];

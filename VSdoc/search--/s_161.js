@@ -1,0 +1,1 @@
+search_result['161']=["topic_000000000000004A.html","SqlRepository\u0026lt;TEntity, TAdapter\u0026gt; Class","Clase abstracta que contiene la implementacion necesaria para el tratamiento de repositorios."];

@@ -1,0 +1,1 @@
+search_result['510']=["topic_0000000000000139.html","Rol.Permisos Property","/// Listado de permisos pertenecientes a un rol.\r\n        ///"];

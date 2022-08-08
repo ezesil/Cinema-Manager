@@ -1,0 +1,1 @@
+search_result['717']=["topic_00000000000001AD.html","ServiceContainer Class","Contenedor de servicios. Permite obtener y registrar una instancia de una clase.\r\nRequiere un constructor sin parametros."];

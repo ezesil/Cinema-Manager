@@ -1,0 +1,1 @@
+search_result['167']=["topic_000000000000004B.html","SqlRepository\u0026lt;TEntity, TAdapter\u0026gt; Constructor","Constructor por defecto para el funcionamiento basico de todas las querys."];

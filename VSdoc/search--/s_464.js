@@ -1,0 +1,1 @@
+search_result['464']=["topic_0000000000000103_overloads--.html","Log Constructor","Constructor que toma como parametros un mensaje, el nivel de severidad y la traza completa del evento."];

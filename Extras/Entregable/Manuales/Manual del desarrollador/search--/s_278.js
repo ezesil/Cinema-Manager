@@ -1,0 +1,1 @@
+search_result['278']=["topic_0000000000000089.html","Session Class","Representa a una sesion de una pelicula en una sala."];

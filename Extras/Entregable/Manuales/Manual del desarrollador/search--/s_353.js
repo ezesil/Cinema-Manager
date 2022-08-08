@@ -1,0 +1,1 @@
+search_result['353']=["topic_00000000000000C1.html","UserAdapter Class","Adaptador para usuarios."];

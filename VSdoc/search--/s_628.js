@@ -1,0 +1,1 @@
+search_result['628']=["topic_0000000000000174.html","IntegrityService.CheckIntegrity Method","Verifica la integridad de los datos. Retorna True si no hay errores, False si hubo errores."];

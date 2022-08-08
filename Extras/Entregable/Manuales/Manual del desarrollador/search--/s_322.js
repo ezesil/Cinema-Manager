@@ -1,0 +1,1 @@
+search_result['322']=["topic_00000000000000A8.html","LanguageBLL.GetLanguageFromMemory Method","Obtiene el lenguaje especificado si está cargado en memoria."];

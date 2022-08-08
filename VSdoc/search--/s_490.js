@@ -1,0 +1,1 @@
+search_result['490']=["topic_000000000000012E.html","Permiso(Int32, String) Constructor","Constructor que toma un ID y un codigo de permiso como parametros."];

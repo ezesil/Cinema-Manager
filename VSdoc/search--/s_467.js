@@ -1,0 +1,1 @@
+search_result['467']=["topic_0000000000000106.html","Log.SeverityName Property","Nivel de severidad en formato de texto."];

@@ -1,0 +1,1 @@
+search_result['209']=["topic_000000000000005F.html","ObjectExtensions.ByteToBoolean Method","Convierte un objeto Byte[] en tipo booleano. Solo funciona si el objeto de origen es byte[].\r\nHecho para reducir codigo en adaptadores."];

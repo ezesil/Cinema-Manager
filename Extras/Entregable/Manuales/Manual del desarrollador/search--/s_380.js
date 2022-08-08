@@ -1,0 +1,1 @@
+search_result['380']=["topic_00000000000000CC_overloads--.html","SqlRepository\u0026lt;TEntity, TAdapter\u0026gt;.Insert Method","Inserta un objeto en la base de datos."];

@@ -1,0 +1,1 @@
+var breadcrumbs=[['-1',"",""],['2',"SOLUTION-WIDE PROPERTIES Reference","topic_0000000000000240.html"],['589',"Cinema.UI.Services Namespace","topic_00000000000001F5.html"],['590',"ControlTranslationService Class","topic_00000000000001F6.html"],['595',"Methods","topic_00000000000001F6_methods--.html"],['598',"GetSupportedLanguages Method","topic_0000000000000202.html"]];

@@ -1,0 +1,1 @@
+c['135']=[['136',"Rol() Constructor","topic_0000000000000135.html",0],['137',"Rol(int, string, List\u003cPermiso\u003e) Constructor","topic_0000000000000136.html",0]];

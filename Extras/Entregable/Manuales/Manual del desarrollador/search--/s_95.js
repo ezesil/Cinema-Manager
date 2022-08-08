@@ -1,0 +1,1 @@
+search_result['95']=["topic_0000000000000030.html","SessionAdapter Class","Adaptadores para sesiones."];

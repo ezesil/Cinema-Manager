@@ -1,0 +1,1 @@
+search_result['558']=["topic_0000000000000157.html","DALException Class","/// Representa errores ocurridos durante el acceso a datos.\r\n    ///"];

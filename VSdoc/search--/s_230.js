@@ -1,0 +1,1 @@
+search_result['230']=["topic_000000000000006A.html","Movie.Language Property","Lenguaje hablado de la pelicula."];

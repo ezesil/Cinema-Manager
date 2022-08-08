@@ -1,0 +1,1 @@
+search_result['338']=["topic_00000000000000B7_methods--.html","IGenericAdapter\u0026lt;T\u0026gt; Methods",""];

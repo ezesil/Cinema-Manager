@@ -1,0 +1,1 @@
+search_result['926']=["topic_000000000000021B.html","AdminPanel Class","Contenedor para controles de usuario que contengan herramientas de administrador."];

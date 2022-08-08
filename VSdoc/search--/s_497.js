@@ -1,0 +1,1 @@
+search_result['497']=["topic_0000000000000133.html","Permiso.ToString Method","Devuelve el codigo interno de permiso."];

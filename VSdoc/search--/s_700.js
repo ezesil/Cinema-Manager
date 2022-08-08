@@ -1,0 +1,1 @@
+search_result['700']=["topic_000000000000019D_overloads--.html","RolePermissionManagementService.ObtenerListaDePermisos Method","Obtiene todos los permisos por rol."];

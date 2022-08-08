@@ -1,0 +1,1 @@
+search_result['335']=["topic_00000000000000B7.html","IGenericAdapter\u0026lt;T\u0026gt; Interface","Interfaz generica para los adaptadores de datos."];

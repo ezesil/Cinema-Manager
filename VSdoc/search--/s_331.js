@@ -1,0 +1,1 @@
+search_result['331']=["topic_00000000000000B1.html","LanguageBLL.GetTranslation Method","Obtiene la traducción para una determinada clave."];

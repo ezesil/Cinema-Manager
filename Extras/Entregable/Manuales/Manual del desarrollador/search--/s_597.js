@@ -1,0 +1,1 @@
+search_result['597']=["topic_0000000000000166.html","ExceptionExtensions.GetFullNameHandler Method","Permite obtener el nombre completo del objeto que originó esta excepcion."];

@@ -1,0 +1,1 @@
+c['33']=[['34',"SqlRepository\u003cTEntity, TAdapter\u003e Constructor","topic_00000000000000C5.html",0],['35',"Methods","topic_00000000000000C4_methods--.html",1]];

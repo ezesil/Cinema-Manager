@@ -1,0 +1,1 @@
+c['190']=[['191',"HandledException Class","topic_0000000000000178.html",1],['193',"LogEventHandler Delegate","topic_000000000000017A.html",0],['194',"ExceptionHandler Constructor","topic_000000000000017C.html",0],['195',"Methods","topic_0000000000000177_methods--.html",1],['198',"Events","topic_0000000000000177_events--.html",1]];

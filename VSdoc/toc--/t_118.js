@@ -1,0 +1,1 @@
+c['118']=[['119',"Permiso() Constructor","topic_000000000000012D.html",0],['120',"Permiso(int, Permission) Constructor","topic_000000000000012F.html",0],['121',"Permiso(int, string) Constructor","topic_000000000000012E.html",0]];

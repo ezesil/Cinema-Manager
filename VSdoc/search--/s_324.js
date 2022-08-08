@@ -1,0 +1,1 @@
+search_result['324']=["topic_00000000000000AA.html","LanguageBLL.SaveLanguageInMemory Method","Aplica los cambios en memoria al lenguaje especificado."];

@@ -1,0 +1,1 @@
+search_result['300']=["topic_0000000000000095.html","Ticket.SessionId Property","ID de la sesion asignada al ticket."];

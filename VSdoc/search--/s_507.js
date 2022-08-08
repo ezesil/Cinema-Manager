@@ -1,0 +1,1 @@
+search_result['507']=["topic_0000000000000136_overloads--.html","Rol Constructor","/// Constructor que recibe un entero, un string y un listado de permisos como parametro.\r\n        ///"];

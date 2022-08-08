@@ -1,0 +1,1 @@
+search_result['545']=["topic_0000000000000150.html","BLLException.IsBusinessException Property","/// Indica si es una exception de logica de negocio.\r\n        ///"];

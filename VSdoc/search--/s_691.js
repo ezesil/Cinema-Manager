@@ -1,0 +1,1 @@
+search_result['691']=["topic_000000000000019A.html","Logger.GetAllSqlLogs Method","Obtiene todos los logs del sistema almacenados en una base de datos Sql Server."];

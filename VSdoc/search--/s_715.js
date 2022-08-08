@@ -1,0 +1,1 @@
+search_result['715']=["topic_00000000000001AB.html","RolePermissionManagementService.CrearRolPermisoRelation Method","Permite crear una relacion rol-permiso del sistema."];

@@ -1,0 +1,1 @@
+c['402']=[['403',"Delete Method","topic_0000000000000057_overloads--.html",1],['405',"GetAll Method","topic_0000000000000055_overloads--.html",1],['407',"GetOne Method","topic_0000000000000056_overloads--.html",1],['409',"Insert Method","topic_0000000000000053_overloads--.html",1],['411',"Update Method","topic_0000000000000054_overloads--.html",1]];

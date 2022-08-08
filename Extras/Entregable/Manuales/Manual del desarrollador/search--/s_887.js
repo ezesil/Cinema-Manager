@@ -1,0 +1,1 @@
+search_result['887']=["topic_0000000000000201.html","ControlTranslationService.TryTranslateForm (IList\u0026lt;Control\u0026gt;) Method","Intenta traducir una colección de controles."];

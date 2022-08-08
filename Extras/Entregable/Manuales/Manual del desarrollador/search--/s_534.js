@@ -1,0 +1,1 @@
+search_result['534']=["topic_000000000000014A.html","User.Enabled Property","Indica si el usuario está activo."];

@@ -1,0 +1,1 @@
+search_result['332']=["topic_00000000000000B2.html","LanguageBLL.GetSupportedLanguages Method","Obtiene un diccionario con las claves y nombres de los lenguajes soportados y cargados correctamente."];

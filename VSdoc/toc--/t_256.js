@@ -1,0 +1,1 @@
+c['256']=[['257',"ObtenerListaDePermisos() Method","topic_000000000000019D.html",0],['258',"ObtenerListaDePermisos(Rol) Method","topic_000000000000019E.html",0]];

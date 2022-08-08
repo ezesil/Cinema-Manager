@@ -1,0 +1,1 @@
+search_result['595']=["topic_0000000000000164.html","ExceptionExtensions.SetOriginName\u0026lt;T\u0026gt; Method","Permite indicar el nombre del objeto que originó esta excepcion.\r\nDevuelve la misma excepcion para permitir concatenar acciones."];

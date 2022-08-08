@@ -1,0 +1,1 @@
+search_result['370']=["topic_00000000000000C7.html","SqlRepository\u0026lt;TEntity, TAdapter\u0026gt;.Delete (Object, String) Method","Metodo para borrar una base de datos."];

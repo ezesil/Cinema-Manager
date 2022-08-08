@@ -1,0 +1,1 @@
+var breadcrumbs=[['-1',"",""],['2',"SOLUTION-WIDE PROPERTIES Reference","topic_0000000000000240.html"],['74',"BaseServices.Domain Namespace","topic_00000000000000E2.html"],['142',"RolPermisoRelation Class","topic_0000000000000140.html"],['143',"Properties","topic_0000000000000140_props--.html"],['145',"IdRol Property","topic_0000000000000141.html"]];

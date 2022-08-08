@@ -1,0 +1,1 @@
+search_result['565']=["topic_0000000000000158_overloads--.html","DALException Constructor","/// Constructor que toma como parametro otra excepcion.\r\n        ///"];

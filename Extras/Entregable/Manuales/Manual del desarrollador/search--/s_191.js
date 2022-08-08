@@ -1,0 +1,1 @@
+search_result['191']=["topic_0000000000000059.html","VisibleOnGrid Class","Indica si la propiedad debe mostrarse en el grid."];

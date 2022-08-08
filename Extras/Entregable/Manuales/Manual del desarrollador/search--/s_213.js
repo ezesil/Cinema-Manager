@@ -1,0 +1,1 @@
+search_result['213']=["topic_0000000000000063.html","ObjectExtensions.GetFlag\u0026lt;T\u0026gt; Method","Metodo de extension de PropertyInfo. Obtiene el flag especificado en el tipo generico."];

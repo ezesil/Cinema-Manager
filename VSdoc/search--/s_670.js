@@ -1,0 +1,1 @@
+search_result['670']=["topic_000000000000018A.html","LanguageService.SetLanguage Method","Establece el nuevo lenguaje utilizando una version abreviada de su nombre."];

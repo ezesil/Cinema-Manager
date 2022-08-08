@@ -1,0 +1,1 @@
+search_result['550']=["topic_0000000000000153.html","BLLException(Exception, Boolean) Constructor","/// Constructor que toma como parametros una excepcion y un booleano que indica si es una excepcion de logica de negocio.\r\n        ///"];

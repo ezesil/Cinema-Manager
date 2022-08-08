@@ -1,0 +1,1 @@
+search_result['554']=["topic_0000000000000155.html","BLLException(String) Constructor","/// Constructor que toma como parametro un mensaje.\r\n        ///"];

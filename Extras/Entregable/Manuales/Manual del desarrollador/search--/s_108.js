@@ -1,0 +1,1 @@
+search_result['108']=["topic_0000000000000033.html","TicketAdapter.Adapt Method","Adapta tickets a partir de un object[];"];

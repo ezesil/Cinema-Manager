@@ -1,0 +1,1 @@
+search_result['932']=["topic_000000000000021C.html","AdminPanel Constructor","Constructor que incluye los servicios necesarios del panel de administrador."];

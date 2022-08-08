@@ -1,0 +1,1 @@
+search_result['232']=["topic_000000000000006C.html","Movie.IsActive Property","Indica si la pelicula está activa. Si la pelicula está inactiva, no se mostrará en los buscadores\r\nexcepto en el buscador de peliculas."];

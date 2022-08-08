@@ -1,0 +1,1 @@
+var breadcrumbs=[['-1',"",""],['2',"SOLUTION-WIDE PROPERTIES Reference","topic_0000000000000240.html"],['284',"BaseServices.Services.Extensions Namespace","topic_000000000000015F.html"],['285',"ExceptionExtensions Class","topic_0000000000000160.html"],['286',"Methods","topic_0000000000000160_methods--.html"],['293',"SetSeverityLevel Method","topic_0000000000000162.html"]];

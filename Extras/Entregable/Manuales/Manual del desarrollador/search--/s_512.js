@@ -1,0 +1,1 @@
+search_result['512']=["topic_0000000000000140.html","RolPermisoRelation Class","Representa la relacion entre un rol y un permiso."];

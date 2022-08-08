@@ -1,0 +1,1 @@
+var breadcrumbs=[['-1',"",""],['2',"SOLUTION-WIDE PROPERTIES Reference","topic_0000000000000240.html"],['4',"BaseServices.BLL Namespace","topic_00000000000000A6.html"],['5',"LanguageBLL Class","topic_00000000000000A7.html"],['6',"Methods","topic_00000000000000A7_methods--.html"],['17',"SaveSupportedLanguagesFile Method","topic_00000000000000AC.html"]];

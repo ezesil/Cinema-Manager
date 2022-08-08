@@ -1,0 +1,1 @@
+search_result['369']=["topic_00000000000000C6_overloads--.html","SqlRepository\u0026lt;TEntity, TAdapter\u0026gt;.Delete Method","Metodo para borrar un objeto."];

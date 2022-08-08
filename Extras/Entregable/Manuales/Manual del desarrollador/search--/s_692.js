@@ -1,0 +1,1 @@
+search_result['692']=["topic_000000000000019B.html","RolePermissionManagementService Class","Servicio de manejo de relaciones entre roles y permisos."];

@@ -1,0 +1,1 @@
+var breadcrumbs=[['-1',"",""],['2',"SOLUTION-WIDE PROPERTIES Reference","topic_0000000000000240.html"],['573',"Cinema.UI.Extensions Namespace","topic_00000000000001E9.html"],['574',"ComboBoxExtensions Class","topic_00000000000001EA.html"],['575',"Methods","topic_00000000000001EA_methods--.html"],['576',"GetSelectedObject\u003cTout\u003e Method","topic_00000000000001EB.html"]];

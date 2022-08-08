@@ -1,0 +1,1 @@
+search_result['631']=["topic_0000000000000177.html","ExceptionHandler Class","Gestiona la recepcion de excepciones para su posterior manejo."];

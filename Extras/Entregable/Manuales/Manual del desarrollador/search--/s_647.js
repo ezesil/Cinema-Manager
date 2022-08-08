@@ -1,0 +1,1 @@
+search_result['647']=["topic_000000000000017D.html","ExceptionHandler.Register\u0026lt;TException\u0026gt; Method","Permite registrar una excepcion en el manejador de excepciones."];

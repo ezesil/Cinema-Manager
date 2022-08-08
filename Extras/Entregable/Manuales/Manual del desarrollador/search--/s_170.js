@@ -1,0 +1,1 @@
+search_result['170']=["topic_000000000000004E.html","SqlRepository\u0026lt;TEntity, TAdapter\u0026gt;.GetOne Method","Obtiene un objeto."];

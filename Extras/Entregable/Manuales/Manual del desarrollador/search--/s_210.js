@@ -1,0 +1,1 @@
+search_result['210']=["topic_0000000000000060.html","ObjectExtensions.StringToBoolean Method","Convierte un objeto string en tipo booleano. Solo funciona si el objeto de origen es string.\r\nHecho para reducir codigo en adaptadores."];

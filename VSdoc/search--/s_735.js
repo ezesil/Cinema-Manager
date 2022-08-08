@@ -1,0 +1,1 @@
+search_result['735']=["topic_00000000000001B5.html","SessionService.UserIsNull Property","Indica si el usuario actual es nulo."];

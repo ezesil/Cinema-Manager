@@ -1,0 +1,1 @@
+var breadcrumbs=[['-1',"",""],['2',"SOLUTION-WIDE PROPERTIES Reference","topic_0000000000000240.html"],['413',"Cinema.DAL.Repository.Sql.Adapter Namespace","topic_000000000000002B.html"],['423',"TicketAdapter Class","topic_0000000000000032.html"],['424',"Methods","topic_0000000000000032_methods--.html"],['425',"Adapt Method","topic_0000000000000033.html"]];

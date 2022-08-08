@@ -1,0 +1,1 @@
+search_result['644']=["topic_000000000000017A.html","LogEventHandler Delegate","Delegado para el manejo de eventos de logs."];

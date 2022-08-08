@@ -1,0 +1,1 @@
+search_result['273']=["topic_0000000000000084.html","SeatMatrix.ColumnsCount Property","Cantidad de columnas."];

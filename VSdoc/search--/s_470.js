@@ -1,0 +1,1 @@
+search_result['470']=["topic_0000000000000109.html","LogType Enumeration","Valor que indica donde debe guardarse la bitacora. Obsoleto."];

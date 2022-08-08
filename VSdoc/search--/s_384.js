@@ -1,0 +1,1 @@
+search_result['384']=["topic_00000000000000CE_overloads--.html","SqlRepository\u0026lt;TEntity, TAdapter\u0026gt;.Update Method","Actualiza un objeto en la base de datos."];

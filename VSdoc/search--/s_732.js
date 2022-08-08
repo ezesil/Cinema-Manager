@@ -1,0 +1,1 @@
+search_result['732']=["topic_00000000000001B2.html","OnLogoutEventHandler Delegate","Delegado para el manejo de eventos de Logout."];

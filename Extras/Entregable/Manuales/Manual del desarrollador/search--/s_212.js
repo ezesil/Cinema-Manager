@@ -1,0 +1,1 @@
+search_result['212']=["topic_0000000000000062.html","ObjectExtensions.GetDescription Method","Obtiene el texto especificado en el flag [Description(texto)] del objeto especificado.\r\nUtilizado para obtener este flag de propiedades."];

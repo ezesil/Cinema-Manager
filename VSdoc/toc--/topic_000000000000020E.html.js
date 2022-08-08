@@ -1,0 +1,1 @@
+var breadcrumbs=[['-1',"",""],['2',"SOLUTION-WIDE PROPERTIES Reference","topic_0000000000000240.html"],['589',"Cinema.UI.Services Namespace","topic_00000000000001F5.html"],['615',"NavigationManager Class","topic_000000000000020A.html"],['631',"Events","topic_000000000000020A_events--.html"],['632',"BeforeNavigating Event","topic_000000000000020E.html"]];
